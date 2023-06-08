@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "statslab",
     "section": "",
-    "text": "Content covering statistics, data analysis, and computer programming. Sections are listed on the left."
+    "text": "Introduction\nContent covering statistics, data analysis, and computer programming. Sections are listed on the left."
   },
   {
     "objectID": "beginnings.html",
@@ -16,128 +16,128 @@
   {
     "objectID": "begin/rlang.html#r-the-language",
     "href": "begin/rlang.html#r-the-language",
-    "title": "2  R & RStudio",
-    "section": "2.1 R: The Language",
-    "text": "2.1 R: The Language"
+    "title": "1  R & RStudio",
+    "section": "1.1 R: The Language",
+    "text": "1.1 R: The Language"
   },
   {
     "objectID": "begin/rlang.html#rstudio",
     "href": "begin/rlang.html#rstudio",
-    "title": "2  R & RStudio",
-    "section": "2.2 RStudio",
-    "text": "2.2 RStudio"
+    "title": "1  R & RStudio",
+    "section": "1.2 RStudio",
+    "text": "1.2 RStudio"
   },
   {
     "objectID": "begin/rlang.html#installation",
     "href": "begin/rlang.html#installation",
-    "title": "2  R & RStudio",
-    "section": "2.3 Installation",
-    "text": "2.3 Installation"
+    "title": "1  R & RStudio",
+    "section": "1.3 Installation",
+    "text": "1.3 Installation"
   },
   {
     "objectID": "begin/rlang.html#other-packages",
     "href": "begin/rlang.html#other-packages",
-    "title": "2  R & RStudio",
-    "section": "2.4 Other Packages",
-    "text": "2.4 Other Packages"
+    "title": "1  R & RStudio",
+    "section": "1.4 Other Packages",
+    "text": "1.4 Other Packages"
   },
   {
     "objectID": "begin/data.html#how-do-i-get-my-data-into-r",
     "href": "begin/data.html#how-do-i-get-my-data-into-r",
-    "title": "3  Working with Data",
-    "section": "3.1 How do I get my data into R?",
-    "text": "3.1 How do I get my data into R?"
+    "title": "2  Working with Data",
+    "section": "2.1 How do I get my data into R?",
+    "text": "2.1 How do I get my data into R?"
   },
   {
     "objectID": "begin/data.html#introduction-to-variables",
     "href": "begin/data.html#introduction-to-variables",
-    "title": "3  Working with Data",
-    "section": "3.2 Introduction to variables",
-    "text": "3.2 Introduction to variables"
+    "title": "2  Working with Data",
+    "section": "2.2 Introduction to variables",
+    "text": "2.2 Introduction to variables"
   },
   {
     "objectID": "begin/data.html#data-types-numeric-character-logical",
     "href": "begin/data.html#data-types-numeric-character-logical",
-    "title": "3  Working with Data",
-    "section": "3.3 Data types: numeric, character, logical",
-    "text": "3.3 Data types: numeric, character, logical"
+    "title": "2  Working with Data",
+    "section": "2.3 Data types: numeric, character, logical",
+    "text": "2.3 Data types: numeric, character, logical"
   },
   {
     "objectID": "begin/data.html#vectors",
     "href": "begin/data.html#vectors",
-    "title": "3  Working with Data",
-    "section": "3.4 Vectors",
-    "text": "3.4 Vectors"
+    "title": "2  Working with Data",
+    "section": "2.4 Vectors",
+    "text": "2.4 Vectors"
   },
   {
     "objectID": "begin/data.html#dataframes",
     "href": "begin/data.html#dataframes",
-    "title": "3  Working with Data",
-    "section": "3.5 Dataframes",
-    "text": "3.5 Dataframes"
+    "title": "2  Working with Data",
+    "section": "2.5 Dataframes",
+    "text": "2.5 Dataframes"
   },
   {
     "objectID": "begin/programming.html#commands-at-the-console",
     "href": "begin/programming.html#commands-at-the-console",
-    "title": "4  R as a Calculator",
-    "section": "4.1 Commands at the console",
-    "text": "4.1 Commands at the console"
+    "title": "3  R as a Calculator",
+    "section": "3.1 Commands at the console",
+    "text": "3.1 Commands at the console"
   },
   {
     "objectID": "begin/programming.html#simple-calculations",
     "href": "begin/programming.html#simple-calculations",
-    "title": "4  R as a Calculator",
-    "section": "4.2 Simple calculations",
-    "text": "4.2 Simple calculations"
+    "title": "3  R as a Calculator",
+    "section": "3.2 Simple calculations",
+    "text": "3.2 Simple calculations"
   },
   {
     "objectID": "begin/programming.html#functions",
     "href": "begin/programming.html#functions",
-    "title": "4  R as a Calculator",
-    "section": "4.3 Functions",
-    "text": "4.3 Functions"
+    "title": "3  R as a Calculator",
+    "section": "3.3 Functions",
+    "text": "3.3 Functions"
   },
   {
     "objectID": "begin/programming.html#variables",
     "href": "begin/programming.html#variables",
-    "title": "4  R as a Calculator",
-    "section": "4.4 Variables",
-    "text": "4.4 Variables"
+    "title": "3  R as a Calculator",
+    "section": "3.4 Variables",
+    "text": "3.4 Variables"
   },
   {
     "objectID": "begin/programming.html#loops",
     "href": "begin/programming.html#loops",
-    "title": "4  R as a Calculator",
-    "section": "4.5 Loops",
-    "text": "4.5 Loops"
+    "title": "3  R as a Calculator",
+    "section": "3.5 Loops",
+    "text": "3.5 Loops"
   },
   {
     "objectID": "begin/programming.html#conditionals",
     "href": "begin/programming.html#conditionals",
-    "title": "4  R as a Calculator",
-    "section": "4.6 Conditionals",
-    "text": "4.6 Conditionals"
+    "title": "3  R as a Calculator",
+    "section": "3.6 Conditionals",
+    "text": "3.6 Conditionals"
   },
   {
     "objectID": "begin/programming.html#functions-1",
     "href": "begin/programming.html#functions-1",
-    "title": "4  R as a Calculator",
-    "section": "4.7 Functions",
-    "text": "4.7 Functions"
+    "title": "3  R as a Calculator",
+    "section": "3.7 Functions",
+    "text": "3.7 Functions"
   },
   {
     "objectID": "begin/dplyr.html#what-is-dplyr",
     "href": "begin/dplyr.html#what-is-dplyr",
-    "title": "5  Manipulating Data",
-    "section": "5.1 What is dplyr",
-    "text": "5.1 What is dplyr"
+    "title": "4  Manipulating Data",
+    "section": "4.1 What is dplyr",
+    "text": "4.1 What is dplyr"
   },
   {
     "objectID": "begin/ggplot2.html#how-to-plot",
     "href": "begin/ggplot2.html#how-to-plot",
-    "title": "6  Plotting Data",
-    "section": "6.1 How to plot",
-    "text": "6.1 How to plot"
+    "title": "5  Plotting Data",
+    "section": "5.1 How to plot",
+    "text": "5.1 How to plot"
   },
   {
     "objectID": "regression.html",
@@ -149,21 +149,21 @@
   {
     "objectID": "regression/single.html",
     "href": "regression/single.html",
-    "title": "7  (Simple) Regression",
+    "title": "6  Simple",
     "section": "",
     "text": "What is regression"
   },
   {
     "objectID": "regression/multiple.html",
     "href": "regression/multiple.html",
-    "title": "8  (Multiple) Regression",
+    "title": "7  Multiple",
     "section": "",
     "text": "What is multiple regression"
   },
   {
     "objectID": "regression/anova.html",
     "href": "regression/anova.html",
-    "title": "9  ANOVA",
+    "title": "8  ANOVA",
     "section": "",
     "text": "What is ANOVA\nWhat is ANCOVA"
   },
@@ -177,15 +177,15 @@
   {
     "objectID": "other/simulation.html#simulate",
     "href": "other/simulation.html#simulate",
-    "title": "10  Simulating Data",
-    "section": "10.1 Simulate?",
-    "text": "10.1 Simulate?"
+    "title": "9  Simulating Data",
+    "section": "9.1 Simulate?",
+    "text": "9.1 Simulate?"
   },
   {
     "objectID": "other/missingness.html#what-happened-to-my-data",
     "href": "other/missingness.html#what-happened-to-my-data",
-    "title": "11  Missing Data",
-    "section": "11.1 What happened to my data?",
-    "text": "11.1 What happened to my data?"
+    "title": "10  Missing Data",
+    "section": "10.1 What happened to my data?",
+    "text": "10.1 What happened to my data?"
   }
 ]
