@@ -11,7 +11,7 @@
     "href": "beginnings.html",
     "title": "Beginnings",
     "section": "",
-    "text": "What are we doing here?"
+    "text": "In this section, we will be discussing the tools that we will be using and some introductory concepts on the topic of data wrangling and exploratory data analysis."
   },
   {
     "objectID": "begin/rlang.html#r-the-language",
