@@ -1,19 +1,31 @@
 project:
-  type: website
+    type: book
 
-website:
-  title: "statslab"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+book:
+    title: "statslab"
+
+    chapters:
+    - index.qmd
+
+    - part: beginnings.qmd
+      chapters:
+        - begin/rlang.qmd
+        - begin/data.qmd
+        - begin/programming.qmd
+        - begin/dplyr.qmd
+        - begin/ggplot2.qmd
+    - part: regression.qmd
+      chapters:
+        - regression/single.qmd
+        - regression/multiple.qmd
+        - regression/anova.qmd
+    - part: oddsandends.qmd
+      chapters:
+        - other/simulation.qmd
+        - other/missingness.qmd
 
 format:
-  html:
-    theme: cosmo
-    css: styles.css
-    toc: true
-
-
-
+    html:
+        theme: cosmo
+        css: styles.css
+        toc: true

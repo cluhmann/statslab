@@ -1,0 +1,21 @@
+# R as a Calculator
+
+## Commands at the console
+
+
+## Simple calculations
+
+
+## Functions
+
+
+## Variables
+
+## Loops
+
+
+## Conditionals
+
+
+## Functions
+

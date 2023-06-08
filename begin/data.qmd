@@ -1,0 +1,7 @@
+# Working with Data
+
+## How do I get my data into R?
+## Introduction to variables
+## Data types: numeric, character, logical
+## Vectors
+## Dataframes
