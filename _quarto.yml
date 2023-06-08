@@ -7,19 +7,19 @@ book:
     chapters:
     - index.qmd
 
-    - part: beginnings.qmd
+    - part: "Beginnings"
       chapters:
         - begin/rlang.qmd
         - begin/data.qmd
         - begin/programming.qmd
         - begin/dplyr.qmd
         - begin/ggplot2.qmd
-    - part: regression.qmd
+    - part: "Regression"
       chapters:
         - regression/single.qmd
         - regression/multiple.qmd
         - regression/anova.qmd
-    - part: oddsandends.qmd
+    - part: "Odds & Ends"
       chapters:
         - other/simulation.qmd
         - other/missingness.qmd
