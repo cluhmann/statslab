@@ -14,17 +14,59 @@
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "begin/loading-data.html",
-    "href": "begin/loading-data.html",
-    "title": "Loading Data",
+    "objectID": "begin/data.html",
+    "href": "begin/data.html",
+    "title": "Working with Data",
     "section": "",
-    "text": "How do I get my data into R?"
+    "text": "How do I get my data into R?\nIntroduction to variables\nData types: numeric, character, logical\nVectors\nDataframes"
   },
   {
-    "objectID": "begin/r-and-rstudio.html",
-    "href": "begin/r-and-rstudio.html",
+    "objectID": "begin/rlang.html",
+    "href": "begin/rlang.html",
     "title": "R & RStudio",
     "section": "",
-    "text": "What is R? What is RStudio? How to install. Etc."
+    "text": "What is R\nWhat is RStudio\nHow to install R & RStudio\nInstalling packages"
+  },
+  {
+    "objectID": "begin/programming.html",
+    "href": "begin/programming.html",
+    "title": "R as a Calculator",
+    "section": "",
+    "text": "Commands at the console\nSimple calculations\nFunctions\nVariables\nLoops\nConditionals\nFunctions"
+  },
+  {
+    "objectID": "begin/ggplot2.html",
+    "href": "begin/ggplot2.html",
+    "title": "R & RStudio",
+    "section": "",
+    "text": "What is R\nWhat is RStudio\nHow to install R & RStudio\nInstalling packages"
+  },
+  {
+    "objectID": "begin/dplyr.html",
+    "href": "begin/dplyr.html",
+    "title": "R & RStudio",
+    "section": "",
+    "text": "What is R\nWhat is RStudio\nHow to install R & RStudio\nInstalling packages"
+  },
+  {
+    "objectID": "regression/multiple.html",
+    "href": "regression/multiple.html",
+    "title": "(Multiple) Regression",
+    "section": "",
+    "text": "What is multiple regression"
+  },
+  {
+    "objectID": "regression/single.html",
+    "href": "regression/single.html",
+    "title": "(Simple) Regression",
+    "section": "",
+    "text": "What is regression"
+  },
+  {
+    "objectID": "regression/anova.html",
+    "href": "regression/anova.html",
+    "title": "ANOVA",
+    "section": "",
+    "text": "What is ANOVA\nWhat is ANCOVA"
   }
 ]

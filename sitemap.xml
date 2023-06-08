@@ -2,18 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cluhmann.github.io/statslab/index.html</loc>
-    <lastmod>2023-06-08T02:42:50.120Z</lastmod>
+    <lastmod>2023-06-08T04:57:10.759Z</lastmod>
   </url>
   <url>
     <loc>https://cluhmann.github.io/statslab/about.html</loc>
-    <lastmod>2023-06-08T02:42:50.724Z</lastmod>
+    <lastmod>2023-06-08T04:57:11.375Z</lastmod>
   </url>
   <url>
-    <loc>https://cluhmann.github.io/statslab/begin/loading-data.html</loc>
-    <lastmod>2023-06-08T02:42:50.868Z</lastmod>
+    <loc>https://cluhmann.github.io/statslab/begin/data.html</loc>
+    <lastmod>2023-06-08T04:57:11.543Z</lastmod>
   </url>
   <url>
-    <loc>https://cluhmann.github.io/statslab/begin/r-and-rstudio.html</loc>
-    <lastmod>2023-06-08T02:42:51.020Z</lastmod>
+    <loc>https://cluhmann.github.io/statslab/begin/rlang.html</loc>
+    <lastmod>2023-06-08T04:57:11.719Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/begin/programming.html</loc>
+    <lastmod>2023-06-08T04:57:11.879Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/begin/ggplot2.html</loc>
+    <lastmod>2023-06-08T04:57:12.023Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/begin/dplyr.html</loc>
+    <lastmod>2023-06-08T04:57:12.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/regression/multiple.html</loc>
+    <lastmod>2023-06-08T04:57:12.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/regression/single.html</loc>
+    <lastmod>2023-06-08T04:57:12.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/regression/anova.html</loc>
+    <lastmod>2023-06-08T04:57:12.627Z</lastmod>
   </url>
 </urlset>
