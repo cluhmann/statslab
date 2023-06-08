@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cluhmann.github.io/statslab/index.html</loc>
-    <lastmod>2023-06-08T02:22:21.138Z</lastmod>
+    <lastmod>2023-06-08T02:36:00.371Z</lastmod>
   </url>
   <url>
     <loc>https://cluhmann.github.io/statslab/about.html</loc>
-    <lastmod>2023-06-08T02:22:21.778Z</lastmod>
+    <lastmod>2023-06-08T02:36:00.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/loading-data.html</loc>
+    <lastmod>2023-06-08T02:36:01.151Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cluhmann.github.io/statslab/r-and-rstudio.html</loc>
+    <lastmod>2023-06-08T02:36:01.303Z</lastmod>
   </url>
 </urlset>

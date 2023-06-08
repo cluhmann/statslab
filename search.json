@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "statslab",
+    "title": "Stats Lab",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Content covering statistics, data analysis, and computer programming. Sections are listed on the left."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,19 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "loading-data.html",
+    "href": "loading-data.html",
+    "title": "Loading Data",
+    "section": "",
+    "text": "How do I get my data into R?"
+  },
+  {
+    "objectID": "r-and-rstudio.html",
+    "href": "r-and-rstudio.html",
+    "title": "R & RStudio",
+    "section": "",
+    "text": "What is R? What is RStudio? How to install. Etc."
   }
 ]
