@@ -37,16 +37,16 @@
   {
     "objectID": "begin/ggplot2.html",
     "href": "begin/ggplot2.html",
-    "title": "R & RStudio",
+    "title": "Plotting Data",
     "section": "",
-    "text": "What is R\nWhat is RStudio\nHow to install R & RStudio\nInstalling packages"
+    "text": "How to plot"
   },
   {
     "objectID": "begin/dplyr.html",
     "href": "begin/dplyr.html",
-    "title": "R & RStudio",
+    "title": "Manipulating Data",
     "section": "",
-    "text": "What is R\nWhat is RStudio\nHow to install R & RStudio\nInstalling packages"
+    "text": "What is dplyr"
   },
   {
     "objectID": "regression/multiple.html",
