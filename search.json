@@ -14,15 +14,15 @@
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "loading-data.html",
-    "href": "loading-data.html",
+    "objectID": "begin/loading-data.html",
+    "href": "begin/loading-data.html",
     "title": "Loading Data",
     "section": "",
     "text": "How do I get my data into R?"
   },
   {
-    "objectID": "r-and-rstudio.html",
-    "href": "r-and-rstudio.html",
+    "objectID": "begin/r-and-rstudio.html",
+    "href": "begin/r-and-rstudio.html",
     "title": "R & RStudio",
     "section": "",
     "text": "What is R? What is RStudio? How to install. Etc."
