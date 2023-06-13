@@ -15,7 +15,7 @@ book:
     - part: "Exploring"
       chapters:
         - explore/dplyr.qmd
-    - explore/ggplot2.qmd
+        - explore/ggplot2.qmd
     - part: "Regressing"
       chapters:
         - regression/single.qmd
