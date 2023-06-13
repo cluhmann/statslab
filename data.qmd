@@ -31,7 +31,7 @@ books <- read.csv( file = "./data/booksales.csv" )
 #| eval: false
 books <- read.csv( file = "booksales.csv" )
 ```
-There are two very important points to notice here. Firstly, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books`.^[Note that I didn't to this in my earlier example when loading the .Rdata] file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
+There are two very important points to notice here. Firstly, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
 
 ```{r}
 print( books )
@@ -62,10 +62,13 @@ In the top left corner, you need to type the name of the variable you R to creat
 - Quote. What character is used to denote a block of text? That's usually going to be a double quote mark. It is for the `booksales.csv` file, so that's what I selected.
 
 The nice thing about the RStudio window is that it shows you the raw data file at the top of the window, and it shows you a preview of the data at the bottom. If the data at the bottom doesn't look right, try changing some of the settings on the left hand side. Once you're happy, click "Import". When you do, two commands appear in the R console:
-```
+
+```{r}
+#| eval: false
 booksales <- read.csv("~/Rbook/data/booksales.csv")
 View(booksales)
 ```
+
 The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio. 
 
 ### Loading workspace files using R
@@ -75,57 +78,78 @@ When I used the `list.files()` command to list the contents of the `/Users/dan/R
 - `file`. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.
 
 Using the absolute file path, the command would look like this:
-```
+
+```{r}
+#| eval: false
 load( file = "/Users/dan/Rbook/data/booksales.Rdata" )
 ```
+
 but this is pretty lengthy. Given that the working directory (remember, we changed the directory at the end of Section \@ref(nav3)) is `/Users/dan/Rbook/data`, I could use a relative file path, like so:
+
+```{r}
+#| eval: false
+load( file = "/Users/dan/Rbook/data/booksales.Rdata" )
 ```
-load( file = "../data/booksales.Rdata" )
-```
+
 However, my preference is usually to change the working directory first, and *then* load the file. What that would look like is this:
-```
+
+```{r}
+#| eval: false
 setwd( "../data" )         # move to the data directory
 load( "booksales.Rdata" )  # load the data
 ```
+
 If I were then to type `who()` I'd see that there are several new variables in my workspace now.  Throughout this book, whenever you see me loading a file, I will assume that the file is actually stored in the working directory, or that you've changed the working directory so that R is pointing at the directory that contains the file. Obviously, *you* don't need type that command yourself: you can use the RStudio file panel to do the work.
 
 ### Loading workspace files using RStudio
 
 Okay, so how do we open an .Rdata file using the RStudio file panel? It's terribly simple. First, use the file panel to find the folder that contains the file you want to load. If you look at Figure \@ref(fig:filepanel), you can see that there are several .Rdata files listed. Let's say I want to load the `booksales.Rdata` file. All I have to do is click on the file name. RStudio brings up a little dialog box asking me to confirm that I do want to load this file. I click yes. The following command then turns up in the console,
-```
+
+```{r}
+#| eval: false
 load("~/Rbook/data/booksales.Rdata")
 ```
+
 and the new variables will appear in the workspace (you'll see them in the Environment panel in RStudio, or if you type `who()`). So easy it barely warrants having its own section.
 
 
 ### Saving a workspace file using `save`
 
 Not surprisingly, saving data is very similar to loading data. Although RStudio provides a simple way to save files (see below), it's worth understanding the actual commands involved. There are two commands you can use to do this, `save()` and `save.image()`. If you're happy to save *all* of the variables in your workspace into the data file, then you should use `save.image()`. And if you're happy for R to save the file into the current working directory, all you have to do is this:
+
 ```{r eval=FALSE}
 save.image( file = "myfile.Rdata" )
 ```
+
 Since `file` is the first argument, you can shorten this to `save.image("myfile.Rdata")`; and if you want to save to a different directory, then (as always) you need to be more explicit about specifying the path to the file, just as we discussed in Section \@ref(navigation). Suppose, however, I have several variables in my workspace, and I only want to save some of them. For instance, I might have this as my workspace:
-```{r eval=FALSE}
+
+```{r}
+#| eval: false
 who()
 ##   -- Name --   -- Class --   -- Size --
 ##   data         data.frame    3 x 2     
 ##   handy        character     1         
 ##   junk         numeric       1        
 ```
+
 I want to save `data` and `handy`, but not `junk`. But I don't want to delete `junk` right now, because I want to use it for something else later on. This is where the `save()` function is useful, since it lets me indicate exactly which variables I want to save. Here is one way I can use the `save` function to solve my problem:
-```{r eval=FALSE}
+
+```{r}
+#| eval: false
 save(data, handy, file = "myfile.Rdata")
 ```
 Importantly, you *must* specify the name of the `file` argument. The reason is that if you don't do so, R will think that `"myfile.Rdata"` is actually a *variable* that you want to save, and you'll get an error message. Finally, I should mention a second way to specify which variables the `save()` function should save, which is to use the `list` argument. You do so like this:
-```{r eval = FALSE}
+```{r}
+#| eval: false
 save.me <- c("data", "handy")   # the variables to be saved
 save( file = "booksales2.Rdata", list = save.me )   # the command to save them
 ```
 
 ### Saving a workspace file using RStudio{#save1}
 
-RStudio allows you to save the workspace pretty easily. In the environment panel (Figures \@ref(fig:workspace) and \@ref(fig:workspace2)) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 20 years. Alternatively, go to the "Session" menu and click on the "Save Workspace As..." option.^[A word of warning: what you *don't* want to do is use the "File" menu. If you look in the "File" menu you will see "Save" and "Save As..." options, but they don't save the workspace. Those options are used for dealing with *scripts*, and so they'll produce `.R` files. We won't get to those until Chapter \@ref(scripting).] This will bring up the standard "save" dialog box for your operating system (e.g., on a Mac it'll look a little bit like the loading dialog box in Figure \@ref(fig:fileopen)). Type in the name of the file that you want to save it to, and all the variables in your workspace will be saved to disk. You'll see an R command like this one
-```{r eval=FALSE}
+RStudio allows you to save the workspace pretty easily. In the environment panel (Figures \@ref(fig:workspace) and \@ref(fig:workspace2)) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 20 years. Alternatively, go to the "Session" menu and click on the "Save Workspace As..." option.  This will bring up the standard "save" dialog box for your operating system (e.g., on a Mac it'll look a little bit like the loading dialog box in Figure \@ref(fig:fileopen)). Type in the name of the file that you want to save it to, and all the variables in your workspace will be saved to disk. You'll see an R command like this one
+```{r}
+#| eval: false
 save.image("~/Desktop/Untitled.RData")
 ```
 Pretty straightforward, really.

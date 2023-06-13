@@ -6,6 +6,10 @@ _Statistical Inference via Data Science: A ModernDive into R and the Tidyverse_ 
 
 https://github.com/moderndive/ModernDive_book
 
-_Learning statistics with R_ by Danielle Navarro
+Licensed under a creative commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0).
+
+_Learning Statistics with R_ by Danielle Navarro
 
 https://github.com/djnavarro/rbook
+
+Licensed under creative commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0).
