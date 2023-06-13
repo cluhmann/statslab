@@ -22,7 +22,7 @@ The interface between a programmer (or data analyst) and a programming language 
 
 First time users often confuse R and RStudio. At its simplest, R is like a car's engine\index{R} while RStudio is like a car's dashboard\index{RStudio} as illustrated in Figure \@ref(fig:R-vs-RStudio-1).
 
-![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png){width=2.5in}
+![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png)
 
 
 More precisely, R is the programming language that performs computations, whereas RStudio is how users interact with R.
@@ -41,13 +41,13 @@ The second step is to install RStudio.  You can download it from Posit: https://
 Recall our car analogy from earlier. Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly but rather we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new *programs* or *applications* you can open. We'll always work in RStudio and not in the R application. Figure \@ref(fig:R-vs-RStudio-2) shows what icon you should be clicking on your computer. 
 
 
-![Icons of R versus RStudio on your computer.]("images/logos/R_vs_RStudio.png"){width=2.5in}
+![Icons of R versus RStudio on your computer.](images/logos/R_vs_RStudio.png)
 
 
 After you open RStudio, you should see something similar to Figure \@ref(fig:RStudio-interface). (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
 
 
-![RStudio interface to R.]("images/rstudio_screenshots/rstudio.png"){width=2.5in}
+![RStudio interface to R.](images/rstudio_screenshots/rstudio.png){width=2.5in}
 
 
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.
@@ -81,7 +81,7 @@ a) Type the name of the package under "Packages (separate multiple with space or
 a) Click "Install."  
 
 
-![Installing packages in R the easy way.]("images/rstudio_screenshots/install_packages_easy_way.png"){width=2.5in}
+![Installing packages in R the easy way.](images/rstudio_screenshots/install_packages_easy_way.png){width=2.5in}
 
 
 An alternative but slightly less convenient way to install a package is by typing `install.packages("ggplot2")` in the console pane of RStudio and pressing Return/Enter on your keyboard. Note you must include the quotation marks around the name of the package.

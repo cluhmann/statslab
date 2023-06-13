@@ -1,6 +1,6 @@
 project:
     type: book
-    execute-dir: project
+execute-dir: project
 
 book:
     title: "statslab"
@@ -10,22 +10,22 @@ book:
 
     - part: "Beginnings"
       chapters:
-        - begin/rlang.qmd
-        - begin/programming.qmd
-        - begin/data.qmd
+        - rlang.qmd
+        - programming.qmd
+        - data.qmd
     - part: "Exploring"
       chapters:
-        - explore/dplyr.qmd
-        - explore/ggplot2.qmd
+        - dplyr.qmd
+        - ggplot2.qmd
     - part: "Regressing"
       chapters:
-        - regression/single.qmd
-        - regression/multiple.qmd
-        - regression/anova.qmd
+        - single.qmd
+        - multiple.qmd
+        - anova.qmd
     - part: "Odds & Ends"
       chapters:
-        - other/simulation.qmd
-        - other/missingness.qmd
+        - simulation.qmd
+        - missingness.qmd
 
 format:
     html:

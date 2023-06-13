@@ -720,7 +720,7 @@ At this point, I hope you can see why logical indexing is such a useful thing. I
 
 ## Quitting R
 
-![The dialog box that shows up when you try to close RStudio.]("images/rstudio_screenshots/Rstudio_quit.png"){width=2.5in}
+![The dialog box that shows up when you try to close RStudio.](images/rstudio_screenshots/Rstudio_quit.png)
 
 There's one last thing I should cover in this chapter: how to quit R. You can just shut down the application in the normal way (e.g., File->Quit Session). However, R also has a function, `q()`, that you can use to quit, which can be handy. Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in Section \@ref(load), but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
 ```{r eval=FALSE}
