@@ -10,11 +10,13 @@ book:
     - part: "Beginnings"
       chapters:
         - begin/rlang.qmd
-        - begin/data.qmd
         - begin/programming.qmd
-        - begin/dplyr.qmd
-        - begin/ggplot2.qmd
-    - part: "Regression"
+        - begin/data.qmd
+    - part: "Exploring"
+      chapters:
+        - explore/dplyr.qmd
+    - explore/ggplot2.qmd
+    - part: "Regressing"
       chapters:
         - regression/single.qmd
         - regression/multiple.qmd
