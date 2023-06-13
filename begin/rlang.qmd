@@ -22,15 +22,8 @@ The interface between a programmer (or data analyst) and a programming language 
 
 First time users often confuse R and RStudio. At its simplest, R is like a car's engine\index{R} while RStudio is like a car's dashboard\index{RStudio} as illustrated in Figure \@ref(fig:R-vs-RStudio-1).
 
-<!--
-R: Engine            |  RStudio: Dashboard 
-:-------------------------:|:-------------------------:
-![](images/shutterstock/shutterstock_111774881.jpg){ height=2.5in }  |  ![](images/shutterstock/shutterstock_1128690833.jpg){ height=2.5in }
--->
+![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png){width=2.5in}
 
-```{r R-vs-RStudio-1, echo=FALSE, fig.cap="Analogy of difference between R and RStudio.", out.width="95%", purl=FALSE}
-include_graphics("images/shutterstock/R_vs_RStudio_1.png")
-```
 
 More precisely, R is the programming language that performs computations, whereas RStudio is how users interact with R.
 
@@ -47,21 +40,15 @@ The second step is to install RStudio.  You can download it from Posit: https://
 
 Recall our car analogy from earlier. Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly but rather we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new *programs* or *applications* you can open. We'll always work in RStudio and not in the R application. Figure \@ref(fig:R-vs-RStudio-2) shows what icon you should be clicking on your computer. 
 
-<!--
-R: Do not open this          |  RStudio: Open this
-:-------------------------:|:-------------------------:
-`r include_image("images/logos/Rlogo.png", html_opts = "width=25%")`  | `r include_image("images/logos/RStudio-Ball.png", html_opts = "width=20%")`
--->
 
-```{r R-vs-RStudio-2, echo=FALSE, fig.cap="Icons of R versus RStudio on your computer.", out.width="90%", purl=FALSE}
-include_graphics("images/logos/R_vs_RStudio.png")
-```
+![Icons of R versus RStudio on your computer.]("images/logos/R_vs_RStudio.png"){width=2.5in}
+
 
 After you open RStudio, you should see something similar to Figure \@ref(fig:RStudio-interface). (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
 
-```{r RStudio-interface, echo=FALSE, fig.cap="RStudio interface to R.", out.width="93%", purl=FALSE}
-include_graphics("images/rstudio_screenshots/rstudio.png")
-```
+
+![RStudio interface to R.]("images/rstudio_screenshots/rstudio.png"){width=2.5in}
+
 
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.
 
@@ -92,10 +79,10 @@ a) Click on the "Packages" tab.
 a) Click on "Install" next to Update.
 a) Type the name of the package under "Packages (separate multiple with space or comma):" In this case, type `ggplot2`.
 a) Click "Install."  
-     
-```{r easy-way-install, echo=FALSE, fig.cap="Installing packages in R the easy way.", out.width="55%", out.height="55%", purl=FALSE}
-include_graphics("images/rstudio_screenshots/install_packages_easy_way.png")
-```     
+
+
+![Installing packages in R the easy way.]("images/rstudio_screenshots/install_packages_easy_way.png"){width=2.5in}
+
 
 An alternative but slightly less convenient way to install a package is by typing `install.packages("ggplot2")` in the console pane of RStudio and pressing Return/Enter on your keyboard. Note you must include the quotation marks around the name of the package.
 
