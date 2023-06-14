@@ -13,6 +13,8 @@ There are several attributes that make R useful for teaching statistics:
 - R's the focus on data analysis is built into its native data types
 - R has strong graphical abilities
 
+Don't worry if all of these benefits are meaningless to you at this point.  We'll get into the details soon enough.  The short version is that the first two bullet points are features that make programmers' lives easier/more convenient and last two mean that R is ready-made to do data analysis.
+
 There are also a variety of downsides to R, but we will try to sidestep these as much as we can.  One way we will do this is by exclusively using packages from the tidyverse.  Once you are familiar with one way of working in R, you can explore the many, many alternatives.
 
 
@@ -44,10 +46,10 @@ Recall our car analogy from earlier. Much as we don't drive a car by interacting
 ![Icons of R versus RStudio on your computer.](images/logos/R_vs_RStudio.png)
 
 
-After you open RStudio, you should see something similar to Figure \@ref(fig:RStudio-interface). (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
+After you open RStudio, you should see something similar to Figure @fig-RStudio-interface. (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
 
 
-![RStudio interface to R.](images/rstudio_screenshots/rstudio.png){width=2.5in}
+![RStudio interface to R.](images/rstudio_screenshots/rstudio.png){fig-RStudio-interface}
 
 
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.
@@ -71,9 +73,9 @@ Once Instagram is open on your phone, you can then proceed to share your photo w
 
 Let's take a look at how these two steps come together to install and load the `ggplot2` package for data visualization.
 
-### Package Installation
+### Package Installation {sec-packageinstallation}
 
-There are two ways to install an R package: an easy way and a more advanced way. \index{R packages!installation} Let's install the `ggplot2` package the easy way first as shown in Figure \@ref(fig:easy-way-install). In the Files pane of RStudio:
+There are two ways to install an R package: an easy way and a more advanced way. \index{R packages!installation} Let's install the `ggplot2` package the easy way first as shown in Figure \@ref(fig-easy-way-install). In the Files pane of RStudio:
 
 a) Click on the "Packages" tab.
 a) Click on "Install" next to Update.
@@ -81,8 +83,7 @@ a) Type the name of the package under "Packages (separate multiple with space or
 a) Click "Install."  
 
 
-![Installing packages in R the easy way.](images/rstudio_screenshots/install_packages_easy_way.png){width=2.5in}
-
+![Installing packages in R the easy way.](images/rstudio_screenshots/install_packages_easy_way.png){fig-easy-way-install}
 
 An alternative but slightly less convenient way to install a package is by typing `install.packages("ggplot2")` in the console pane of RStudio and pressing Return/Enter on your keyboard. Note you must include the quotation marks around the name of the package.
 
@@ -94,7 +95,8 @@ Recall that after you've installed a package, you need to "load it." In other wo
 
 For example, to load the `ggplot2` package, run the following code in the console pane. What do we mean by "run the following code"? Either type or copy-and-paste the following code into the console pane and then hit the Enter key. 
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(ggplot2)
 ```
 
@@ -104,7 +106,7 @@ If after running the earlier code, a blinking cursor returns next to the `>` "pr
 Error in library(ggplot2) : there is no package called ‘ggplot2’
 ```
 
-`...` it means that you didn't successfully install it. This is an example of an "error message" we discussed in Subsection \@ref(messages). If you get this error message, go back to Subsection \@ref(package-installation) on R package installation and make sure to install the `ggplot2` package before proceeding.
+`...` it means that you didn't successfully install it. If you get this error message, go back to Subsection \@ref(package-installation) on R package installation and make sure to install the `ggplot2` package before proceeding.
 
 ### Package Use {#package-use}
 

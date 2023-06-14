@@ -1,0 +1,156 @@
+# The Tidyverse {#sec-tidyverse}
+
+From here out on we will be utilizing a set of inter-related packages collectively known as the "tidyverse".  These packages share conventions and revolve around a specific flavor of dataframe (known as a "tibble").  In this chapter, we cover what the tidyverse libraries are, how to install them, and how to load them.
+
+## "Tidy" data {#tidy-data-ex}
+
+Let's now learn about the concept of "tidy" data format.
+
+### Definition of "tidy" data {#tidy-definition}
+
+You have surely heard the word "tidy" in your life:
+
+* "Tidy up your room!"
+* "Write your homework in a tidy way so it is easier to provide feedback."
+* Marie Kondo's best-selling book, [_The Life-Changing Magic of Tidying Up: The Japanese Art of Decluttering and Organizing_](https://www.powells.com/book/-9781607747307), and Netflix TV series [_Tidying Up with Marie Kondo_](https://www.netflix.com/title/80209379).
+* "I am not by any stretch of the imagination a tidy person, and the piles of unread books on the coffee table and by my bed have a plaintive, pleading quality to me - 'Read me, please!'" - Linda Grant
+
+What does it mean for your data to be "tidy"? While "tidy" has a clear English meaning of "organized," the word "tidy" in data science using R means that your data follows a standardized format. We will follow Hadley Wickham's \index{Wickham, Hadley} definition of *"tidy" data* \index{tidy data} [@tidy] shown also in Figure \@ref(fig:tidyfig):
+
+> A *dataset* is a collection of values, usually either numbers (if quantitative) or strings AKA text data (if qualitative/categorical). Values are organised in two ways. Every value belongs to a variable and an observation. A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a city) across attributes.
+> 
+> "Tidy" data is a standard way of mapping the meaning of a dataset to its structure. A dataset is messy or tidy depending on how rows, columns and tables are matched up with observations, variables and types. In *tidy data*:
+>
+> 1. Each variable forms a column.
+> 2. Each observation forms a row.
+> 3. Each type of observational unit forms a table.
+
+(ref:tidy-r4ds) Tidy data graphic from *R for Data Science*.
+
+```{r}
+#| echo: false
+#| 
+include_graphics("images/r4ds/tidy-1.png")
+```
+
+For example, say you have the following table of stock prices in Table \@ref(tab:non-tidy-stocks):
+
+```{r}
+#| echo: false
+stocks <- tibble(
+  Date = as.Date("2009-01-01") + 0:4,
+  `Boeing stock price` = paste("$", c("173.55", "172.61", "173.86", "170.77", "174.29"), sep = ""),
+  `Amazon stock price` = paste("$", c("174.90", "171.42", "171.58", "173.89", "170.16"), sep = ""),
+  `Google stock price` = paste("$", c("174.34", "170.04", "173.65", "174.87", "172.19"), sep = "")
+) %>%
+  slice(1:2)
+stocks %>%
+  kable(
+    digits = 2,
+    caption = "Stock prices (non-tidy format)",
+    booktabs = TRUE,
+    linesep = ""
+  ) %>%
+  kable_styling(
+    font_size = ifelse(is_latex_output(), 10, 16),
+    latex_options = c("hold_position")
+  )
+```
+
+Although the data are neatly organized in a rectangular spreadsheet-type format, they do not follow the definition of data in "tidy" format. While there are three variables corresponding to three unique pieces of information (date, stock name, and stock price), there are not three columns. In "tidy" data format, each variable should be its own column, as shown in Table \@ref(tab:tidy-stocks). Notice that both tables present the same information, but in different formats. 
+
+```{r}
+#| echo: false
+stocks_tidy <- stocks %>%
+  rename(
+    Boeing = `Boeing stock price`,
+    Amazon = `Amazon stock price`,
+    Google = `Google stock price`
+  ) %>%
+  #  gather(`Stock name`, `Stock price`, -Date)
+  pivot_longer(
+    cols = -Date,
+    names_to = "Stock Name",
+    values_to = "Stock Price"
+  )
+stocks_tidy %>%
+  kable(
+    digits = 2,
+    caption = "Stock prices (tidy format)",
+    booktabs = TRUE,
+    linesep = ""
+  ) %>%
+  kable_styling(
+    font_size = ifelse(is_latex_output(), 10, 16),
+    latex_options = c("hold_position")
+  )
+```
+
+Now we have the requisite three columns Date, Stock Name, and Stock Price. On the other hand, consider the data in Table \@ref(tab:tidy-stocks-2).
+
+```{r}
+#| echo: false
+
+stocks <- tibble(
+  Date = as.Date("2009-01-01") + 0:4,
+  `Boeing Price` = paste("$", c("173.55", "172.61", "173.86", "170.77", "174.29"), sep = ""),
+  `Weather` = c("Sunny", "Overcast", "Rain", "Rain", "Sunny")
+) %>%
+  slice(1:2)
+stocks %>%
+  kable(
+    digits = 2,
+    caption = "Example of tidy data" # ,
+    #    booktabs = TRUE
+  ) %>%
+  kable_styling(
+    font_size = ifelse(is_latex_output(), 10, 16),
+    latex_options = c("hold_position")
+  )
+```
+
+In this case, even though the variable "Boeing Price" occurs just like in our non-"tidy" data in Table @tab:non-tidy-stocks, the data *is* "tidy" since there are three variables corresponding to three unique pieces of information: Date, Boeing price, and the Weather that particular day.
+
+
+## `tidyverse` package {#tidyverse-package}
+
+Notice at the beginning of the chapter we loaded the following four packages, which are among four of the most frequently used R packages for data science:
+
+```{r}
+#| eval: false
+
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(tidyr)
+```
+
+Recall that `ggplot2` is for data visualization, `dplyr` is for data wrangling, `readr` is for importing spreadsheet data into R, and `tidyr` is for converting data to "tidy" format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the `tidyverse` package. The `tidyverse` package acts as an "umbrella" package whereby installing/loading it will install/load multiple packages at once for you. 
+
+After installing the `tidyverse` package as you would a normal package as seen in Section \@ref(packages), running:
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+```
+
+would be the same as running:
+
+```{r}
+#| eval: false
+
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(tidyr)
+library(purrr)
+library(tibble)
+library(stringr)
+library(forcats)
+```
+
+
+The `purrr`, `tibble`, `stringr`, and `forcats` are left for a more advanced book; check out [*R for Data Science*](http://r4ds.had.co.nz/) to learn about these packages.
+
+For the remainder of this book, we'll start every chapter by running `library(tidyverse)`, instead of loading the various component packages individually. The `tidyverse` "umbrella" package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames are in "tidy" format. This standardization of input and output data frames makes transitions between different functions in the different packages as seamless as possible. For more information, check out the [tidyverse.org](https://www.tidyverse.org/) webpage for the package.

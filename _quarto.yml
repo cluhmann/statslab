@@ -15,6 +15,8 @@ book:
         - data.qmd
     - part: "Exploring"
       chapters:
+        - tidyverse.qmd
+        - tibbles.qmd
         - dplyr.qmd
         - ggplot2.qmd
     - part: "Regressing"
