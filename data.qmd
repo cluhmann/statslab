@@ -15,7 +15,7 @@ One quite commonly used data format is the humble "comma separated value" file, 
 ![The booksales.csv data file. On the left, I've opened the file in using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right, the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas.](images/mechanics/booksalescsv.jpg)
 
 
-If RStudio were not available to you, the easiest way to open this file would be to use the `read.csv()` function.^[In a lot of books you'll see the `read.table()` function used for this purpose instead of `read.csv()`. They're more or less identical functions, with the same arguments and everything. They differ only in the default values.] This function is pretty flexible, and I'll talk a lot more about it's capabilities in Section \@ref(importing) for more details, but for now there's only two arguments to the function that I'll mention:
+If RStudio were not available to you, the easiest way to open this file would be to use the `read.csv()` function. This function is pretty flexible, and I'll talk a lot more about it's capabilities in Section \@ref(importing) for more details, but for now there's only two arguments to the function that I'll mention:
 
 - `file`. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.
 - `header`. This is a logical value indicating whether or not the first row of the file contains variable names. The default value is `TRUE`. 
@@ -38,6 +38,10 @@ print( books )
 ```
 
 Clearly, it's worked, but the format of this output is a bit unfamiliar. We haven't seen anything like this before. What you're looking at is a *data frame*, which is a very important kind of variable in R, and one I'll discuss in Section \@ref(dataframes). For now, let's just be happy that we imported the data and that it looks about right.
+
+::: {.callout-note}
+In a lot of books you'll see the `read.table()` function used for this purpose instead of `read.csv()`. They're more or less identical functions, with the same arguments and everything. They differ only in the default values.
+:::
 
 
 ### Importing data from CSV files using RStudio
