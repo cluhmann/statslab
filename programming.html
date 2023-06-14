@@ -181,14 +181,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tibbles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dataframes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Plotting Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -205,19 +217,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./single.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,13 +246,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simulating Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./missingness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="commands-at-the-console" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="commands-at-the-console"><span class="header-section-number">2.1</span> Commands at the console</h2>
-<p>One of the easiest things you can do with R is use it as a simple calculator, so it’s a good place to start. For instance, try typing <code>10 + 20</code>, and hitting enter.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> When you do this, you’ve entered a <strong><em>command</em></strong>, and R will “execute” that command. What you see on screen now will be this:</p>
+<p>One of the easiest things you can do with R is use it as a simple calculator, so it’s a good place to start. For instance, try typing <code>10 + 20</code>, and hitting enter. The simple act of typing it rather than “just reading” makes a big difference. It makes the concepts more concrete, and it ties the abstract ideas (programming and statistics) to the actual context in which you need to use them. Statistics is something you <em>do</em>, not just something you read about in a textbook.] When you do this, you’ve entered a <strong><em>command</em></strong>, and R will “execute” that command. What you see on screen now will be this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">20</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -495,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bedmas" class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="bedmas"><span class="header-section-number">2.2.3</span> Doing calculations in the right order</h3>
 <p>Okay. At this point, you know how to take one of the most powerful pieces of statistical software in the world, and use it as a $2 calculator. And as a bonus, you’ve learned a few very basic programming concepts. That’s not nothing (you could argue that you’ve just saved yourself $2) but on the other hand, it’s not very much either. In order to use R more effectively, we need to introduce more programming concepts.</p>
-<p>In most situations where you would want to use a calculator, you might want to do multiple calculations. R lets you do this, just by typing in longer commands. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In fact, we’ve already seen an example of this earlier, when I typed in <code>5 * 5 * 5 * 5</code>. However, let’s try a slightly different example:</p>
+<p>In most situations where you would want to use a calculator, you might want to do multiple calculations. R lets you do this, just by typing in longer commands. In fact, we’ve already seen an example of this earlier, when I typed in <code>5 * 5 * 5 * 5</code>. However, let’s try a slightly different example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -503,7 +515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Clearly, this isn’t a problem for R either. However, it’s worth stopping for a second, and thinking about what R just did. Clearly, since it gave us an answer of <code>9</code> it must have multiplied <code>2 * 4</code> (to get an interim answer of 8) and then added 1 to that. But, suppose it had decided to just go from left to right: if R had decided instead to add <code>1+2</code> (to get an interim answer of 3) and then multiplied by 4, it would have come up with an answer of <code>12</code>.</p>
-<p>To answer this, you need to know the <strong><em>order of operations</em></strong> that R uses. If you remember back to your high school maths classes, it’s actually the same order that you got taught when you were at school: the “<strong><em>BEDMAS</em></strong>” order.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> That is, first calculate things inside <strong>B</strong>rackets <code>()</code>, then calculate <strong>E</strong>xponents <code>^</code>, then <strong>D</strong>ivision <code>/</code> and <strong>M</strong>ultiplication <code>*</code>, then <strong>A</strong>ddition <code>+</code> and <strong>S</strong>ubtraction <code>-</code>. So, to continue the example above, if we want to force R to calculate the <code>1+2</code> part before the multiplication, all we would have to do is enclose it in brackets:</p>
+<p>To answer this, you need to know the <strong><em>order of operations</em></strong> that R uses. If you remember back to your high school maths classes, it’s actually the same order that you got taught when you were at school: the “<strong><em>BEDMAS</em></strong>” order. That is, first calculate things inside <strong>B</strong>rackets <code>()</code>, then calculate <strong>E</strong>xponents <code>^</code>, then <strong>D</strong>ivision <code>/</code> and <strong>M</strong>ultiplication <code>*</code>, then <strong>A</strong>ddition <code>+</code> and <strong>S</strong>ubtraction <code>-</code>. So, to continue the example above, if we want to force R to calculate the <code>1+2</code> part before the multiplication, all we would have to do is enclose it in brackets:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -529,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="dv">350</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When you hit enter, R doesn’t print out any output.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> It just gives you another command prompt. However, behind the scenes R has created a variable called <code>sales</code> and given it a value of <code>350</code>. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do <em>that</em> is to type the name of the variable and hit enter<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>When you hit enter, R doesn’t print out any output. It just gives you another command prompt. However, behind the scenes R has created a variable called <code>sales</code> and given it a value of <code>350</code>. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do <em>that</em> is to type the name of the variable and hit enter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -537,11 +549,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>So that’s nice to know. Anytime you can’t remember what R has got stored in a particular variable, you can just type the name of the variable and hit enter.</p>
-<p>Okay, so now we know how to assign variables. Actually, there’s a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the <code>&lt;-</code> operator, we can also use <code>-&gt;</code> and <code>=</code>, and it’s pretty important to understand the differences between them.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> Let’s start by considering <code>-&gt;</code>, since that’s the easy one (we’ll discuss the use of <code>=</code> in Section @ref(functionarguments). As you might expect from just looking at the symbol, it’s almost identical to <code>&lt;-</code>. It’s just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my <code>sales</code> variable using <code>-&gt;</code>, I would write it like this:</p>
+<p>Okay, so now we know how to assign variables. Actually, there’s a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the <code>&lt;-</code> operator, we can also use <code>-&gt;</code> and <code>=</code>, and it’s pretty important to understand the differences between them. Let’s start by considering <code>-&gt;</code>, since that’s the easy one (we’ll discuss the use of <code>=</code> in Section @ref(functionarguments). As you might expect from just looking at the symbol, it’s almost identical to <code>&lt;-</code>. It’s just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my <code>sales</code> variable using <code>-&gt;</code>, I would write it like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dv">350</span> <span class="ot">-&gt;</span> sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This has the same effect: and it <em>still</em> means that I’m only going to sell <code>350</code> copies. Sigh. Apart from this superficial difference, <code>&lt;-</code> and <code>-&gt;</code> are identical. In fact, as far as R is concerned, they’re actually the same operator, just in a “left form” and a “right form”.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<p>This has the same effect: and it <em>still</em> means that I’m only going to sell <code>350</code> copies. Sigh. Apart from this superficial difference, <code>&lt;-</code> and <code>-&gt;</code> are identical. In fact, as far as R is concerned, they’re actually the same operator, just in a “left form” and a “right form”.</p>
 </section>
 <section id="doing-calculations-using-variables" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="doing-calculations-using-variables"><span class="header-section-number">2.3.2</span> Doing calculations using variables</h3>
@@ -584,7 +596,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rules-and-conventions-for-naming-variables" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="rules-and-conventions-for-naming-variables"><span class="header-section-number">2.3.3</span> Rules and conventions for naming variables</h3>
-<p>In the examples that we’ve seen so far, my variable names (<code>sales</code> and <code>revenue</code>) have just been English-language words written using lowercase letters. However, R allows a lot more flexibility when it comes to naming your variables, as the following list of rules<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> illustrates:</p>
+<p>In the examples that we’ve seen so far, my variable names (<code>sales</code> and <code>revenue</code>) have just been English-language words written using lowercase letters. However, R allows a lot more flexibility when it comes to naming your variables, as the following list of rules illustrates:</p>
 <ul>
 <li>Variable names can only use the upper case alphabetic characters <code>A</code>-<code>Z</code> as well as the lower case characters <code>a</code>-<code>z</code>. You can also include numeric characters <code>0</code>-<code>9</code> in the variable name, as well as the period <code>.</code> or underscore <code>_</code> character. In other words, you can use <code>SaL.e_s</code> as a variable name (though I can’t think why you would want to), but you can’t use <code>Sales?</code>.</li>
 <li>Variable names cannot include spaces: therefore <code>my sales</code> is not a valid name, but <code>my.sales</code> is.</li>
@@ -596,13 +608,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Use informative variable names. As a general rule, using meaningful names like <code>sales</code> and <code>revenue</code> is preferred over arbitrary ones like <code>variable1</code> and <code>variable2</code>. Otherwise it’s very hard to remember what the contents of different variables are, and it becomes hard to understand what your commands actually do.</li>
 <li>Use short variable names. Typing is a pain and no-one likes doing it. So we much prefer to use a name like <code>sales</code> over a name like <code>sales.for.this.book.that.you.are.reading</code>. Obviously there’s a bit of a tension between using informative names (which tend to be long) and using short names (which tend to be meaningless), so use a bit of common sense when trading off these two conventions.</li>
-<li>Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores “my new salary”. Obviously I can’t include spaces in the variable name, so how should I do this? There are three different conventions that you sometimes see R users employing. Firstly, you can separate the words using periods, which would give you <code>my.new.salary</code> as the variable name. Alternatively, you could separate words using underscores, as in <code>my_new_salary</code>. Finally, you could use capital letters at the beginning of each word (except the first one), which gives you <code>myNewSalary</code> as the variable name. I don’t think there’s any strong reason to prefer one over the other,<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> but it’s important to be consistent.</li>
+<li>Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores “my new salary”. Obviously I can’t include spaces in the variable name, so how should I do this? There are three different conventions that you sometimes see R users employing. Firstly, you can separate the words using periods, which would give you <code>my.new.salary</code> as the variable name. Alternatively, you could separate words using underscores, as in <code>my_new_salary</code>. Finally, you could use capital letters at the beginning of each word (except the first one), which gives you <code>myNewSalary</code> as the variable name. I don’t think there’s any strong reason to prefer one over the other, but it’s important to be consistent.</li>
 </ul>
 </section>
 </section>
 <section id="functions" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.4</span> Functions</h2>
-<p>The symbols <code>+</code>, <code>-</code>, <code>*</code> and so on are examples of operators. As we’ve seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you’re going to need to start using <strong><em>functions</em></strong>.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> I’ll talk in more detail about functions and how they work in Section @ref(functions), but for now let’s just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The square root, in case your high school maths is a bit rusty, is just the opposite of squaring a number. So, for instance, since “5 squared is 25” I can say that “5 is the square root of 25”. The usual notation for this is</p>
+<p>The symbols <code>+</code>, <code>-</code>, <code>*</code> and so on are examples of operators. As we’ve seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you’re going to need to start using <strong><em>functions</em></strong>. I’ll talk in more detail about functions and how they work in Section @ref(functions), but for now let’s just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The square root, in case your high school maths is a bit rusty, is just the opposite of squaring a number. So, for instance, since “5 squared is 25” I can say that “5 is the square root of 25”. The usual notation for this is</p>
 <p><span class="math display">\[
 \sqrt{25} = 5
 \]</span></p>
@@ -644,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>When R executes this command, starts out by calculating the value of <code>abs(-8)</code>, which produces an intermediate value of <code>8</code>. Having done so, the command simplifies to <code>sqrt( 1 + 8 )</code>. To solve the square root<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> it first needs to add <code>1 + 8</code> to get <code>9</code>, at which point it evaluates <code>sqrt(9)</code>, and so it finally outputs a value of <code>3</code>.</p>
+<p>When R executes this command, starts out by calculating the value of <code>abs(-8)</code>, which produces an intermediate value of <code>8</code>. Having done so, the command simplifies to <code>sqrt( 1 + 8 )</code>. To solve the square root it first needs to add <code>1 + 8</code> to get <code>9</code>, at which point it evaluates <code>sqrt(9)</code>, and so it finally outputs a value of <code>3</code>.</p>
 <section id="functionarguments" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="functionarguments"><span class="header-section-number">2.4.1</span> Function arguments, their names and their defaults</h3>
 <p>There’s two more fairly important things that you need to understand about how functions work in R, and that’s the use of “named” arguments, and default values” for arguments. Not surprisingly, that’s not to say that this is the last we’ll hear about how functions work, but they are the last things we desperately need to discuss in order to get you started. To understand what these two concepts are all about, I’ll introduce another function. The <code>round()</code> function can be used to round some value to the nearest whole number. For example, I could type this:</p>
@@ -669,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Notice that this is kind of similar in spirit to variable assignment (Section @ref(assign)), except that I used <code>=</code> here, rather than <code>&lt;-</code>. In both cases we’re specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I’m doing here when specifying arguments, and so as a consequence it’s important that you use <code>=</code> in this context.</p>
-<p>As you can see, specifying the arguments by name involves a lot more typing, but it’s also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name,<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> since that makes it clearer to you what I’m doing. However, one important thing to note is that when specifying the arguments using their names, it doesn’t matter what order you type them in. But if you don’t use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output…</p>
+<p>As you can see, specifying the arguments by name involves a lot more typing, but it’s also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name, since that makes it clearer to you what I’m doing. However, one important thing to note is that when specifying the arguments using their names, it doesn’t matter what order you type them in. But if you don’t use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>( <span class="fl">3.14165</span>, <span class="dv">2</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -700,7 +712,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>At this point we’ve covered functions in enough detail to get us safely through the next couple of chapters (with one small exception: see Section @ref(generics), so let’s return to our discussion of variables. When I introduced variables in Section @ref(assign) I showed you how we can use variables to store a single number. In this section, we’ll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a <strong><em>vector</em></strong>. So let’s create one.</p>
 <section id="creating-a-vector" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="creating-a-vector"><span class="header-section-number">2.5.1</span> Creating a vector</h3>
-<p>Let’s stick to my silly “get rich quick by textbook writing” example. Suppose the textbook company (if I actually had one, that is) sends me sales data on a monthly basis. Since my class start in late February, we might expect most of the sales to occur towards the start of the year. Let’s suppose that I have 100 sales in February, 200 sales in March and 50 sales in April, and no other sales for the rest of the year. What I would like to do is have a variable – let’s call it <code>sales.by.month</code> – that stores all this sales data. The first number stored should be <code>0</code> since I had no sales in January, the second should be <code>100</code>, and so on. The simplest way to do this in R is to use the <strong><em>combine</em></strong> function, <code>c()</code>. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<p>Let’s stick to my silly “get rich quick by textbook writing” example. Suppose the textbook company (if I actually had one, that is) sends me sales data on a monthly basis. Since my class start in late February, we might expect most of the sales to occur towards the start of the year. Let’s suppose that I have 100 sales in February, 200 sales in March and 50 sales in April, and no other sales for the rest of the year. What I would like to do is have a variable – let’s call it <code>sales.by.month</code> – that stores all this sales data. The first number stored should be <code>0</code> since I had no sales in January, the second should be <code>100</code>, and so on. The simplest way to do this in R is to use the <strong><em>combine</em></strong> function, <code>c()</code>. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>sales.by.month <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>sales.by.month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -804,7 +816,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "hello"</code></pre>
 </div>
 </div>
-<p>Of course, there’s no reason why I can’t create a vector of character strings. For instance, if we were to continue with the example of my attempts to look at the monthly sales data for my book, one variable I might want would include the names of all 12 <code>months</code>.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> To do so, I could type in a command like this</p>
+<p>Of course, there’s no reason why I can’t create a vector of character strings. For instance, if we were to continue with the example of my attempts to look at the monthly sales data for my book, one variable I might want would include the names of all 12 <code>months</code>. To do so, I could type in a command like this</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>,</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>, <span class="st">"November"</span>, </span>
@@ -842,7 +854,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Time to move onto a third kind of data. A key concept in that a lot of R relies on is the idea of a <strong><em>logical value</em></strong>. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely <code>TRUE</code> and <code>FALSE</code>. Despite the simplicity, a logical values are very useful things. Let’s see how they work.</p>
 <section id="assessing-mathematical-truths" class="level3" data-number="2.7.1">
 <h3 data-number="2.7.1" class="anchored" data-anchor-id="assessing-mathematical-truths"><span class="header-section-number">2.7.1</span> Assessing mathematical truths</h3>
-<p>In George Orwell’s classic book <em>1984</em>, one of the slogans used by the totalitarian Party was “two plus two equals five”, the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It’s a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. “Man is infinitely malleable”, the book says. I’m pretty sure that this isn’t true of humans<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> but it’s definitely not true of R. R is not infinitely malleable. It has rather firm opinions on the topic of what is and isn’t true, at least as regards basic mathematics. If I ask it to calculate <code>2 + 2</code>, it always gives the same answer, and it’s not bloody 5:</p>
+<p>In George Orwell’s classic book <em>1984</em>, one of the slogans used by the totalitarian Party was “two plus two equals five”, the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It’s a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. “Man is infinitely malleable”, the book says. I’m pretty sure that this isn’t true of humans but it’s definitely not true of R. R is not infinitely malleable. It has rather firm opinions on the topic of what is and isn’t true, at least as regards basic mathematics. If I ask it to calculate <code>2 + 2</code>, it always gives the same answer, and it’s not bloody 5:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -856,7 +868,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>What I’ve done here is use the <strong><em>equality operator</em></strong>, <code>==</code>, to force R to make a “true or false” judgement.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> Okay, let’s see what R thinks of the Party slogan:</p>
+<p>What I’ve done here is use the <strong><em>equality operator</em></strong>, <code>==</code>, to force R to make a “true or false” judgement. Okay, let’s see what R thinks of the Party slogan:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1050,7 +1062,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>But there are many situations where you really do need to use the <code>!</code> operator. We’ll see some later on.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
+<p>But there are many situations where you really do need to use the <code>!</code> operator. We’ll see some later on.</p>
 </section>
 <section id="storing-and-using-logical-data" class="level3" data-number="2.7.3">
 <h3 data-number="2.7.3" class="anchored" data-anchor-id="storing-and-using-logical-data"><span class="header-section-number">2.7.3</span> Storing and using logical data</h3>
@@ -1070,7 +1082,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-<p>Better yet, because it’s kind of tedious to type <code>TRUE</code> or <code>FALSE</code> over and over again, R provides you with a shortcut: you can use <code>T</code> and <code>F</code> instead (but it’s case sensitive: <code>t</code> and <code>f</code> won’t work).<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> So this works:</p>
+<p>Better yet, because it’s kind of tedious to type <code>TRUE</code> or <code>FALSE</code> over and over again, R provides you with a shortcut: you can use <code>T</code> and <code>F</code> instead (but it’s case sensitive: <code>t</code> and <code>f</code> won’t work).</p>
+<p>::: {.callout-caution} ## TRUE and FALSE</p>
+<p><code>TRUE</code> and <code>FALSE</code> are reserved keywords in R, so you can trust that they always mean what they say they do. Unfortunately, the shortcut versions <code>T</code> and <code>F</code> do not have this property. It’s even possible to create variables that set up the reverse meanings, by typing commands like <code>T &lt;- FALSE</code> and <code>F &lt;- TRUE</code>. This is kind of insane, and something that is generally thought to be a design flaw in R. Anyway, the long and short of it is that it’s safer to use <code>TRUE</code> and <code>FALSE</code>.:::</p>
+<p>So this works:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>is.the.Party.correct <span class="ot">&lt;-</span> F</span>
 <span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>is.the.Party.correct</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1247,7 +1262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Either way, I get the answer I want.</p>
-<p>At this point, I hope you can see why logical indexing is such a useful thing. It’s a very basic, yet very powerful way to manipulate data. We’ll talk a lot more about how to manipulate data in Chapter @ref(datahandling), since it’s a critical skill for real world research that is often overlooked in introductory research methods classes (or at least, that’s been my experience). It does take a bit of practice to become completely comfortable using logical indexing, so it’s a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like “how do I get R to spit out all the elements that are [blah]”. Practice makes perfect, and it’s only by practicing logical indexing that you’ll perfect the art of yelling frustrated insults at your computer.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></p>
+<p>At this point, I hope you can see why logical indexing is such a useful thing. It’s a very basic, yet very powerful way to manipulate data. We’ll talk a lot more about how to manipulate data in Chapter @ref(datahandling), since it’s a critical skill for real world research that is often overlooked in introductory research methods classes (or at least, that’s been my experience). It does take a bit of practice to become completely comfortable using logical indexing, so it’s a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like “how do I get R to spit out all the elements that are [blah]”. Practice makes perfect, and it’s only by practicing logical indexing that you’ll perfect the art of yelling frustrated insults at your computer.</p>
 </section>
 </section>
 <section id="quitting-r" class="level2" data-number="2.9">
@@ -1269,30 +1284,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again (see Figure @ref(fig:RStudiooptions). On a Mac, you can open this window by going to the “RStudio” menu and selecting “Preferences”. On a Windows machine you go to the “Tools” menu and select “Global Options”. Under the “General” tab you’ll see an option that reads “Save workspace to .Rdata on exit”. By default this is set to “ask”. If you want R to stop asking, change it to “never”.</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Seriously. If you’re in a position to do so, open up R and start typing. The simple act of typing it rather than “just reading” makes a big difference. It makes the concepts more concrete, and it ties the abstract ideas (programming and statistics) to the actual context in which you need to use them. Statistics is something you <em>do</em>, not just something you read about in a textbook.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>If you’re reading this with R open, a good learning trick is to try typing in a few different variations on what I’ve done here. If you experiment with your commands, you’ll quickly learn what works and what doesn’t<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>For advanced users: if you want a table showing the complete order of operator precedence in R, type <code>?Syntax</code>. I haven’t included it in this book since there are quite a few different operators, and we don’t need that much detail. Besides, in practice most people seem to figure it out from seeing examples: until writing this book I never looked at the formal statement of operator precedence for any language I ever coded in, and never ran into any difficulties.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>If you are using RStudio, and the “environment” panel (formerly known as the “workspace” panel) is visible when you typed the command, then you probably saw something happening there. That’s to be expected, and is quite helpful. However, there’s two things to note here (1) I haven’t yet explained what that panel does, so for now just ignore it, and (2) this is one of the helpful things RStudio does, not a part of R itself.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>As we’ll discuss later, by doing this we are implicitly using the <code>print()</code> function<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Actually, in keeping with the R tradition of providing you with a billion different screwdrivers (even when you’re actually looking for a hammer) these aren’t the only options. There’s also the<code>assign()</code> function, and the <code>&lt;&lt;-</code> and <code>-&gt;&gt;</code> operators. However, we won’t be using these at all in this book.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>A quick reminder: when using operators like <code>&lt;-</code> and <code>-&gt;</code> that span multiple characters, you can’t insert spaces in the middle. That is, if you type <code>- &gt;</code> or <code>&lt; -</code>, R will interpret your command the wrong way. And I will cry.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>Actually, you can override any of these rules if you want to, and quite easily. All you have to do is add quote marks or backticks around your non-standard variable name. For instance <code>`my sales ` &lt;- 350</code> would work just fine, but it’s almost never a good idea to do this.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>For very advanced users: there is one exception to this. If you’re naming a function, don’t use <code>.</code> in the name unless you are intending to make use of the S3 object oriented programming system in R. If you don’t know what S3 is, then you definitely don’t want to be using it! For function naming, there’s been a trend among R users to prefer <code>myFunctionName</code>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>A side note for students with a programming background. Technically speaking, operators <em>are</em> functions in R: the addition operator <code>+</code> is actually a convenient way of calling the addition function <code>+()</code>. Thus <code>10+20</code> is equivalent to the function call <code>+(20, 30)</code>. Not surprisingly, no-one ever uses this version. Because that would be stupid.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>A note for the mathematically inclined: R does support complex numbers, but unless you explicitly specify that you want them it assumes all calculations must be real valued. By default, the square root of a negative number is treated as undefined: <code>sqrt(-9)</code> will produce <code>NaN</code> (not a number) as its output. To get complex numbers, you would type <code>sqrt(-9+0i)</code> and R would now return <code>0+3i</code>. However, since we won’t have any need for complex numbers in this book, I won’t refer to them again.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>The two functions discussed previously, <code>sqrt()</code> and <code>abs()</code>, both only have a single argument, <code>x</code>. So I could have typed something like <code>sqrt(x = 225)</code> or <code>abs(x = -13)</code> earlier. The fact that all these functions use <code>x</code> as the name of the argument that corresponds the “main” variable that you’re working with is no coincidence. That’s a fairly widely used convention. Quite often, the writers of R functions will try to use conventional names like this to make your life easier. Or at least that’s the theory. In practice it doesn’t always work as well as you’d hope.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>Notice that I didn’t specify any argument names here. The <code>c()</code> function is one of those cases where we don’t use names. We just type all the numbers, and R just dumps them all in a single variable.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14"><p>Though actually there’s no real need to do this, since R has an inbuilt variable called <code>month.name</code> that you can use for this purpose.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>I offer up my teenage attempts to be “cool” as evidence that some things just can’t be done.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16"><p>Note that this is a very different operator to the assignment operator <code>=</code> that I talked about in Section @ref(assign). A common typo that people make when trying to write logical commands in R (or other languages, since the “<code>=</code> versus <code>==</code>” distinction is important in most programming languages) is to accidentally type <code>=</code> when you really mean <code>==</code>. Be especially cautious with this – I’ve been programming in various languages since I was a teenager, and I <em>still</em> screw this up a lot. Hm. I think I see why I wasn’t cool as a teenager. And why I’m still not cool.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn17"><p>A note for those of you who have taken a computer science class: yes, R does have a function for exclusive-or, namely <code>xor()</code>. Also worth noting is the fact that R makes the distinction between element-wise operators <code>&amp;</code> and <code>|</code> and operators that look only at the first element of the vector, namely <code>&amp;&amp;</code> and <code>||</code>. To see the distinction, compare the behaviour of a command like <code>c(FALSE,TRUE) &amp; c(TRUE,TRUE)</code> to the behaviour of something like <code>c(FALSE,TRUE) &amp;&amp; c(TRUE,TRUE)</code>. If this doesn’t mean anything to you, ignore this footnote entirely. It’s not important for the content of this book.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>Warning! <code>TRUE</code> and <code>FALSE</code> are reserved keywords in R, so you can trust that they always mean what they say they do. Unfortunately, the shortcut versions <code>T</code> and <code>F</code> do not have this property. It’s even possible to create variables that set up the reverse meanings, by typing commands like <code>T &lt;- FALSE</code> and <code>F &lt;- TRUE</code>. This is kind of insane, and something that is generally thought to be a design flaw in R. Anyway, the long and short of it is that it’s safer to use <code>TRUE</code> and <code>FALSE</code>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p>Well, I say that… but in my personal experience it wasn’t until I started learning “regular expressions” that my loathing of computers reached its peak.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
