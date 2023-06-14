@@ -1,5 +1,11 @@
 # Dataframes {#sec-dataframes}
 
+```{r}
+#| echo: false
+library(tidyverse)
+library(fivethirtyeight)
+```
+
 ## What is a tibble?
 
 ## Converting to "tidy" data
@@ -19,7 +25,7 @@ drinks %>%
 
 After reading the help file by running (`?drinks`), you'll see that `drinks` is a data frame containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi's article: ["Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?"](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/).
 
-Let's narrow down the data a bit.  We'll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the `total_litres_of_pure_alcohol` variable, and rename the other variables to something a bit more convenient.  Don't worry about the code here.  We'll get into all of these operations more in the chapter on @sec-wrangling.
+Let's narrow down the data a bit.  We'll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the `total_litres_of_pure_alcohol` variable, and rename the other variables to something a bit more convenient.  Don't worry about the code here.  We'll get into all of these operations more in the chapter on @sec-dplyr.
 
 ```{r}
 drinks_smaller <- drinks %>% 
@@ -37,6 +43,17 @@ drinks_smaller_tidy <- drinks_smaller %>%
                values_to = "servings", 
                cols = -country)
 drinks_smaller_tidy
+```
+
+```{r}
+#| echo: false
+n_row_drinks <- drinks_smaller_tidy %>% nrow()
+n_alcohol_types <- drinks_smaller_tidy %>%
+  select(type) %>%
+  n_distinct()
+n_countries <- drinks_smaller_tidy %>%
+  select(country) %>%
+  n_distinct()
 ```
 
 We set the arguments to `pivot_longer()` as follows:
@@ -58,32 +75,22 @@ drinks_smaller %>%
 Note that the third argument now specifies which columns we want to "tidy" with `c(beer, spirit, wine)`, instead of the columns we don't want to "tidy" using `-country`. We use the `c()` function to create a vector of the columns in `drinks_smaller` that we'd like to "tidy." Note that since these three columns appear one after another in the `drinks_smaller` data frame, we could also do the following for the `cols` argument:
 
 ```{r}
-#|eval: false
 drinks_smaller %>% 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
                cols = beer:wine)
+drinks_smaller_tidy <- drinks_smaller %>%
+  gather(type, servings, -country)
 ```
 
-With our `drinks_smaller_tidy` "tidy" formatted data frame, we can now produce the barplot you saw in Figure  \@ref(fig:drinks-smaller) using `geom_col()`. This is done in Figure \@ref(fig:drinks-smaller-tidy-barplot). Recall from Section \@ref(geombar) on barplots that we use `geom_col()` and not `geom_bar()`, since we would like to map the "pre-counted" `servings` variable to the `y`-aesthetic of the bars.
+Let's see what our "tidy" formatted data frame, `drinks_smaller_tidy`, looks like.
 
 ```{r}
-#|eval: false
-ggplot(drinks_smaller_tidy, aes(x = country, y = servings, fill = type)) +
-  geom_col(position = "dodge")
+#| echo: false
+drinks_smaller_tidy
 ```
 
-(ref:drinks-col) Comparing alcohol consumption in `r n_countries` countries using geom_col().
-
-```{r drinks-smaller-tidy-barplot, echo=FALSE, fig.cap="(ref:drinks-col)", fig.height=2.5, purl=FALSE}
-if (is_html_output()) {
-  drinks_smaller_tidy_plot
-} else {
-  drinks_smaller_tidy_plot + scale_fill_grey()
-}
-```
-
-Converting "wide" format data to "tidy" format often confuses new R users. The only way to learn to get comfortable with the `pivot_longer()` function is with practice, practice, and more practice using different datasets. For example, run `?pivot_longer` and look at the examples in the bottom of the help file. We'll show another example of using `pivot_longer()` to convert a "wide" formatted data frame to "tidy" format in Section \@ref(case-study-tidy). 
+Converting "wide" format data to "tidy" format often confuses new R users. The only way to learn to get comfortable with the `pivot_longer()` function is with practice, practice, and more practice using different datasets. For example, run `?pivot_longer` and look at the examples in the bottom of the help file.
 
 If however you want to convert a "tidy" data frame to "wide" format, you will need to use the `pivot_wider()`\index{tidyr!pivot\_wider()} function instead. Run `?pivot_wider` and look at the examples in the bottom of the help file for examples.
 

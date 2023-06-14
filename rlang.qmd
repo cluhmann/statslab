@@ -49,7 +49,7 @@ Recall our car analogy from earlier. Much as we don't drive a car by interacting
 After you open RStudio, you should see something similar to Figure @fig-RStudio-interface. (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
 
 
-![RStudio interface to R.](images/rstudio_screenshots/rstudio.png){fig-RStudio-interface}
+![RStudio interface to R.](images/rstudio_screenshots/rstudio.png){#fig-RStudio-interface}
 
 
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.

@@ -46,9 +46,9 @@ In a lot of books you'll see the `read.table()` function used for this purpose i
 
 ### Importing data from CSV files using RStudio {#sec-importing}
 
-Yet again, importing data is easier in RStudio. In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure @fig-fileopen. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in Figure @fig-import.
+Yet again, importing data is easier in RStudio. In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder/Explorer window that you use to choose a file. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in Figure @fig-import.
 
-![A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it's the usual way in which a Mac asks you to find a file. Windows users won't see this: they'll see the usual explorer window that Windows always gives you when it wants you to select a file.](images/rstudio_screenshots/openscreen.png){fig-import}
+![A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it's the usual way in which a Mac asks you to find a file. Windows users won't see this: they'll see the usual explorer window that Windows always gives you when it wants you to select a file.](images/rstudio_screenshots/openscreen.png){#fig-import}
 
 
 
@@ -116,7 +116,7 @@ load("~/Rbook/data/booksales.Rdata")
 
 and the new variables will appear in the workspace (you'll see them in the Environment panel in RStudio, or if you type `who()`). So easy it barely warrants having its own section.
 
-![The file panel is the area shown in the lower right hand corner. It provides a very easy way to browse and navigate your computer using R. See main text for details.](images/mechanics/filepanel.png){fig-filepanel}
+![The file panel is the area shown in the lower right hand corner. It provides a very easy way to browse and navigate your computer using R. See main text for details.](images/mechanics/filepanel.png){#fig-filepanel}
 
 
 ### Saving a workspace file using `save`
@@ -156,7 +156,7 @@ save( file = "booksales2.Rdata", list = save.me )   # the command to save them
 
 RStudio allows you to save the workspace pretty easily. In the environment panel (@fig:workspace) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 20 years.
 
-![The RStudio Environment panel shows you the contents of the workspace. The view shown above is the list view. To switch to the grid view, click on the menu item on the top right that currently reads list. Select grid from the dropdown menu, and then it will switch to a view like the one shown in the other workspace figure](images/mechanics/workspacepanel.png){fig-workspace}
+![The RStudio Environment panel shows you the contents of the workspace. The view shown above is the list view. To switch to the grid view, click on the menu item on the top right that currently reads list. Select grid from the dropdown menu, and then it will switch to a view like the one shown in the other workspace figure](images/mechanics/workspacepanel.png){#fig-workspace}
 
 Alternatively, go to the "Session" menu and click on the "Save Workspace As..." option.  This will bring up the standard "save" dialog box for your operating system. Type in the name of the file that you want to save it to, and all the variables in your workspace will be saved to disk. You'll see an R command like this:
 
