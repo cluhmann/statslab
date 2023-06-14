@@ -1,5 +1,11 @@
 # The Tidyverse {#sec-tidyverse}
 
+```{r}
+#| echo: false
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
 From here out on we will be utilizing a set of inter-related packages collectively known as the "tidyverse".  These packages share conventions and revolve around a specific flavor of dataframe (known as a "tibble").  In this chapter, we cover what the tidyverse libraries are, how to install them, and how to load them.
 
 ## "Tidy" data {#tidy-data-ex}
@@ -27,11 +33,8 @@ What does it mean for your data to be "tidy"? While "tidy" has a clear English m
 
 (ref:tidy-r4ds) Tidy data graphic from *R for Data Science*.
 
-```{r}
-#| echo: false
-#| 
-include_graphics("images/r4ds/tidy-1.png")
-```
+![Tidy data](images/mechanics/tidy-1.png)
+
 
 For example, say you have the following table of stock prices in Table \@ref(tab:non-tidy-stocks):
 
