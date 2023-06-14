@@ -358,8 +358,13 @@ Note
 </section>
 <section id="sec-importing" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="sec-importing"><span class="header-section-number">3.1.2</span> Importing data from CSV files using RStudio</h3>
-<p>Yet again, importing data is easier in RStudio. In the environment panel in RStudio you should see a button called “Import Dataset”. Click on that, and it will give you a couple of options: select the “From Text File…” option, and it will open up a very familiar dialog box asking you to select a file: if you’re on a Mac, it’ll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure <span class="quarto-unresolved-ref">?fig-fileopen</span>. I’m assuming that you’re familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the “Open” button. When you do this, you’ll see a window that looks like the one in Figure <span class="quarto-unresolved-ref">?fig-import</span>.</p>
-<p><img src="images/rstudio_screenshots/openscreen.png" class="img-fluid" alt="A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it’s the usual way in which a Mac asks you to find a file. Windows users won’t see this: they’ll see the usual explorer window that Windows always gives you when it wants you to select a file.">{fig-import}</p>
+<p>Yet again, importing data is easier in RStudio. In the environment panel in RStudio you should see a button called “Import Dataset”. Click on that, and it will give you a couple of options: select the “From Text File…” option, and it will open up a very familiar dialog box asking you to select a file: if you’re on a Mac, it’ll look like the usual Finder window that you use to choose a file; on Windows it looks like an Explorer window. An example of what it looks like on a Mac is shown in Figure <span class="quarto-unresolved-ref">?fig-fileopen</span>. I’m assuming that you’re familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the “Open” button. When you do this, you’ll see a window that looks like the one in Figure <a href="#fig-import">Figure&nbsp;<span>3.2</span></a>.</p>
+<div id="fig-import" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/rstudio_screenshots/openscreen.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it’s the usual way in which a Mac asks you to find a file. Windows users won’t see this: they’ll see the usual explorer window that Windows always gives you when it wants you to select a file.</figcaption>
+</figure>
+</div>
 <p>The import data set window is relatively straightforward to understand.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -404,12 +409,17 @@ Note
 </section>
 <section id="loading-workspace-files-using-rstudio" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="loading-workspace-files-using-rstudio"><span class="header-section-number">3.1.4</span> Loading workspace files using RStudio</h3>
-<p>Okay, so how do we open an .Rdata file using the RStudio file panel? It’s terribly simple. First, use the file panel to find the folder that contains the file you want to load. If you look at Figure <span class="quarto-unresolved-ref">?fig-filepanel</span>, you can see that there are several .Rdata files listed. Let’s say I want to load the <code>booksales.Rdata</code> file. All I have to do is click on the file name. RStudio brings up a little dialog box asking me to confirm that I do want to load this file. I click yes. The following command then turns up in the console,</p>
+<p>Okay, so how do we open an .Rdata file using the RStudio file panel? It’s terribly simple. First, use the file panel to find the folder that contains the file you want to load. If you look at Figure <a href="#fig-filepanel">Figure&nbsp;<span>3.3</span></a>, you can see that there are several .Rdata files listed. Let’s say I want to load the <code>booksales.Rdata</code> file. All I have to do is click on the file name. RStudio brings up a little dialog box asking me to confirm that I do want to load this file. I click yes. The following command then turns up in the console,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"~/Rbook/data/booksales.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and the new variables will appear in the workspace (you’ll see them in the Environment panel in RStudio, or if you type <code>who()</code>). So easy it barely warrants having its own section.</p>
-<p><img src="images/mechanics/filepanel.png" class="img-fluid" alt="The file panel is the area shown in the lower right hand corner. It provides a very easy way to browse and navigate your computer using R. See main text for details.">{fig-filepanel}</p>
+<div id="fig-filepanel" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/mechanics/filepanel.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.3: The file panel is the area shown in the lower right hand corner. It provides a very easy way to browse and navigate your computer using R. See main text for details.</figcaption>
+</figure>
+</div>
 </section>
 <section id="saving-a-workspace-file-using-save" class="level3" data-number="3.1.5">
 <h3 data-number="3.1.5" class="anchored" data-anchor-id="saving-a-workspace-file-using-save"><span class="header-section-number">3.1.5</span> Saving a workspace file using <code>save</code></h3>
@@ -438,7 +448,12 @@ Note
 <section id="save1" class="level3" data-number="3.1.6">
 <h3 data-number="3.1.6" class="anchored" data-anchor-id="save1"><span class="header-section-number">3.1.6</span> Saving a workspace file using RStudio</h3>
 <p>RStudio allows you to save the workspace pretty easily. In the environment panel (<span class="citation" data-cites="fig:workspace">@fig:workspace</span>) you can see the “save” button. There’s no text, but it’s the same icon that gets used on every computer everywhere: it’s the one that looks like a floppy disk. You know, those things that haven’t been used in about 20 years.</p>
-<p><img src="images/mechanics/workspacepanel.png" class="img-fluid" alt="The RStudio Environment panel shows you the contents of the workspace. The view shown above is the list view. To switch to the grid view, click on the menu item on the top right that currently reads list. Select grid from the dropdown menu, and then it will switch to a view like the one shown in the other workspace figure">{fig-workspace}</p>
+<div id="fig-workspace" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/mechanics/workspacepanel.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.4: The RStudio Environment panel shows you the contents of the workspace. The view shown above is the list view. To switch to the grid view, click on the menu item on the top right that currently reads list. Select grid from the dropdown menu, and then it will switch to a view like the one shown in the other workspace figure</figcaption>
+</figure>
+</div>
 <p>Alternatively, go to the “Session” menu and click on the “Save Workspace As…” option. This will bring up the standard “save” dialog box for your operating system. Type in the name of the file that you want to save it to, and all the variables in your workspace will be saved to disk. You’ll see an R command like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"~/Desktop/Untitled.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
