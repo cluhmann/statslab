@@ -22,9 +22,9 @@ There are also a variety of downsides to R, but we will try to sidestep these as
 
 The interface between a programmer (or data analyst) and a programming language is often an integrate development environment (IDE), which is just a fancy term for a piece of software that collects a bunch of inter-related tools often useful when programming.  We will be using RStudio as our IDE.  As the name suggests, RStudio was designed as an R-first IDE, making things easy for those new to R and/or programming.
 
-First time users often confuse R and RStudio. At its simplest, R is like a car's engine\index{R} while RStudio is like a car's dashboard\index{RStudio} as illustrated in Figure \@ref(fig:R-vs-RStudio-1).
+First time users often confuse R and RStudio. At its simplest, R is like a car's engine while RStudio is like a car's dashboard as illustrated in Figure @fig-R-vs-RStudio-1.
 
-![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png)
+![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png){#fig-R-vs-RStudio-1}
 
 
 More precisely, R is the programming language that performs computations, whereas RStudio is how users interact with R.
@@ -40,10 +40,10 @@ The second step is to install RStudio.  You can download it from Posit: https://
 
 ## Using R via RStudio
 
-Recall our car analogy from earlier. Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly but rather we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new *programs* or *applications* you can open. We'll always work in RStudio and not in the R application. Figure \@ref(fig:R-vs-RStudio-2) shows what icon you should be clicking on your computer. 
+Recall our car analogy from earlier. Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly but rather we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new *programs* or *applications* you can open. We'll always work in RStudio and not in the R application. Figure @fig-R-vs-RStudio-2 shows what icon you should be clicking on your computer. 
 
 
-![Icons of R versus RStudio on your computer.](images/logos/R_vs_RStudio.png)
+![Icons of R versus RStudio on your computer.](images/logos/R_vs_RStudio.png){#fig-R-vs-RStudio-2}
 
 
 After you open RStudio, you should see something similar to Figure @fig-RStudio-interface. (Note that slight differences might exist if the RStudio interface is updated after 2019 to not be this by default.)
@@ -55,7 +55,7 @@ After you open RStudio, you should see something similar to Figure @fig-RStudio-
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.
 
 
-## Other Packages
+## Other Packages{#sec-packages}
 
 One of the main strengths of R (arguably the most important strength) is the availability of many, many packages (or libraries) that extend the functionality of R in all sort of different ways. These libraries are written by a worldwide community of R users and can be downloaded for free.  We will rely on a variety of these packages, so we take a moment now to discuss how packages work in R and RStudio.
 
@@ -75,7 +75,7 @@ Let's take a look at how these two steps come together to install and load the `
 
 ### Package Installation {sec-packageinstallation}
 
-There are two ways to install an R package: an easy way and a more advanced way. \index{R packages!installation} Let's install the `ggplot2` package the easy way first as shown in Figure \@ref(fig-easy-way-install). In the Files pane of RStudio:
+There are two ways to install an R package: an easy way and a more advanced way. Let's install the `ggplot2` package the easy way first as shown in Figure @fig-easy-way-install. In the Files pane of RStudio:
 
 a) Click on the "Packages" tab.
 a) Click on "Install" next to Update.
@@ -83,7 +83,7 @@ a) Type the name of the package under "Packages (separate multiple with space or
 a) Click "Install."  
 
 
-![Installing packages in R the easy way.](images/rstudio_screenshots/install_packages_easy_way.png){fig-easy-way-install}
+![Installing packages in R the easy way.](images/rstudio_screenshots/install_packages_easy_way.png){#fig-easy-way-install}
 
 An alternative but slightly less convenient way to install a package is by typing `install.packages("ggplot2")` in the console pane of RStudio and pressing Return/Enter on your keyboard. Note you must include the quotation marks around the name of the package.
 
@@ -91,7 +91,7 @@ Much like an app on your phone, you only have to install a package once. However
 
 ### Package Loading
 
-Recall that after you've installed a package, you need to "load it." In other words, you need to "open it." We do this by using the `library()` command. \index{R packages!loading} 
+Recall that after you've installed a package, you need to "load it." In other words, you need to "open it." We do this by using the `library()` command.
 
 For example, to load the `ggplot2` package, run the following code in the console pane. What do we mean by "run the following code"? Either type or copy-and-paste the following code into the console pane and then hit the Enter key. 
 
@@ -100,13 +100,13 @@ For example, to load the `ggplot2` package, run the following code in the consol
 library(ggplot2)
 ```
 
-If after running the earlier code, a blinking cursor returns next to the `>` "prompt" sign, it means you were successful and the `ggplot2` package is now loaded and ready to use. If, however, you get a red "error message" that reads `...` \index{R packages!loading error}
+If after running the earlier code, a blinking cursor returns next to the `>` "prompt" sign, it means you were successful and the `ggplot2` package is now loaded and ready to use. If, however, you get a red "error message" that reads `...`
 
 ```
 Error in library(ggplot2) : there is no package called ‘ggplot2’
 ```
 
-`...` it means that you didn't successfully install it. If you get this error message, go back to Subsection \@ref(package-installation) on R package installation and make sure to install the `ggplot2` package before proceeding.
+`...` it means that you didn't successfully install it. If you get this error message, go back to Subsection @sec-packageinstallation on R package installation and make sure to install the `ggplot2` package before proceeding.
 
 ### Package Use {#package-use}
 
@@ -117,3 +117,20 @@ Error: could not find function
 ```
 
 This is a different error message than the one you just saw on a package not having been installed yet. R is telling you that you are trying to use a function in a package that has not yet been "loaded." R doesn't know where to find the function you are using. Almost all new users forget to do this when starting out, and it is a little annoying to get used to doing it. However, you'll remember with practice and after some time it will become second nature for you.
+
+
+## Quitting R
+
+![The dialog box that shows up when you try to close RStudio.](images/rstudio_screenshots/Rstudio_quit.png){#fig-rstudio-quit}
+
+There's one last thing I should cover in this chapter: how to quit R. You can just shut down the application in the normal way (e.g., File->Quit Session). However, R also has a function, `q()`, that you can use to quit, which can be handy. Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in @, but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
+```{r eval=FALSE}
+q()
+
+## Save workspace image? [y/n/c]: 
+```
+The `y/n/c` part here is short for "yes / no / cancel". Type `y` if you want to save, `n` if you don't, and `c` if you've changed your mind and you don't want to quit after all. 
+
+What does this actually *mean*? What's going on is that R wants to know if you want to save all those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit... what R is *really* asking is if you want it to store these variables in a "default" data file, which it will automatically reload for you next time you open R. And quite frankly, if I'd wanted to save the variables, then I'd have already saved them before trying to quit. Not only that, I'd have saved them to a location of *my* choice, so that I can find it again later. So I personally never bother with this. 
+
+In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again (see @fig-rstudio-quit). On a Mac, you can open this window by going to the "RStudio" menu and selecting "Preferences". On a Windows machine you go to the "Tools" menu and select "Global Options". Under the "General" tab you'll see an option that reads "Save workspace to .Rdata on exit". By default this is set to "ask". If you want R to stop asking, change it to "never".

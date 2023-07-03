@@ -86,9 +86,12 @@ Okay, now that we've discussed some of the tedious details associated with typin
 
 ### Adding, subtracting, multiplying and dividing
 
-So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, Table \@ref(tab:arithmetic1) lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
+So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, @tbl--arithmetic1 lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
 
-```{r arithmetic1, echo=FALSE}
+```{r}
+#| arithmetic1
+#| label: tbl--arithmetic1
+#| echo=FALSE
 knitr::kable(rbind(
               c("addition", "`+`", "10 + 2", 12),
               c("subtraction", "`-`", "9 - 3", 6),
@@ -110,9 +113,9 @@ So that's handy.
 ### Taking powers
 
 
-The first four operations listed in Table \@ref(tab:arithmetic1) are things we all learned in primary school, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the only one that is of any real importance for the purposes of this book is taking powers, so I'll discuss that one here: the other two are discussed in Chapter \@ref(datahandling).
+The first four operations listed in Table \@ref(tab:arithmetic1) are things we all learned in primary school, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the most important is probably taking powers.
 
-For those of you who can still remember your high school maths, this should be familiar. But for some people high school maths was a long time ago, and others of us didn't listen very hard in high school. It's not complicated. As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this:
+For those of you who can still remember your high school math, this should be familiar. And if not, it's not complicated. As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this:
 $$
 5^4 = 5 \times 5 \times 5 \times 5 
 $$
@@ -158,7 +161,7 @@ All of the above being said, it's helpful to remember that *brackets always come
 
 
 
-## Storing a number as a variable{#assign}
+## Storing a number as a variable{#sec-assign}
 
 One of the most important things to be able to do in R (or any programming language, for that matter) is to store information in **_variables_**. Variables in R aren't exactly the same thing as the variables we talked about in the last chapter on research methods, but they are similar. At a conceptual level you can think of a variable as *label* for a certain piece of information, or even several different pieces of information. When doing statistical analysis in R all of your data (the variables you measured in your study) will be stored as variables in R, but as well see later in the book you'll find that you end up creating variables for other things too. However, before we delve into all the messy details of data sets and statistical analysis, let's look at the very basics for how we create variables and work with them. 
 
@@ -178,7 +181,7 @@ sales
 
 So that's nice to know. Anytime you can't remember what R has got stored in a particular variable, you can just type the name of the variable and hit enter. 
 
-Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in Section \@ref(functionarguments). As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
+Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in @functionarguments. As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
 
 ```{r}
 350 -> sales
@@ -244,9 +247,9 @@ In addition to those rules that R enforces, there are some informal conventions 
 - Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores "my new salary". Obviously I can't include spaces in the variable name, so how should I do this? There are three different conventions that you sometimes see R users employing. Firstly, you can separate the words using periods, which would give you `my.new.salary` as the variable name. Alternatively, you could separate words using underscores, as in `my_new_salary`. Finally, you could use capital letters at the beginning of each word (except the first one), which gives you `myNewSalary` as the variable name. I don't think there's any strong reason to prefer one over the other, but it's important to be consistent.
 
 
-## Functions
+## Functions{#sec-functions}
 
-The symbols `+`, `-`, `*` and so on are examples of operators. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using **_functions_**. I'll talk in more detail about functions and how they work in Section \@ref(functions), but for now let's just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The  square root, in case your high school maths is a bit rusty, is just the opposite of squaring a number. So, for instance, since "5 squared is 25" I can say that "5 is the square root of 25". The usual notation for this is 
+The symbols `+`, `-`, `*` and so on are examples of operators. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using **_functions_**. We'll see more detail about functions and how they work later, but for now let's just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The  square root, in case your high school math is a bit rusty, is just the opposite of squaring a number. So, for instance, since "5 squared is 25" I can say that "5 is the square root of 25". The usual notation for this is 
 
 $$
 \sqrt{25} = 5
@@ -311,7 +314,7 @@ What's happening here is that I've specified *two* arguments: the first argument
 round( x = 3.1415, digits = 2 )
 ```
 
-Notice that this is kind of similar in spirit to variable assignment (Section \@ref(assign)), except that I used `=` here, rather than `<-`. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I'm doing here when specifying arguments, and so as a consequence it's important that you use `=` in this context.
+Notice that this is kind of similar in spirit to variable assignment, except that `=` is used here, rather than `<-`. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I'm doing here when specifying arguments, and so as a consequence it's important that you use `=` in this context.
 
 
 As you can see, specifying the arguments by name involves a lot more typing, but it's also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name, since that makes it clearer to you what I'm doing. However, one important thing to note is that when specifying the arguments using their names, it doesn't matter what order you type them in. But if you don't use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output...
@@ -328,7 +331,7 @@ but this one does not...
 round( 2, 3.14165 )
 ```
 
-How do you find out what the correct order is? There's a few different ways, but the easiest one is to look at the help documentation for the function (see Section \@ref(help). However, if you're ever unsure, it's probably best to actually type in the argument name.
+How do you find out what the correct order is? There's a few different ways, but the easiest one is to look at the help documentation for the function (e.g., `? round`). However, if you're ever unsure, it's probably best to actually type in the argument name.
 
 Okay, so that's the first thing I said you'd need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the `round()` function I didn't actually specify the `digits` argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the `digits` argument has a ***default value*** of `0`, meaning that if you decide not to specify a value for `digits` then R will act as if you had typed `digits = 0`. This is quite handy: the vast majority of the time when you want to round a number you want to round it to the nearest whole number, and it would be pretty annoying to have to specify the `digits` argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn't allow this! Thus, by having `digits = 0` as the default value, we get the best of both worlds.
 
@@ -336,7 +339,7 @@ Okay, so that's the first thing I said you'd need to know: argument names. The s
 
 ## Storing many numbers as a vector{#vectors}
 
-At this point we've covered functions in enough detail to get us safely through the next couple of chapters (with one small exception: see Section \@ref(generics), so let's return to our discussion of variables. When I introduced variables in Section \@ref(assign) I showed you how we can use variables to store a single number. In this section, we'll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a **_vector_**. So let's create one. 
+At this point we've covered functions in enough detail to get us safely through most of the rest of the book, so let's return to our discussion of variables. When variables were introduced in @sec-assign we saw how we can use variables to store a single number. In this section, we'll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a **_vector_**. So let's create one. 
 
 ### Creating a vector
 Let's stick to my silly "get rich quick by textbook writing" example. Suppose the textbook company (if I actually had one, that is) sends me sales data on a monthly basis. Since my class start in late February, we might expect most of the sales to occur towards the start of the year. Let's suppose that I have 100 sales in February, 200 sales in March and 50 sales in April, and no other sales for the rest of the year. What I would like to do is have a variable -- let's call it `sales.by.month` -- that stores all this sales data. The first number stored should be `0` since I had no sales in January, the second should be `100`, and so on. The simplest way to do this in R is to use the **_combine_** function, `c()`. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:
@@ -378,7 +381,7 @@ Yep, that's the February sales all right. But there's a subtle detail to be awar
 february.sales <- sales.by.month[2]
 february.sales
 ```
-Obviously, the new variable `february.sales` should only have one element and so when I print it out this new variable, the R output begins with a `[1]` because `100` is the value of the first (and only) element of `february.sales`. The fact that this also happens to be the value of the second element of `sales.by.month` is irrelevant. We'll pick this topic up again shortly (Section \@ref(indexing)). 
+Obviously, the new variable `february.sales` should only have one element and so when I print it out this new variable, the R output begins with a `[1]` because `100` is the value of the first (and only) element of `february.sales`. The fact that this also happens to be the value of the second element of `sales.by.month` is irrelevant. We'll pick this topic up again shortly ( @sec-indexing).
 
 ### Altering the elements of a vector
 
@@ -418,9 +421,9 @@ Obviously, the `profit` variable is the same one we created earlier, and the `da
 ```{r}
 profit / days.per.month
 ```
-I still don't like all those zeros, but that's not what matters here. Notice that the second element of the output is 25, because R has divided the second element of `profit` (i.e. 700) by the second element of `days.per.month` (i.e. 28). Similarly, the third element of the output is equal to 1400 divided by 31, and so on. We'll talk more about calculations involving vectors later on (and in particular a thing called the "recycling rule"; Section \@ref(recycling)), but that's enough detail for now.
+I still don't like all those zeros, but that's not what matters here. Notice that the second element of the output is 25, because R has divided the second element of `profit` (i.e. 700) by the second element of `days.per.month` (i.e. 28). Similarly, the third element of the output is equal to 1400 divided by 31, and so on. We'll talk more about calculations involving vectors later on, but that's enough detail for now.
 
-## Storing text data{#text}
+## Storing text data{#sec-text}
 
 A lot of the time your data will be numeric in nature, but not always. Sometimes your data really needs to be described using text, not using numbers. To address this, we need to consider the situation where our variables store text. To create a variable that stores the word "hello", we can type this:
 ```{r}
@@ -447,7 +450,7 @@ months[4]
 
 ### Working with text{#simpletext}
 
-Working with text data is somewhat more complicated than working with numeric data, and I discuss some of the basic ideas in Section \@ref(textprocessing), but for purposes of the current chapter we only need this bare bones sketch. The only other thing I want to do before moving on is show you an example of a function that can be applied to text data. So far, most of the functions that we have seen (i.e., `sqrt()`, `abs()` and `round()`) only make sense when applied to numeric data (e.g., you can't calculate the square root of "hello"), and we've seen one function that can be applied to pretty much any variable or vector (i.e., `length()`). So it might be nice to see an example of a function that can be applied to text. 
+Working with text data is somewhat more complicated than working with numeric data. There is much to discuss here, but for purposes of the current chapter we only need this bare bones sketch. The only other thing I want to do before moving on is show you an example of a function that can be applied to text data. So far, most of the functions that we have seen (i.e., `sqrt()`, `abs()` and `round()`) only make sense when applied to numeric data (e.g., you can't calculate the square root of "hello"), and we've seen one function that can be applied to pretty much any variable or vector (i.e., `length()`). So it might be nice to see an example of a function that can be applied to text. 
 
 The function I'm going to introduce you to is called `nchar()`, and what it does is count the number of individual characters that make up a string. Recall earlier that when we tried to calculate the `length()` of our `greeting` variable it returned a value of `1`: the `greeting` variable contains only the one string, which happens to be `"hello"`. But what if I want to know how many letters there are in the word? Sure, I could *count* them, but that's boring, and more to the point it's a terrible strategy if what I wanted to know was the number of letters in *War and Peace*. That's where the `nchar()` function is helpful:
 ```{r}
@@ -496,9 +499,11 @@ or this
 ```{r}
 sqrt( 25 ) == 5
 ```
-Not only that, but as Table \@ref(tab:logicals) illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
+Not only that, but as Table @tbl-logicals illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
 
-```{r logicals, echo=FALSE}
+```{r}
+#| label: logicals
+#| echo: FALSE
 
 knitr::kable(rbind(
                     c("less than ", "<", "2 < 3", "`TRUE`"),
@@ -538,9 +543,11 @@ And at this point I hope it's pretty obvious what the **_greater than_** operato
 
 
 
-We're not quite done yet. There are three more logical operations that are worth knowing about, listed in Table \@ref(tab:logicals2). 
+We're not quite done yet. There are three more logical operations that are worth knowing about, listed in Table @tbl-logicals2.
 
-```{r logicals2, echo=FALSE}
+```{r}
+#| label: logicals2
+#| echo: FALSE
 
 knitr::kable(rbind(
                     c("not", "!", "!(1==1)", "`FALSE`"),
@@ -582,7 +589,7 @@ But there are many situations where you really do need to use the `!` operator. 
  
 ### Storing and using logical data
 
-Up to this point, I've introduced *numeric data* (in Sections \@ref(assign) and \@ref(vectors)) and *character data* (in Section \@ref(text)). So you might not be surprised to discover that these `TRUE` and `FALSE` values that R has been producing are actually a third kind of data, called *logical data*. That is, when I asked R if `2 + 2 == 5` and it said `[1] FALSE` in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called `is.the.Party.correct`, which would store R's opinion:
+Up to this point, I've introduced *numeric data* (@sec-assign and @sec-vectors) and *character data* (@sec-text). So you might not be surprised to discover that these `TRUE` and `FALSE` values that R has been producing are actually a third kind of data, called *logical data*. That is, when I asked R if `2 + 2 == 5` and it said `[1] FALSE` in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called `is.the.Party.correct`, which would store R's opinion:
 ```{r}
 is.the.Party.correct <- 2 + 2 == 5
 is.the.Party.correct
@@ -613,12 +620,12 @@ is.the.Party.correct <- f
 
 ### Vectors of logicals
 
-The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (Section \@ref(vectors)) and vectors of text data (Section \@ref(text)). Again, we can define them directly via the `c()` function, like this:
+The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (@sec-vectors) and vectors of text data (@sec-text). Again, we can define them directly via the `c()` function, like this:
 ```{r}
 x <- c(TRUE, TRUE, FALSE)
 x
 ```
-or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let's unpack it slowly. First, let's suppose we have a vector of numbers (i.e., a "non-logical vector"). For instance, we could use the `sales.by.month` vector that we were using in Section \@ref(vectors). Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this: 
+or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let's unpack it slowly. First, let's suppose we have a vector of numbers (i.e., a "non-logical vector"). For instance, we could use the `sales.by.month` vector that we were using in @sec-vectors. Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this: 
 ```{r}
 sales.by.month > 0
 
@@ -632,9 +639,9 @@ any.sales.this.month
 In other words, `any.sales.this.month` is a logical vector whose elements are `TRUE` only if the corresponding element of `sales.by.month` is greater than zero. For instance, since I sold zero books in January, the first element is `FALSE`. 
 
 
-### Applying logical operation to text{#logictext}
+### Applying logical operation to text{#sec-logictext}
 
-In a moment (Section \@ref(indexing)) I'll show you why these logical operations and logical vectors are so handy, but before I do so I want to very briefly point out that you can apply them to text as well as to logical data. It's just that we need to be a bit more careful in understanding how R interprets the different operations. In this section I'll talk about how the equal to operator `==` applies to text, since this is the most important one. Obviously, the not equal to operator `!=` gives the exact opposite answers to `==` so I'm implicitly talking about that one too, but I won't give specific commands showing the use of `!=`. As for the other operators, I'll defer a more detailed discussion of this topic to Section \@ref(logictext2). 
+In a moment (@sec-indexing) I'll show you why these logical operations and logical vectors are so handy, but before I do so I want to very briefly point out that you can apply them to text as well as to logical data. It's just that we need to be a bit more careful in understanding how R interprets the different operations. In this section I'll talk about how the equal to operator `==` applies to text, since this is the most important one. Obviously, the not equal to operator `!=` gives the exact opposite answers to `==` so I'm implicitly talking about that one too, but I won't give specific commands showing the use of `!=`. There are a variety of other operators, but those will do for now. 
 
 Okay, let's see how it works. In one sense, it's very simple. For instance, I can ask R if the word `"cat"` is the same as the word `"dog"`, like this:
 ```{r}
@@ -657,7 +664,7 @@ Again, that's exactly what we'd expect. However, what you need to keep in mind i
 
 
 
-## Indexing vectors{#indexing} 
+## Indexing vectors{#sec-indexing} 
 
 One last thing to add before finishing up this chapter. So far, whenever I've had to get information out of a vector, all I've done is typed something like `months[4]`; and when I do this R prints out the fourth element of the `months` vector. In this section, I'll show you two additional tricks for getting information out of the vector.
 
@@ -722,20 +729,4 @@ months[stock.levels != "high" ]
 ```
 Either way, I get the answer I want.
 
-At this point, I hope you can see why logical indexing is such a useful thing. It's a very basic, yet very powerful way to manipulate data. We'll talk a lot more about how to manipulate data in Chapter \@ref(datahandling), since it's a critical skill for real world research that is often overlooked in introductory research methods classes (or at least, that's been my experience). It does take a bit of practice to become completely comfortable using logical indexing, so it's a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like "how do I get R to spit out all the elements that are [blah]". Practice makes perfect, and it's only by practicing logical indexing that you'll perfect the art of yelling frustrated insults at your computer.
-
-## Quitting R
-
-![The dialog box that shows up when you try to close RStudio.](images/rstudio_screenshots/Rstudio_quit.png)
-
-There's one last thing I should cover in this chapter: how to quit R. You can just shut down the application in the normal way (e.g., File->Quit Session). However, R also has a function, `q()`, that you can use to quit, which can be handy. Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in Section \@ref(load), but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
-```{r eval=FALSE}
-q()
-
-## Save workspace image? [y/n/c]: 
-```
-The `y/n/c` part here is short for "yes / no / cancel". Type `y` if you want to save, `n` if you don't, and `c` if you've changed your mind and you don't want to quit after all. 
-
-What does this actually *mean*? What's going on is that R wants to know if you want to save all those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit... what R is *really* asking is if you want it to store these variables in a "default" data file, which it will automatically reload for you next time you open R. And quite frankly, if I'd wanted to save the variables, then I'd have already saved them before trying to quit. Not only that, I'd have saved them to a location of *my* choice, so that I can find it again later. So I personally never bother with this. 
-
-In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again (see Figure \@ref(fig:RStudiooptions). On a Mac, you can open this window by going to the "RStudio" menu and selecting "Preferences". On a Windows machine you go to the "Tools" menu and select "Global Options". Under the "General" tab you'll see an option that reads "Save workspace to .Rdata on exit". By default this is set to "ask". If you want R to stop asking, change it to "never".
+At this point, I hope you can see why logical indexing is such a useful thing. It's a very basic, yet very powerful way to manipulate data. Subsequent chapters will talk a lot more about how to manipulate data, since it's a critical skill for real world research that is often overlooked in introductory statistics courses It does take a bit of practice to become completely comfortable using logical indexing, so it's a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like "how do I get R to spit out all the elements that are [blah]". Practice makes perfect, and it's only by practicing logical indexing that you'll perfect the art of yelling frustrated insults at your computer.
