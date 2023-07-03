@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data(#sec-working-with-data)</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#what-is-a-tibble" id="toc-what-is-a-tibble" class="nav-link active" data-scroll-target="#what-is-a-tibble"><span class="header-section-number">5.1</span> What is a tibble?</a></li>
-  <li><a href="#converting-to-tidy-data" id="toc-converting-to-tidy-data" class="nav-link" data-scroll-target="#converting-to-tidy-data"><span class="header-section-number">5.2</span> Converting to “tidy” data</a></li>
+  <li><a href="#what-is-tidy-data" id="toc-what-is-tidy-data" class="nav-link" data-scroll-target="#what-is-tidy-data"><span class="header-section-number">5.2</span> What is “tidy” data?</a></li>
   </ul>
 </nav>
     </div>
@@ -292,14 +292,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p>Through the R universe, data is stored in what are referred to as dataframes. A dataframe is a tabular data format that works a bit like a spreadsheet. Within the tidyverse, dataframes are organized in a particular way (“tidy” format) and will tend to be stored in a particular type of dataframe (a “tibble”). In this chapter, we’ll explore these conventions.</p>
+<p>Columns within a dataframe store data of a certain <strong>type</strong> (e.g., decimals, strings, etc.). Let’s take a quick look at a standard R dataframe. We’ll use one of the built-in data sets, <code>iris</code>, which contains data about measurements of various flowers. For now, we’ll just take a look at the first five rows:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa</code></pre>
+</div>
+</div>
+<p>As we can see, each row corresponds to an observation (a flower) and each columns represents a measurement from that flower.</p>
 <section id="what-is-a-tibble" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="what-is-a-tibble"><span class="header-section-number">5.1</span> What is a tibble?</h2>
+<p>A tibble is a type of dataframe commonly used in the tidyverse. Tibbles contain the same basic information as a corresponding dataframe, but tibbles are slightly different in a variety of minor ways. Let’s take a look at the <code>iris</code> data represented as a tibble. We’ll again confine our inspection to the first five rows:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+1          5.1         3.5          1.4         0.2 setosa 
+2          4.9         3            1.4         0.2 setosa 
+3          4.7         3.2          1.3         0.2 setosa 
+4          4.6         3.1          1.5         0.2 setosa 
+5          5           3.6          1.4         0.2 setosa </code></pre>
+</div>
+</div>
+<p>Note that the data is identical to that seen above. However, the tibble provides some additional useful information. It tells us that this particular tibble has five columns and, because we only asked for the first five rows, also has five rows. In addition, it tells us about the <strong>data type</strong> of each column. The first four columns are of type <code>dbl</code>, which is double-precision floating point number (a decimal). The last column is of type <code>fct</code>, or factor. In R, factors are used to represent categorical variables, variables that have a fixed set of possible values (in this case, the set of species).</p>
 </section>
-<section id="converting-to-tidy-data" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="converting-to-tidy-data"><span class="header-section-number">5.2</span> Converting to “tidy” data</h2>
-<p>For the rest of this book, we will primarily deal with data that is already in “tidy” format as well. This is not always the case however with all datasets in the world. If your original data frame is in wide (non-“tidy”) format and you would like to use the tidyverse packages, you will first have to convert it to “tidy” format. To do so, we recommend using the <code>pivot_longer()</code> function in the <code>tidyr</code> package <span class="citation" data-cites="R-tidyr">[@R-tidyr]</span>.</p>
-<p>Let’s load some data from the <code>fivethirtyeight</code> package. The <code>fivethirtyeight</code> package <span class="citation" data-cites="R-fivethirtyeight">[@R-fivethirtyeight]</span> provides access to the datasets used in many articles published by the data journalism website, <a href="https://fivethirtyeight.com/">FiveThirtyEight.com</a>. For a complete list of all 129 datasets included in the <code>fivethirtyeight</code> package, check out the package webpage by going to: <a href="https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html" class="uri">https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html</a>.</p>
-<p>Let’s focus our attention on the <code>drinks</code> data frame:</p>
+<section id="what-is-tidy-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="what-is-tidy-data"><span class="header-section-number">5.2</span> What is “tidy” data?</h2>
+<p>For the rest of this book, we will primarily deal with data that is already in “tidy” format as well. This is not always the case however with all data sets in the world. If your original dataframe is in wide (not “tidy”) format and you would like to use the tidyverse packages, you will first have to convert it to “tidy” format. To do so, we recommend using the <code>pivot_longer()</code> function in the <code>tidyr</code> package.</p>
+<p>Let’s load some data from the <code>fivethirtyeight</code> package. The <code>fivethirtyeight</code> package provides access to the data sets used in many articles published by the data journalism website, <a href="https://fivethirtyeight.com/">FiveThirtyEight.com</a>. For a complete list of all data sets included in the <code>fivethirtyeight</code> package, check out <a href="https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html">the package webpage</a>.</p>
+<p>Let’s focus our attention on the <code>drinks</code> dataframe:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
@@ -310,17 +337,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3 Algeria                25               0            14                    0.7
 4 Andorra               245             138           312                   12.4
 5 Angola                217              57            45                    5.9
-# … with abbreviated variable name ¹​total_litres_of_pure_alcohol</code></pre>
+# ℹ abbreviated name: ¹​total_litres_of_pure_alcohol</code></pre>
 </div>
 </div>
-<p>After reading the help file by running (<code>?drinks</code>), you’ll see that <code>drinks</code> is a data frame containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi’s article: <a href="https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/">“Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?”</a>.</p>
-<p>Let’s narrow down the data a bit. We’ll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the <code>total_litres_of_pure_alcohol</code> variable, and rename the other variables to something a bit more convenient. Don’t worry about the code here. We’ll get into all of these operations more in the chapter on <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>.</p>
+<p>After reading the help file by running (<code>?drinks</code>), you’ll see that <code>drinks</code> is a dataframe containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi’s article: <a href="https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/">“Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?”</a>.</p>
+<p>Let’s narrow down the data a bit. We’ll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the <code>total_litres_of_pure_alcohol</code> variable, and rename the other variables to something a bit more convenient. Don’t worry about the code here. We’ll get into all of these operations more in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="ot">&lt;-</span> drinks <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"USA"</span>, <span class="st">"China"</span>, <span class="st">"Italy"</span>, <span class="st">"Saudi Arabia"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_litres_of_pure_alcohol) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">beer =</span> beer_servings, <span class="at">spirit =</span> spirit_servings, <span class="at">wine =</span> wine_servings)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>drinks_smaller</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="ot">&lt;-</span> drinks <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"USA"</span>, <span class="st">"China"</span>, <span class="st">"Italy"</span>, <span class="st">"Saudi Arabia"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total_litres_of_pure_alcohol) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">beer =</span> beer_servings, <span class="at">spirit =</span> spirit_servings, <span class="at">wine =</span> wine_servings)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>drinks_smaller</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   country       beer spirit  wine
@@ -333,11 +360,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Note that this data is not in “tidy” format. However, we can convert it to tidy format by using the <code>pivot_longer()</code> function from the <code>tidyr</code> package as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy <span class="ot">&lt;-</span> drinks_smaller <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="sc">-</span>country)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy <span class="ot">&lt;-</span> drinks_smaller <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="sc">-</span>country)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    country      type   servings
@@ -358,17 +385,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We set the arguments to <code>pivot_longer()</code> as follows:</p>
 <ol type="1">
-<li><code>names_to</code> here corresponds to the name of the variable in the new “tidy”/long data frame that will contain the <em>column names</em> of the original data. Observe how we set <code>names_to = "type"</code>. In the resulting <code>drinks_smaller_tidy</code>, the column <code>type</code> contains the three types of alcohol <code>beer</code>, <code>spirit</code>, and <code>wine</code>. Since <code>type</code> is a variable name that doesn’t appear in <code>drinks_smaller</code>, we use quotation marks around it. You’ll receive an error if you just use <code>names_to = type</code> here.</li>
-<li><code>values_to</code> here is the name of the variable in the new “tidy” data frame that will contain the <em>values</em> of the original data. Observe how we set <code>values_to = "servings"</code> since each of the numeric values in each of the <code>beer</code>, <code>wine</code>, and <code>spirit</code> columns of the <code>drinks_smaller</code> data corresponds to a value of <code>servings</code>. In the resulting <code>drinks_smaller_tidy</code>, the column <code>servings</code> contains the 4 <span class="math inline">\(\times\)</span> 3 = 12 numerical values. Note again that <code>servings</code> doesn’t appear as a variable in <code>drinks_smaller</code> so it again needs quotation marks around it for the <code>values_to</code> argument.</li>
-<li>The third argument <code>cols</code> is the columns in the <code>drinks_smaller</code> data frame you either want to or don’t want to “tidy.” Observe how we set this to <code>-country</code> indicating that we don’t want to “tidy” the <code>country</code> variable in <code>drinks_smaller</code> and rather only <code>beer</code>, <code>spirit</code>, and <code>wine</code>. Since <code>country</code> is a column that appears in <code>drinks_smaller</code> we don’t put quotation marks around it.</li>
+<li><code>names_to</code> here corresponds to the name of the variable in the new “tidy”/long dataframe that will contain the <em>column names</em> of the original data. Observe how we set <code>names_to = "type"</code>. In the resulting <code>drinks_smaller_tidy</code>, the column <code>type</code> contains the three types of alcohol <code>beer</code>, <code>spirit</code>, and <code>wine</code>. Since <code>type</code> is a variable name that doesn’t appear in <code>drinks_smaller</code>, we use quotation marks around it. You’ll receive an error if you just use <code>names_to = type</code> here.</li>
+<li><code>values_to</code> here is the name of the variable in the new “tidy” dataframe that will contain the <em>values</em> of the original data. Observe how we set <code>values_to = "servings"</code> since each of the numeric values in each of the <code>beer</code>, <code>wine</code>, and <code>spirit</code> columns of the <code>drinks_smaller</code> data corresponds to a value of <code>servings</code>. In the resulting <code>drinks_smaller_tidy</code>, the column <code>servings</code> contains the 4 <span class="math inline">\(\times\)</span> 3 = 12 numerical values. Note again that <code>servings</code> doesn’t appear as a variable in <code>drinks_smaller</code> so it again needs quotation marks around it for the <code>values_to</code> argument.</li>
+<li>The third argument <code>cols</code> is the columns in the <code>drinks_smaller</code> dataframe you either want to or don’t want to “tidy.” Observe how we set this to <code>-country</code> indicating that we don’t want to “tidy” the <code>country</code> variable in <code>drinks_smaller</code> and rather only <code>beer</code>, <code>spirit</code>, and <code>wine</code>. Since <code>country</code> is a column that appears in <code>drinks_smaller</code> we don’t put quotation marks around it.</li>
 </ol>
 <p>The third argument here of <code>cols</code> is a little nuanced, so let’s consider code that’s written slightly differently but that produces the same output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(beer, spirit, wine))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(beer, spirit, wine))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    country      type   servings
@@ -387,12 +414,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 12 USA          wine         84</code></pre>
 </div>
 </div>
-<p>Note that the third argument now specifies which columns we want to “tidy” with <code>c(beer, spirit, wine)</code>, instead of the columns we don’t want to “tidy” using <code>-country</code>. We use the <code>c()</code> function to create a vector of the columns in <code>drinks_smaller</code> that we’d like to “tidy.” Note that since these three columns appear one after another in the <code>drinks_smaller</code> data frame, we could also do the following for the <code>cols</code> argument:</p>
+<p>Note that the third argument now specifies which columns we want to “tidy” with <code>c(beer, spirit, wine)</code>, instead of the columns we don’t want to “tidy” using <code>-country</code>. We use the <code>c()</code> function to create a vector of the columns in <code>drinks_smaller</code> that we’d like to “tidy.” Note that since these three columns appear one after another in the <code>drinks_smaller</code> dataframe, we could also do the following for the <code>cols</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> beer<span class="sc">:</span>wine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> beer<span class="sc">:</span>wine)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    country      type   servings
@@ -410,10 +437,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 11 USA          spirit      158
 12 USA          wine         84</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy <span class="ot">&lt;-</span> drinks_smaller <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(type, servings, <span class="sc">-</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy <span class="ot">&lt;-</span> drinks_smaller <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(type, servings, <span class="sc">-</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s see what our “tidy” formatted data frame, <code>drinks_smaller_tidy</code>, looks like.</p>
+<p>Let’s see what our “tidy” formatted dataframe, <code>drinks_smaller_tidy</code>, looks like.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
@@ -433,9 +460,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 12 USA          wine         84</code></pre>
 </div>
 </div>
-<p>Converting “wide” format data to “tidy” format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice using different datasets. For example, run <code>?pivot_longer</code> and look at the examples in the bottom of the help file.</p>
-<p>If however you want to convert a “tidy” data frame to “wide” format, you will need to use the <code>pivot_wider()</code> function instead. Run <code>?pivot_wider</code> and look at the examples in the bottom of the help file for examples.</p>
-<p>You can also view examples of both <code>pivot_longer()</code> and <code>pivot_wider()</code> on the <a href="https://tidyr.tidyverse.org/dev/articles/pivot.html#pew">tidyverse.org</a> webpage. There’s a nice example to check out the different functions available for data tidying and a case study using data from the World Health Organization on that webpage. Furthermore, each week the R4DS Online Learning Community posts a dataset in the weekly <a href="https://github.com/rfordatascience/tidytuesday"><code>#</code>TidyTuesday event</a> that might serve as a nice place for you to find other data to explore and transform.</p>
+<p>Converting “wide” format data to “tidy” format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice using different data sets. For example, run <code>?pivot_longer</code> and look at the examples in the bottom of the help file.</p>
+<p>If however you want to convert a “tidy” dataframe to “wide” format, you will need to use the <code>pivot_wider()</code> function instead. Run <code>?pivot_wider</code> and look at the examples in the bottom of the help file for examples.</p>
+<p>You can also view examples of both <code>pivot_longer()</code> and <code>pivot_wider()</code> on the <a href="https://tidyr.tidyverse.org/dev/articles/pivot.html#pew">tidyverse.org</a> webpage. There’s a nice example to check out the different functions available for data tidying and a case study using data from the World Health Organization on that webpage. Furthermore, each week the R4DS Online Learning Community posts a data set in the weekly <a href="https://github.com/rfordatascience/tidytuesday"><code>#</code>TidyTuesday event</a> that might serve as a nice place for you to find other data to explore and transform.</p>
 
 
 </section>

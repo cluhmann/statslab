@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 3&nbsp; Working with Data</title>
+<title>statslab - 3&nbsp; Working with Data(#sec-working-with-data)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rlang.html">Beginnings</a></li><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rlang.html">Beginnings</a></li><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data(#sec-working-with-data)</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data(#sec-working-with-data)</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,14 +265,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#load" id="toc-load" class="nav-link active" data-scroll-target="#load"><span class="header-section-number">3.1</span> Loading and saving data</a>
+  <li><a href="#sec-load" id="toc-sec-load" class="nav-link active" data-scroll-target="#sec-load"><span class="header-section-number">3.1</span> Loading and saving data</a>
   <ul class="collapse">
-  <li><a href="#loadingcsv" id="toc-loadingcsv" class="nav-link" data-scroll-target="#loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using loadingcsv</a></li>
+  <li><a href="#sec-loadingcsv" id="toc-sec-loadingcsv" class="nav-link" data-scroll-target="#sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using loadingcsv</a></li>
   <li><a href="#sec-importing" id="toc-sec-importing" class="nav-link" data-scroll-target="#sec-importing"><span class="header-section-number">3.1.2</span> Importing data from CSV files using RStudio</a></li>
   <li><a href="#loading-workspace-files-using-r" id="toc-loading-workspace-files-using-r" class="nav-link" data-scroll-target="#loading-workspace-files-using-r"><span class="header-section-number">3.1.3</span> Loading workspace files using R</a></li>
   <li><a href="#loading-workspace-files-using-rstudio" id="toc-loading-workspace-files-using-rstudio" class="nav-link" data-scroll-target="#loading-workspace-files-using-rstudio"><span class="header-section-number">3.1.4</span> Loading workspace files using RStudio</a></li>
   <li><a href="#saving-a-workspace-file-using-save" id="toc-saving-a-workspace-file-using-save" class="nav-link" data-scroll-target="#saving-a-workspace-file-using-save"><span class="header-section-number">3.1.5</span> Saving a workspace file using <code>save</code></a></li>
-  <li><a href="#save1" id="toc-save1" class="nav-link" data-scroll-target="#save1"><span class="header-section-number">3.1.6</span> Saving a workspace file using RStudio</a></li>
+  <li><a href="#sec-save1" id="toc-sec-save1" class="nav-link" data-scroll-target="#sec-save1"><span class="header-section-number">3.1.6</span> Saving a workspace file using RStudio</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -282,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data(#sec-working-with-data)</span></h1>
 </div>
 
 
@@ -297,15 +297,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="load" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="load"><span class="header-section-number">3.1</span> Loading and saving data</h2>
+<section id="sec-load" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-load"><span class="header-section-number">3.1</span> Loading and saving data</h2>
 <p>There are several different types of files that are likely to be relevant to us when doing data analysis. There are three in particular that are especially important from the perspective of this book:</p>
 <ul>
 <li><em>Comma separated value (CSV) files</em> are those with a .csv file extension. These are just regular old text files, and they can be opened with almost any software. This means that storing data in CSV files does not tie users to any particular software and keeps things simple.</li>
 <li><em>Workspace files</em> are those with a .Rdata file extension. This is the standard kind of file that R uses to store data and variables. They’re called “workspace files” because you can use them to save your whole workspace.</li>
 </ul>
-<section id="loadingcsv" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using loadingcsv</h3>
+<section id="sec-loadingcsv" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using loadingcsv</h3>
 <p>One quite commonly used data format is the humble “comma separated value” file, also called a CSV file, and usually bearing the file extension .csv. CSV files are just plain old-fashioned text files, and what they store is basically just a table of data. This is illustrated in Figure <a href="#fig-booksalescsv">Figure&nbsp;<span>3.1</span></a>, which shows a file called booksales.csv that I’ve created. As you can see, each row corresponds to a variable, and each row represents the book sales data for one month. The first row doesn’t contain actual data though: it has the names of the variables.</p>
 <div id="fig-booksalescsv" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -445,8 +445,8 @@ Note
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>( <span class="at">file =</span> <span class="st">"booksales2.Rdata"</span>, <span class="at">list =</span> save.me )   <span class="co"># the command to save them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="save1" class="level3" data-number="3.1.6">
-<h3 data-number="3.1.6" class="anchored" data-anchor-id="save1"><span class="header-section-number">3.1.6</span> Saving a workspace file using RStudio</h3>
+<section id="sec-save1" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="sec-save1"><span class="header-section-number">3.1.6</span> Saving a workspace file using RStudio</h3>
 <p>RStudio allows you to save the workspace pretty easily. In the environment panel (<span class="citation" data-cites="fig:workspace">@fig:workspace</span>) you can see the “save” button. There’s no text, but it’s the same icon that gets used on every computer everywhere: it’s the one that looks like a floppy disk. You know, those things that haven’t been used in about 20 years.</p>
 <div id="fig-workspace" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
