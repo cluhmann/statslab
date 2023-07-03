@@ -289,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#functionarguments" id="toc-functionarguments" class="nav-link" data-scroll-target="#functionarguments"><span class="header-section-number">2.4.1</span> Function arguments, their names and their defaults</a></li>
   </ul></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">2.5</span> Storing many numbers as a vector</a>
+  <li><a href="#sec-vectors" id="toc-sec-vectors" class="nav-link" data-scroll-target="#sec-vectors"><span class="header-section-number">2.5</span> Storing many numbers as a vector</a>
   <ul class="collapse">
   <li><a href="#creating-a-vector" id="toc-creating-a-vector" class="nav-link" data-scroll-target="#creating-a-vector"><span class="header-section-number">2.5.1</span> Creating a vector</a></li>
   <li><a href="#a-handy-digression" id="toc-a-handy-digression" class="nav-link" data-scroll-target="#a-handy-digression"><span class="header-section-number">2.5.2</span> A handy digression</a></li>
@@ -701,8 +701,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Okay, so that’s the first thing I said you’d need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the <code>round()</code> function I didn’t actually specify the <code>digits</code> argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the <code>digits</code> argument has a <strong><em>default value</em></strong> of <code>0</code>, meaning that if you decide not to specify a value for <code>digits</code> then R will act as if you had typed <code>digits = 0</code>. This is quite handy: the vast majority of the time when you want to round a number you want to round it to the nearest whole number, and it would be pretty annoying to have to specify the <code>digits</code> argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn’t allow this! Thus, by having <code>digits = 0</code> as the default value, we get the best of both worlds.</p>
 </section>
 </section>
-<section id="vectors" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.5</span> Storing many numbers as a vector</h2>
+<section id="sec-vectors" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-vectors"><span class="header-section-number">2.5</span> Storing many numbers as a vector</h2>
 <p>At this point we’ve covered functions in enough detail to get us safely through most of the rest of the book, so let’s return to our discussion of variables. When variables were introduced in <a href="#sec-assign"><span>Section&nbsp;2.3</span></a> we saw how we can use variables to store a single number. In this section, we’ll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a <strong><em>vector</em></strong>. So let’s create one.</p>
 <section id="creating-a-vector" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="creating-a-vector"><span class="header-section-number">2.5.1</span> Creating a vector</h3>
@@ -895,11 +895,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Not only that, but as Table <span class="quarto-unresolved-ref">?tbl-logicals</span> illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts.</p>
-<div class="cell">
-<div class="cell-output-display">
+<p>Not only that, but as Table <a href="#tbl-logicals">Table&nbsp;<span>2.2</span></a> illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts.</p>
+<div id="tbl-logicals" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;2.2: <strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-logicals-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-logicals" style="flex-basis: 100.0%;justify-content: center;">
 <table class="table table-sm table-striped small">
-<caption>Some logical operators. Technically I should be calling these “binary relational operators”, but quite frankly I don’t want to. It’s my book so no-one can make me.</caption>
+<caption>(a) Some logical operators. Technically I should be calling these “binary relational operators”, but quite frankly I don’t want to. It’s my book so no-one can make me.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">operation</th>
@@ -949,6 +953,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
+</div>
 <p>Hopefully these are all pretty self-explanatory: for example, the <strong><em>less than</em></strong> operator <code>&lt;</code> checks to see if the number on the left is less than the number on the right. If it’s less, then R returns an answer of <code>TRUE</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="dv">99</span> <span class="sc">&lt;</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -985,11 +990,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>We’re not quite done yet. There are three more logical operations that are worth knowing about, listed in Table <span class="quarto-unresolved-ref">?tbl-logicals2</span>.</p>
-<div class="cell">
-<div class="cell-output-display">
+<p>We’re not quite done yet. There are three more logical operations that are worth knowing about, listed in Table <a href="#tbl-logicals2">Table&nbsp;<span>2.3</span></a>.</p>
+<div id="tbl-logicals2" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;2.3: <strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-logicals2-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-logicals2" style="flex-basis: 100.0%;justify-content: center;">
 <table class="table table-sm table-striped small">
-<caption>Some more logical operators.</caption>
+<caption>(a) Some more logical operators.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">operation</th>
@@ -1019,6 +1028,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 <p>These are the <strong><em>not</em></strong> operator <code>!</code>, the <strong><em>and</em></strong> operator <code>&amp;</code>, and the <strong><em>or</em></strong> operator <code>|</code>. Like the other logical operators, their behaviour is more or less exactly what you’d expect given their names. For instance, if I ask you to assess the claim that “either <span class="math inline">\(2+2 = 4\)</span> <em>or</em> <span class="math inline">\(2+2 = 5\)</span>” you’d say that it’s true. Since it’s an “either-or” statement, all we need is for one of the two parts to be true. That’s what the <code>|</code> operator does:</p>
@@ -1060,7 +1070,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="storing-and-using-logical-data" class="level3" data-number="2.7.3">
 <h3 data-number="2.7.3" class="anchored" data-anchor-id="storing-and-using-logical-data"><span class="header-section-number">2.7.3</span> Storing and using logical data</h3>
-<p>Up to this point, I’ve introduced <em>numeric data</em> (<a href="#sec-assign"><span>Section&nbsp;2.3</span></a> and <span class="quarto-unresolved-ref">?sec-vectors</span>) and <em>character data</em> (<a href="#sec-text"><span>Section&nbsp;2.6</span></a>). So you might not be surprised to discover that these <code>TRUE</code> and <code>FALSE</code> values that R has been producing are actually a third kind of data, called <em>logical data</em>. That is, when I asked R if <code>2 + 2 == 5</code> and it said <code>[1] FALSE</code> in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called <code>is.the.Party.correct</code>, which would store R’s opinion:</p>
+<p>Up to this point, I’ve introduced <em>numeric data</em> (<a href="#sec-assign"><span>Section&nbsp;2.3</span></a> and <a href="#sec-vectors"><span>Section&nbsp;2.5</span></a>) and <em>character data</em> (<a href="#sec-text"><span>Section&nbsp;2.6</span></a>). So you might not be surprised to discover that these <code>TRUE</code> and <code>FALSE</code> values that R has been producing are actually a third kind of data, called <em>logical data</em>. That is, when I asked R if <code>2 + 2 == 5</code> and it said <code>[1] FALSE</code> in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called <code>is.the.Party.correct</code>, which would store R’s opinion:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>is.the.Party.correct <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">5</span></span>
 <span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>is.the.Party.correct</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1097,7 +1107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="vectors-of-logicals" class="level3" data-number="2.7.4">
 <h3 data-number="2.7.4" class="anchored" data-anchor-id="vectors-of-logicals"><span class="header-section-number">2.7.4</span> Vectors of logicals</h3>
-<p>The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (<span class="quarto-unresolved-ref">?sec-vectors</span>) and vectors of text data (<a href="#sec-text"><span>Section&nbsp;2.6</span></a>). Again, we can define them directly via the <code>c()</code> function, like this:</p>
+<p>The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (<a href="#sec-vectors"><span>Section&nbsp;2.5</span></a>) and vectors of text data (<a href="#sec-text"><span>Section&nbsp;2.6</span></a>). Again, we can define them directly via the <code>c()</code> function, like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
 <span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1105,7 +1115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1]  TRUE  TRUE FALSE</code></pre>
 </div>
 </div>
-<p>or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let’s unpack it slowly. First, let’s suppose we have a vector of numbers (i.e., a “non-logical vector”). For instance, we could use the <code>sales.by.month</code> vector that we were using in <span class="quarto-unresolved-ref">?sec-vectors</span>. Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this:</p>
+<p>or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let’s unpack it slowly. First, let’s suppose we have a vector of numbers (i.e., a “non-logical vector”). For instance, we could use the <code>sales.by.month</code> vector that we were using in <a href="#sec-vectors"><span>Section&nbsp;2.5</span></a>. Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>sales.by.month <span class="sc">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
