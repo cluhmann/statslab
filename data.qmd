@@ -1,5 +1,11 @@
 # Working with Data {#sec-working-with-data}
 
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+```
+
 ## Loading and saving data {#sec-load}
 
 
@@ -24,32 +30,36 @@ Therefore, to import the CSV file, the command I need is:
 
 ```{r}
 #| echo: false
-books <- read.csv( file = "./data/booksales.csv" )
+books <- read_csv("./data/booksales.csv")
 ```
 
 ```{r}
 #| eval: false
-books <- read.csv( file = "booksales.csv" )
+books <- read_csv("./data/booksales.csv")
 ```
+
 There are two very important points to notice here. Firstly, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
 
 ```{r}
 print( books )
 ```
 
-Clearly, it's worked, but the format of this output is a bit unfamiliar. We haven't seen anything like this before. What you're looking at is a *data frame*, which is a very important kind of variable in R, and one I'll discuss in Section @sec-dataframes For now, let's just be happy that we imported the data and that it looks about right.
+Clearly, it's worked, but the format of this output is a bit unfamiliar. We haven't seen anything like this before. What you're looking at is a *data frame*, which is a very important kind of variable in R, and one I'll discuss in @sec-dataframes. For now, let's just be happy that we imported the data and that it looks about right.
 
 ::: {.callout-note}
-In a lot of books you'll see the `read.table()` function used for this purpose instead of `read.csv()`. They're more or less identical functions, with the same arguments and everything. They differ only in the default values.
+In a lot of books you'll see the `read.table()` or `read.csv()` functions used for this purpose instead of `read_csv()`. They're similar functions, but `read_csv()` is a function from the `readr` package, one of the many packages from "the tidyverse".  The tidyverse is a set of interoperable packages we will be using throughout this course. Further information about the tidyverse can be found in @sec-tidyverse.
 :::
 
 
 ### Importing data from CSV files using RStudio {#sec-importing}
 
-Yet again, importing data is easier in RStudio. In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder/Explorer window that you use to choose a file. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in Figure @fig-import.
+::: {.callout-warning}
+As detailed above, `read_csv()` is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable.  Using RStudio's built-in "Import Dataset" functionality will produce dataframes, whereas `read_csv` produces "tibbles". Further information about the difference between plain dataframes and tibbles can be found in @sec-dataframes.
+:::
+
+In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder/Explorer window that you use to choose a file. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in Figure @fig-import.
 
 ![A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it's the usual way in which a Mac asks you to find a file. Windows users won't see this: they'll see the usual explorer window that Windows always gives you when it wants you to select a file.](images/rstudio_screenshots/openscreen.png){#fig-import}
-
 
 
 The import data set window is relatively straightforward to understand. 
@@ -59,13 +69,12 @@ The import data set window is relatively straightforward to understand.
 
 In the top left corner, you need to type the name of the variable you R to create. By default, that will be the same as the file name: our file is called `booksales.csv`, so RStudio suggests the name `booksales`. If you're happy with that, leave it alone. If not, type something else. Immediately below this are a few things that you can tweak to make sure that the data gets imported correctly: 
 
-
 - Heading. Does the first row of the file contain raw data, or does it contain headings for each variable? The `booksales.csv` file has a header at the top, so I selected "yes".
 - Separator. What character is used to separate different entries? In most CSV files this will be a comma (it is "comma separated" after all). But you can change this if your file is different. 
 - Decimal. What character is used to specify the decimal point? In English speaking countries, this is almost always a period (i.e., `.`). That's not universally true: many European countries use a comma. So you can change that if you need to.
 - Quote. What character is used to denote a block of text? That's usually going to be a double quote mark. It is for the `booksales.csv` file, so that's what I selected.
 
-The nice thing about the RStudio window is that it shows you the raw data file at the top of the window, and it shows you a preview of the data at the bottom. If the data at the bottom doesn't look right, try changing some of the settings on the left hand side. Once you're happy, click "Import". When you do, two commands appear in the R console:
+One nice thing about the RStudio window is that it shows you the raw data file at the top of the window, and it shows you a preview of the data at the bottom. If the data at the bottom doesn't look right, try changing some of the settings on the left hand side. Once you're happy, click "Import". When you do, two commands appear in the R console:
 
 ```{r}
 #| eval: false
@@ -73,7 +82,10 @@ booksales <- read.csv("~/Rbook/data/booksales.csv")
 View(booksales)
 ```
 
-The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio. 
+The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio.
+
+Note, however, that this variable looks a bit different from the `sales` variable we created using `read_csv`. Again, the differences will be discussed more in @sec-dataframes.
+
 
 ### Loading workspace files using R
 
@@ -172,5 +184,5 @@ Pretty straightforward, really.
     - General Social Survey 1972-2016 [Cumulative File] (ICPSR 36797)?
     - https://doi.org/10.3886/ICPSR36797.v1
 - Inside the "statslab" directory/folder you created at the end of the previous chapter (@sec-rlangactivities), create a sub-directory/folder and name it "data"
-- Unzip the data and associated files into the "data" directory/folder you just created
-- Briefly review codebook
+- Unzip the data and associated files and place them in the "data" directory/folder you just created
+- Briefly review the codebook

@@ -144,4 +144,4 @@ In fact, every time I install R on a new machine one of the first things I do is
 - Verify installation of the tidyverse package by loading the package using the instructions found in @sec-packageload
 - Create a directory/folder somewhere convenient on your hard drive and name it "statslab"
 - Set the "working directory" for R by going to "Session" menu and selecting "Set Working Directory" and then "Choose Directory...".  Select the "statslab" directory/folder you just created.
-- Any time you wish to being work for this course, perform this step so that all of your file (data, scripts, etc.) are saved in a central location. Future activities will provide further instruction assuming that you a) have created this directory/folder and b) have set it to be your working directory in RStudio.
+- Any time you wish to begin (or return to) work for this course, perform this step so that all of your file (data, scripts, etc.) are saved in a central location. Future activities will provide further instruction assuming that you a) have created this directory/folder and b) have set it to be your working directory in RStudio.
