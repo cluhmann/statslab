@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data(#sec-working-with-data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,7 +268,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#what-is-a-tibble" id="toc-what-is-a-tibble" class="nav-link active" data-scroll-target="#what-is-a-tibble"><span class="header-section-number">5.1</span> What is a tibble?</a></li>
-  <li><a href="#what-is-tidy-data" id="toc-what-is-tidy-data" class="nav-link" data-scroll-target="#what-is-tidy-data"><span class="header-section-number">5.2</span> What is “tidy” data?</a></li>
+  <li><a href="#tidying-your-data" id="toc-tidying-your-data" class="nav-link" data-scroll-target="#tidying-your-data"><span class="header-section-number">5.2</span> Tidying your data</a></li>
+  <li><a href="#activities" id="toc-activities" class="nav-link" data-scroll-target="#activities"><span class="header-section-number">5.3</span> Activities</a></li>
   </ul>
 </nav>
     </div>
@@ -292,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Through the R universe, data is stored in what are referred to as dataframes. A dataframe is a tabular data format that works a bit like a spreadsheet. Within the tidyverse, dataframes are organized in a particular way (“tidy” format) and will tend to be stored in a particular type of dataframe (a “tibble”). In this chapter, we’ll explore these conventions.</p>
+<p>Throughout the R universe, data is stored in what are referred to as dataframes. A dataframe is a tabular data format that works a bit like a spreadsheet. Within the tidyverse, dataframes are organized in a particular way (“tidy” format) and will tend to be stored in a particular type of dataframe (a “tibble”). In this chapter, we’ll explore these conventions.</p>
 <p>Columns within a dataframe store data of a certain <strong>type</strong> (e.g., decimals, strings, etc.). Let’s take a quick look at a standard R dataframe. We’ll use one of the built-in data sets, <code>iris</code>, which contains data about measurements of various flowers. For now, we’ll just take a look at the first five rows:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -322,10 +323,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Note that the data is identical to that seen above. However, the tibble provides some additional useful information. It tells us that this particular tibble has five columns and, because we only asked for the first five rows, also has five rows. In addition, it tells us about the <strong>data type</strong> of each column. The first four columns are of type <code>dbl</code>, which is double-precision floating point number (a decimal). The last column is of type <code>fct</code>, or factor. In R, factors are used to represent categorical variables, variables that have a fixed set of possible values (in this case, the set of species).</p>
 </section>
-<section id="what-is-tidy-data" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="what-is-tidy-data"><span class="header-section-number">5.2</span> What is “tidy” data?</h2>
-<p>For the rest of this book, we will primarily deal with data that is already in “tidy” format as well. This is not always the case however with all data sets in the world. If your original dataframe is in wide (not “tidy”) format and you would like to use the tidyverse packages, you will first have to convert it to “tidy” format. To do so, we recommend using the <code>pivot_longer()</code> function in the <code>tidyr</code> package.</p>
-<p>Let’s load some data from the <code>fivethirtyeight</code> package. The <code>fivethirtyeight</code> package provides access to the data sets used in many articles published by the data journalism website, <a href="https://fivethirtyeight.com/">FiveThirtyEight.com</a>. For a complete list of all data sets included in the <code>fivethirtyeight</code> package, check out <a href="https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html">the package webpage</a>.</p>
+<section id="tidying-your-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="tidying-your-data"><span class="header-section-number">5.2</span> Tidying your data</h2>
+<p>For the rest of this book, we will primarily deal with data that is already in “tidy” format as explained <a href="tidyverse.html"><span>Chapter&nbsp;4</span></a>. However, many data sets you encounter in the world are in so-called “wide” format. If you wish to use the tidyverse packages, you will first have to convert these date sets to “tidy” format. To do so, we recommend using the <code>pivot_longer()</code> function in the <code>tidyr</code> package.</p>
+<p>To illustrated, let’s load some data from the <code>fivethirtyeight</code> package. The <code>fivethirtyeight</code> package provides access to the data sets used in many articles published by the data journalism website, <a href="https://fivethirtyeight.com/">FiveThirtyEight.com</a>. For a complete list of all data sets included in the <code>fivethirtyeight</code> package, check out <a href="https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html">the package webpage</a>.</p>
 <p>Let’s focus our attention on the <code>drinks</code> dataframe:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -340,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ abbreviated name: ¹​total_litres_of_pure_alcohol</code></pre>
 </div>
 </div>
-<p>After reading the help file by running (<code>?drinks</code>), you’ll see that <code>drinks</code> is a dataframe containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi’s article: <a href="https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/">“Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?”</a>.</p>
+<p>After reading the help file (i.e., by running <code>?drinks</code>), you’ll see that <code>drinks</code> is a dataframe containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi’s article: <a href="https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/">“Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?”</a>.</p>
 <p>Let’s narrow down the data a bit. We’ll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the <code>total_litres_of_pure_alcohol</code> variable, and rename the other variables to something a bit more convenient. Don’t worry about the code here. We’ll get into all of these operations more in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="ot">&lt;-</span> drinks <span class="sc">%&gt;%</span> </span>
@@ -463,6 +464,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Converting “wide” format data to “tidy” format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice using different data sets. For example, run <code>?pivot_longer</code> and look at the examples in the bottom of the help file.</p>
 <p>If however you want to convert a “tidy” dataframe to “wide” format, you will need to use the <code>pivot_wider()</code> function instead. Run <code>?pivot_wider</code> and look at the examples in the bottom of the help file for examples.</p>
 <p>You can also view examples of both <code>pivot_longer()</code> and <code>pivot_wider()</code> on the <a href="https://tidyr.tidyverse.org/dev/articles/pivot.html#pew">tidyverse.org</a> webpage. There’s a nice example to check out the different functions available for data tidying and a case study using data from the World Health Organization on that webpage. Furthermore, each week the R4DS Online Learning Community posts a data set in the weekly <a href="https://github.com/rfordatascience/tidytuesday"><code>#</code>TidyTuesday event</a> that might serve as a nice place for you to find other data to explore and transform.</p>
+</section>
+<section id="activities" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="activities"><span class="header-section-number">5.3</span> Activities</h2>
+<ul>
+<li>Load data from previous chapter</li>
+<li>Is the data in tidy format?</li>
+<li>How many observations does the data contain?</li>
+<li>How many variables does the data contain?</li>
+<li>Data types of different variables</li>
+</ul>
 
 
 </section>
