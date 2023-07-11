@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-packages" id="toc-sec-packages" class="nav-link" data-scroll-target="#sec-packages"><span class="header-section-number">1.5</span> Other Packages</a>
   <ul class="collapse">
   <li><a href="#sec-packageinstall" id="toc-sec-packageinstall" class="nav-link" data-scroll-target="#sec-packageinstall"><span class="header-section-number">1.5.1</span> Package Installation</a></li>
-  <li><a href="#packageload" id="toc-packageload" class="nav-link" data-scroll-target="#packageload"><span class="header-section-number">1.5.2</span> Package Loading</a></li>
+  <li><a href="#sec-packageload" id="toc-sec-packageload" class="nav-link" data-scroll-target="#sec-packageload"><span class="header-section-number">1.5.2</span> Package Loading</a></li>
   <li><a href="#sec-packageuse" id="toc-sec-packageuse" class="nav-link" data-scroll-target="#sec-packageuse"><span class="header-section-number">1.5.3</span> Package Use</a></li>
   </ul></li>
   <li><a href="#quitting-r" id="toc-quitting-r" class="nav-link" data-scroll-target="#quitting-r"><span class="header-section-number">1.6</span> Quitting R</a></li>
@@ -381,8 +381,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>An alternative but slightly less convenient way to install a package is by typing <code>install.packages("ggplot2")</code> in the console pane of RStudio and pressing Return/Enter on your keyboard. Note you must include the quotation marks around the name of the package.</p>
 <p>Much like an app on your phone, you only have to install a package once. However, if you want to <strong>update</strong> a previously installed package to a newer version, you need to reinstall it by repeating the earlier steps.</p>
 </section>
-<section id="packageload" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="packageload"><span class="header-section-number">1.5.2</span> Package Loading</h3>
+<section id="sec-packageload" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="sec-packageload"><span class="header-section-number">1.5.2</span> Package Loading</h3>
 <p>Recall that after you’ve installed a package, you need to “load it.” In other words, you need to “open it.” We do this by using the <code>library()</code> command.</p>
 <p>For example, to load the <code>ggplot2</code> package, run the following code in the console pane. What do we mean by “run the following code”? Either type or copy-and-paste the following code into the console pane and then hit the Enter key.</p>
 <div class="cell">
@@ -390,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>If after running the earlier code, a blinking cursor returns next to the <code>&gt;</code> “prompt” sign, it means you were successful and the <code>ggplot2</code> package is now loaded and ready to use. If, however, you get a red “error message” that reads <code>...</code></p>
 <pre><code>Error in library(ggplot2) : there is no package called ‘ggplot2’</code></pre>
-<p><code>...</code> it means that you didn’t successfully install it. If you get this error message, go back to Subsection <span class="quarto-unresolved-ref">?sec-packageinstallation</span> on R package installation and make sure to install the <code>ggplot2</code> package before proceeding.</p>
+<p><code>...</code> it means that you didn’t successfully install it. If you get this error message, go back to Subsection <a href="#sec-packageinstall"><span>Section&nbsp;1.5.1</span></a> on R package installation and make sure to install the <code>ggplot2</code> package before proceeding.</p>
 </section>
 <section id="sec-packageuse" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="sec-packageuse"><span class="header-section-number">1.5.3</span> Package Use</h3>
@@ -428,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Set the “Save workspace to .Rdata on exit” option to “never”.</li>
 <li>Install the <code>tidyverse</code> package using the instructions found in <a href="#sec-packageinstall"><span>Section&nbsp;1.5.1</span></a></li>
-<li>Verify installation of the tidyverse package by loading the package using the instructions found in <span class="quarto-unresolved-ref">?sec-packageload</span></li>
+<li>Verify installation of the tidyverse package by loading the package using the instructions found in <a href="#sec-packageload"><span>Section&nbsp;1.5.2</span></a></li>
 <li>Create a directory/folder somewhere convenient on your hard drive and name it “statslab”</li>
 <li>Set the “working directory” for R by going to “Session” menu and selecting “Set Working Directory” and then “Choose Directory…”. Select the “statslab” directory/folder you just created.</li>
 <li>Any time you wish to being work for this course, perform this step so that all of your file (data, scripts, etc.) are saved in a central location. Future activities will provide further instruction assuming that you a) have created this directory/folder and b) have set it to be your working directory in RStudio.</li>
