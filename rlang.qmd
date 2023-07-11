@@ -22,16 +22,12 @@ There are also a variety of downsides to R, but we will try to sidestep these as
 
 The interface between a programmer (or data analyst) and a programming language is often an integrate development environment (IDE), which is just a fancy term for a piece of software that collects a bunch of inter-related tools often useful when programming.  We will be using RStudio as our IDE.  As the name suggests, RStudio was designed as an R-first IDE, making things easy for those new to R and/or programming.
 
-First time users often confuse R and RStudio. At its simplest, R is like a car's engine while RStudio is like a car's dashboard as illustrated in Figure @fig-R-vs-RStudio-1.
+First time users often confuse R and RStudio. At its simplest, R is like a car's engine while RStudio is like a car's dashboard as illustrated in Figure @fig-R-vs-RStudio-1. More precisely, R is the programming language that performs computations and RStudio is how users interact with R.
 
 ![Analogy of difference between R and RStudio.](images/shutterstock/R_vs_RStudio_1.png){#fig-R-vs-RStudio-1}
 
 
-More precisely, R is the programming language that performs computations, whereas RStudio is how users interact with R.
-
-
-
-## Installation
+## Installation{#sec-install}
 
 Installation involves two major steps.  The first step is to install R itself.  You can get the most recent version from CRAN (the comprehensive R archive network): https://cloud.r-project.org.  There are ready-made installers available for Linux, macOS, and Windows.
 
@@ -55,7 +51,7 @@ After you open RStudio, you should see something similar to Figure @fig-RStudio-
 Note the three *panes* dividing the screen: the *console pane*, the *files pane*, and the *environment pane*.  The console pane is where you enter R commands and R returns the corresponding results (and/or error messages if you make a mistake).  We'll dig into the other panes a bit more later.
 
 
-## Other Packages{#sec-packages}
+## Other Packages {#sec-packages}
 
 One of the main strengths of R (arguably the most important strength) is the availability of many, many packages (or libraries) that extend the functionality of R in all sort of different ways. These libraries are written by a worldwide community of R users and can be downloaded for free.  We will rely on a variety of these packages, so we take a moment now to discuss how packages work in R and RStudio.
 
@@ -73,7 +69,7 @@ Once Instagram is open on your phone, you can then proceed to share your photo w
 
 Let's take a look at how these two steps come together to install and load the `ggplot2` package for data visualization.
 
-### Package Installation {sec-packageinstallation}
+### Package Installation {#sec-packageinstall}
 
 There are two ways to install an R package: an easy way and a more advanced way. Let's install the `ggplot2` package the easy way first as shown in Figure @fig-easy-way-install. In the Files pane of RStudio:
 
@@ -89,7 +85,7 @@ An alternative but slightly less convenient way to install a package is by typin
 
 Much like an app on your phone, you only have to install a package once. However, if you want to **update** a previously installed package to a newer version, you need to reinstall it by repeating the earlier steps.
 
-### Package Loading
+### Package Loading {#sec-packageload}
 
 Recall that after you've installed a package, you need to "load it." In other words, you need to "open it." We do this by using the `library()` command.
 
@@ -106,9 +102,9 @@ If after running the earlier code, a blinking cursor returns next to the `>` "pr
 Error in library(ggplot2) : there is no package called ‘ggplot2’
 ```
 
-`...` it means that you didn't successfully install it. If you get this error message, go back to Subsection @sec-packageinstallation on R package installation and make sure to install the `ggplot2` package before proceeding.
+`...` it means that you didn't successfully install it. If you get this error message, go back to Subsection @sec-packageinstall on R package installation and make sure to install the `ggplot2` package before proceeding.
 
-### Package Use {#package-use}
+### Package Use {#sec-packageuse}
 
 One very common mistake new R users make when wanting to use particular packages is they forget to "load" them first by using the `library()` command we just saw. Remember: *you have to load each package you want to use every time you start RStudio.* If you don't first "load" a package, but attempt to use one of its features, you'll see an error message similar to:
 
@@ -123,14 +119,29 @@ This is a different error message than the one you just saw on a package not hav
 
 ![The dialog box that shows up when you try to close RStudio.](images/rstudio_screenshots/Rstudio_quit.png){#fig-rstudio-quit}
 
-There's one last thing I should cover in this chapter: how to quit R. You can just shut down the application in the normal way (e.g., File->Quit Session). However, R also has a function, `q()`, that you can use to quit, which can be handy. Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in @, but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
+There's one last thing I should cover in this chapter: how to quit R. You can just shut down the application in the normal way (e.g., File->Quit Session). However, R also has a function, `q()`, that you can use to quit, which can be handy. Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in @sec-working-with-data, but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
+
 ```{r eval=FALSE}
 q()
 
 ## Save workspace image? [y/n/c]: 
 ```
+
 The `y/n/c` part here is short for "yes / no / cancel". Type `y` if you want to save, `n` if you don't, and `c` if you've changed your mind and you don't want to quit after all. 
 
-What does this actually *mean*? What's going on is that R wants to know if you want to save all those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit... what R is *really* asking is if you want it to store these variables in a "default" data file, which it will automatically reload for you next time you open R. And quite frankly, if I'd wanted to save the variables, then I'd have already saved them before trying to quit. Not only that, I'd have saved them to a location of *my* choice, so that I can find it again later. So I personally never bother with this. 
+What does this actually *mean*? What's going on is that R wants to know if you want to save all those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit.. what R is *really* asking is if you want it to store these variables in a "default" data file, which it will automatically reload for you next time you open R. And quite frankly, if I'd wanted to save the variables, then I'd have already saved them before trying to quit. Not only that, I'd have saved them to a location of *my* choice, so that I can find it again later. So I personally never bother with this. 
 
 In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again (see @fig-rstudio-quit). On a Mac, you can open this window by going to the "RStudio" menu and selecting "Preferences". On a Windows machine you go to the "Tools" menu and select "Global Options". Under the "General" tab you'll see an option that reads "Save workspace to .Rdata on exit". By default this is set to "ask". If you want R to stop asking, change it to "never".
+
+## Activities  {#sec-rlangactivities}
+
+- Install both R and RStudio using the instructions found in @sec-install
+- Open RStudio
+- Settings
+    - Go to "Tools" menu and select "Global Options...".  On the "General" tab, uncheck the box that says "Restore .RData into workspace at startup".
+- Set the "Save workspace to .Rdata on exit" option to "never".
+- Install the `tidyverse` package using the instructions found in @sec-packageinstall
+- Verify installation of the tidyverse package by loading the package using the instructions found in @sec-packageload
+- Create a directory/folder somewhere convenient on your hard drive and name it "statslab"
+- Set the "working directory" for R by going to "Session" menu and selecting "Set Working Directory" and then "Choose Directory...".  Select the "statslab" directory/folder you just created.
+- Any time you wish to being work for this course, perform this step so that all of your file (data, scripts, etc.) are saved in a central location. Future activities will provide further instruction assuming that you a) have created this directory/folder and b) have set it to be your working directory in RStudio.

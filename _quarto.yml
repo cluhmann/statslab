@@ -1,6 +1,6 @@
 project:
     type: book
-execute-dir: project
+    execute-dir: project
 
 book:
     title: "statslab"

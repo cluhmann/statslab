@@ -1,29 +1,35 @@
 # R as a Calculator
 
+```{r}
+#| echo: false
+#| output: false
+library(knitr)
+```
+
 ## Commands at the console
 
 One of the easiest things you can do with R is use it as a simple calculator, so it's a good place to start. For instance, try typing `10 + 20`, and hitting enter. The simple act of typing it rather than "just reading" makes a big difference. It makes the concepts more concrete, and it ties the abstract ideas (programming and statistics) to the actual context in which you need to use them. Statistics is something you *do*, not just something you read about in a textbook.] When you do this, you've entered a ***command***, and R will "execute" that command. What you see on screen now will be this:
 
 
-```{r eval=FALSE}
+```
 > 10 + 20
 [1] 30
 ```
 
 
-Not a lot of surprises in this extract. But there's a few things worth talking about, even with such a simple example. Firstly, it's important that you understand how to read the extract. In this example, what *I* typed was the `10 + 20` part. I didn't type the `>` symbol: that's just the R command prompt and isn't part of the actual command. And neither did I type the `[1] 30` part. That's what R printed out in response to my command. 
+Should be much surprise here. But there's a few things worth talking about, even with such a simple example. First, it's important that you understand how to read the code example. In this example, what was typed into the RStudio console was the `10 + 20` part. The `>` symbol as not typed. That's just the command prompt and isn't part of the actual command. The `[1] 30` part was also not typed into the console. That's what R printed out in response to the `10 + 20` code.
 
-Secondly, it's important to understand how the output is formatted. Obviously, the correct answer to the sum `10 + 20` is `30`, and not surprisingly R has printed that out as part of its response. But it's also printed out this `[1]` part, which probably doesn't make a lot of sense to you right now. You're going to see that a lot. I'll talk about what this means in a bit more detail later on, but for now you can think of `[1] 30` as if R were saying "the answer to the 1st question you asked is 30". That's not quite the truth, but it's close enough for now. And in any case it's not really very interesting at the moment: we only asked R to calculate one thing, so obviously there's only one answer printed on the screen. Later on this will change, and the `[1]` part will start to make a bit more sense. For now, I just don't want you to get confused or concerned by it. 
+Second, it's important to understand how the output is formatted. Obviously, the correct answer to the sum `10 + 20` is `30`, and not surprisingly R has printed that out as part of its output. But it's also printed out this `[1]` part, which probably doesn't make a lot of sense to you right now. You're going to see that a lot. I'll talk about what this means in a bit more detail later on, but for now you can think of `[1] 30` as if R were saying "the answer to the 1st question you asked is 30". That's not quite accurate, but it's close enough for now. And in any case it's not really very interesting at the moment: we only asked R to calculate one thing, so obviously there's only one answer. Later on this will change, and the `[1]` part will start to make a bit more sense. For now, I just don't want you to get confused or concerned by it. 
 
 
 
 ### An important digression about formatting
 
-Now that I've taught you these rules I'm going to change them pretty much immediately. That is because I want you to be able to copy code from the book directly into R if if you want to test things or conduct your own analyses. However, if you copy this kind of code (that shows the command prompt and the results) directly into R you will get an error 
+Now that I've taught you these rules I'm going to change them pretty much immediately. That is because I want you to be able to copy code from the book directly into R if if you want to test things or conduct your own analyses. However, if you copy this kind of code (that shows the command prompt and the results) directly into R you will get an error:
 
-```{r error=TRUE}
+```{r}
+#| error: TRUE
 > 10 + 20
-[1] 30
 ```
 
 So instead, I'm going to provide code in a slightly different format so that it looks like this...
@@ -34,27 +40,21 @@ So instead, I'm going to provide code in a slightly different format so that it 
 
 There are two main differences. 
 
-- In your console, you type after the >, but from now I I won’t show the command prompt in the book.  
-- In the book, output is commented out with \#\#, in your console it appears directly after your code. 
+- In your console, the ">" is the prompt and you type your code after (to the right of) this prompt.
+- We'll often show the output of a bit of code, but the output will be displayed after the block of code itself.
 
-These two differences mean that if you’re working with an electronic version of the book, you can easily copy code out of the book and into the console.
-
-So for example if you copied the two lines of code from the book you'd get this
-
-```{r}
-10 + 20
-## [1] 30
-```
+For your purposes, this also means that you can easily copy code from any of these code blocks and paste it into your RStudio console in order to execute.
 
 ### Be very careful to avoid typos
 
-Before we go on to talk about other types of calculations that we can do with R, there's a few other things I want to point out. The first thing is that, while R is good software, it's still software. It's pretty stupid, and because it's stupid it can't handle typos. It takes it on faith that you meant to type *exactly* what you did type. For example, suppose that you forgot to hit the shift key when trying to type `+`, and as a result your command ended up being `10 = 20` rather than `10 + 20`. Here's what happens:
+Before we go on to talk about other types of calculations that we can do with R, there's a few other things I want to point out. The first thing is that, though R is good software, it's still software. R, like any programming language, is pretty stupid and because it's stupid it can't handle typos. It takes it on faith that you meant to type *exactly* what you actually typed. For example, suppose that you forgot to hit the shift key when trying to type `+`, and as a result your command ended up being `10 = 20` rather than `10 + 20`. Here's what happens:
 
-```{r error=TRUE}
+```{r}
+#| error: true
 10 = 20
 ```
 
-What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it. When a *human* looks at this, and then looks down at his or her keyboard and sees that `+` and `=` are on the same key, it's pretty obvious that the command was a typo. But R doesn't know this, so it gets upset. And, if you look at it from its perspective, this makes sense. All that R "knows" is that `10` is a legitimate number, `20` is a legitimate number, and `=` is a legitimate part of the language too. In other words, from its perspective this really does look like the user meant to type `10 = 20`, since all the individual parts of that statement are legitimate and it's too stupid to realise that this is probably a typo. Therefore, R takes it on faith that this is exactly what you meant... it only "discovers" that the command is nonsense when it tries to follow your instructions, typo and all. And then it whinges, and spits out an error.
+What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it. When a *human* looks at this, and then looks down at his or her keyboard and sees that `+` and `=` are on the same key, it's pretty obvious that the command was a typo. But R doesn't know this, so it gets upset. And, if you look at it from its perspective, this makes sense. All that R "knows" is that `10` is a legitimate number, `20` is a legitimate number, and `=` is a legitimate part of the language too. In other words, from its perspective this really does look like the user meant to type `10 = 20`, since all the individual parts of that statement are legitimate and it's too stupid to realize that this is probably a typo. Therefore, R takes it on faith that this is exactly what you meant... it only "discovers" that the command is nonsense when it tries to follow your instructions, typo and all. And then it complains by spitting out an error.
 
 Even more subtle is the fact that some typos won't produce errors at all, because they happen to correspond to "well-formed" R commands. For instance, suppose that not only did I forget to hit the shift key when trying to type `10 + 20`, I also managed to press the key next to one I meant do. The resulting typo would produce the command `10 - 20`. Clearly, R has no way of knowing that you meant to *add* 20 to 10, not *subtract* 20 from 10, so what happens this time is this:
 
@@ -65,7 +65,7 @@ Even more subtle is the fact that some typos won't produce errors at all, becaus
 
 In this case, R produces the right answer, but to the the wrong question. 
 
-To some extent, I'm stating the obvious here, but it's important. The people who wrote R are smart. You, the user, are smart. But R itself is dumb. And because it's dumb, it has to be mindlessly obedient. It does *exactly* what you ask it to do. There is  no equivalent to "autocorrect" in R, and for good reason. When doing advanced stuff -- and even the simplest of statistics is pretty advanced in a lot of ways -- it's dangerous to let a mindless automaton like R try to overrule the human user. But because of this, it's your responsibility to be careful. Always make sure you type *exactly what you mean*. When dealing with computers, it's not enough to type "approximately" the right thing. In general, you absolutely *must* be precise in what you say to R ... like all machines it is too stupid to be anything other than absurdly literal in its interpretation.
+To some extent, I'm stating the obvious here, but it's important. The people who wrote R are smart. You, the user, are smart. But R is a programming language and programming languages are a way to tell computers what to do and computers are dumb. And because they are dumb, they are mindlessly obedient. R does *exactly* what you tell it to do. R will not try and second-guess what you "actually meant"; there is no "autocorrect". This is for good reason. When doing advanced stuff -- and even the simplest of statistics is pretty advanced in a lot of ways -- it's risky to let a mindless automaton like R try to overrule the human user. So it's your responsibility to be careful. Always make sure you type *exactly what you mean*. When dealing with computers, it's not enough to type "approximately" the right thing. In general, you absolutely *must* be precise in what you tell R to do ... like all machines it is too stupid to be anything other than absurdly literal in its interpretation.
 
 ### R is (a bit) flexible with spacing
 
@@ -82,16 +82,15 @@ or this
 
 ## Simple calculations
 
-Okay, now that we've discussed some of the tedious details associated with typing R commands, let's get back to learning how to use the most powerful piece of statistical software in the world as a \$2 calculator. So far, all we know how to do is addition. Clearly, a calculator that only did addition would be a bit stupid, so I should tell you about how to perform other simple calculations using R. But first, some more terminology. Addition is an example of an "operation" that you can perform (specifically, an arithmetic operation), and the ***operator*** that performs it is `+`. To people with a programming or mathematics background, this terminology probably feels pretty natural, but to other people it might feel like I'm trying to make something very simple (addition) sound more complicated than it is (by calling it an arithmetic operation). To some extent, that's true: if addition was the only operation that we were interested in, it'd be a bit silly to introduce all this extra terminology. However, as we go along, we'll start using more and more different kinds of operations, so it's probably a good idea to get the language straight now, while we're still talking about very familiar concepts like addition! 
+Okay, now that we've discussed some of the tedious details associated with typing R commands, let's get back to learning how to use the most powerful piece of statistical software in the world as a \$2 calculator. So far, all we know how to do is addition. Clearly, a calculator that only did addition would be a bit stupid, so we'll discuss other simple calculations you can perform using R. But first, some more terminology. Addition is an example of an "operation" that you can perform (specifically, an arithmetic operation), and the ***operator*** that performs it is `+`. To people with a programming or mathematics background, this terminology probably feels pretty natural, but to other people it might feel like I'm trying to make something very simple (addition) sound more complicated than it is (by calling it an arithmetic operation). To some extent, that's true: if addition was the only operation that we were interested in, it'd be a bit silly to introduce all this extra terminology. However, as we go along, we'll start using more and more different kinds of operations, so it's probably a good idea to get the language straight now, while we're still talking about very familiar concepts like addition! 
 
 ### Adding, subtracting, multiplying and dividing
 
-So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, @tbl--arithmetic1 lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
+So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, @tbl-arithmetic1 lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
 
 ```{r}
-#| arithmetic1
-#| label: tbl--arithmetic1
-#| echo=FALSE
+#| label: tbl-arithmetic1
+#| echo: FALSE
 knitr::kable(rbind(
               c("addition", "`+`", "10 + 2", 12),
               c("subtraction", "`-`", "9 - 3", 6),
@@ -110,10 +109,10 @@ As you can see, R uses fairly standard symbols to denote each of the different o
 
 So that's handy. 
 
+
 ### Taking powers
 
-
-The first four operations listed in Table \@ref(tab:arithmetic1) are things we all learned in primary school, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the most important is probably taking powers.
+The first four operations listed in @tab-arithmetic1 are things we all learned at a young age, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the most important is probably taking powers.
 
 For those of you who can still remember your high school math, this should be familiar. And if not, it's not complicated. As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this:
 $$
@@ -157,23 +156,23 @@ This is a fairly useful thing to be able to do. The only other thing I should po
 4 / 2 * 3
 ```
 
-All of the above being said, it's helpful to remember that *brackets always come first*. So, if you're ever unsure about what order R will do things in, an easy solution is to enclose the thing *you* want it to do first in brackets.  There's nothing stopping you from typing `(4 / 2) * 3`. By enclosing the division in brackets we make it clear which thing is supposed to happen first. In this instance you wouldn't have needed to, since R would have done the division first anyway, but when you're first starting out it's better to make sure R does what you want!
+All of the above being said, it's helpful to remember that *parentheses always come first*. So, if you're ever unsure about what order R will do things in, an easy solution is to enclose the thing *you* want it to do first in parentheses  In addition, making the order of operations explicit makes your code more readable.  By enclosing the division in parentheses (e.g., `(4 / 2) * 3`) we make it clear which thing happens first.
 
 
 
-## Storing a number as a variable{#sec-assign}
+## Storing a number as a variable {#sec-assign}
 
-One of the most important things to be able to do in R (or any programming language, for that matter) is to store information in **_variables_**. Variables in R aren't exactly the same thing as the variables we talked about in the last chapter on research methods, but they are similar. At a conceptual level you can think of a variable as *label* for a certain piece of information, or even several different pieces of information. When doing statistical analysis in R all of your data (the variables you measured in your study) will be stored as variables in R, but as well see later in the book you'll find that you end up creating variables for other things too. However, before we delve into all the messy details of data sets and statistical analysis, let's look at the very basics for how we create variables and work with them. 
+One of the most important things to be able to do in R (or any programming language, for that matter) is to store information in **_variables_**. At a conceptual level you can think of a variable as *label* for a certain piece of information, or even several different pieces of information. For example, when using R as a calculator, there may be times when you want to store an intermediate result along the way.  For example, when calculating an average (the sum divided by the count), you might wish to save the sum before dividing that sum by the count. Let's look at the very basics for how we create variables and work with them. 
 
 ### Variable assignment using `<-` and `->`
 
-Since we've been working with numbers so far, let's start by creating variables to store our numbers. And since most people like concrete examples, let's invent one. Suppose I'm trying to calculate how much money I'm going to make from this book. There's several different numbers I might want to store. Firstly, I need to figure out how many copies I'll sell. This isn't exactly *Harry Potter*, so let's assume I'm only going to sell one copy per student in my class. That's 350 sales, so let's create a variable called `sales`. What I want to do is assign a **_value_** to my variable `sales`, and that value should be `350`. We do this by using the **_assignment operator_**, which is `<-`. Here's how we do it:
+Since we've been working with numbers so far, let's start by creating variables to store our numbers. And since most people like concrete examples, let's invent one. Suppose I'm trying to calculate how much money I'm going to make selling this book. There's several different numbers I might want to store. Firstly, I need to figure out how many copies I'll sell. This isn't exactly *Harry Potter*, so let's assume I'm only going to sell one copy per student in my class. That's 30 sales, so let's create a variable called `sales`. What I want to do is assign a **_value_** to my variable `sales`, and that value should be `30`. We do this by using the **_assignment operator_**, which is `<-`. Here's how we do it:
 
 ```{r}
-sales <- 350
+sales <- 30
 ```
 
-When you hit enter, R doesn't print out any output. It just gives you another command prompt. However, behind the scenes R has created a variable called `sales` and given it a value of `350`. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do *that* is to type the name of the variable and hit enter.
+When you hit enter, R doesn't print out any output. It just gives you another command prompt. However, behind the scenes R has created a variable called `sales` and given it a value of `30`. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do *that* is to type the name of the variable and hit enter.
 
 ```{r}
 sales
@@ -181,12 +180,12 @@ sales
 
 So that's nice to know. Anytime you can't remember what R has got stored in a particular variable, you can just type the name of the variable and hit enter. 
 
-Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in @functionarguments. As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
+Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in @sec-functionarguments. As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
 
 ```{r}
-350 -> sales
+30 -> sales
 ```
-This has the same effect: and it *still* means that I'm only going to sell `350` copies. Sigh. Apart from this superficial difference, `<-` and `->` are identical. In fact, as far as R is concerned, they're actually the same operator, just in a "left form" and a "right form".
+This has the same effect: and it *still* means that I'm only going to sell `30` copies. Sigh. Apart from this superficial difference, `<-` and `->` are identical. In fact, as far as R is concerned, they're actually the same operator, just in a "left form" and a "right form".
 
 
 ### Doing calculations using variables
@@ -194,14 +193,14 @@ This has the same effect: and it *still* means that I'm only going to sell `350`
 Okay, let's get back to my original story. In my quest to become rich, I've written this textbook. To figure out how good a strategy is, I've started creating some variables in R. In addition to defining a `sales` variable that counts the number of copies I'm going to sell, I can also create a variable called `royalty`, indicating how much money I get per copy. Let's say that my royalties are about $7 per book:
 
 ```{r}
-sales <- 350
+sales <- 30
 royalty <- 7
 ```
 
-The nice thing about variables (in fact, the whole point of having variables) is that we can do anything with a variable that we ought to be able to do with the information that it stores. That is, since R allows me to multiply `350` by `7`
+The nice thing about variables (in fact, the whole point of having variables) is that we can do anything with a variable that we ought to be able to do with the information that it stores. That is, since R allows me to multiply `30` by `7`
 
 ```{r}
-350 * 7
+30 * 7
 ```
 
 it also allows me to multiply `sales` by `royalty`
@@ -210,7 +209,7 @@ it also allows me to multiply `sales` by `royalty`
 sales * royalty
 ```
 
-As far as R is concerned, the `sales * royalty` command is the same as the `350 * 7` command. Not surprisingly, I can assign the output of this calculation to a new variable, which I'll call `revenue`. And when we do this, the new variable `revenue` gets the value `2450`. So let's do that, and then get R to print out the value of `revenue` so that we can verify that it's done what we asked:
+As far as R is concerned, the `sales * royalty` command is the same as the `30 * 7` command. Not surprisingly, I can assign the output of this calculation to a new variable, which I'll call `revenue`. And when we do this, the new variable `revenue` gets the value `35`. So let's do that, and then get R to print out the value of `revenue` so that we can verify that it's done what we asked:
 
 ```{r}
 revenue <- sales * royalty
@@ -224,42 +223,41 @@ revenue <- revenue + 550
 revenue
 ```
 
-In this calculation, R has taken the old value of `revenue` (i.e., 2450) and added 550 to that value, producing a value of 3000. This new value is assigned to the `revenue` variable, overwriting its previous value. In any case, we now know that I'm expecting to make $3000 off this. Pretty sweet, I thinks to myself. Or at least, that's what I thinks until I do a few more calculation and work out what the implied hourly wage I'm making off this looks like. 
+In this calculation, R has taken the old value of `revenue` (i.e., 210) and added 550 to that value, producing a value of 760 This new value is assigned to the `revenue` variable, overwriting its previous value. In any case, we now know that I'm expecting to make $760 off this. Pretty sweet, I thinks to myself. Or at least, that's what I thinks until I do a few more calculation and work out what the implied hourly wage I'm making off this looks like. 
+
 
 ### Rules and conventions for naming variables
 
 In the examples that we've seen so far, my variable names (`sales` and `revenue`) have just been English-language words written using lowercase letters. However, R allows a lot more flexibility when it comes to naming your variables, as the following list of rules illustrates:
 
-
 - Variable names can only use the upper case alphabetic characters `A`-`Z` as well as the lower case characters `a`-`z`. You can also include numeric characters `0`-`9` in the variable name, as well as the period `.` or underscore `_` character. In other words, you can use `SaL.e_s` as a variable name (though I can't think why you would want to), but you can't use `Sales?`. 
 - Variable names cannot include spaces: therefore `my sales` is not a valid name, but `my.sales` is.
 - Variable names are case sensitive: that is, `Sales` and `sales` are *different* variable names.
 - Variable names must start with a letter or a period. You can't use something like `_sales` or `1sales` as a variable name. You can use `.sales` as a variable name if you want, but it's not usually a good idea. By convention, variables starting with a `.` are used for special purposes, so you should avoid doing so. 
-- Variable names cannot be one of the reserved keywords. These are special names that R needs to keep "safe" from us mere users, so you can't use them as the names of variables. The keywords are: `if`, `else`, `repeat`, `while`, `function`, `for`, `in`, `next`, `break`, `TRUE`, `FALSE`, `NULL`, `Inf`, `NaN`, `NA`, `NA_integer_`, `NA_real_`, `NA_complex_`, and finally,  `NA_character_`. Don't feel especially obliged to memorise these: if you make a mistake and try to use one of the keywords as a variable name, R will complain about it like the whiny little automaton it is.
-
-
+- Variable names cannot be one of the reserved keywords. These are special names that R needs to keep "safe" from us mere users, so you can't use them as the names of variables. The keywords are: `if`, `else`, `repeat`, `while`, `function`, `for`, `in`, `next`, `break`, `TRUE`, `FALSE`, `NULL`, `Inf`, `NaN`, `NA`, `NA_integer_`, `NA_real_`, `NA_complex_`, and finally,  `NA_character_`. Don't feel especially obliged to memorize these: if you make a mistake and try to use one of the keywords as a variable name, R will complain about it like the whiny little automaton it is.
 
 In addition to those rules that R enforces, there are some informal conventions that people tend to follow when naming variables. One of them you've already seen: i.e., don't use variables that start with a period. But there are several others. You aren't obliged to follow these conventions, and there are many situations in which it's advisable to ignore them, but it's generally a good idea to follow them when you can:
 
-
 - Use informative variable names. As a general rule, using meaningful names like `sales` and `revenue` is preferred over arbitrary ones like `variable1` and `variable2`. Otherwise it's very hard to remember what the contents of different variables are, and it becomes hard to understand what your commands actually do. 
 - Use short variable names. Typing is a pain and no-one likes doing it. So we much prefer to use a name like `sales` over a name like `sales.for.this.book.that.you.are.reading`. Obviously there's a bit of a tension between using informative names (which tend to be long) and using short names (which tend to be meaningless), so use a bit of common sense when trading off these two conventions.
-- Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores "my new salary". Obviously I can't include spaces in the variable name, so how should I do this? There are three different conventions that you sometimes see R users employing. Firstly, you can separate the words using periods, which would give you `my.new.salary` as the variable name. Alternatively, you could separate words using underscores, as in `my_new_salary`. Finally, you could use capital letters at the beginning of each word (except the first one), which gives you `myNewSalary` as the variable name. I don't think there's any strong reason to prefer one over the other, but it's important to be consistent.
+- Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores "my new salary". Obviously I can't include spaces in the variable name, so how should I do this? There are two main conventions that you sometimes see R users employing. First, there is "camel case" in which you use capital letters at the beginning of each constituent word (except the first one), which gives you `myNewSalary` as the variable name. Second, there is "snake case" in which you separate words using underscores, as in `my_new_salary`. Finally, you may also see some R users separating words using periods, which would give you `my.new.salary`. Do not do this because it is syntactically ambiguous (and thus makes your code difficult to read/understand).
 
 
-## Functions{#sec-functions}
+## Functions {#sec-functions}
 
-The symbols `+`, `-`, `*` and so on are examples of operators. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using **_functions_**. We'll see more detail about functions and how they work later, but for now let's just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The  square root, in case your high school math is a bit rusty, is just the opposite of squaring a number. So, for instance, since "5 squared is 25" I can say that "5 is the square root of 25". The usual notation for this is 
+The symbols `+`, `-`, `*`, etc. are examples of operators. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using **_functions_**. We'll see more detail about functions and how they work later, but for now let's just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The  square root, in case your high school math is a bit rusty, is just the opposite of squaring a number. So, for instance, since "5 squared is 25" I can say that "5 is the square root of 25". This is the usual notation:
 
 $$
 \sqrt{25} = 5
 $$
 
-though sometimes you'll also see it written like this
-$25^{0.5} = 5.$
+Sometimes you'll also see it written like this:
+
+$25^{0.5} = 5$
+
 This second way of writing it is kind of useful to "remind" you of the mathematical fact that "square root of $x$" is actually the same as "raising $x$ to the power of 0.5". Personally, I've never found this to be terribly meaningful psychologically, though I have to admit it's quite convenient mathematically. Anyway, it's not important. What is important is that you remember what a square root is, since we're going to need it later on.
 
-To calculate the square root of 25, I can do it in my head pretty easily, since I memorised my multiplication tables when I was a kid. It gets harder when the numbers get bigger, and pretty much impossible if they're not whole numbers. This is where something like R comes in very handy. Let's say I wanted to calculate $\sqrt{225}$, the square root of 225. There's two ways I could do this using R. Firstly, since the square root of 255 is the same thing as raising 225 to the power of 0.5, I could use the power operator `^`, just like we did earlier:
+You may be able to calculate the square root of 25 in your head. But it gets more difficult when the numbers get bigger, and pretty much impossible if they're not whole numbers. This is where something like R comes in very handy. Let's say I wanted to calculate $\sqrt{225}$, the square root of 225. There's two ways I could do this using R. First, since the square root of 255 is the same thing as raising 225 to the power of 0.5, we could use the power operator `^`, just like we did earlier:
 
 ```{r}
 225 ^ 0.5
@@ -271,12 +269,14 @@ However, there's a second way that we can do this, since R also provides a ***sq
 sqrt( 225 )
 ```
 
-and as you might expect from our previous discussion, the spaces in between the parentheses are purely cosmetic. I could have typed `sqrt(225)` or `sqrt( 225   )` and gotten the same result. When we use a function to do something, we generally refer to this as **_calling_** the function, and the values that we type into the function (there can be more than one) are referred to as the **_arguments_** of that function. 
+As you might expect from our previous discussion, the spaces in between the parentheses are purely cosmetic. We could have typed `sqrt(225)` or `sqrt( 225   )` and gotten the same result. When we use a function to do something, we generally refer to this as **_calling_** the function, and the values that we type into the function (there can be more than one) are referred to as the **_arguments_** of that function. 
 
-Obviously, the `sqrt()` function doesn't really give us any new functionality, since we already knew how to do square root calculations by using the power operator `^`, though I do think it looks nicer when we use `sqrt()`. However, there are lots of other functions in R: in fact, almost everything of interest that I'll talk about in this book is an R function of some kind. For example, one function that we will need to use in this book is the ***absolute value function***. Compared to the square root function, it's extremely simple: it just converts negative numbers to positive numbers, and leaves positive numbers alone. Mathematically, the absolute value of $x$ is written $|x|$ or sometimes $\mbox{abs}(x)$. Calculating absolute values in R is pretty easy, since R provides the `abs()` function that you can use for this purpose. When you feed it a positive number...
+Obviously, the `sqrt()` function doesn't really give us any new functionality, since we already knew how to do square root calculations by using the power operator `^`, though it maybe be more explicit, clearer, and thus easier to read to use `sqrt()`. However, there are lots of other functions in R: in fact, almost everything of interest that I'll talk about in this book is an R function of some kind. For example, one function that we will need to use in this book is the ***absolute value function***. Compared to the square root function, it's extremely simple: it just converts negative numbers to positive numbers, and leaves positive numbers alone. Mathematically, the absolute value of $x$ is written $|x|$ or sometimes $\mbox{abs}(x)$. Calculating absolute values in R is pretty easy, since R provides the `abs()` function that you can use for this purpose. When you feed it a positive number...
+
 ```{r}
 abs( 21 )
 ```
+
 the absolute value function does nothing to it at all. But when you feed it a negative number, it spits out the positive version of the same number, like this:
 
 ```{r}
@@ -285,8 +285,7 @@ abs( -13 )
 
 In all honesty, there's nothing that the absolute value function does that you couldn't do just by looking at the number and erasing the minus sign if there is one. However, there's a few places later in the book where we have to use absolute values, so I thought it might be a good idea to explain the meaning of the term early on.
 
-
-Before moving on, it's worth noting that -- in the same way that R allows us to put multiple operations together into a longer command, like `1 + 2*4` for instance -- it also lets us put functions together and even combine functions with operators if we so desire. For example, the following is a perfectly legitimate command:
+Before moving on, it's worth noting that -- in the same way that R allows us to put multiple operations together into a longer command, like `1 + (2*4)` for instance -- it also lets us put functions together and even combine functions with operators if we so desire. For example, the following is a perfectly legitimate command:
 
 ```{r}
 sqrt( 1 + abs(-8) )
@@ -295,29 +294,28 @@ sqrt( 1 + abs(-8) )
 When R executes this command, starts out by calculating the value of `abs(-8)`, which produces an intermediate value of `8`. Having done so, the command simplifies to `sqrt( 1 + 8 )`. To solve the square root it first needs to add `1 + 8` to get `9`, at which point it evaluates `sqrt(9)`, and so it finally outputs a value of `3`.
 
 
+### Function arguments, their names and their defaults {#sec-functionarguments}
 
-### Function arguments, their names and their defaults{#functionarguments}
-
-There's two more fairly important things that you need to understand about how functions work in R, and that's the use of "named" arguments, and default values" for arguments. Not surprisingly, that's not to say that this is the last we'll hear about how functions work, but they are the last things we desperately need to discuss in order to get you started. To understand what these two concepts are all about, I'll introduce another function. The `round()` function can be used to round some value to the nearest whole number. For example, I could type this:
+There's two more fairly important things that you need to understand about how functions work in R, and that's the use of "named" arguments, and "default values" for arguments. Not surprisingly, that's not to say that this is the last we'll hear about how functions work, but they are the last things we desperately need to discuss in order to get you started. To understand what these two concepts are all about, I'll introduce another function. The `round()` function can be used to round some value to the nearest whole number. For example, I could type this:
 
 ```{r}
 round( 3.1415 )
 ```
+
 Pretty straightforward, really. However, suppose I only wanted to round it to two decimal places: that is, I want to get `3.14` as the output. The `round()` function supports this, by allowing you to input a second argument to the function that specifies the number of decimal places that you want to round the number to. In other words, I could do this: 
 
 ```{r}
 round( 3.14165, 2 )
 ```
 
-What's happening here is that I've specified *two* arguments: the first argument is the number that needs to be rounded (i.e., `3.1415`), the second argument is the number of decimal places that it should be rounded to (i.e., `2`), and the two arguments are separated by a comma. In this simple example, it's quite easy to remember which one argument comes first and which one comes second, but for more complicated functions this is not easy. Fortunately, most R functions make use of ***argument names***. For the `round()` function, for example the number that needs to be rounded is specified using the `x` argument, and the number of decimal points that you want it rounded to is specified using the `digits` argument. Because we have these names available to us, we can specify the arguments to the function by name. We do so like this:
+What's happening here is that I've specified *two* arguments: the first argument is the number that needs to be rounded (i.e., `3.14165`), the second argument is the number of decimal places that it should be rounded to (i.e., `2`), and the two arguments are separated by a comma. In this simple example, it's quite easy to remember which one argument comes first and which one comes second, but for more complicated functions this is not easy. Fortunately, most R functions make use of ***argument names***. For the `round()` function, for example the number that needs to be rounded is specified using the `x` argument, and the number of decimal points that you want it rounded to is specified using the `digits` argument. Because we have these names available to us, we can specify the arguments to the function by name. We do so like this:
 ```{r}
 round( x = 3.1415, digits = 2 )
 ```
 
-Notice that this is kind of similar in spirit to variable assignment, except that `=` is used here, rather than `<-`. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what I was doing earlier on when creating variables, and what I'm doing here when specifying arguments, and so as a consequence it's important that you use `=` in this context.
+Notice that this is kind of similar in spirit to variable assignment, except that `=` is used here, rather than `<-`. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what we were doing earlier on when creating variables, and what we're doing here when specifying arguments, and so as a consequence it's important that you use `=` in this context.
 
-
-As you can see, specifying the arguments by name involves a lot more typing, but it's also a lot easier to read. Because of this, the commands in this book will usually specify arguments by name, since that makes it clearer to you what I'm doing. However, one important thing to note is that when specifying the arguments using their names, it doesn't matter what order you type them in. But if you don't use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output...
+As you can see, specifying the arguments by name involves a lot more typing, but it's also explicit and thus a lot easier to read. Because of this, the commands in this book will usually specify arguments by name, since that makes it clearer to you what I'm doing. However, one important thing to note is that when specifying the arguments using their names, it doesn't matter what order you type them in. But if you don't use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output...
 
 ```{r}
 round( 3.14165, 2 )
@@ -336,45 +334,55 @@ How do you find out what the correct order is? There's a few different ways, but
 Okay, so that's the first thing I said you'd need to know: argument names. The second thing you need to know about is default values. Notice that the first time I called the `round()` function I didn't actually specify the `digits` argument at all, and yet R somehow knew that this meant it should round to the nearest whole number. How did that happen? The answer is that the `digits` argument has a ***default value*** of `0`, meaning that if you decide not to specify a value for `digits` then R will act as if you had typed `digits = 0`. This is quite handy: the vast majority of the time when you want to round a number you want to round it to the nearest whole number, and it would be pretty annoying to have to specify the `digits` argument every single time. On the other hand, sometimes you actually do want to round to something other than the nearest whole number, and it would be even more annoying if R didn't allow this! Thus, by having `digits = 0` as the default value, we get the best of both worlds.
 
 
+## Storing many numbers as a vector {#sec-vectors}
 
-## Storing many numbers as a vector{#vectors}
+At this point we've covered functions in enough detail to get us safely through most of the rest of the book, so let's return to our discussion of variables. When variables were introduced in @sec-assign we saw how we can use variables to store a single number. In this section, we'll extend this idea and look at how to store multiple numbers within the one variable. In R, a variable stores multiple values is called a **_vector_**. So let's create one.
 
-At this point we've covered functions in enough detail to get us safely through most of the rest of the book, so let's return to our discussion of variables. When variables were introduced in @sec-assign we saw how we can use variables to store a single number. In this section, we'll extend this idea and look at how to store multiple numbers within the one variable. In R, the name for a variable that can store multiple values is a **_vector_**. So let's create one. 
 
 ### Creating a vector
-Let's stick to my silly "get rich quick by textbook writing" example. Suppose the textbook company (if I actually had one, that is) sends me sales data on a monthly basis. Since my class start in late February, we might expect most of the sales to occur towards the start of the year. Let's suppose that I have 100 sales in February, 200 sales in March and 50 sales in April, and no other sales for the rest of the year. What I would like to do is have a variable -- let's call it `sales.by.month` -- that stores all this sales data. The first number stored should be `0` since I had no sales in January, the second should be `100`, and so on. The simplest way to do this in R is to use the **_combine_** function, `c()`. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:
+
+Let's stick to my silly "get rich quick by textbook writing" example. Suppose the textbook company (if there actually was one, that is) sends sales data on a monthly basis. Since my class start in late February, we might expect most of the sales to occur towards the start of the year. Let's suppose that I have 100 sales in February, 200 sales in March and 50 sales in April, and no other sales for the rest of the year. What I would like to do is have a variable -- let's call it `sales.by.month` -- that stores all this sales data. The first number stored should be `0` since I had no sales in January, the second should be `100`, and so on. The simplest way to do this in R is to use the **_combine_** function, `c()`. To do so, all we have to do is type all the numbers you want to store in a comma separated list, like this:
+
 ```{r}
 sales.by.month <- c(0, 100, 200, 50, 0, 0, 0, 0, 0, 0, 0, 0)
 sales.by.month
 ```
-To use the correct terminology here, we have a single variable here called `sales.by.month`: this variable is a vector that consists of 12 **_elements_**. 
 
+To use the correct terminology here, we have a single variable here called `sales.by.month`: this variable is a vector that consists of 12 **_elements_**. 
 
 
 ### A handy digression
 
 Now that we've learned how to put information into a vector, the next  thing to understand is how to pull that information back out again. However, before I do so it's worth taking a slight detour. If you've been following along, typing all the commands into R yourself, it's possible that the output that you saw when we printed out the `sales.by.month` vector was slightly different to what I showed above. This would have happened if the window (or the RStudio panel) that contains the R console is really, really narrow. If that were the case, you might have seen output that looks something like this:
 
-```{r set-options1, echo=FALSE, cache=FALSE}
+```{r}
+#| echo: false
+#| output: false
+orig_width = getOption("width")
 options(width = 20)
 ```
 
 ```{r}
 sales.by.month
 ```
-Because there wasn't much room on the screen, R has printed out the results over three lines. But that's not the important thing to notice. The important point is that the first line has a `[1]` in front of it, whereas the second line starts with `[5]` and the third with `[9]`. It's pretty clear what's happening here. For the first row, R has printed out the 1st element through to the 4th element, so it starts that row with a `[1]`. For the second row, R has printed out the 5th element of the vector through to the 8th one, and so it begins that row with a `[5]` so that you can tell where it's up to at a glance. It might seem a bit odd to you that R does this, but in some ways it's a kindness, especially when dealing with larger data sets!
 
-```{r set-options2, echo=FALSE, cache=FALSE}
-options(width = 75)
+```{r}
+#| echo: false
+#| output: false
+options(width = orig_width)
 ```
 
-### Getting information out of vectors{#vectorsubset}
+Because there wasn't much room on the screen, R has printed out the results over three lines. But that's not the important thing to notice. The important point is that the first line has a `[1]` in front of it, whereas the second line starts with `[5]` and the third with `[9]`. It's pretty clear what's happening here. For the first row, R has printed out the 1st element through to the 4th element, so it starts that row with a `[1]`. For the second row, R has printed out the 5th element of the vector through to the 8th one, and so it begins that row with a `[5]` so that you can tell where it's up to at a glance. It might seem a bit odd to you that R does this, but in some ways it's a kindness, especially when dealing with larger data sets!
+
+
+### Getting information out of vectors {#vectorsubset}
 
 To get back to the main story, let's consider the problem of how to get information out of a vector. At this point, you might have a sneaking suspicion that the answer has something to do with the `[1]` and `[9]` things that R has been printing out. And of course you are correct. Suppose I want to pull out the February sales data only. February is the second month of the year, so let's try this:
 
 ```{r}
 sales.by.month[2]
 ```
+
 Yep, that's the February sales all right. But there's a subtle detail to be aware of here: notice that R outputs `[1] 100`, *not* `[2] 100`. This is because R is being extremely literal. When we typed in `sales.by.month[2]`, we asked R to find exactly *one* thing, and that one thing happens to be the second element of our `sales.by.month` vector. So, when it outputs `[1] 100` what R is saying is that the first number *that we just asked for* is `100`. This behaviour makes more sense when you realise that we can use this trick to create new variables. For example, I could create a `february.sales` variable like this:
 
 ```{r}
@@ -482,7 +490,8 @@ What I've done here is use the **_equality operator_**, `==`, to force R to make
 2+2 == 5
 ```
 Booyah! Freedom and ponies for all! Or something like that. Anyway, it's worth having a look at what happens if I try to *force* R to believe that two plus two is five by making an assignment statement like  `2 + 2 = 5` or `2 + 2 <- 5`. When I do this, here's what happens:
-```{r error=TRUE}
+```{r}
+#| error: TRUE
 2 + 2 = 5
 ```
 R doesn't like this very much. It recognises that `2 + 2` is *not* a variable (that's what the "non-language object" part is saying), and it won't let you try to "reassign" it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number `2`. 
@@ -502,7 +511,7 @@ sqrt( 25 ) == 5
 Not only that, but as Table @tbl-logicals illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
 
 ```{r}
-#| label: logicals
+#| label: tbl-logicals
 #| echo: FALSE
 
 knitr::kable(rbind(
@@ -546,7 +555,7 @@ And at this point I hope it's pretty obvious what the **_greater than_** operato
 We're not quite done yet. There are three more logical operations that are worth knowing about, listed in Table @tbl-logicals2.
 
 ```{r}
-#| label: logicals2
+#| label: tbl-logicals2
 #| echo: FALSE
 
 knitr::kable(rbind(
@@ -557,7 +566,6 @@ knitr::kable(rbind(
               col.names = c("operation", "operator", "example input", "answer"),
   booktabs = TRUE
 )
-
 ```
 
 
@@ -614,7 +622,8 @@ is.the.Party.correct <- F
 is.the.Party.correct
 ```
 but this doesn't:
-```{r error=TRUE}
+```{r}
+#| error: TRUE
 is.the.Party.correct <- f
 ```
 
@@ -730,3 +739,8 @@ months[stock.levels != "high" ]
 Either way, I get the answer I want.
 
 At this point, I hope you can see why logical indexing is such a useful thing. It's a very basic, yet very powerful way to manipulate data. Subsequent chapters will talk a lot more about how to manipulate data, since it's a critical skill for real world research that is often overlooked in introductory statistics courses It does take a bit of practice to become completely comfortable using logical indexing, so it's a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like "how do I get R to spit out all the elements that are [blah]". Practice makes perfect, and it's only by practicing logical indexing that you'll perfect the art of yelling frustrated insults at your computer.
+
+
+## Activities
+
+- Open RStudio and 

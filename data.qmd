@@ -1,6 +1,6 @@
-# Working with Data(#sec-working-with-data)
+# Working with Data {#sec-working-with-data}
 
-## Loading and saving data{#sec-load}
+## Loading and saving data {#sec-load}
 
 
 There are several different types of files that are likely to be relevant to us when doing data analysis. There are three in particular that are especially important from the perspective of this book:
@@ -8,7 +8,7 @@ There are several different types of files that are likely to be relevant to us 
 - *Comma separated value (CSV) files* are those with a .csv file extension. These are just regular old text files, and they can be opened with almost any software. This means that storing data in CSV files does not tie users to any particular software and keeps things simple.
 - *Workspace files* are those with a .Rdata file extension. This is the standard kind of file that R uses to store data and variables. They're called "workspace files" because you can use them to save your whole workspace. 
 
-### Importing data from CSV files using loadingcsv{#sec-loadingcsv}
+### Importing data from CSV files using `loadingcsv` {#sec-loadingcsv}
 
 One quite commonly used data format is the humble "comma separated value" file, also called a CSV file, and usually bearing the file extension .csv. CSV files are just plain old-fashioned text files, and what they store is basically just a table of data. This is illustrated in Figure @fig-booksalescsv, which shows a file called booksales.csv that I've created. As you can see, each row corresponds to a variable, and each row represents the book sales data for one month. The first row doesn't contain actual data though: it has the names of the variables.
 
@@ -152,7 +152,7 @@ save.me <- c("data", "handy")   # the variables to be saved
 save( file = "booksales2.Rdata", list = save.me )   # the command to save them
 ```
 
-### Saving a workspace file using RStudio{#sec-save1}
+### Saving a workspace file using RStudio {#sec-save1}
 
 RStudio allows you to save the workspace pretty easily. In the environment panel (@fig:workspace) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 20 years.
 
@@ -165,3 +165,12 @@ Alternatively, go to the "Session" menu and click on the "Save Workspace As..." 
 save.image("~/Desktop/Untitled.RData")
 ```
 Pretty straightforward, really.
+
+## Activities {#sec-dataactivities}
+
+- Download data
+    - General Social Survey 1972-2016 [Cumulative File] (ICPSR 36797)?
+    - https://doi.org/10.3886/ICPSR36797.v1
+- Inside the "statslab" directory/folder you created at the end of the previous chapter (@sec-rlangactivities), create a sub-directory/folder and name it "data"
+- Unzip the data and associated files into the "data" directory/folder you just created
+- Briefly review codebook

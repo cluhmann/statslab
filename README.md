@@ -14,6 +14,12 @@ https://github.com/djnavarro/rbook
 
 Licensed under creative commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0).
 
+The psyTeachR textbooks by the psyTeachR team
+
+https://psyteachr.github.io/resources.html
+
+Licensed under creative commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0)
+
 ## Packages required to build the site/book
 - tidyverse
 - kable

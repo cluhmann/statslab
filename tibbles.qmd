@@ -7,7 +7,7 @@ library(tidyverse)
 library(fivethirtyeight)
 ```
 
-Through the R universe, data is stored in what are referred to as dataframes.  A dataframe is a tabular data format that works a bit like a spreadsheet.  Within the tidyverse, dataframes are organized in a particular way ("tidy" format) and will tend to be stored in a particular type of dataframe (a "tibble").  In this chapter, we'll explore these conventions.
+Throughout the R universe, data is stored in what are referred to as dataframes.  A dataframe is a tabular data format that works a bit like a spreadsheet.  Within the tidyverse, dataframes are organized in a particular way ("tidy" format) and will tend to be stored in a particular type of dataframe (a "tibble").  In this chapter, we'll explore these conventions.
 
 Columns within a dataframe store data of a certain **type** (e.g., decimals, strings, etc.).  Let's take a quick look at a standard R dataframe.  We'll use one of the built-in data sets, `iris`, which contains data about measurements of various flowers.  For now, we'll just take a look at the first five rows:
 
@@ -33,12 +33,11 @@ Note that the data is identical to that seen above.  However, the tibble provide
 
 
 
-## What is "tidy" data?
+## Tidying your data
 
-For the rest of this book, we will primarily deal with data that is already in "tidy" format as well. This is not always the case however with all data sets in the world. If your original dataframe is in wide (not "tidy") format and you would like to use the tidyverse packages, you will first have to convert it to "tidy" format. To do so, we recommend using the `pivot_longer()` function in the `tidyr` package.
+For the rest of this book, we will primarily deal with data that is already in "tidy" format as explained @sec-tidyverse. However, many data sets you encounter in the world are in so-called "wide" format.  If you wish to use the tidyverse packages, you will first have to convert these date sets to "tidy" format. To do so, we recommend using the `pivot_longer()` function in the `tidyr` package.
 
-
-Let's load some data from the `fivethirtyeight` package. The `fivethirtyeight` package provides access to the data sets used in many articles published by the data journalism website, [FiveThirtyEight.com](https://fivethirtyeight.com/). For a complete list of all data sets included in the `fivethirtyeight` package, check out [the package webpage](https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html).
+To illustrated, let's load some data from the `fivethirtyeight` package. The `fivethirtyeight` package provides access to the data sets used in many articles published by the data journalism website, [FiveThirtyEight.com](https://fivethirtyeight.com/). For a complete list of all data sets included in the `fivethirtyeight` package, check out [the package webpage](https://fivethirtyeight-r.netlify.app/articles/fivethirtyeight.html).
 
 Let's focus our attention on the `drinks` dataframe:
 
@@ -48,7 +47,7 @@ drinks %>%
   head(5)
 ```
 
-After reading the help file by running (`?drinks`), you'll see that `drinks` is a dataframe containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi's article: ["Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?"](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/).
+After reading the help file (i.e., by running `?drinks`), you'll see that `drinks` is a dataframe containing results from a survey of beer, spirits, and wine consumption originally reported on FiveThirtyEight.com in Mona Chalabi's article: ["Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?"](https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/).
 
 Let's narrow down the data a bit.  We'll only consider 4 countries (the United States, China, Italy, and Saudi Arabia), omit the `total_litres_of_pure_alcohol` variable, and rename the other variables to something a bit more convenient.  Don't worry about the code here.  We'll get into all of these operations more in @sec-dplyr.
 
@@ -117,6 +116,14 @@ drinks_smaller_tidy
 
 Converting "wide" format data to "tidy" format often confuses new R users. The only way to learn to get comfortable with the `pivot_longer()` function is with practice, practice, and more practice using different data sets. For example, run `?pivot_longer` and look at the examples in the bottom of the help file.
 
-If however you want to convert a "tidy" dataframe to "wide" format, you will need to use the `pivot_wider()`\index{tidyr!pivot\_wider()} function instead. Run `?pivot_wider` and look at the examples in the bottom of the help file for examples.
+If however you want to convert a "tidy" dataframe to "wide" format, you will need to use the `pivot_wider()` function instead. Run `?pivot_wider` and look at the examples in the bottom of the help file for examples.
 
 You can also view examples of both `pivot_longer()` and `pivot_wider()` on the [tidyverse.org](https://tidyr.tidyverse.org/dev/articles/pivot.html#pew) webpage. There's a nice example to check out the different functions available for data tidying and a case study using data from the World Health Organization on that webpage. Furthermore, each week the R4DS Online Learning Community posts a data set in the weekly [`#`TidyTuesday event](https://github.com/rfordatascience/tidytuesday) that might serve as a nice place for you to find other data to explore and transform. 
+
+## Activities
+
+- Load data from previous chapter
+- Is the data in tidy format?
+- How many observations does the data contain?
+- How many variables does the data contain?
+- Data types of different variables
