@@ -369,7 +369,7 @@ Let's take a look at only the `pts`, `ast`, and the resulting `star_support` var
 #| tbl-cap: "Five rows showing `star_support`"
 nba %>% 
   select(pts, ast, star_support) %>% 
-  slice(c(1,2,7,399,4)) %>% 
+  slice(c(1,2,7,399,4))
 ```
 
 The player in the third row scored an average of 17.2 points per game and made an average of 3.4 assists per game, so his `star_support` value is $17.2-3.5=13.8$. On the other hand, the player in the fourth row averaged 1.5 points and 2.9 assists, so its `star_support` value is $1.5 - 2.9 = -1.4$.
