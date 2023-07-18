@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#sec-load" id="toc-sec-load" class="nav-link active" data-scroll-target="#sec-load"><span class="header-section-number">3.1</span> Loading and saving data</a>
   <ul class="collapse">
-  <li><a href="#sec-loadingcsv" id="toc-sec-loadingcsv" class="nav-link" data-scroll-target="#sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using <code>loadingcsv</code></a></li>
+  <li><a href="#sec-loadingcsv" id="toc-sec-loadingcsv" class="nav-link" data-scroll-target="#sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using <code>read_csv</code></a></li>
   <li><a href="#sec-importing" id="toc-sec-importing" class="nav-link" data-scroll-target="#sec-importing"><span class="header-section-number">3.1.2</span> Importing data from CSV files using RStudio</a></li>
   <li><a href="#loading-workspace-files-using-r" id="toc-loading-workspace-files-using-r" class="nav-link" data-scroll-target="#loading-workspace-files-using-r"><span class="header-section-number">3.1.3</span> Loading workspace files using R</a></li>
   <li><a href="#loading-workspace-files-using-rstudio" id="toc-loading-workspace-files-using-rstudio" class="nav-link" data-scroll-target="#loading-workspace-files-using-rstudio"><span class="header-section-number">3.1.4</span> Loading workspace files using RStudio</a></li>
@@ -306,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Workspace files</em> are those with a .Rdata file extension. This is the standard kind of file that R uses to store data and variables. They’re called “workspace files” because you can use them to save your whole workspace.</li>
 </ul>
 <section id="sec-loadingcsv" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using <code>loadingcsv</code></h3>
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-loadingcsv"><span class="header-section-number">3.1.1</span> Importing data from CSV files using <code>read_csv</code></h3>
 <p>One quite commonly used data format is the humble “comma separated value” file, also called a CSV file, and usually bearing the file extension .csv. CSV files are just plain old-fashioned text files, and what they store is basically just a table of data. This is illustrated in Figure <a href="#fig-booksalescsv">Figure&nbsp;<span>3.1</span></a>, which shows a file called booksales.csv that I’ve created. As you can see, each row corresponds to a variable, and each row represents the book sales data for one month. The first row doesn’t contain actual data though: it has the names of the variables.</p>
 <div id="fig-booksalescsv" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -321,23 +321,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Therefore, to import the CSV file, the command I need is:</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 12 Columns: 4
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (2): Month, Stock.Levels
-dbl (2): Days, Sales
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>books <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/booksales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>books <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/booksales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are two very important points to notice here. Firstly, notice that I <em>didn’t</em> try to use the <code>load()</code> function, because that function is only meant to be used for .Rdata files. If you try to use <code>load()</code> on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called <code>books</code> file. There’s a reason for this. The idea behind an <code>.Rdata</code> file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you’d see that the data file keeps track of all the variables and their names. So when you <code>load()</code> the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores <em>one</em> variable, but that variable is big table. So when you import that table into the workspace, R expects <em>you</em> to give it a name.] Let’s have a look at what we’ve got:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>( books )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(books)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
    Month      Days Sales Stock.Levels
@@ -356,7 +344,12 @@ dbl (2): Days, Sales
 12 December     31     0 high        </code></pre>
 </div>
 </div>
-<p>Clearly, it’s worked, but the format of this output is a bit unfamiliar. We haven’t seen anything like this before. What you’re looking at is a <em>data frame</em>, which is a very important kind of variable in R, and one I’ll discuss in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>. For now, let’s just be happy that we imported the data and that it looks about right.</p>
+<p>You can instead open the data in RStudio’s spreadsheet viewer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(books)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>books</code> data set is quite small, so just calling <code>print()</code> is fine. But for larger data sets, the <code>View()</code> and the spreadsheet viewer allows for a more thorough inspection.</p>
+<p>Clearly, it’s worked, but the format of this output is a bit unfamiliar. We haven’t seen anything like this before. What you’re looking at is a <em>data frame</em>, which is a very important kind of variable in R, and one I’ll discuss at length in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>. For now, let’s just be happy that we imported the data and that it looks about right.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -367,7 +360,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a lot of books you’ll see the <code>read.table()</code> or <code>read.csv()</code> functions used for this purpose instead of <code>read_csv()</code>. They’re similar functions, but <code>read_csv()</code> is a function from the <code>readr</code> package, one of the many packages from “the tidyverse”. The tidyverse is a set of interoperable packages we will be using throughout this course. Further information about the tidyverse can be found in <a href="tidyverse.html"><span>Chapter&nbsp;4</span></a>.</p>
+<p>In a lot of books you’ll see the <code>read.table()</code> or <code>read.csv()</code> functions used for this purpose instead of <code>read_csv()</code>. They’re similar functions, but <code>read_csv()</code> is a function from the <code>readr</code> package, one of the many packages that make up “the tidyverse”. The tidyverse is a set of interoperable packages we will be using throughout this course. Further information about the tidyverse can be found in <a href="tidyverse.html"><span>Chapter&nbsp;4</span></a>.</p>
 </div>
 </div>
 </section>
@@ -383,10 +376,10 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As detailed above, <code>read_csv()</code> is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable. Using RStudio’s built-in “Import Dataset” functionality will produce dataframes, whereas <code>read_csv</code> produces “tibbles”. Further information about the difference between plain dataframes and tibbles can be found in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>.</p>
+<p>As detailed above, <code>read_csv()</code> is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable. Using RStudio’s built-in “Import Dataset” functionality will produce a dataframe, whereas <code>read_csv</code> produces a “tibble”. We will Further information about the difference between plain dataframes and tibbles can be found in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>.</p>
 </div>
 </div>
-<p>In the environment panel in RStudio you should see a button called “Import Dataset”. Click on that, and it will give you a couple of options: select the “From Text File…” option, and it will open up a very familiar dialog box asking you to select a file: if you’re on a Mac, it’ll look like the usual Finder/Explorer window that you use to choose a file. I’m assuming that you’re familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the “Open” button. When you do this, you’ll see a window that looks like the one in Figure <a href="#fig-import">Figure&nbsp;<span>3.2</span></a>.</p>
+<p>In the environment panel in RStudio you should see a button called “Import Dataset”. Click on that, and it will give you a couple of options: select the “From Text File…” option, and it will open up a very familiar dialog box asking you to select a file: if you’re on a Mac, it’ll look like the usual Finder/Explorer window that you use to choose a file. I’m assuming that you’re familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the “Open” button. When you do this, you’ll see a window that looks like the one in <a href="#fig-import">Figure&nbsp;<span>3.2</span></a>.</p>
 <div id="fig-import" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/rstudio_screenshots/openscreen.png" class="img-fluid figure-img"></p>
@@ -413,7 +406,7 @@ Warning
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(booksales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio.</p>
-<p>Note, however, that this variable looks a bit different from the <code>sales</code> variable we created using <code>read_csv</code>. Again, the differences will be discussed more in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>.</p>
+<p>Note, however, that this variable looks a bit different from the <code>sales</code> variable we created using <code>read_csv</code>. This is because RStudio has used <code>read.csv()</code> rather than <code>read_csv()</code> as we did in the previous section. Again, the differences will be discussed more in <a href="tibbles.html"><span>Chapter&nbsp;5</span></a>.</p>
 </section>
 <section id="loading-workspace-files-using-r" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="loading-workspace-files-using-r"><span class="header-section-number">3.1.3</span> Loading workspace files using R</h3>
@@ -423,24 +416,19 @@ Warning
 </ul>
 <p>Using the absolute file path, the command would look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="at">file =</span> <span class="st">"/Users/dan/Rbook/data/booksales.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="at">file =</span> <span class="st">"/home/christian/Documents/teaching/statslab/data/booksales.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>but this is pretty lengthy. Given that the working directory is <code>/Users/dan/Rbook/data</code>, I could use a relative file path, like so:</p>
+<p>but this is long and ugly. Given that the working directory is <code>/home/christian/Documents/teaching/statslab</code>, I could use a relative file path, like so:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="at">file =</span> <span class="st">"/Users/dan/Rbook/data/booksales.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="at">file =</span> <span class="st">"./data/booksales.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>However, my preference is usually to change the working directory first, and <em>then</em> load the file. What that would look like is this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>( <span class="st">"../data"</span> )         <span class="co"># move to the data directory</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="st">"booksales.Rdata"</span> )  <span class="co"># load the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If I were then to type <code>who()</code> I’d see that there are several new variables in my workspace now. Throughout this book, whenever you see me loading a file, I will assume that the file is actually stored in the working directory, or that you’ve changed the working directory so that R is pointing at the directory that contains the file. Obviously, <em>you</em> don’t need type that command yourself: you can use the RStudio file panel to do the work.</p>
+<p>Another strategy would be to first change the working directory to whatever directory contains the desired file (<code>setwd()</code> or Session-&gt;Set Working Directory) and then load the file using only the file name (e.g., <code>load(file = "booksales.Rdata")</code>). This may seem tempting, but we will avoid doing this because changing the working directory can be confusing if you’re not paying close attention. Instead, we will assume that a) our working directory is the “statslab” directory we created previously (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.3</span></a>) and b) all of our data files (CSVs and workspaces) are located in the “data” subdirectory. Outside of this class, however, you may not be able to move data files and/or R scripts. In such cases, it may be easier to modify the working directory. Just be aware that you may need to change the working directory both <strong>before</strong> and <strong>after</strong> loading the desired file(s). Don’t get lost (you can always figure out what the current working directory is with <code>getwd()</code>)!</p>
 </section>
 <section id="loading-workspace-files-using-rstudio" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="loading-workspace-files-using-rstudio"><span class="header-section-number">3.1.4</span> Loading workspace files using RStudio</h3>
 <p>Okay, so how do we open an .Rdata file using the RStudio file panel? It’s terribly simple. First, use the file panel to find the folder that contains the file you want to load. If you look at Figure <a href="#fig-filepanel">Figure&nbsp;<span>3.3</span></a>, you can see that there are several .Rdata files listed. Let’s say I want to load the <code>booksales.Rdata</code> file. All I have to do is click on the file name. RStudio brings up a little dialog box asking me to confirm that I do want to load this file. I click yes. The following command then turns up in the console,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"~/Rbook/data/booksales.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"./data/booksales.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and the new variables will appear in the workspace (you’ll see them in the Environment panel in RStudio, or if you type <code>who()</code>). So easy it barely warrants having its own section.</p>
 <div id="fig-filepanel" class="quarto-figure quarto-figure-center anchored">
@@ -454,24 +442,24 @@ Warning
 <h3 data-number="3.1.5" class="anchored" data-anchor-id="saving-a-workspace-file-using-save"><span class="header-section-number">3.1.5</span> Saving a workspace file using <code>save</code></h3>
 <p>Not surprisingly, saving data is very similar to loading data. Although RStudio provides a simple way to save files (see below), it’s worth understanding the actual commands involved. There are two commands you can use to do this, <code>save()</code> and <code>save.image()</code>. If you’re happy to save <em>all</em> of the variables in your workspace into the data file, then you should use <code>save.image()</code>. And if you’re happy for R to save the file into the current working directory, all you have to do is this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>( <span class="at">file =</span> <span class="st">"myfile.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>( <span class="at">file =</span> <span class="st">"myfile.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since <code>file</code> is the first argument, you can shorten this to <code>save.image("myfile.Rdata")</code>; and if you want to save to a different directory, then (as always) you need to be more explicit about specifying the path to the file. Suppose, however, I have several variables in my workspace, and I only want to save some of them. For instance, I might have this as my workspace:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">who</span>()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   -- Name --   -- Class --   -- Size --</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   data         data.frame    3 x 2     </span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   handy        character     1         </span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   junk         numeric       1        </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">who</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   -- Name --   -- Class --   -- Size --</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   data         data.frame    3 x 2     </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   handy        character     1         </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   junk         numeric       1        </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I want to save <code>data</code> and <code>handy</code>, but not <code>junk</code>. But I don’t want to delete <code>junk</code> right now, because I want to use it for something else later on. This is where the <code>save()</code> function is useful, since it lets me indicate exactly which variables I want to save. Here is one way I can use the <code>save</code> function to solve my problem:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data, handy, <span class="at">file =</span> <span class="st">"myfile.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data, handy, <span class="at">file =</span> <span class="st">"myfile.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Importantly, you <em>must</em> specify the name of the <code>file</code> argument. The reason is that if you don’t do so, R will think that <code>"myfile.Rdata"</code> is actually a <em>variable</em> that you want to save, and you’ll get an error message. Finally, I should mention a second way to specify which variables the <code>save()</code> function should save, which is to use the <code>list</code> argument. You do so like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>save.me <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"data"</span>, <span class="st">"handy"</span>)   <span class="co"># the variables to be saved</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>( <span class="at">file =</span> <span class="st">"booksales2.Rdata"</span>, <span class="at">list =</span> save.me )   <span class="co"># the command to save them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vars_to_save <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"data"</span>, <span class="st">"handy"</span>)   <span class="co"># the variables to be saved</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>( <span class="at">file =</span> <span class="st">"booksales2.Rdata"</span>, <span class="at">list =</span> vars_to_save )   <span class="co"># the command to save them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-save1" class="level3" data-number="3.1.6">
@@ -485,7 +473,7 @@ Warning
 </div>
 <p>Alternatively, go to the “Session” menu and click on the “Save Workspace As…” option. This will bring up the standard “save” dialog box for your operating system. Type in the name of the file that you want to save it to, and all the variables in your workspace will be saved to disk. You’ll see an R command like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"~/Desktop/Untitled.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"~/Desktop/Untitled.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pretty straightforward, really.</p>
 </section>
@@ -493,14 +481,12 @@ Warning
 <section id="sec-dataactivities" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-dataactivities"><span class="header-section-number">3.2</span> Activities</h2>
 <ul>
-<li>Download data
-<ul>
-<li>General Social Survey 1972-2016 [Cumulative File] (ICPSR 36797)?</li>
-<li>https://doi.org/10.3886/ICPSR36797.v1</li>
-</ul></li>
-<li>Inside the “statslab” directory/folder you created at the end of the previous chapter (<a href="rlang.html#sec-rlangactivities"><span>Section&nbsp;1.7</span></a>), create a sub-directory/folder and name it “data”</li>
-<li>Unzip the data and associated files and place them in the “data” directory/folder you just created</li>
-<li>Briefly review the codebook</li>
+<li>Download data</li>
+<li>Download the following file: <a href="">TBD</a></li>
+<li>Inside the “statslab” directory/folder you created at the end of the previous chapter (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.3</span></a>), create a sub-directory/folder and name it “data”</li>
+<li>Unzip the data files and place them in the “data” directory/folder you just created</li>
+<li>Open the 2015 data file (<code>nba_all_seasons.csv</code>) in your favorite spreadsheet software (e.g., Microsoft Excel)</li>
+<li>Briefly review the content of this file.</li>
 </ul>
 
 

@@ -273,6 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tidy-definition" id="toc-tidy-definition" class="nav-link" data-scroll-target="#tidy-definition"><span class="header-section-number">4.1.1</span> Definition of “tidy” data</a></li>
   </ul></li>
   <li><a href="#tidyverse-package" id="toc-tidyverse-package" class="nav-link" data-scroll-target="#tidyverse-package"><span class="header-section-number">4.2</span> <code>tidyverse</code> package</a></li>
+  <li><a href="#sec-rlangactivities" id="toc-sec-rlangactivities" class="nav-link" data-scroll-target="#sec-rlangactivities"><span class="header-section-number">4.3</span> Activities</a></li>
   </ul>
 </nav>
     </div>
@@ -447,12 +448,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>ggplot2</code> package is for data visualization, <code>dplyr</code> is for data wrangling, <code>readr</code> is for importing spreadsheet data into R, and <code>tidyr</code> is for converting data to “tidy” format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the <code>tidyverse</code> package. The <code>tidyverse</code> package acts as an “umbrella” package whereby installing/loading it will install/load multiple packages at once for you.</p>
+<p>The <code>ggplot2</code> package is for data visualization, <code>dplyr</code> is for data wrangling, <code>readr</code> is for importing CSV files into R (we used it in <a href="data.html#sec-loadingcsv"><span>Section&nbsp;3.1.1</span></a>), and <code>tidyr</code> is for converting data to “tidy” format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the <code>tidyverse</code> package. The <code>tidyverse</code> package acts as an “umbrella” package whereby installing/loading it will install/load multiple packages at once for you.</p>
 <p>After installing the <code>tidyverse</code> package as you would a normal package (see <a href="rlang.html#sec-packages"><span>Section&nbsp;1.5</span></a>), running:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>would be the same as running:</p>
+<p>accomplishes the the same things as running:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -464,7 +465,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code> are left for a more advanced book; check out <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> to learn about these packages.</p>
-<p>For the remainder of this book, we’ll start every chapter by running <code>library(tidyverse)</code>, instead of loading the various component packages individually. The <code>tidyverse</code> “umbrella” package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs:</p>
+<p>For the remainder of this book, we’ll start every chapter by running <code>library(tidyverse)</code> instead of loading the various component packages individually. The <code>tidyverse</code> “umbrella” package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in “tidy” format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information, check out the <a href="https://www.tidyverse.org/">tidyverse.org</a> webpage for the package.</p>
+</section>
+<section id="sec-rlangactivities" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-rlangactivities"><span class="header-section-number">4.3</span> Activities</h2>
+<ul>
+<li>Open RStudio</li>
+<li>If you have not done so already, install the <code>tidyverse</code> package using the instructions found in <a href="rlang.html#sec-packageinstall"><span>Section&nbsp;1.5.1</span></a></li>
+<li>Verify installation of the tidyverse package by loading the package using the instructions found in <a href="rlang.html#sec-packageload"><span>Section&nbsp;1.5.2</span></a></li>
+<li>Check out all the cheatsheets available for tidyverse package by going to the Help menu and selecting “Cheat Sheets”. You can look over the <code>readr</code> cheat sheet for now, but remember this resource as we will be diving into the other tidyverse packages (e.g., <code>dplyr</code>, <code>ggplot2</code>) in future chapters.</li>
+</ul>
 
 
 </section>
