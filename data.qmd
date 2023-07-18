@@ -14,7 +14,7 @@ There are several different types of files that are likely to be relevant to us 
 - *Comma separated value (CSV) files* are those with a .csv file extension. These are just regular old text files, and they can be opened with almost any software. This means that storing data in CSV files does not tie users to any particular software and keeps things simple.
 - *Workspace files* are those with a .Rdata file extension. This is the standard kind of file that R uses to store data and variables. They're called "workspace files" because you can use them to save your whole workspace. 
 
-### Importing data from CSV files using `loadingcsv` {#sec-loadingcsv}
+### Importing data from CSV files using `read_csv` {#sec-loadingcsv}
 
 One quite commonly used data format is the humble "comma separated value" file, also called a CSV file, and usually bearing the file extension .csv. CSV files are just plain old-fashioned text files, and what they store is basically just a table of data. This is illustrated in Figure @fig-booksalescsv, which shows a file called booksales.csv that I've created. As you can see, each row corresponds to a variable, and each row represents the book sales data for one month. The first row doesn't contain actual data though: it has the names of the variables.
 
@@ -29,35 +29,46 @@ If RStudio were not available to you, the easiest way to open this file would be
 Therefore, to import the CSV file, the command I need is:
 
 ```{r}
-#| echo: false
+#| eval: false
 books <- read_csv("./data/booksales.csv")
 ```
 
 ```{r}
-#| eval: false
+#| echo: false
+#| warning: false
+#| output: false
 books <- read_csv("./data/booksales.csv")
 ```
 
 There are two very important points to notice here. Firstly, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
 
 ```{r}
-print( books )
+print(books)
 ```
 
-Clearly, it's worked, but the format of this output is a bit unfamiliar. We haven't seen anything like this before. What you're looking at is a *data frame*, which is a very important kind of variable in R, and one I'll discuss in @sec-dataframes. For now, let's just be happy that we imported the data and that it looks about right.
+You can instead open the data in RStudio's spreadsheet viewer:
+
+```{r}
+#| eval: false
+View(books)
+```
+
+The `books` data set is quite small, so just calling `print()` is fine.  But for larger data sets, the `View()` and the spreadsheet viewer allows for a more thorough inspection.
+
+Clearly, it's worked, but the format of this output is a bit unfamiliar. We haven't seen anything like this before. What you're looking at is a *data frame*, which is a very important kind of variable in R, and one I'll discuss at length in @sec-dataframes. For now, let's just be happy that we imported the data and that it looks about right.
 
 ::: {.callout-note}
-In a lot of books you'll see the `read.table()` or `read.csv()` functions used for this purpose instead of `read_csv()`. They're similar functions, but `read_csv()` is a function from the `readr` package, one of the many packages from "the tidyverse".  The tidyverse is a set of interoperable packages we will be using throughout this course. Further information about the tidyverse can be found in @sec-tidyverse.
+In a lot of books you'll see the `read.table()` or `read.csv()` functions used for this purpose instead of `read_csv()`. They're similar functions, but `read_csv()` is a function from the `readr` package, one of the many packages that make up "the tidyverse".  The tidyverse is a set of interoperable packages we will be using throughout this course. Further information about the tidyverse can be found in @sec-tidyverse.
 :::
 
 
 ### Importing data from CSV files using RStudio {#sec-importing}
 
 ::: {.callout-warning}
-As detailed above, `read_csv()` is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable.  Using RStudio's built-in "Import Dataset" functionality will produce dataframes, whereas `read_csv` produces "tibbles". Further information about the difference between plain dataframes and tibbles can be found in @sec-dataframes.
+As detailed above, `read_csv()` is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable.  Using RStudio's built-in "Import Dataset" functionality will produce a dataframe, whereas `read_csv` produces a "tibble". We will Further information about the difference between plain dataframes and tibbles can be found in @sec-dataframes.
 :::
 
-In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder/Explorer window that you use to choose a file. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in Figure @fig-import.
+In the environment panel in RStudio you should see a button called "Import Dataset". Click on that, and it will give you a couple of options: select the "From Text File..." option, and it will open up a very familiar dialog box asking you to select a file: if you're on a Mac, it'll look like the usual Finder/Explorer window that you use to choose a file. I'm assuming that you're familiar with your own computer, so you should have no problem finding the CSV file that you want to import! Find the one you want, then click on the "Open" button. When you do this, you'll see a window that looks like the one in @fig-import.
 
 ![A dialog box on a Mac asking you to select the CSV file R should try to import. Mac users will recognise this immediately: it's the usual way in which a Mac asks you to find a file. Windows users won't see this: they'll see the usual explorer window that Windows always gives you when it wants you to select a file.](images/rstudio_screenshots/openscreen.png){#fig-import}
 
@@ -84,7 +95,7 @@ View(booksales)
 
 The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio.
 
-Note, however, that this variable looks a bit different from the `sales` variable we created using `read_csv`. Again, the differences will be discussed more in @sec-dataframes.
+Note, however, that this variable looks a bit different from the `sales` variable we created using `read_csv`. This is because RStudio has used `read.csv()` rather than `read_csv()` as we did in the previous section.  Again, the differences will be discussed more in @sec-dataframes.
 
 
 ### Loading workspace files using R
@@ -97,25 +108,17 @@ Using the absolute file path, the command would look like this:
 
 ```{r}
 #| eval: false
-load( file = "/Users/dan/Rbook/data/booksales.Rdata" )
+load( file = "/home/christian/Documents/teaching/statslab/data/booksales.Rdata" )
 ```
 
-but this is pretty lengthy. Given that the working directory is `/Users/dan/Rbook/data`, I could use a relative file path, like so:
+but this is long and ugly. Given that the working directory is `/home/christian/Documents/teaching/statslab`, I could use a relative file path, like so:
 
 ```{r}
 #| eval: false
-load( file = "/Users/dan/Rbook/data/booksales.Rdata" )
+load( file = "./data/booksales.Rdata" )
 ```
 
-However, my preference is usually to change the working directory first, and *then* load the file. What that would look like is this:
-
-```{r}
-#| eval: false
-setwd( "../data" )         # move to the data directory
-load( "booksales.Rdata" )  # load the data
-```
-
-If I were then to type `who()` I'd see that there are several new variables in my workspace now.  Throughout this book, whenever you see me loading a file, I will assume that the file is actually stored in the working directory, or that you've changed the working directory so that R is pointing at the directory that contains the file. Obviously, *you* don't need type that command yourself: you can use the RStudio file panel to do the work.
+Another strategy would be to first change the working directory to whatever directory contains the desired file (`setwd()` or Session->Set Working Directory) and then load the file using only the file name (e.g., `load(file = "booksales.Rdata")`).  This may seem tempting, but we will avoid doing this because changing the working directory can be confusing if you're not paying close attention. Instead, we will assume that a) our working directory is the "statslab" directory we created previously (@sec-rlangactivities) and b) all of our data files (CSVs and workspaces) are located in the "data" subdirectory. Outside of this class, however, you may not be able to move data files and/or R scripts. In such cases, it may be easier to modify the working directory.  Just be aware that you may need to change the working directory both **before** and **after** loading the desired file(s). Don't get lost (you can always figure out what the current working directory is with `getwd()`)!
 
 ### Loading workspace files using RStudio
 
@@ -123,7 +126,7 @@ Okay, so how do we open an .Rdata file using the RStudio file panel? It's terrib
 
 ```{r}
 #| eval: false
-load("~/Rbook/data/booksales.Rdata")
+load("./data/booksales.Rdata")
 ```
 
 and the new variables will appear in the workspace (you'll see them in the Environment panel in RStudio, or if you type `who()`). So easy it barely warrants having its own section.
@@ -160,8 +163,8 @@ save(data, handy, file = "myfile.Rdata")
 Importantly, you *must* specify the name of the `file` argument. The reason is that if you don't do so, R will think that `"myfile.Rdata"` is actually a *variable* that you want to save, and you'll get an error message. Finally, I should mention a second way to specify which variables the `save()` function should save, which is to use the `list` argument. You do so like this:
 ```{r}
 #| eval: false
-save.me <- c("data", "handy")   # the variables to be saved
-save( file = "booksales2.Rdata", list = save.me )   # the command to save them
+vars_to_save <- c("data", "handy")   # the variables to be saved
+save( file = "booksales2.Rdata", list = vars_to_save )   # the command to save them
 ```
 
 ### Saving a workspace file using RStudio {#sec-save1}
@@ -176,13 +179,14 @@ Alternatively, go to the "Session" menu and click on the "Save Workspace As..." 
 #| eval: false
 save.image("~/Desktop/Untitled.RData")
 ```
+
 Pretty straightforward, really.
 
 ## Activities {#sec-dataactivities}
 
 - Download data
-    - General Social Survey 1972-2016 [Cumulative File] (ICPSR 36797)?
-    - https://doi.org/10.3886/ICPSR36797.v1
+- Download the following file: [TBD]()
 - Inside the "statslab" directory/folder you created at the end of the previous chapter (@sec-rlangactivities), create a sub-directory/folder and name it "data"
-- Unzip the data and associated files and place them in the "data" directory/folder you just created
-- Briefly review the codebook
+- Unzip the data files and place them in the "data" directory/folder you just created
+- Open the 2015 data file (`nba_all_seasons.csv`) in your favorite spreadsheet software (e.g., Microsoft Excel)
+- Briefly review the content of this file.

@@ -128,7 +128,7 @@ library(readr)
 library(tidyr)
 ```
 
-The `ggplot2` package is for data visualization, `dplyr` is for data wrangling, `readr` is for importing spreadsheet data into R, and `tidyr` is for converting data to "tidy" format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the `tidyverse` package. The `tidyverse` package acts as an "umbrella" package whereby installing/loading it will install/load multiple packages at once for you. 
+The `ggplot2` package is for data visualization, `dplyr` is for data wrangling, `readr` is for importing CSV files into R (we used it in @sec-loadingcsv), and `tidyr` is for converting data to "tidy" format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the `tidyverse` package. The `tidyverse` package acts as an "umbrella" package whereby installing/loading it will install/load multiple packages at once for you. 
 
 After installing the `tidyverse` package as you would a normal package (see @sec-packages), running:
 
@@ -138,7 +138,7 @@ After installing the `tidyverse` package as you would a normal package (see @sec
 library(tidyverse)
 ```
 
-would be the same as running:
+accomplishes the the same things as running:
 
 ```{r}
 #| eval: false
@@ -156,4 +156,12 @@ library(forcats)
 
 The `purrr`, `tibble`, `stringr`, and `forcats` are left for a more advanced book; check out [*R for Data Science*](http://r4ds.had.co.nz/) to learn about these packages.
 
-For the remainder of this book, we'll start every chapter by running `library(tidyverse)`, instead of loading the various component packages individually. The `tidyverse` "umbrella" package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: 
+For the remainder of this book, we'll start every chapter by running `library(tidyverse)` instead of loading the various component packages individually. The `tidyverse` "umbrella" package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in "tidy" format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information, check out the [tidyverse.org](https://www.tidyverse.org/) webpage for the package.
+
+
+## Activities  {#sec-rlangactivities}
+
+- Open RStudio
+- If you have not done so already, install the `tidyverse` package using the instructions found in @sec-packageinstall
+- Verify installation of the tidyverse package by loading the package using the instructions found in @sec-packageload
+- Check out all the cheatsheets available for tidyverse package by going to the Help menu and selecting "Cheat Sheets". You can look over the `readr` cheat sheet for now, but remember this resource as we will be diving into the other tidyverse packages (e.g., `dplyr`, `ggplot2`) in future chapters.
