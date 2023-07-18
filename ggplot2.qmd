@@ -36,7 +36,14 @@ You might be wondering why we wrote the terms `data`, `geom`, and `aes` in a com
 
 ### An initial example
 
-Let's take another look at our `nba` data set, this time via the grammar of graphics.  Let's specifically take a look at how things have changed over the years.  To do so, we first need to do a bit of work before we can use `season` as a measure of time. This is because the `season` column is currently stored as a character vector, with values such as "2000-01" and "2011-12".  So we need to things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values.  We'll do that using the `stringr` package, yet another package that is part of the tidyverse.
+Let's take another look at our `nba` data set, this time via the grammar of graphics.  Let's specifically take a look at how things have changed over the years.  As always, we need to load the data we downloaded back in @sec-dataactivities.  Run the following:
+
+```{r}
+#| output: false
+nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
+```
+
+We need to do a bit of work before we can use `season` as a measure of time. This is because the `season` column is currently stored as a character vector, with values such as "2000-01" and "2011-12".  So we need to things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values.  We'll do that using the `stringr` package, yet another package that is part of the tidyverse.
 
 ```{r}
 nba <- nba %>%
