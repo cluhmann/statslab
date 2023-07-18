@@ -1,3 +1,118 @@
-# Plotting Data {#sec-ggplot2}
+# Visualizing Data {#sec-ggplot2}
 
-## How to plot
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+```
+
+
+We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn't easily obtain from just looking at the raw data values or even the summaries we generated in @sec-dplyr.  To visualizer our data, we'll be using the `ggplot2` package, as it provides an easy way to customize your plots. `ggplot2` is rooted in the data visualization theory known as _the grammar of graphics_ [@wilkinson2005], developed by Leland Wilkinson.
+
+At their most basic, graphics/plots/charts (we use these terms interchangeably in this book) provide a nice way to explore the patterns in data, such as the *distribution* of individual variables and *relationships* between groups of variables. Graphics are designed to emphasize the findings and insights you want your audience to understand.  This does, however, require a balancing act.  On the one hand, you want to highlight as many interesting findings as possible. On the other hand, you don't want to include so much information that it overwhelms your audience.  
+
+As we will see, plots also help us to identify patterns in our data.  We'll see that a common extension of these ideas is to compare the *distribution* of one numerical variable, such as what are the center and spread of the values, as we go across the levels of a different categorical variable.
+
+
+## The grammar of graphics {#grammarofgraphics}
+
+We start with a discussion of a theoretical framework for data visualization known as "the grammar of graphics." This framework serves as the foundation for the `ggplot2` package which we'll use extensively in this chapter. In @sec-dplyr, we saw how dplyr provides a "grammar" of data manipulation, a grammar which is made up of several "verbs" (functions like `filter` and `mutate`).  Similar to dplyr's grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing *statistical graphics* by combining different types of *layers*. This grammar was created by Leland Wilkinson [@wilkinson2005] and has been implemented in a variety of data visualization software platforms like R, but also [Plotly](https://plot.ly/) and [Tableau](https://www.tableau.com/).
+
+
+### Components of the grammar
+
+In short, the grammar tells us that:
+
+> **A statistical graphic is a `mapping` of `data` variables to `aes`thetic attributes of `geom`etric objects.**
+
+Specifically, we can break a graphic into the following three essential components:
+
+1. `data`: the dataset containing the variables of interest.
+1. `geom`: the geometric object in question. This refers to the type of object we can observe in a plot. For example: points, lines, and bars.
+1. `aes`: aesthetic attributes of the geometric object. For example, x/y position, color, shape, and size.  Aesthetic attributes are *mapped* to variables in the data set.
+
+You might be wondering why we wrote the terms `data`, `geom`, and `aes` in a computer code type font. We'll see very shortly that we'll specify the elements of the grammar in R using these terms. However, let's first break down the grammar with an example.
+
+
+### An initial example
+
+Let's take another look at our `nba` data set, this time via the grammar of graphics.  Let's specifically take a look at how things have changed over the years.  To do so, we first need to do a bit of work before we can use `season` as a measure of time. This is because the `season` column is currently stored as a character vector, with values such as "2000-01" and "2011-12".  So we need to things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values.  We'll do that using the `stringr` package, yet another package that is part of the tidyverse.
+
+```{r}
+nba <- nba %>%
+    mutate(season_int = substr(nba$season, start=1, stop=4))  %>%
+    mutate(season_int = as.integer(season_int))
+```
+
+Now that we have time represented as a numeric column in our data set, we can use it to plot trends over time. Consider Figure \@ref(fig:gapminder), which plots this for all `r gapminder_2007 %>% nrow()` of the data's countries.
+
+```{r gapminder, echo=FALSE, fig.cap="Life expectancy over GDP per capita in 2007.", fig.height=2.95, purl=FALSE}
+gapminder_plot <- ggplot(
+  data = gapminder_2007,
+  mapping = aes(
+    x = `GDP per Capita`,
+    y = `Life Expectancy`,
+    size = Population,
+    color = Continent
+  )
+) +
+  geom_point() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+
+if (is_html_output()) {
+  gapminder_plot
+} else {
+  gapminder_plot + scale_color_grey()
+}
+```
+
+Let's view this plot through the grammar of graphics:
+
+1. The `data` variable **GDP per Capita** gets mapped to the `x`-position `aes`thetic \index{ggplot2!aes()} of the points.
+1. The `data` \index{ggplot2!data} variable **Life Expectancy** gets mapped to the `y`-position `aes`thetic of the points.
+1. The `data` variable **Population** gets mapped to the `size` `aes`thetic of the points.
+1. The `data` variable **Continent** gets mapped to the `color` `aes`thetic of the points.
+
+We'll see shortly that `data` corresponds to the particular data frame where our data is saved and that "data variables" correspond to particular columns in the data frame. Furthermore, the type of `geom`etric object \index{ggplot2!geom} considered in this plot are points. That being said, while in this example we are considering points, graphics are not limited to just points. We can also use lines, bars, and other geometric objects.
+
+Let's summarize the three essential components of the grammar in Table \@ref(tab:summary-table-gapminder).
+
+```{r summary-table-gapminder, echo=FALSE, purl=FALSE}
+tibble(
+  `data variable` = c("GDP per Capita", "Life Expectancy", "Population", "Continent"),
+  aes = c("x", "y", "size", "color"),
+  geom = c("point", "point", "point", "point")
+) %>%
+  kable(
+    caption = "Summary of the grammar of graphics for this plot",
+    booktabs = TRUE,
+    linesep = ""
+  ) %>%
+  kable_styling(
+    font_size = ifelse(is_latex_output(), 10, 16),
+    latex_options = c("hold_position")
+  )
+```
+
+
+### Other components
+
+There are other components of the grammar of graphics we can control as well.  As you start to delve deeper into the grammar of graphics, you'll start to encounter these topics more frequently. In this book, we'll keep things simple and only work with these two additional components:
+
+- `facet`ing breaks up a plot into several plots split by the values of another variable (Section \@ref(facets)) \index{ggplot2!facet}
+- `position` adjustments for barplots (Section \@ref(geombar)) \index{ggplot2!position}
+
+Other more complex components like `scales` and `coord`inate systems are left for a more advanced text such as [*R for Data Science*](http://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings) [@rds2016].  Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.
+
+
+### ggplot2 package
+
+In this book, we will use the `ggplot2` package for data visualization, which is an implementation of the `g`rammar of `g`raphics for R [@R-ggplot2]. As we noted earlier, a lot of the previous section was written in a computer code type font. This is because the various components of the grammar of graphics are specified in the `ggplot()` \index{ggplot2!ggplot()} function included in the `ggplot2` package. For the purposes of this book, we'll always provide the `ggplot()` function with the following arguments (i.e., inputs) at a minimum:
+
+* The data frame where the variables exist: the `data` argument.
+* The mapping of the variables to aesthetic attributes: the `mapping` argument which specifies the `aes`thetic attributes involved.
+
+After we've specified these components, we then add *layers* to the plot using the `+` sign. The most essential layer to add to a plot is the layer that specifies which type of `geom`etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we'll see in Section \@ref(facets)).
+
+Let's now put the theory of the grammar of graphics into practice.
+
