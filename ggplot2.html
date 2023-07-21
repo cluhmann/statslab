@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 7&nbsp; Plotting Data</title>
+<title>statslab - 7&nbsp; Visualizing Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidyverse.html">Exploring</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidyverse.html">Exploring</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing Data</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +265,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-to-plot" id="toc-how-to-plot" class="nav-link active" data-scroll-target="#how-to-plot"><span class="header-section-number">7.1</span> How to plot</a></li>
+  <li><a href="#grammarofgraphics" id="toc-grammarofgraphics" class="nav-link active" data-scroll-target="#grammarofgraphics"><span class="header-section-number">7.1</span> The grammar of graphics</a>
+  <ul class="collapse">
+  <li><a href="#components-of-the-grammar" id="toc-components-of-the-grammar" class="nav-link" data-scroll-target="#components-of-the-grammar"><span class="header-section-number">7.1.1</span> Components of the grammar</a></li>
+  <li><a href="#an-initial-example" id="toc-an-initial-example" class="nav-link" data-scroll-target="#an-initial-example"><span class="header-section-number">7.1.2</span> An initial example</a></li>
+  <li><a href="#other-components" id="toc-other-components" class="nav-link" data-scroll-target="#other-components"><span class="header-section-number">7.1.3</span> Other components</a></li>
+  <li><a href="#ggplot2-package" id="toc-ggplot2-package" class="nav-link" data-scroll-target="#ggplot2-package"><span class="header-section-number">7.1.4</span> ggplot2 package</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -240,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ggplot2" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Plotting Data</span></span></h1>
+<h1 class="title"><span id="sec-ggplot2" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing Data</span></span></h1>
 </div>
 
 
@@ -255,10 +295,93 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="how-to-plot" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="how-to-plot"><span class="header-section-number">7.1</span> How to plot</h2>
+<p>We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn’t easily obtain from just looking at the raw data values or even the summaries we generated in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>. To visualizer our data, we’ll be using the <code>ggplot2</code> package, as it provides an easy way to customize your plots. <code>ggplot2</code> is rooted in the data visualization theory known as <em>the grammar of graphics</em> <span class="citation" data-cites="wilkinson2005">[@wilkinson2005]</span>, developed by Leland Wilkinson.</p>
+<p>At their most basic, graphics/plots/charts (we use these terms interchangeably in this book) provide a nice way to explore the patterns in data, such as the <em>distribution</em> of individual variables and <em>relationships</em> between groups of variables. Graphics are designed to emphasize the findings and insights you want your audience to understand. This does, however, require a balancing act. On the one hand, you want to highlight as many interesting findings as possible. On the other hand, you don’t want to include so much information that it overwhelms your audience.</p>
+<p>As we will see, plots also help us to identify patterns in our data. We’ll see that a common extension of these ideas is to compare the <em>distribution</em> of one numerical variable, such as what are the center and spread of the values, as we go across the levels of a different categorical variable.</p>
+<section id="grammarofgraphics" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="grammarofgraphics"><span class="header-section-number">7.1</span> The grammar of graphics</h2>
+<p>We start with a discussion of a theoretical framework for data visualization known as “the grammar of graphics.” This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this chapter. In <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>, we saw how dplyr provides a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions like <code>filter</code> and <code>mutate</code>). Similar to dplyr’s grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing <em>statistical graphics</em> by combining different types of <em>layers</em>. This grammar was created by Leland Wilkinson <span class="citation" data-cites="wilkinson2005">[@wilkinson2005]</span> and has been implemented in a variety of data visualization software platforms like R, but also <a href="https://plot.ly/">Plotly</a> and <a href="https://www.tableau.com/">Tableau</a>.</p>
+<section id="components-of-the-grammar" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="components-of-the-grammar"><span class="header-section-number">7.1.1</span> Components of the grammar</h3>
+<p>In short, the grammar tells us that:</p>
+<blockquote class="blockquote">
+<p><strong>A statistical graphic is a <code>mapping</code> of <code>data</code> variables to <code>aes</code>thetic attributes of <code>geom</code>etric objects.</strong></p>
+</blockquote>
+<p>Specifically, we can break a graphic into the following three essential components:</p>
+<ol type="1">
+<li><code>data</code>: the dataset containing the variables of interest.</li>
+<li><code>geom</code>: the geometric object in question. This refers to the type of object we can observe in a plot. For example: points, lines, and bars.</li>
+<li><code>aes</code>: aesthetic attributes of the geometric object. For example, x/y position, color, shape, and size. Aesthetic attributes are <em>mapped</em> to variables in the data set.</li>
+</ol>
+<p>You might be wondering why we wrote the terms <code>data</code>, <code>geom</code>, and <code>aes</code> in a computer code type font. We’ll see very shortly that we’ll specify the elements of the grammar in R using these terms. However, let’s first break down the grammar with an example.</p>
+</section>
+<section id="an-initial-example" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="an-initial-example"><span class="header-section-number">7.1.2</span> An initial example</h3>
+<p>Let’s take another look at our <code>nba</code> data set, this time via the grammar of graphics. Let’s specifically take a look at how things have changed over the years. As always, we need to load the data we downloaded back in <a href="data.html#sec-dataactivities"><span>Section&nbsp;3.2</span></a>. Run the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"Undrafted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We need to do a bit of work before we can use <code>season</code> as a measure of time. This is because the <code>season</code> column is currently stored as a character vector, with values such as “2000-01” and “2011-12”. So we need two things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values. We’ll do that using the <code>stringr</code> package, yet another package that is part of the tidyverse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select first 4 characters of `season`</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">season_int =</span> <span class="fu">substr</span>(nba<span class="sc">$</span>season, <span class="at">start=</span><span class="dv">1</span>, <span class="at">stop=</span><span class="dv">4</span>))  <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to integer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">season_int =</span> <span class="fu">as.integer</span>(season_int))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have time represented as a numeric column in our data set, we can use it to plot trends over time.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ggplot2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s view this plot through the grammar of graphics:</p>
+<ol type="1">
+<li>The <code>data</code> variable <strong>season_int</strong> gets mapped to the <code>x</code>-position <code>aes</code>thetic of the points.</li>
+<li>The <code>data</code> variable <strong>pts</strong> gets mapped to the <code>y</code>-position <code>aes</code>thetic of the points.</li>
+<li>The <code>data</code> variable <strong>ast</strong> gets mapped to the <code>size</code> <code>aes</code>thetic of the points.</li>
+<li>The <code>data</code> variable <strong>college</strong> gets mapped to the <code>color</code> <code>aes</code>thetic of the points.</li>
+</ol>
+<p>We’ll see shortly that <code>data</code> corresponds to the particular data frame where our data is saved and that “data variables” correspond to particular columns in the data frame. Furthermore, the type of <code>geom</code>etric object considered in this plot are points. That being said, while in this example we are considering points, graphics are not limited to just points. We can also use lines, bars, and other geometric objects.</p>
+<p>Let’s summarize the three essential components of the grammar in <span class="citation" data-cites="tab:summary-table">@tab:summary-table</span>-.</p>
+<div id="tbl-summary-table-gapminder" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Summary of the grammar of graphics for this plot">
+<div class="panel-caption table-caption">
+<p><strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<pre><code># A tibble: 4 × 3
+  `data variable` aes   geom 
+  &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;
+1 season_int      x     point
+2 pts             y     point
+3 ast             size  point
+4 college         color point</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="other-components" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="other-components"><span class="header-section-number">7.1.3</span> Other components</h3>
+<p>There are other components of the grammar of graphics we can control as well. As you start to delve deeper into the grammar of graphics, you’ll start to encounter these topics more frequently. In this book, we’ll keep things simple and only work with these two additional components:</p>
+<ul>
+<li><code>facet</code>ing breaks up a plot into several plots split by the values of another variable</li>
+<li><code>position</code> adjustments for barplots</li>
+</ul>
+<p>Other more complex components like <code>scales</code> and <code>coord</code>inate systems are left for a more advanced text such as [<em>R for Data Science</em>](https://r4ds.hadley.nz/layers.html#aesthetic-mappings. Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.</p>
+</section>
+<section id="ggplot2-package" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="ggplot2-package"><span class="header-section-number">7.1.4</span> ggplot2 package</h3>
+<p>In this book, we will use the <code>ggplot2</code> package for data visualization, which is an implementation of the <code>g</code>rammar of <code>g</code>raphics for R. As we noted earlier, a lot of the previous section was written in a computer code type font. This is because the various components of the grammar of graphics are specified in the <code>ggplot()</code> function included in the <code>ggplot2</code> package. For the purposes of this book, we’ll always provide the <code>ggplot()</code> function with the following arguments (i.e., inputs) at a minimum:</p>
+<ul>
+<li>The data frame where the variables exist: the <code>data</code> argument.</li>
+<li>The mapping of the variables to aesthetic attributes: the <code>mapping</code> argument which specifies the <code>aes</code>thetic attributes involved.</li>
+</ul>
+<p>After we’ve specified these components, we then add <em>layers</em> to the plot using the <code>+</code> sign. The most essential layer to add to a plot is the layer that specifies which type of <code>geom</code>etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we’ll see in Section @ref(facets)).</p>
+<p>Let’s now put the theory of the grammar of graphics into practice.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
