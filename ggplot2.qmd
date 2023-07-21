@@ -72,11 +72,7 @@ ggplot(data = nba %>%
                    size = ast,
                    color = college
                )) +
-    #xlim(-25, 25) +
-    #scale_fill_gradient(low = "white", high = "black") +
-    scale_size(range = c(0, 2)) +
-    theme(legend.position = "none") +
-    labs(x = "Season", y = "Weight")
+    scale_size(range = c(0, 5))
 ```
 
 Let's view this plot through the grammar of graphics:
@@ -91,7 +87,7 @@ We'll see shortly that `data` corresponds to the particular data frame where our
 Let's summarize the three essential components of the grammar in @tab:summary-table-.
 
 ```{r}
-#| echo:false
+#| echo: false
 #| label: tbl-summary-table-gapminder
 #| tbl-cap: "Summary of the grammar of graphics for this plot"
 tibble(
@@ -109,7 +105,7 @@ There are other components of the grammar of graphics we can control as well.  A
 - `facet`ing breaks up a plot into several plots split by the values of another variable
 - `position` adjustments for barplots
 
-Other more complex components like `scales` and `coord`inate systems are left for a more advanced text such as [*R for Data Science*](https://r4ds.hadley.nz/layers.html#aesthetic-mappings.  Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.
+Other more complex components like `scales` and `coord`inate systems are left for a more advanced text such as [*R for Data Science*](https://r4ds.hadley.nz/layers.html#aesthetic-mappings).  Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.
 
 
 ### ggplot2 package
