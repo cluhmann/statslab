@@ -43,62 +43,62 @@ Let's take another look at our `nba` data set, this time via the grammar of grap
 nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
 ```
 
-We need to do a bit of work before we can use `season` as a measure of time. This is because the `season` column is currently stored as a character vector, with values such as "2000-01" and "2011-12".  So we need to things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values.  We'll do that using the `stringr` package, yet another package that is part of the tidyverse.
+We need to do a bit of work before we can use `season` as a measure of time. This is because the `season` column is currently stored as a character vector, with values such as "2000-01" and "2011-12".  So we need two things: these character vectors need to be trimmed so that we retain only the first 4 characters in each vector and we then need to convert these character vectors to their corresponding numeric values.  We'll do that using the `stringr` package, yet another package that is part of the tidyverse.
 
 ```{r}
 nba <- nba %>%
+    # select first 4 characters of `season`
     mutate(season_int = substr(nba$season, start=1, stop=4))  %>%
+    # convert to integer
     mutate(season_int = as.integer(season_int))
 ```
 
-Now that we have time represented as a numeric column in our data set, we can use it to plot trends over time. Consider Figure \@ref(fig:gapminder), which plots this for all `r gapminder_2007 %>% nrow()` of the data's countries.
+Now that we have time represented as a numeric column in our data set, we can use it to plot trends over time.
 
-```{r gapminder, echo=FALSE, fig.cap="Life expectancy over GDP per capita in 2007.", fig.height=2.95, purl=FALSE}
-gapminder_plot <- ggplot(
-  data = gapminder_2007,
-  mapping = aes(
-    x = `GDP per Capita`,
-    y = `Life Expectancy`,
-    size = Population,
-    color = Continent
-  )
-) +
-  geom_point() +
-  labs(x = "GDP per capita", y = "Life expectancy")
-
-if (is_html_output()) {
-  gapminder_plot
-} else {
-  gapminder_plot + scale_color_grey()
-}
+```{r}
+#| echo: false
+colleges_sel = nba %>%
+    filter(college != "None") %>%
+    group_by(college) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n)) %>%
+    slice_head(n = 5)
+ggplot(data = nba %>%
+           filter(college %in% pull(colleges_sel, college))) +
+    geom_point(alpha = 0.95,
+               mapping = aes(
+                   x = season_int,
+                   y = pts,
+                   size = ast,
+                   color = college
+               )) +
+    #xlim(-25, 25) +
+    #scale_fill_gradient(low = "white", high = "black") +
+    scale_size(range = c(0, 2)) +
+    theme(legend.position = "none") +
+    labs(x = "Season", y = "Weight")
 ```
 
 Let's view this plot through the grammar of graphics:
 
-1. The `data` variable **GDP per Capita** gets mapped to the `x`-position `aes`thetic \index{ggplot2!aes()} of the points.
-1. The `data` \index{ggplot2!data} variable **Life Expectancy** gets mapped to the `y`-position `aes`thetic of the points.
-1. The `data` variable **Population** gets mapped to the `size` `aes`thetic of the points.
-1. The `data` variable **Continent** gets mapped to the `color` `aes`thetic of the points.
+1. The `data` variable **season_int** gets mapped to the `x`-position `aes`thetic of the points.
+1. The `data` variable **pts** gets mapped to the `y`-position `aes`thetic of the points.
+1. The `data` variable **ast** gets mapped to the `size` `aes`thetic of the points.
+1. The `data` variable **college** gets mapped to the `color` `aes`thetic of the points.
 
-We'll see shortly that `data` corresponds to the particular data frame where our data is saved and that "data variables" correspond to particular columns in the data frame. Furthermore, the type of `geom`etric object \index{ggplot2!geom} considered in this plot are points. That being said, while in this example we are considering points, graphics are not limited to just points. We can also use lines, bars, and other geometric objects.
+We'll see shortly that `data` corresponds to the particular data frame where our data is saved and that "data variables" correspond to particular columns in the data frame. Furthermore, the type of `geom`etric object considered in this plot are points. That being said, while in this example we are considering points, graphics are not limited to just points. We can also use lines, bars, and other geometric objects.
 
-Let's summarize the three essential components of the grammar in Table \@ref(tab:summary-table-gapminder).
+Let's summarize the three essential components of the grammar in @tab:summary-table-.
 
-```{r summary-table-gapminder, echo=FALSE, purl=FALSE}
+```{r}
+#| echo:false
+#| label: tbl-summary-table-gapminder
+#| tbl-cap: "Summary of the grammar of graphics for this plot"
 tibble(
-  `data variable` = c("GDP per Capita", "Life Expectancy", "Population", "Continent"),
+  `data variable` = c("season_int", "pts", "ast", "college"),
   aes = c("x", "y", "size", "color"),
   geom = c("point", "point", "point", "point")
-) %>%
-  kable(
-    caption = "Summary of the grammar of graphics for this plot",
-    booktabs = TRUE,
-    linesep = ""
-  ) %>%
-  kable_styling(
-    font_size = ifelse(is_latex_output(), 10, 16),
-    latex_options = c("hold_position")
-  )
+)
 ```
 
 
@@ -106,15 +106,15 @@ tibble(
 
 There are other components of the grammar of graphics we can control as well.  As you start to delve deeper into the grammar of graphics, you'll start to encounter these topics more frequently. In this book, we'll keep things simple and only work with these two additional components:
 
-- `facet`ing breaks up a plot into several plots split by the values of another variable (Section \@ref(facets)) \index{ggplot2!facet}
-- `position` adjustments for barplots (Section \@ref(geombar)) \index{ggplot2!position}
+- `facet`ing breaks up a plot into several plots split by the values of another variable
+- `position` adjustments for barplots
 
-Other more complex components like `scales` and `coord`inate systems are left for a more advanced text such as [*R for Data Science*](http://r4ds.had.co.nz/data-visualisation.html#aesthetic-mappings) [@rds2016].  Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.
+Other more complex components like `scales` and `coord`inate systems are left for a more advanced text such as [*R for Data Science*](https://r4ds.hadley.nz/layers.html#aesthetic-mappings.  Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.
 
 
 ### ggplot2 package
 
-In this book, we will use the `ggplot2` package for data visualization, which is an implementation of the `g`rammar of `g`raphics for R [@R-ggplot2]. As we noted earlier, a lot of the previous section was written in a computer code type font. This is because the various components of the grammar of graphics are specified in the `ggplot()` \index{ggplot2!ggplot()} function included in the `ggplot2` package. For the purposes of this book, we'll always provide the `ggplot()` function with the following arguments (i.e., inputs) at a minimum:
+In this book, we will use the `ggplot2` package for data visualization, which is an implementation of the `g`rammar of `g`raphics for R. As we noted earlier, a lot of the previous section was written in a computer code type font. This is because the various components of the grammar of graphics are specified in the `ggplot()` function included in the `ggplot2` package. For the purposes of this book, we'll always provide the `ggplot()` function with the following arguments (i.e., inputs) at a minimum:
 
 * The data frame where the variables exist: the `data` argument.
 * The mapping of the variables to aesthetic attributes: the `mapping` argument which specifies the `aes`thetic attributes involved.
