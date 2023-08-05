@@ -29,6 +29,8 @@ book:
         - simulation.qmd
         - missingness.qmd
 
+bibliography: references.bib
+
 format:
     html:
         theme: cosmo
