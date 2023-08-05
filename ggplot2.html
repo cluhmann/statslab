@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -281,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overplotting" id="toc-overplotting" class="nav-link" data-scroll-target="#overplotting"><span class="header-section-number">7.3.2</span> Overplotting</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.3.3</span> Summary</a></li>
   </ul></li>
-  <li><a href="#linegraphs" id="toc-linegraphs" class="nav-link" data-scroll-target="#linegraphs"><span class="header-section-number">7.4</span> 5NG#2: Linegraphs</a>
+  <li><a href="#sec-linegraphs" id="toc-sec-linegraphs" class="nav-link" data-scroll-target="#sec-linegraphs"><span class="header-section-number">7.4</span> 5NG#2: Linegraphs</a>
   <ul class="collapse">
   <li><a href="#sec-geomline" id="toc-sec-geomline" class="nav-link" data-scroll-target="#sec-geomline"><span class="header-section-number">7.4.1</span> Linegraphs via <code>geom_line</code></a></li>
   <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">7.4.2</span> Summary</a></li>
@@ -333,12 +352,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn’t easily obtain from just looking at the raw data values or even the summaries we generated in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>. To visualizer our data, we’ll be using the <code>ggplot2</code> package, as it provides an easy way to customize your plots. <code>ggplot2</code> is rooted in the data visualization theory known as <em>the grammar of graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref"><strong>wilkinson2005?</strong></a>)</span>, developed by Leland Wilkinson.</p>
+<p>We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn’t easily obtain from just looking at the raw data values or even the summaries we generated in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>. To visualizer our data, we’ll be using the <code>ggplot2</code> package, as it provides an easy way to customize your plots. <code>ggplot2</code> is rooted in the data visualization theory known as <em>the grammar of graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span>, developed by Leland Wilkinson.</p>
 <p>At their most basic, graphics/plots/charts (we use these terms interchangeably in this book) provide a nice way to explore the patterns in data, such as the <em>distribution</em> of individual variables and <em>relationships</em> between groups of variables. Graphics are designed to emphasize the findings and insights you want your audience to understand. This does, however, require a balancing act. On the one hand, you want to highlight as many interesting findings as possible. On the other hand, you don’t want to include so much information that it overwhelms your audience.</p>
 <p>As we will see, plots also help us to identify patterns in our data. We’ll see that a common extension of these ideas is to compare the <em>distribution</em> of one numerical variable, such as what are the center and spread of the values, as we go across the levels of a different categorical variable.</p>
 <section id="grammarofgraphics" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="grammarofgraphics"><span class="header-section-number">7.1</span> The grammar of graphics</h2>
-<p>We start with a discussion of a theoretical framework for data visualization known as “the grammar of graphics.” This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this chapter. In <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>, we saw how dplyr provides a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions like <code>filter</code> and <code>mutate</code>). Similar to dplyr’s grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing <em>statistical graphics</em> by combining different types of <em>layers</em>. This grammar was created by Leland Wilkinson <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref"><strong>wilkinson2005?</strong></a>)</span> and has been implemented in a variety of data visualization software platforms like R, but also <a href="https://plot.ly/">Plotly</a> and <a href="https://www.tableau.com/">Tableau</a>.</p>
+<p>We start with a discussion of a theoretical framework for data visualization known as “the grammar of graphics.” This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this chapter. In <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>, we saw how dplyr provides a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions like <code>filter</code> and <code>mutate</code>). Similar to dplyr’s grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing <em>statistical graphics</em> by combining different types of <em>layers</em>. This grammar was created by Leland Wilkinson <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span> and has been implemented in a variety of data visualization software platforms like R, but also <a href="https://plot.ly/">Plotly</a> and <a href="https://www.tableau.com/">Tableau</a>.</p>
 <section id="components-of-the-grammar" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="components-of-the-grammar"><span class="header-section-number">7.1.1</span> Components of the grammar</h3>
 <p>In short, the grammar tells us that:</p>
@@ -535,8 +554,8 @@ the `.groups` argument.</code></pre>
 <p>With medium to large datasets, you may need to play around with the different modifications to scatterplots we saw such as changing the transparency/opacity of the points or by jittering the points. This tweaking is often a fun part of data visualization, since you’ll have the chance to see different relationships emerge as you tinker with your plots.</p>
 </section>
 </section>
-<section id="linegraphs" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="linegraphs"><span class="header-section-number">7.4</span> 5NG#2: Linegraphs</h2>
+<section id="sec-linegraphs" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-linegraphs"><span class="header-section-number">7.4</span> 5NG#2: Linegraphs</h2>
 <p>The next of the five named graphs are linegraphs. Linegraphs show the relationship between two numerical variables when the variable on the x-axis is ordinal; there is an inherent ordering to the variable.</p>
 <p>The most common examples of linegraphs have some notion of time on the x-axis: hours, days, weeks, years, etc. Since time is naturally ordinal, we connect consecutive observations of the variable on the y-axis with a line. Linegraphs that have some notion of time on the x-axis are also called <em>time series</em> plots.</p>
 <section id="sec-geomline" class="level3" data-number="7.4.1">
@@ -572,7 +591,7 @@ the `.groups` argument.</code></pre>
 </section>
 <section id="sec-histograms" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="sec-histograms"><span class="header-section-number">7.5</span> 5NG#3: Histograms</h2>
-<p>Let’s consider the <code>pts</code> variable in the <code>nba</code> data frame once again, but unlike with the linegraphs in <span class="quarto-unresolved-ref">?sec-linegraphs</span>, let’s say we don’t care about its relationship with time, but rather we only care about how the values of <code>pts</code> <em>distribute</em>. In other words:</p>
+<p>Let’s consider the <code>pts</code> variable in the <code>nba</code> data frame once again, but unlike with the linegraphs in <a href="#sec-linegraphs"><span>Section&nbsp;7.4</span></a>, let’s say we don’t care about its relationship with time, but rather we only care about how the values of <code>pts</code> <em>distribute</em>. In other words:</p>
 <ol type="1">
 <li>What are the smallest and largest values?</li>
 <li>What is the “center” or “most typical” value?</li>
@@ -591,7 +610,7 @@ the `.groups` argument.</code></pre>
 </div>
 </div>
 <p>This gives us a bit of an idea of how the values of <code>pts</code> are distributed: note that values range from zero to approximately 20. In addition, there appear to be more values falling between approximately 3 and 10 than there are values falling above this range. However, because of the high degree of overplotting in the points, it’s hard to get a sense of exactly how many values are between 5 and 10.</p>
-<p>What is commonly produced instead of <span class="quarto-unresolved-ref">?fig-temp-on-line</span> is known as a <em>histogram</em>. A histogram is a plot that visualizes the <em>distribution</em> of a numerical value as follows:</p>
+<p>What is commonly produced instead of <a href="#fig-pts-on-line">Figure&nbsp;<span>7.6</span></a> is known as a <em>histogram</em>. A histogram is a plot that visualizes the <em>distribution</em> of a numerical value as follows:</p>
 <ol type="1">
 <li>We first cut up the x-axis into a series of <em>bins</em>, where each bin represents a range of values.</li>
 <li>For each bin, we count the number of observations that fall in the range corresponding to that bin.</li>
@@ -819,15 +838,15 @@ the `.groups` argument.</code></pre>
 ℹ did you forget `aes(group = ...)`?</code></pre>
 </div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-badbox" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="ggplot2_files/figure-html/badbox-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Invalid boxplot specification.</figcaption>
+<p><img src="ggplot2_files/figure-html/fig-badbox-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.16: Invalid boxplot specification.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Observe in <span class="quarto-unresolved-ref">?fig-badbox</span> that this plot does not provide information about points separated by season. The warning message clues us in as to why. It is telling us that we have a “continuous”, or numerical variable, on the x-position aesthetic. Boxplots, however, require a categorical variable to be mapped to the x-position aesthetic.</p>
+<p>Observe in <a href="#fig-badbox">Figure&nbsp;<span>7.16</span></a> that this plot does not provide information about points separated by season. The warning message clues us in as to why. It is telling us that we have a “continuous”, or numerical variable, on the x-position aesthetic. Boxplots, however, require a categorical variable to be mapped to the x-position aesthetic.</p>
 <p>We can convert the numerical variable <code>season_int</code> into a <code>factor</code> categorical variable by using the <code>factor()</code> function. So after applying <code>factor(season_int)</code>, <code>season_int</code> goes from having numerical values just the 1995, 1996, etc. to having an associated ordering. With this ordering, <code>ggplot()</code> now knows how to work with this variable to produce the needed plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nba, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(season_int), <span class="at">y =</span> pts)) <span class="sc">+</span></span>
@@ -836,12 +855,12 @@ the `.groups` argument.</code></pre>
 <div id="fig-seasonptsbox" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-seasonptsbox-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.16: Side-by-side boxplot of average points per game split by season.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.17: Side-by-side boxplot of average points per game split by season.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The resulting <a href="#fig-seasonptsbox">Figure&nbsp;<span>7.16</span></a> shows 26 separate “box and whiskers” plots similar to the rightmost plot of <a href="#fig-1996-2">Figure&nbsp;<span>7.15</span></a> of only data from 1996. Thus the different boxplots are shown “side-by-side.”</p>
+<p>The resulting <a href="#fig-seasonptsbox">Figure&nbsp;<span>7.17</span></a> shows 26 separate “box and whiskers” plots similar to the rightmost plot of <a href="#fig-1996-2">Figure&nbsp;<span>7.15</span></a> of only data from 1996. Thus the different boxplots are shown “side-by-side.”</p>
 <ul>
 <li>The “box” portions of the visualization represent the 1st quartile, the median (the 2nd quartile), and the 3rd quartile.</li>
 <li>The height of each box (the value of the 3rd quartile minus the value of the 1st quartile) is the interquartile range (IQR). It is a measure of the spread of the middle 50% of values, with longer boxes indicating more variability.</li>
@@ -903,7 +922,7 @@ the `.groups` argument.</code></pre>
 <div id="fig-geombar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-geombar-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.17: Barplot when counts are not pre-counted.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.18: Barplot when counts are not pre-counted.</figcaption>
 </figure>
 </div>
 </div>
@@ -916,12 +935,12 @@ the `.groups` argument.</code></pre>
 <div id="fig-geomcol" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-geomcol-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.18: Barplot when counts are pre-counted.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.19: Barplot when counts are pre-counted.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Compare the barplots in Figures <a href="#fig-geombar">Figure&nbsp;<span>7.17</span></a> and <a href="#fig-geomcol">Figure&nbsp;<span>7.18</span></a>. They are identical because they reflect counts of the same five fruits. However, depending on how our categorical data is represented, either “pre-counted” or not, we must add a different <code>geom</code> layer. When the categorical variable whose distribution you want to visualize</p>
+<p>Compare the barplots in Figures <a href="#fig-geombar">Figure&nbsp;<span>7.18</span></a> and <a href="#fig-geomcol">Figure&nbsp;<span>7.19</span></a>. They are identical because they reflect counts of the same five fruits. However, depending on how our categorical data is represented, either “pre-counted” or not, we must add a different <code>geom</code> layer. When the categorical variable whose distribution you want to visualize</p>
 <ul>
 <li>Is <em>not</em> pre-counted in your data frame, we use <code>geom_bar()</code>.</li>
 <li>Is pre-counted in your data frame, we use <code>geom_col()</code> with the y-position aesthetic mapped to the variable that has the counts.</li>
@@ -941,12 +960,12 @@ the `.groups` argument.</code></pre>
 <div id="fig-collegesbar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-collegesbar-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.19: Number of players by colege using geom_bar().</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.20: Number of players by colege using geom_bar().</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Observe in <a href="#fig-collegesbar">Figure&nbsp;<span>7.19</span></a> that there are many Knicks players who either did not attend any college (“None”), attended Arizona State, or attended Florida. If you don’t know which airlines correspond to which carrier codes, then run <code>View(airlines)</code> to see a directory of airlines. For example, B6 is JetBlue Airways. Alternatively, say you had a data frame where the number of flights for each <code>carrier</code> was pre-counted as in Table @ref(tab:flights-counted).</p>
+<p>Observe in <a href="#fig-collegesbar">Figure&nbsp;<span>7.20</span></a> that there are many Knicks players who either did not attend any college (“None”), attended Arizona State, or attended Florida. If you don’t know which airlines correspond to which carrier codes, then run <code>View(airlines)</code> to see a directory of airlines. For example, B6 is JetBlue Airways. Alternatively, say you had a data frame where the number of flights for each <code>carrier</code> was pre-counted as in Table @ref(tab:flights-counted).</p>
 <div class="cell">
 <div id="fig-colleges-counted" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -1065,11 +1084,11 @@ the `.groups` argument.</code></pre>
 </div>
 
 
-<figcaption class="figure-caption">Figure&nbsp;7.20: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.21: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
-<p>In order to create a barplot visualizing the distribution of the categorical variable <code>college</code> in this case, we would now use <code>geom_col()</code> instead of <code>geom_bar()</code>, with an additional <code>y = number</code> in the aesthetic mapping on top of the <code>x = carrier</code>. The resulting barplot would be identical to <a href="#fig-collegesbar">Figure&nbsp;<span>7.19</span></a>.</p>
+<p>In order to create a barplot visualizing the distribution of the categorical variable <code>college</code> in this case, we would now use <code>geom_col()</code> instead of <code>geom_bar()</code>, with an additional <code>y = number</code> in the aesthetic mapping on top of the <code>x = carrier</code>. The resulting barplot would be identical to <a href="#fig-collegesbar">Figure&nbsp;<span>7.20</span></a>.</p>
 </section>
 <section id="must-avoid-pie-charts" class="level3" data-number="7.8.2">
 <h3 data-number="7.8.2" class="anchored" data-anchor-id="must-avoid-pie-charts"><span class="header-section-number">7.8.2</span> Must avoid pie charts!</h3>
@@ -1093,13 +1112,13 @@ the `.groups` argument.</code></pre>
 <div id="fig-colleges-stacked-bar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-colleges-stacked-bar-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.21: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.22: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-colleges-stacked-bar">Figure&nbsp;<span>7.21</span></a> is an example of a <em>stacked barplot</em>. Though simple to make, in certain aspects it is not ideal. For example, it is not particularly easy to compare the heights of the different colors between the bars, corresponding to comparing the number of players from each <code>season_int</code> between the different teams.</p>
-<p>Before we continue, let’s address some common points of confusion among new R users. First, the <code>fill</code> aesthetic corresponds to the color used to fill the bars, whereas the <code>color</code> aesthetic corresponds to the color of the outline of the bars. This is identical to how we added color to our histogram in <a href="#sec-geomhistogram"><span>Section&nbsp;7.5.1</span></a>: we set the outline of the bars to white by setting <code>color = "white"</code> and the colors of the bars to blue steel by setting <code>fill = "steelblue"</code>. Observe in <a href="#fig-colleges-stacked-bar-color">Figure&nbsp;<span>7.22</span></a> that mapping <code>season_int</code> to <code>color</code> and not <code>fill</code> yields grey bars with different colored outlines.</p>
+<p><a href="#fig-colleges-stacked-bar">Figure&nbsp;<span>7.22</span></a> is an example of a <em>stacked barplot</em>. Though simple to make, in certain aspects it is not ideal. For example, it is not particularly easy to compare the heights of the different colors between the bars, corresponding to comparing the number of players from each <code>season_int</code> between the different teams.</p>
+<p>Before we continue, let’s address some common points of confusion among new R users. First, the <code>fill</code> aesthetic corresponds to the color used to fill the bars, whereas the <code>color</code> aesthetic corresponds to the color of the outline of the bars. This is identical to how we added color to our histogram in <a href="#sec-geomhistogram"><span>Section&nbsp;7.5.1</span></a>: we set the outline of the bars to white by setting <code>color = "white"</code> and the colors of the bars to blue steel by setting <code>fill = "steelblue"</code>. Observe in <a href="#fig-colleges-stacked-bar-color">Figure&nbsp;<span>7.23</span></a> that mapping <code>season_int</code> to <code>color</code> and not <code>fill</code> yields grey bars with different colored outlines.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name, college) <span class="sc">%&gt;%</span></span>
@@ -1113,7 +1132,7 @@ the `.groups` argument.</code></pre>
 <div id="fig-colleges-stacked-bar-color" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-colleges-stacked-bar-color-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.22: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.23: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
@@ -1124,7 +1143,7 @@ the `.groups` argument.</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> college), <span class="at">color =</span> <span class="fu">factor</span>(season_int)) <span class="sc">+</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>An alternative to stacked barplots are <em>side-by-side barplots</em>, also known as <em>dodged barplots</em>, as seen in <a href="#fig-colleges-dodged-bar-color">Figure&nbsp;<span>7.23</span></a>. The code to create a side-by-side barplot is identical to the code to create a stacked barplot, but with a <code>position = "dodge"</code> argument added to <code>geom_bar()</code>. In other words, we are overriding the default barplot type, which is a <em>stacked</em> barplot, and specifying it to be a side-by-side barplot instead.</p>
+<p>An alternative to stacked barplots are <em>side-by-side barplots</em>, also known as <em>dodged barplots</em>, as seen in <a href="#fig-colleges-dodged-bar-color">Figure&nbsp;<span>7.24</span></a>. The code to create a side-by-side barplot is identical to the code to create a stacked barplot, but with a <code>position = "dodge"</code> argument added to <code>geom_bar()</code>. In other words, we are overriding the default barplot type, which is a <em>stacked</em> barplot, and specifying it to be a side-by-side barplot instead.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name, college) <span class="sc">%&gt;%</span></span>
@@ -1138,7 +1157,7 @@ the `.groups` argument.</code></pre>
 <div id="fig-colleges-dodged-bar-color" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-colleges-dodged-bar-color-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.23: <strong>?(caption)</strong></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.24: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
@@ -1177,7 +1196,7 @@ the `.groups` argument.</code></pre>
 <div id="fig-facet-bar-vert" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="ggplot2_files/figure-html/fig-facet-bar-vert-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7.24: Faceted barplot comparing the number of flights by carrier and origin.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.25: Faceted barplot comparing the number of flights by carrier and origin.</figcaption>
 </figure>
 </div>
 </div>
@@ -1260,6 +1279,11 @@ the `.groups` argument.</code></pre>
 <p>You’ll notice that both code segments create the same barplot, even though in the second segment we omitted the <code>data =</code> and <code>mapping =</code> code argument names. This is because the <code>ggplot()</code> function by default assumes that the <code>data</code> argument comes first and the <code>mapping</code> argument comes second. As long as you specify the data frame in question first and the <code>aes()</code> mapping second, you can omit the explicit statement of the argument names <code>data =</code> and <code>mapping =</code>. That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the <code>data=</code> argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for reability and clarity purposes.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-wilkinson2005" class="csl-entry" role="listitem">
+Wilkinson, Leland. 2012. <em>The Grammar of Graphics</em>. Springer.
+</div>
+</div>
 </section>
 </section>
 
