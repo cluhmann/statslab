@@ -164,7 +164,7 @@ ggplot(data = nba, mapping = aes(x = pts, y = ast)) +
   geom_point()
 ```
 
-Let's first unpack the graphic in Figure @fig-scatter. Observe that a *positive relationship* exists between `pts` and `ast`: as the number of points increases, the number of assists also increases.  Observe also the large mass of points clustered near (0, 0), the point indicating players have no points and no assists (e.g., what would be expected from a player that doesn't play very much). 
+Let's first unpack the graphic in @fig-scatter. Observe that a *positive relationship* exists between `pts` and `ast`: as the number of points increases, the number of assists also increases.  Observe also the large mass of points clustered near (0, 0), the point indicating players have no points and no assists (e.g., what would be expected from a player that doesn't play very much). 
 
 Before we continue, let's make a few more observations about this code that created the scatterplot. Note that the `+` sign comes at the end of lines, and not at the beginning. You'll get an error in R if you put it at the beginning of a line. When adding layers to a plot, you are encouraged to start a new line after the `+` (by pressing the Return/Enter button on your keyboard) so that the code for each layer is on a new line. As we add more and more layers to plots, you'll see this will greatly improve the legibility of your code.
 
@@ -194,14 +194,14 @@ Note how the following code is identical to the code in Section \@ref(scatterplo
 #| label: fig-scatter-alpha
 #| fig-cap: Assists versus points 
 ggplot(data = nba, mapping = aes(x = pts, y = ast)) + 
-  geom_point(alpha = 0.2)
+  geom_point(alpha = 0.1)
 ```
 
-The key feature to note in Figure @fig-scatter-alpha is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no `aes()` surrounding `alpha = 0.2`.  This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of `alpha`. In fact, you'll receive an error if you try to change the second line to read `geom_point(aes(alpha = 0.2))`.
+The key feature to note in @fig-scatter-alpha is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no `aes()` surrounding `alpha = 0.1`.  This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of `alpha`. In fact, you'll receive an error if you try to change the second line to read `geom_point(aes(alpha = 0.1))`.
 
 **Method 2: Jittering the points**
 
-The second way of addressing overplotting is by *jittering* all the points. This means giving each point a small "nudge" in a random direction. You can think of "jittering" as shaking the points around a bit on the plot. Let's illustrate using a simple example first. Say we have a data frame with 4 identical rows of x and y values: (0,0), (0,0), (0,0), and (0,0). In Figure \@ref(fig:jitter-example-plot-1), we present both the regular scatterplot of these 4 points (on the left) and its jittered counterpart (on the right). 
+The second way of addressing overplotting is by *jittering* all the points. This means giving each point a small "nudge" in a random direction. You can think of "jittering" as shaking the points around a bit on the plot. Let's illustrate using a simple example first. Say we have a data frame with 4 identical rows of x and y values: (0,0), (0,0), (0,0), and (0,0). In @fig-jitter-example-plot-1, we present both the regular scatterplot of these 4 points (on the left) and its jittered counterpart (on the right). 
 
 ```{r}
 #| label: fig-jitter-example-plot-1
@@ -238,7 +238,7 @@ ggplot(data = nba, mapping = aes(x = pts, y = ast)) +
 
 In order to specify how much jitter to add, we adjusted the `width` and `height` arguments to `geom_jitter()`.  This corresponds to how hard you'd like to shake the plot in horizontal x-axis units and vertical y-axis units, respectively. In this case, both axes are in counts (number of points, number of assists). How much jitter should we add using the `width` and `height` arguments? On the one hand, it is important to add just enough jitter to break any overlap in points, but on the other hand, not so much that we completely alter the original pattern in points.
 
-As can be seen in the resulting Figure @fig-jitter-example-plot-2, in this case jittering doesn't really provide much new insight. In this particular case, it can be argued that changing the transparency of the points by setting `alpha` proved more effective.  When would it be better to use a jittered scatterplot? When would it be better to alter the points' transparency? There is no single right answer that applies to all situations. You need to make a subjective choice and own that choice. At the very least when confronted with overplotting, however, we suggest you make both types of plots and see which one better emphasizes the point you are trying to make. 
+As can be seen in the resulting @fig-jitter-example-plot-2, in this case jittering doesn't really provide much new insight. In this particular case, it can be argued that changing the transparency of the points by setting `alpha` proved more effective.  When would it be better to use a jittered scatterplot? When would it be better to alter the points' transparency? There is no single right answer that applies to all situations. You need to make a subjective choice and own that choice. At the very least when confronted with overplotting, however, we suggest you make both types of plots and see which one better emphasizes the point you are trying to make. 
 
 
 
