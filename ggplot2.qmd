@@ -4,6 +4,7 @@
 #| echo: false
 #| output: false
 library(tidyverse)
+library(patchwork)
 ```
 
 
@@ -72,8 +73,7 @@ ggplot(
         ,
     aes(x = m_ast, y = m_pts, color = college)
 ) +
-    geom_path(arrow = arrow(type = "closed", angle=20)) +
-    #geom_point()
+    geom_path(arrow = arrow(type = "closed", angle=20))
 ```
 
 Let's view this plot through the grammar of graphics:
@@ -168,10 +168,10 @@ Let's first unpack the graphic in Figure @fig-scatter. Observe that a *positive 
 
 Before we continue, let's make a few more observations about this code that created the scatterplot. Note that the `+` sign comes at the end of lines, and not at the beginning. You'll get an error in R if you put it at the beginning of a line. When adding layers to a plot, you are encouraged to start a new line after the `+` (by pressing the Return/Enter button on your keyboard) so that the code for each layer is on a new line. As we add more and more layers to plots, you'll see this will greatly improve the legibility of your code.
 
-To stress the importance of adding the layer specifying the `geom`etric object, consider Figure \@ref(fig:nolayers) where no layers are added. Because the `geom`etric object was not specified, we have a blank plot which is not very useful!
+To stress the importance of adding the layer specifying the `geom`etric object, consider @fig-nolayers where no layers are added. Because the `geom`etric object was not specified, we have a blank plot which is not very useful!
 
 ```{r}
-#| label: fig-scatter
+#| label: fig-nolayers
 #| fig-cap: Assists versus points 
 ggplot(data = nba, mapping = aes(x = pts, y = ast))
 ```

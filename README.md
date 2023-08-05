@@ -25,3 +25,4 @@ Licensed under creative commons Attribution-ShareAlike 4.0 International license
 - kable
 - kableExtra
 - fivethirtyeight
+- patchwork
