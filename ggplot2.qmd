@@ -87,12 +87,10 @@ Let's view this plot through the grammar of graphics.  First, we have actually u
 
 That being said, this is just an example.  Plots can specify points, lines, bars, and a variety of other geometric objects.
 
-Let's summarize the three essential components of the grammar in @tbl-grammar-summary.
+Let's summarize the three essential components of the grammar.
 
 ```{r}
 #| echo: false
-#| label: tbl-grammar-summary
-#| tbl-cap: Summary of the grammar of graphics for this plot
 tibble(
   geom = c("line", "line", "line", "point", "point", "point", "point"),
   aes = c("x", "y", "color", "x", "y", "color", "size"),

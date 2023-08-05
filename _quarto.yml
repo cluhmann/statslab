@@ -4,6 +4,16 @@ project:
 
 book:
     title: "statslab"
+    repo-url: https://github.com/cluhmann/statslab
+    navbar:
+        logo: beta.png
+        logo-alt: "Several beta distributions"
+        search: false
+    search:
+        location: sidebar
+        type: overlay
+    sidebar:
+        search: true
 
     chapters:
     - index.qmd
@@ -19,8 +29,9 @@ book:
         - tibbles.qmd
         - dplyr.qmd
         - ggplot2.qmd
-    - part: "Regressing"
+    - part: "Statistics"
       chapters:
+        - descriptives.qmd
         - single.qmd
         - multiple.qmd
         - anova.qmd
@@ -28,11 +39,12 @@ book:
       chapters:
         - simulation.qmd
         - missingness.qmd
+    - part: references.qmd
 
 bibliography: references.bib
 
 format:
     html:
-        theme: cosmo
+        theme: united
         css: styles.css
         toc: true
