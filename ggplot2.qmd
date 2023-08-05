@@ -5,6 +5,7 @@
 #| output: false
 library(tidyverse)
 library(patchwork)
+library(kableExtra)
 ```
 
 
@@ -117,7 +118,7 @@ In this book, we will use the `ggplot2` package for data visualization, which is
 * The data frame where the variables exist: the `data` argument.
 * The mapping of the variables to aesthetic attributes: the `mapping` argument which specifies the `aes`thetic attributes involved.
 
-After we've specified these components, we then add *layers* to the plot using the `+` sign. The most essential layer to add to a plot is the layer that specifies which type of `geom`etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we'll see in Section @sec-facets).
+After we've specified these components, we then add *layers* to the plot using the `+` sign. The most essential layer to add to a plot is the layer that specifies which type of `geom`etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we'll see in @sec-facets).
 
 Let's now put the theory of the grammar of graphics into practice.
 
@@ -258,13 +259,12 @@ The next of the five named graphs are linegraphs. Linegraphs show the relationsh
 
 The most common examples of linegraphs have some notion of time on the x-axis: hours, days, weeks, years, etc. Since time is naturally ordinal, we connect consecutive observations of the variable on the y-axis with a line. Linegraphs that have some notion of time on the x-axis are also called *time series* plots.
 
-### Linegraphs via `geom_line` {#geomline}
+### Linegraphs via `geom_line` {#sec-geomline}
 
 Let's a linegraph to visualize a single NBA player's number of points scored across seasons.  To do so, we'll use `geom_line()`, instead of using `geom_point()` as we did for the scatterplots above:
 
 ```{r}
-#hourlytemp, fig.cap="Hourly temperature in Newark for January 1-15, 2013."}
-#| fig-cap: Michael Jordon points over time
+#| fig-cap: Stephen Curry points over time
 ggplot(
     data = nba %>%
         filter(player_name == "Stephen Curry"),
@@ -280,10 +280,554 @@ Let's break down this code piece-by-piece in terms of the grammar of graphics.  
 
 We add a layer to the `ggplot()` function call using the `+` sign. The layer in question specifies the third component of the grammar:  the `geom`etric object in question. In this case, the geometric object is a `line` set by specifying `geom_line()`. 
 
-
-
 ### Summary
 
 Linegraphs, just like scatterplots, display the relationship between two numerical variables. However, it is preferred to use linegraphs over scatterplots when the variable on the x-axis (i.e., the explanatory variable) has an inherent ordering, such as some notion of time.  
 
+
+
+
+## 5NG#3: Histograms {#sec-histograms}
+
+Let's consider the `pts` variable in the `nba` data frame once again, but unlike with the linegraphs in @sec-linegraphs, let's say we don't care about its relationship with time, but rather we only care about how the values of `pts` *distribute*. In other words:
+
+1. What are the smallest and largest values?
+1. What is the "center" or "most typical" value?
+1. How do the values spread out?
+1. What are frequent and infrequent values?
+
+One way to visualize this *distribution* of this single variable `pts` is to plot them on a horizontal line as we do in @fig-pts-on-line:
+
+```{r}
+#| label: fig-pts-on-line
+#| echo: false
+#| fig-cap: Plot of players' points per-game point averages.
+ggplot(
+    data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+    mapping = aes(x = pts, y = factor("A"))
+) +
+    geom_point(alpha = .01) +
+    theme(
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()
+    )
+hist_title <- "Plot of players' points per-game point averages."
+```
+
+This gives us a bit of an idea of how the values of `pts` are distributed: note that values range from zero to approximately 20. In addition, there appear to be more values falling between approximately 3 and 10 than there are values falling above this range. However, because of the high degree of overplotting in the points, it's hard to get a sense of exactly how many values are between 5 and 10.
+
+What is commonly produced instead of @fig-temp-on-line is known as a *histogram*.  A histogram is a plot that visualizes the *distribution* of a numerical value as follows:
+
+1. We first cut up the x-axis into a series of *bins*, where each bin represents a range of values. 
+1. For each bin, we count the number of observations that fall in the range corresponding to that bin.
+1. Then for each bin, we draw a bar whose height marks the corresponding count.
+
+Let's drill-down on an example of a histogram, shown in @fig-histogramexample.
+
+```{r}
+#| label: fig-histogramexample
+#| echo: false
+#| fig-cap: Example histogram.
+ggplot(
+    data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+    mapping = aes(x = pts)
+) +
+    geom_histogram(binwidth = 2,
+                   boundary = 70,
+                   color = "white")
+```
+
+Let's focus only on values between 10 points and 20 points for now. Observe that there are five bins of equal width between 10 points and 20 points. Thus we have five bins of width 2 points each: one bin for the 10-12 range, another bin for the 13-14 range, etc.
+
+1. The bin for the 10-12 range has a height of around 150. In other words, around 150 players scored a season average of between 10 and 20 points.
+1. The bin for the 13-14 range has a height of around 100. In other words, around 100. players scored a season average of between 13 and 14 points.
+1. The bin for the 15-16 range has a height of around 50. In other words, around 50 players scored a season average of between 15 and 16 points.
+1. And so on...
+
+### Histograms via `geom_histogram` {#sec-geomhistogram}
+
+Let's now present the `ggplot()` code to plot your first histogram! Unlike with scatterplots and linegraphs, there is now only one variable being mapped in `aes()`: the single numerical variable `pts`. The y-aesthetic of a histogram, the count of the observations in each bin, gets computed for you automatically. Furthermore, the geometric object layer is now a `geom_histogram()`. After running the following code, you'll see the histogram in @fig-pts-histogram as well as a warning message. We'll discuss the warning message first.
+
+```{r}
+#| label: fig-pts-histogram
+#| warning: true
+#| fig-cap: "Histogram of average pts per game."
+ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram()
+```
+
+The warning is telling us that the histogram was constructed using `bins = 30` for 30 equally spaced bins. This is known the default value for this argument (@sec-functionarguments). We'll see in the next section how to change the number of bins to another value than the default.
+
+Now let's unpack the resulting histogram in @fig-pts-histogram2. Observe that values greater than 20 are rather rare. However, because of the large number of bins, it's hard to get a sense for which range of temperatures is spanned by each bin; everything is one giant amorphous blob. So let's add white vertical borders demarcating the bins by adding a `color = "white"` argument to `geom_histogram()` and ignore the warning about setting the number of bins to a better value:
+
+```{r}
+#| echo: false
+#| label: fig-pts-histogram2
+#| fig-cap: "Histogram of average pts per game."
+ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram()
+```
+
+We now have an easier time associating ranges of temperatures to each of the bins in @fig-pts-histogram-color. We can also vary the color of the bars by setting the `fill` argument. For example, you can set the bin colors to be "blue steel" by setting `fill = "steelblue"`:
+
+```{r}
+#| label: fig-pts-histogram-color
+#| fig-cap: "Histogram of average pts per game."
+ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram(color = "white", fill = "steelblue")
+```
+
+If you're curious, run `colors()` to see all `r colors() %>% length()` possible choice of colors in R!
+
+
+### Adjusting the bins {#adjustbins}
+
+Observe in @fig-pts-histogram-color that in the 10-20 range there appear to be roughly 111 bins. Thus each bin has width 20-10 divided by 11, or 0.91 points, which is not a very easily interpretable range to work with. Let's improve this by adjusting the number of bins in our histogram in one of two ways:
+
+1. By adjusting the number of bins via the `bins` argument to `geom_histogram()`. 
+1. By adjusting the width of the bins via the `binwidth` argument to `geom_histogram()`. 
+
+Using the first method, we have the power to specify how many bins we would like to cut the x-axis up in. As mentioned in the previous section, the default number of bins is 30. We can override this default, to say 25 bins, as follows:
+
+```{r}
+#| eval: false
+ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram(bins = 25, color = "white")
+```
+
+Using the second method, instead of specifying the number of bins, we specify the width of the bins by using the `binwidth` argument in the `geom_histogram()` layer. For example, let's set the width of each bin to be 5 points.
+
+```{r}
+#| eval: false
+ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram(binwidth = 5, color = "white")
+```
+
+We compare both resulting histograms side-by-side in @fig-hist-bins.
+
+```{r}
+#| label: fig-hist-bins
+#| fig-cap: "Setting histogram bins in two ways."
+#| echo: false
+hist_1 <- ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram(bins = 25, color = "white")
+hist_2 <- ggplot(data = nba %>%
+        group_by(player_name) %>%
+        summarize(pts = mean(pts)),
+       mapping = aes(x = pts)) +
+  geom_histogram(binwidth = 5, color = "white")
+hist_1 + hist_2
+```
+
+
+
+### Summary
+
+Histograms, unlike scatterplots and linegraphs, present information on only a single numerical variable. Specifically, they are visualizations of the distribution of the numerical variable in question. 
+
+
+## Facets {#sec-facets}
+
+Before continuing with the next of the 5NG, let's briefly introduce a new concept called *faceting*.  Faceting is used when we'd like to split a particular visualization by the values of another variable. This will create multiple copies of the same type of plot with matching x and y axes, but whose content will differ. 
+
+For example, suppose we were interested in looking at how the histogram of players' average points per game changed across seasons. We could "split" this histogram so that we had a separate histogram of `pts` for each of several values of `season_int`. We do this by adding `facet_wrap(~ season_int)` layer. Note the `~` is a "tilde" and can generally be found on the key next to the "1" key on US keyboards. The tilde is required and you'll receive the error `Error in as.quoted(facets) : object 'season_int' not found` if you don't include it here. 
+
+```{r}
+#| label: fig-facethistogram
+#| fig-cap: "Faceted histogram of points per game."
+ggplot(
+    data = nba %>%
+        group_by(player_name, season_int) %>%
+        summarize(pts = mean(pts), season_int=first(season_int)),
+    mapping = aes(x = pts)
+) +
+    geom_histogram(binwidth = 5, color = "white") +
+    facet_wrap( ~ season_int)
+```
+
+
+We can also specify the number of rows and columns in the grid by using the `nrow` and `ncol` arguments inside of \index{ggplot2!facet\_wrap()} `facet_wrap()`. For example, say we would like our faceted histogram to have 4 rows instead of 3. We simply add an `nrow = 4` argument to `facet_wrap(~ season_int)`.
+
+```{r}
+#| label: fig-facethistogram2
+#| fig-cap: "Faceted histogram of points per game."
+ggplot(
+    data = nba %>%
+        group_by(player_name, season_int) %>%
+        summarize(pts = mean(pts), season_int=first(season_int)),
+    mapping = aes(x = pts)
+) +
+    geom_histogram(binwidth = 5, color = "white") +
+    facet_wrap( ~ season_int, nrow = 4)
+```
+
+
+## 5NG#4: Boxplots {#sec-boxplots}
+
+Though faceted histograms are one type of visualization used to compare the distribution of a numerical variable split by the values of another variable, another type of visualization that achieves a similar goal is a *side-by-side boxplot*. A boxplot is constructed from the information provided in the *five-number summary* of a numerical variable.
+
+Let's again consider the distribution of points. For now, let's confine ourselves to the 1996 season to keep things simple.
+
+```{r}
+#| label: fig-1996
+#| fig-cap: Points from 1996 represented as jittered points.
+base_plot <- nba %>%
+        filter(season_int %in% c(1996)) %>%
+    ggplot(mapping = aes(x = factor(season_int), y=pts))
+base_plot + geom_jitter(width = 0.1, height = 0, alpha = 0.3)
+```
+
+These observations have the following *five-number summary*:
+
+```{r}
+#| echo: false
+min_pts <- min(filter(nba, season_int %in% c(1996))$pts)
+max_pts <- max(filter(nba, season_int %in% c(1996))$pts)
+quartiles <- filter(nba, season_int %in% c(1996))  %>%
+  pull(pts) %>%
+  quantile(prob = c(0.25, 0.5, 0.75)) %>%
+  round(0)
+five_number_summary <- tibble(
+  values = c(min_pts, quartiles, max_pts)
+)
+```
+
+1. Minimum: `r five_number_summary$values[1]`
+1. First quartile (25th percentile): `r five_number_summary$values[2]` points
+1. Median (second quartile, 50th percentile): `r five_number_summary$values[3]` points
+1. Third quartile (75th percentile): `r five_number_summary$values[4]` points
+1. Maximum: `r five_number_summary$values[5]`
+
+In the leftmost plot of @fig-1996-2, let's mark these 5 values with dashed horizontal lines on top of the actual data points. In the middle plot of @fig-1996-2 let's add the *boxplot*. In the rightmost plot of @fig-1996-2, let's remove the points and the dashed horizontal lines for clarity's sake.
+
+```{r}
+#| label: fig-1996-2
+#| echo: false
+#| fig-cap: "Building up a boxplot of points"
+boxplot_1 <- base_plot +
+  geom_hline(data = five_number_summary, aes(yintercept = values), linetype = "dashed") +
+  geom_jitter(width = 0.075, height = 0.5, alpha = 0.1)
+boxplot_2 <- base_plot +
+  geom_boxplot() +
+  geom_hline(data = five_number_summary, aes(yintercept = values), linetype = "dashed") +
+  geom_jitter(width = 0.075, height = 0.5, alpha = 0.1)
+boxplot_3 <- base_plot +
+  geom_boxplot()
+boxplot_1 + boxplot_2 + boxplot_3
+```
+
+What the boxplot does is visually summarize the points by cutting them into *quartiles* at the dashed lines, where each quartile contains four equally-size groups of observations. Thus
+
+1. 25% of points fall below the bottom edge of the box, which is the first quartile of `r five_number_summary$values[2]` points. In other words, 25% of observations were below `r five_number_summary$values[2]` points.
+1. 25% of points fall between the bottom edge of the box and the solid middle line, which is the median of `r five_number_summary$values[3]` points. Thus, 25% of observations were between `r five_number_summary$values[2]` points and `r five_number_summary$values[3]` points and 50% of observations were below `r five_number_summary$values[3]` points.
+1. 25% of points fall between the solid middle line and the top edge of the box, which is the third quartile of `r five_number_summary$values[4]` points. It follows that 25% of observations were between `r five_number_summary$values[3]` points and `r five_number_summary$values[4]` points and 75% of observations were below `r five_number_summary$values[4]` points.
+1. 25% of points fall above the top edge of the box. In other words, 25% of observations were above `r five_number_summary$values[4]` points.
+1. The middle 50% of points lie within the *interquartile range (IQR)* between the first and third quartile. Thus, the IQR for this example is `r five_number_summary$values[2]` - `r five_number_summary$values[4]` = `r (five_number_summary$values[2] - five_number_summary$values[4]) %>% round(3)` point. The interquartile range is one measure of a numerical variable's *spread*.
+
+Furthermore, in the rightmost plot of @fig-1996-2, we see the *whiskers* of the boxplot. The whiskers stick out from either end of the box all the way to the minimum and maximum observations of `r five_number_summary$values[1]` and `r five_number_summary$values[5]` points, respectively. However, the whiskers don't always extend to the smallest and largest observed values as they do here. They in fact extend no more than 1.5 $\times$ the interquartile range from either end of the box. In this case, we see a small number of observations that lie more than 1.5 $\times$ `r (five_number_summary$values[2] - five_number_summary$values[4]) %>% round(3)` points = `r (1.5*(five_number_summary$values[2] - five_number_summary$values[4])) %>% round(3)` points the top of the box. These observations are are called *outliers*.
+
+
+
+### Boxplots via `geom_boxplot` {#sec-geomboxplot}
+
+Let's now create a side-by-side boxplot of players' average points per game split by the different seasons as we did previously with the faceted histograms. We do this by mapping the `season_int` variable to the x-position aesthetic, the `pts` variable to the y-position aesthetic, and by adding a `geom_boxplot()` layer:
+
+```{r}
+#| warning: true
+#| label: badbox
+#| fig-cap: "Invalid boxplot specification."
+ggplot(data = nba, mapping = aes(x = season_int, y = pts)) +
+  geom_boxplot()
+```
+
+Observe in @fig-badbox that this plot does not provide information about points separated by season. The warning message clues us in as to why. It is telling us that we have a "continuous", or numerical variable, on the x-position aesthetic. Boxplots, however, require a categorical variable to be mapped to the x-position aesthetic.
+
+We can convert the numerical variable `season_int` into a `factor` categorical variable by using the `factor()` function. So after applying `factor(season_int)`, `season_int` goes from having numerical values just the 1995, 1996, etc. to having an associated ordering. With this ordering, `ggplot()` now knows how to work with this variable to produce the needed plot.
+
+```{r}
+#| warning: true
+#| label: fig-seasonptsbox
+#| fig-cap: "Side-by-side boxplot of average points per game split by season."
+ggplot(data = nba, mapping = aes(x = factor(season_int), y = pts)) +
+  geom_boxplot()
+```
+
+The resulting @fig-seasonptsbox shows 26 separate "box and whiskers" plots similar to the rightmost plot of @fig-1996-2 of only data from 1996. Thus the different boxplots are shown "side-by-side."
+
+* The "box" portions of the visualization represent the 1st quartile, the median (the 2nd quartile), and the 3rd quartile.
+* The height of each box (the value of the 3rd quartile minus the value of the 1st quartile) is the interquartile range (IQR). It is a measure of the spread of the middle 50% of values, with longer boxes indicating more variability.
+* The "whisker" portions of these plots extend out from the bottoms and tops of the boxes and represent points less than the 25th percentile and greater than the 75th percentiles, respectively. They're set to extend out no more than $1.5 \times IQR$ units away from either end of the boxes. We say "no more than" because the ends of the whiskers have to correspond to observed points per game averages  The length of these whiskers show how the data outside the middle 50% of values vary, with longer whiskers indicating more variability.
+* The dots representing values falling outside the whiskers are called *outliers*. These can be thought of as potentially anomalous ("out-of-the-ordinary") values.
+
+It is important to keep in mind that the definition of an outlier is somewhat arbitrary and not absolute. In this case, they are defined by the length of the whiskers, which are no more than $1.5 \times IQR$ units long for each boxplot. Looking at this side-by-side plot we can easily compare scorring distributions across seasons by drawing imaginary horizontal lines across the plot. Furthermore, the heights of the boxes as quantified by the interquartile ranges are informative too; they tell us about variability, or spread, of the different players' averages recorded in a given season.
+
+
+### Summary
+
+Side-by-side boxplots provide us with a way to compare the distribution of a numerical variable across multiple values of another variable. One can see where the median falls across the different groups by comparing the solid lines in the center of the boxes. 
+
+To study the spread of a numerical variable within one of the boxes, look at both the length of the box and also how far the whiskers extend from either end of the box. Outliers are even more easily identified when looking at a boxplot than when looking at a histogram as they are marked with distinct points.
+
+
+
+## 5NG#5: Barplots {#sec-geombar}
+
+Both histograms and boxplots are tools to visualize the distribution of numerical variables. Another commonly desired task is to visualize the distribution of a categorical variable. This is a simpler task, as we are simply counting different categories within a categorical variable, also known as the *levels* of the categorical variable. Often the best way to visualize these different counts, also known as *frequencies*, is with barplots (also called barcharts).
+
+One complication, however, is how your data is represented. Is the categorical variable of interest "pre-counted" or not? For example, run the following code that manually creates two data frames representing a collection of fruit: 3 apples and 2 oranges.
+
+```{r}
+fruits <- tibble(
+  fruit = c("apple", "apple", "orange", "apple", "orange")
+)
+fruits_counted <- tibble(
+  fruit = c("apple", "orange"),
+  number = c(3, 2)
+)
+```
+
+We see both the `fruits` and `fruits_counted` data frames represent the same collection of fruit. Whereas `fruits` just lists the fruit individually...
+
+```{r}
+#| echo: false
+fruits
+```
+
+... `fruits_counted` has a variable `count` which represent the "pre-counted" values of each fruit. 
+
+```{r}
+#| echo: false
+fruits_counted
+```
+
+Depending on how your categorical data is represented, you'll need to add a different `geom`etric layer type to your `ggplot()` to create a barplot, as we now explore. 
+
+
+### Barplots via `geom_bar` or `geom_col`
+
+Let's generate barplots using these two different representations of the same basket of fruit: 3 apples and 2 oranges. Using the `fruits` data frame where all 5 fruits are listed individually in 5 rows, we map the `fruit` variable to the x-position aesthetic and add a \index{ggplot2!geom\_bar()} `geom_bar()` layer:
+
+```{r}
+#| label: fig-geombar
+#| fig-cap: "Barplot when counts are not pre-counted."
+ggplot(data = fruits, mapping = aes(x = fruit)) +
+  geom_bar()
+```
+
+However, using the `fruits_counted` data frame where the fruits have been "pre-counted", we once again map the `fruit` variable to the x-position aesthetic, but here we also map the `count` variable to the y-position aesthetic, and add a `geom_col()` layer instead.
+
+```{r}
+#| label: fig-geomcol
+#| fig-cap: "Barplot when counts are pre-counted."
+ggplot(data = fruits_counted, mapping = aes(x = fruit, y = number)) +
+  geom_col()
+```
+
+Compare the barplots in Figures @fig-geombar and @fig-geomcol. They are identical because they reflect counts of the same five fruits. However, depending on how our categorical data is represented, either "pre-counted" or not, we must add a different `geom` layer. When the categorical variable whose distribution you want to visualize
+
+* Is *not* pre-counted in your data frame, we use `geom_bar()`.
+* Is pre-counted in your data frame, we use `geom_col()` with the y-position aesthetic mapped to the variable that has the counts.
+
+Let's now go back to the `nba` data frame and visualize the distribution of the categorical variable `college`. Specifically, we'll visualize the number of players who graduated from different colleges.  We'll focus on the New York Knicks (`team_abbreviation==NYK`) and data from the 2006-2009 seasons.
+
+Recall from @sec-dplyr, you saw that each row in the `nba` data set corresponds to a player in a given year In other words, the `nba` data frame is more like the `fruits` data frame than the `fruits_counted` data frame because the numbers of players from each college have not been pre-counted. Thus we should use `geom_bar()` instead of `geom_col()` to create a barplot. Much like a `geom_histogram()`, there is only one variable in the `aes()` aesthetic mapping: the variable `college` gets mapped to the `x`-position. As a difference though, histograms typically have bars that touch whereas bar graphs typically have space between the bars.
+
+```{r}
+#| label: fig-collegesbar
+#| fig-cap: Number of players by colege using geom_bar(). 
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+       season_int > 2005) %>%
+    ggplot(mapping = aes(x = college)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+Observe in @fig-collegesbar that there are many Knicks players who either did not attend any college ("None"), attended Arizona State, or attended Florida. If you don't know which airlines correspond to which carrier codes, then run `View(airlines)` to see a directory of airlines. For example, B6 is JetBlue Airways. Alternatively, say you had a data frame where the number of flights for each `carrier` was pre-counted as in Table \@ref(tab:flights-counted).
+
+```{r}
+#| label: fig-colleges-counted
+#| echo: false
+colleges_counted <- nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+       season_int > 2005) %>%
+    group_by(college) %>%
+    summarize(number = n())
+kable(colleges_counted,
+  digits = 3,
+  caption = "Number of players, pre-counted for each college",
+  booktabs = TRUE,
+  longtable = TRUE,
+  linesep = ""
+)
+```
+
+In order to create a barplot visualizing the distribution of the categorical variable `college` in this case, we would now use `geom_col()` instead of `geom_bar()`, with an additional `y = number` in the aesthetic mapping on top of the `x = carrier`. The resulting barplot would be identical to @fig-collegesbar.
+
+
+### Must avoid pie charts!
+
+One of the most common plots used to visualize the distribution of categorical data is the pie chart. Though they may seem harmless, pie charts actually present a problem in that humans are unable to judge angles well. As Naomi Robbins describes in her book, *Creating More Effective Graphs* [@robbins2013], people tend to overestimate angles greater than 90 degrees and underestimate angles less than 90 degrees. In other words, it is difficult to determine the relative size of one piece of the pie compared to another.  So stay away!
+
+
+### Two categorical variables {#sec-two-categ-barplot}
+
+Barplots are a very common way to visualize the frequency of different categories, or levels, of a single categorical variable. Another use of barplots is to visualize the *joint* distribution of two categorical variables at the same time.  Let's examine the *joint* distribution of players by `college` as well as `season`. In other words, the number of players for each combination of `college` and `season`.
+
+For example, the number of WestJet flights from `JFK`, the number of WestJet flights from `LGA`, the number of WestJet flights from `EWR`, the number of American Airlines flights from `JFK`, and so on. Recall the `ggplot()` code that created the barplot of `carrier` frequency in Figure \@ref(fig:flightsbar):
+
+We can now map the additional variable `origin` by adding a `fill = origin` inside the `aes()` aesthetic mapping.
+
+```{r}
+#| label: fig-colleges-stacked-bar
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+           season_int > 2005) %>%
+    ggplot(mapping = aes(x = college, fill = factor(season_int))) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+
+@fig-colleges-stacked-bar is an example of a *stacked barplot*.  Though simple to make, in certain aspects it is not ideal. For example, it is not particularly easy to compare the heights of the different colors between the bars, corresponding to comparing the number of players from each `season_int` between the different teams.
+
+Before we continue, let's address some common points of confusion among new R users. First, the `fill` aesthetic corresponds to the color used to fill the bars, whereas the `color` aesthetic corresponds to the color of the outline of the bars. This is identical to how we added color to our histogram in @sec-geomhistogram: we set the outline of the bars to white by setting `color = "white"` and the colors of the bars to blue steel by setting `fill = "steelblue"`. Observe in @fig-colleges-stacked-bar-color that mapping `season_int` to `color` and not `fill` yields grey bars with different colored outlines.
+
+```{r}
+#| label: fig-colleges-stacked-bar-color
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+           season_int > 2005) %>%
+    ggplot(mapping = aes(x = college, color = factor(season_int))) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+Second, note that `fill` is another aesthetic mapping much like `x`-position; thus we were careful to include it within the parentheses of the `aes()` mapping. The following code, where the `fill` aesthetic is specified outside the `aes()` mapping will yield an error. This is a fairly common error that new `ggplot` users make:
+
+```{r}
+#| eval: false
+...
+    ggplot(mapping = aes(x = college), color = factor(season_int)) +
+    geom_bar() +
+```
+
+An alternative to stacked barplots are *side-by-side barplots*, also known as *dodged barplots*, as seen in @fig-colleges-dodged-bar-color. The code to create a side-by-side barplot is identical to the code to create a stacked barplot, but with a `position = "dodge"` argument added to `geom_bar()`. In other words, we are overriding the default barplot type, which is a *stacked* barplot, and specifying it to be a side-by-side barplot instead.
+
+```{r}
+#| label: fig-colleges-dodged-bar-color
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+           season_int > 2005) %>%
+    ggplot(mapping = aes(x = college, fill = factor(season_int))) +
+    geom_bar(position = "dodge") +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+Here, the **width** of the bars for DuPaul, Florida, and None is different than the width of the bars for Arizona and Iowa State. We can make one tweak to the `position` argument to get them to be the same size in terms of width as the other bars by using the more robust `position_dodge()` function.
+
+```{r}
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+           season_int > 2005) %>%
+    ggplot(mapping = aes(x = college, fill = factor(season_int))) +
+    geom_bar(position = position_dodge(preserve = "single")) +
+    theme(axis.text.x = element_text(angle = 90))
+```
+
+Lastly, another type of barplot is a *faceted barplot*. Recall in @sec-facets we visualized the distribution of players' points *split* by season using facets. We apply the same principle to our barplot visualizing the frequency of `college` split by `season_int`: instead of mapping `college` to `fill` we include it as the variable to create small multiples of the plot across the levels of `college`.
+
+```{r eval=FALSE}
+ggplot(data = flights, mapping = aes(x = carrier)) +
+  geom_bar() +
+  facet_wrap(~ origin, ncol = 1)
+```
+
+```{r}
+#| label: fig-facet-bar-vert
+#| fig-cap: "Faceted barplot comparing the number of flights by carrier and origin."
+nba %>%
+    group_by(player_name, college) %>%
+    filter(team_abbreviation %in% c("NYK"),
+           season_int < 2010,
+           season_int > 2005) %>%
+    ggplot(mapping = aes(x = college)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    facet_wrap(~season_int, ncol = 1)
+```
+
+
+### Summary
+
+Barplots are a common way of displaying the distribution of a categorical variable, or in other words the frequency with which the different categories (also called *levels*) occur.  They are easy to understand and make it easy to make comparisons across levels.  Furthermore, when trying to visualize the relationship of two categorical variables, you have many options: stacked barplots, side-by-side barplots, and faceted barplots. Depending on what aspect of the relationship you are trying to emphasize, you will need to make a choice between these three types of barplots and own that choice.
+
+
+## Conclusion {#sec-data-vis-conclusion}
+
+### Summary table
+
+Let's recap all five of the five named graphs (5NG) in @tab-viz-summary-table summarizing their differences. Using these 5NG, you'll be able to visualize the distributions and relationships of variables contained in a wide array of datasets. This will be even more the case as we start to map more variables to more of each `geom`etric object's `aes`thetic attribute options, further unlocking the awesome power of the `ggplot2` package.
+
+| Named graph  | Shows | Geometric object | Notes |
+|------|------|------|------|
+| Scatterplot    | Relationship between 2 numerical variables     | `geom_point()`    |     |
+| Linegraph    | Relationship between 2 numerical variables     | `geom_line()`    | Used when there is a sequential order to x-variable, e.g., time     |
+| Histogram    | Distribution of 1 numerical variable     | `geom_histogram()`    | Facetted histograms show the distribution of 1 numerical variable split by the values of another variable     |
+| Boxplot    | Distribution of 1 numerical variable split by the values of another variable    | `geom_boxplot()`    | C    |
+| Barplot    | Distribution of 1 categorical variable     | `geom_bar()` when counts are not pre-counted, `geom_col()` when counts are pre-counted `    | Stacked, side-by-side, and faceted barplots show the joint distribution of 2 categorical variables     |
+
+: My Caption {#tbl-viz-summary-table}
+
+### Function argument specification
+
+Let's go over some important points about specifying the arguments (i.e., inputs) to functions. Run the following two segments of code:
+
+```{r}
+#| eval: false
+# Segment 1:
+ggplot(data = nba, mapping = aes(x = team_abbreviation)) +
+  geom_bar()
+
+# Segment 2:
+ggplot(flights, aes(x = team_abbreviation)) +
+  geom_bar()
+```
+
+You'll notice that both code segments create the same barplot, even though in the second segment we omitted the `data = ` and `mapping = ` code argument names. This is because the `ggplot()` function by default assumes that the `data` argument comes first and the `mapping` argument comes second. As long as you specify the data frame in question first and the `aes()` mapping second, you can omit the explicit statement of the argument names `data = ` and `mapping = `.  That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the `data=` argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for reability and clarity purposes.
 
