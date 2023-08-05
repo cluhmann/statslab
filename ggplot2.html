@@ -272,6 +272,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#other-components" id="toc-other-components" class="nav-link" data-scroll-target="#other-components"><span class="header-section-number">7.1.3</span> Other components</a></li>
   <li><a href="#ggplot2-package" id="toc-ggplot2-package" class="nav-link" data-scroll-target="#ggplot2-package"><span class="header-section-number">7.1.4</span> ggplot2 package</a></li>
   </ul></li>
+  <li><a href="#sec-FiveNG" id="toc-sec-FiveNG" class="nav-link" data-scroll-target="#sec-FiveNG"><span class="header-section-number">7.2</span> Five named graphs - the 5NG</a></li>
+  <li><a href="#sec-scatterplots" id="toc-sec-scatterplots" class="nav-link" data-scroll-target="#sec-scatterplots"><span class="header-section-number">7.3</span> 5NG#1: Scatterplots</a>
+  <ul class="collapse">
+  <li><a href="#sec-geompoint" id="toc-sec-geompoint" class="nav-link" data-scroll-target="#sec-geompoint"><span class="header-section-number">7.3.1</span> Scatterplots via <code>geom_point</code></a></li>
+  <li><a href="#overplotting" id="toc-overplotting" class="nav-link" data-scroll-target="#overplotting"><span class="header-section-number">7.3.2</span> Overplotting</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.3.3</span> Summary</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -329,35 +336,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to integer</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">season_int =</span> <span class="fu">as.integer</span>(season_int))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now that we have time represented as a numeric column in our data set, we can use it to plot trends over time.</p>
+<p>Now that we have time represented as a numeric column in our data set, we can use it to plot some data to visualize.</p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'college'. You can override using the
+`.groups` argument.</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="ggplot2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Let’s view this plot through the grammar of graphics:</p>
 <ol type="1">
-<li>The <code>data</code> variable <strong>season_int</strong> gets mapped to the <code>x</code>-position <code>aes</code>thetic of the points.</li>
+<li>The <code>data</code> variable <strong>ast</strong> gets mapped to the <code>x</code>-position <code>aes</code>thetic of the points.</li>
 <li>The <code>data</code> variable <strong>pts</strong> gets mapped to the <code>y</code>-position <code>aes</code>thetic of the points.</li>
-<li>The <code>data</code> variable <strong>ast</strong> gets mapped to the <code>size</code> <code>aes</code>thetic of the points.</li>
 <li>The <code>data</code> variable <strong>college</strong> gets mapped to the <code>color</code> <code>aes</code>thetic of the points.</li>
 </ol>
-<p>We’ll see shortly that <code>data</code> corresponds to the particular data frame where our data is saved and that “data variables” correspond to particular columns in the data frame. Furthermore, the type of <code>geom</code>etric object considered in this plot are points. That being said, while in this example we are considering points, graphics are not limited to just points. We can also use lines, bars, and other geometric objects.</p>
-<p>Let’s summarize the three essential components of the grammar in <span class="citation" data-cites="tab:summary-table">@tab:summary-table</span>-.</p>
-<div id="tbl-summary-table-gapminder" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Summary of the grammar of graphics for this plot">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code># A tibble: 4 × 3
+<p>Furthermore, we have actually used two type of <code>geom</code>etric object here: point object and a path object. The point object provides the small circular data points. The path object provides the line segments connecting the points and the arrow indicating which “direction” the path goes (here, we have sorted the data according to <code>season_int</code>, so the arrow indicates the how the data has evolved over time). That being said, this is just an example. Plots can specify points, lines, bars, and a variety of other geometric objects.</p>
+<p>Let’s summarize the three essential components of the grammar in <span class="citation" data-cites="tab-grammar-summary">@tab-grammar-summary</span>.</p>
+<div class="cell" data-tbl-cap="Summary of the grammar of graphics for this plot">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
   `data variable` aes   geom 
   &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;
-1 season_int      x     point
-2 pts             y     point
-3 ast             size  point
-4 college         color point</code></pre>
-</div>
+1 pts             x     path 
+2 ast             y     path 
+3 college         color path </code></pre>
 </div>
 </div>
 </section>
@@ -368,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>facet</code>ing breaks up a plot into several plots split by the values of another variable</li>
 <li><code>position</code> adjustments for barplots</li>
 </ul>
-<p>Other more complex components like <code>scales</code> and <code>coord</code>inate systems are left for a more advanced text such as [<em>R for Data Science</em>](https://r4ds.hadley.nz/layers.html#aesthetic-mappings. Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.</p>
+<p>Other more complex components like <code>scales</code> and <code>coord</code>inate systems are left for a more advanced text such as <a href="https://r4ds.hadley.nz/layers.html#aesthetic-mappings"><em>R for Data Science</em></a>. Generally speaking, the grammar of graphics allows for a high degree of customization of plots and also a consistent framework for easily updating and modifying them.</p>
 </section>
 <section id="ggplot2-package" class="level3" data-number="7.1.4">
 <h3 data-number="7.1.4" class="anchored" data-anchor-id="ggplot2-package"><span class="header-section-number">7.1.4</span> ggplot2 package</h3>
@@ -377,8 +381,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The data frame where the variables exist: the <code>data</code> argument.</li>
 <li>The mapping of the variables to aesthetic attributes: the <code>mapping</code> argument which specifies the <code>aes</code>thetic attributes involved.</li>
 </ul>
-<p>After we’ve specified these components, we then add <em>layers</em> to the plot using the <code>+</code> sign. The most essential layer to add to a plot is the layer that specifies which type of <code>geom</code>etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we’ll see in Section @ref(facets)).</p>
+<p>After we’ve specified these components, we then add <em>layers</em> to the plot using the <code>+</code> sign. The most essential layer to add to a plot is the layer that specifies which type of <code>geom</code>etric object we want the plot to involve: points, lines, bars, and others. Other layers we can add to a plot include the plot title, axes labels, visual themes for the plots, and facets (which we’ll see in Section <span class="quarto-unresolved-ref">?sec-facets</span>).</p>
 <p>Let’s now put the theory of the grammar of graphics into practice.</p>
+</section>
+</section>
+<section id="sec-FiveNG" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-FiveNG"><span class="header-section-number">7.2</span> Five named graphs - the 5NG</h2>
+<p>In order to keep things simple in this book, we will only focus on five different types of graphics, each with a commonly given name. We term these “five named graphs” or in abbreviated form, the <strong>5NG</strong>:</p>
+<ol type="1">
+<li>scatterplots</li>
+<li>linegraphs</li>
+<li>histograms</li>
+<li>boxplots</li>
+<li>barplots</li>
+</ol>
+<p>We’ll also present some variations of these plots, but with this basic repertoire of five graphics in your toolbox, you can visualize a wide array of different variable types. Note that certain plots are only appropriate for categorical variables, while others are only appropriate for numerical variables.</p>
+</section>
+<section id="sec-scatterplots" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-scatterplots"><span class="header-section-number">7.3</span> 5NG#1: Scatterplots</h2>
+<p>The simplest of the 5NG are <em>scatterplots</em>. They allow you to visualize the <em>relationship</em> between two numerical variables. While you may already be familiar with scatterplots, let’s view them through the lens of the grammar of graphics. Specifically, we will visualize the relationship between the following two numerical variables in the <code>nba</code> data frame:</p>
+<ol type="1">
+<li><code>pts</code>: average points per game each player scored</li>
+<li><code>ast</code>: average number of assists per game each player made</li>
+</ol>
+<section id="sec-geompoint" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="sec-geompoint"><span class="header-section-number">7.3.1</span> Scatterplots via <code>geom_point</code></h3>
+<p>Let’s now go over the code that will create the desired scatterplot, while keeping in mind the grammar of graphics framework we introduced above. Let’s take a look at the code and break it down piece-by-piece.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nba, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> pts, <span class="at">y =</span> ast)) <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Within the <code>ggplot()</code> function, we specify two of the components of the grammar of graphics as arguments (i.e., inputs):</p>
+<ol type="1">
+<li>The <code>data</code> as the <code>nba</code> data frame via <code>data = nba</code>.</li>
+<li>The <code>aes</code>thetic <code>mapping</code> by setting <code>mapping = aes(x = pts, y = ast)</code>. Specifically, the variable <code>pts</code> maps to the <code>x</code> position aesthetic, whereas the variable <code>ast</code> maps to the <code>y</code> position.</li>
+</ol>
+<p>We then add a layer to the <code>ggplot()</code> function call using the <code>+</code> sign. The added layer in question specifies the third component of the grammar: the <code>geom</code>etric object. In this case, the geometric object is set to be points by specifying <code>geom_point()</code>. After running these two lines of code in your console, you’ll notice two outputs: a warning message and this graphic.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ggplot2_files/figure-html/fig-scatter-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Assists versus points</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s first unpack the graphic in Figure <a href="#fig-scatter">Figure&nbsp;<span>7.1</span></a>. Observe that a <em>positive relationship</em> exists between <code>pts</code> and <code>ast</code>: as the number of points increases, the number of assists also increases. Observe also the large mass of points clustered near (0, 0), the point indicating players have no points and no assists (e.g., what would be expected from a player that doesn’t play very much).</p>
+<p>Before we continue, let’s make a few more observations about this code that created the scatterplot. Note that the <code>+</code> sign comes at the end of lines, and not at the beginning. You’ll get an error in R if you put it at the beginning of a line. When adding layers to a plot, you are encouraged to start a new line after the <code>+</code> (by pressing the Return/Enter button on your keyboard) so that the code for each layer is on a new line. As we add more and more layers to plots, you’ll see this will greatly improve the legibility of your code.</p>
+<p>To stress the importance of adding the layer specifying the <code>geom</code>etric object, consider <a href="#fig-nolayers">Figure&nbsp;<span>7.2</span></a> where no layers are added. Because the <code>geom</code>etric object was not specified, we have a blank plot which is not very useful!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nba, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> pts, <span class="at">y =</span> ast))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-nolayers" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ggplot2_files/figure-html/fig-nolayers-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.2: Assists versus points</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="overplotting" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="overplotting"><span class="header-section-number">7.3.2</span> Overplotting</h3>
+<p>The large mass of points near (0, 0) in Figure can cause some confusion since it is hard to tell the true number of points that are actually in this lower corner. This is the result of a phenomenon called <em>overplotting</em>. As one may guess, this corresponds to points being plotted on top of each other over and over again. When overplotting occurs, it is difficult to know the number of points being plotted. There are two methods to address the issue of overplotting. Either by</p>
+<ol type="1">
+<li>Adjusting the transparency of the points or</li>
+<li>Adding a little random “jitter”, or random “nudges”, to each of the points.</li>
+</ol>
+<p><strong>Method 1: Changing the transparency</strong></p>
+<p>The first way of addressing overplotting is to change the transparency/opacity of the points by setting the <code>alpha</code> argument in <code>geom_point()</code>. We can change the <code>alpha</code> argument to be any value between <code>0</code> and <code>1</code>, where <code>0</code> sets the points to be 100% transparent and <code>1</code> sets the points to be 100% opaque. By default, <code>alpha</code> is set to <code>1</code>. In other words, if we don’t explicitly set an <code>alpha</code> value, R will use <code>alpha = 1</code>.</p>
+<p>Note how the following code is identical to the code in Section @ref(scatterplots) that created the scatterplot with overplotting, but with <code>alpha = 0.2</code> added to the <code>geom_point()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nba, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> pts, <span class="at">y =</span> ast)) <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-scatter-alpha" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ggplot2_files/figure-html/fig-scatter-alpha-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.3: Assists versus points</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The key feature to note in Figure <a href="#fig-scatter-alpha">Figure&nbsp;<span>7.3</span></a> is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no <code>aes()</code> surrounding <code>alpha = 0.2</code>. This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of <code>alpha</code>. In fact, you’ll receive an error if you try to change the second line to read <code>geom_point(aes(alpha = 0.2))</code>.</p>
+<p><strong>Method 2: Jittering the points</strong></p>
+<p>The second way of addressing overplotting is by <em>jittering</em> all the points. This means giving each point a small “nudge” in a random direction. You can think of “jittering” as shaking the points around a bit on the plot. Let’s illustrate using a simple example first. Say we have a data frame with 4 identical rows of x and y values: (0,0), (0,0), (0,0), and (0,0). In Figure @ref(fig:jitter-example-plot-1), we present both the regular scatterplot of these 4 points (on the left) and its jittered counterpart (on the right).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-jitter-example-plot-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ggplot2_files/figure-html/fig-jitter-example-plot-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.4: Regular and jittered scatterplots</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the left scatterplot, observe that the 4 points are superimposed on top of each other. While we know there are 4 values being plotted, this fact might not be apparent to others. In the right scatterplot, the points are jittered and it is now plainly evident that this plot involves four points since each point is given a random “nudge.”</p>
+<p>Keep in mind, however, that jittering is strictly a visualization tool; even after creating a jittered scatterplot, the original values saved in the data frame remain unchanged.</p>
+<p>To create a jittered scatterplot, instead of using <code>geom_point()</code>, we use <code>geom_jitter()</code>. Observe how the following code is very similar to the code that created <a href="#fig-scatter">Figure&nbsp;<span>7.1</span></a>, but with <code>geom_point()</code> replaced with <code>geom_jitter()</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-jitter-example-plot-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ggplot2_files/figure-html/fig-jitter-example-plot-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.5: Assists versus points jittered scatterplot</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to specify how much jitter to add, we adjusted the <code>width</code> and <code>height</code> arguments to <code>geom_jitter()</code>. This corresponds to how hard you’d like to shake the plot in horizontal x-axis units and vertical y-axis units, respectively. In this case, both axes are in counts (number of points, number of assists). How much jitter should we add using the <code>width</code> and <code>height</code> arguments? On the one hand, it is important to add just enough jitter to break any overlap in points, but on the other hand, not so much that we completely alter the original pattern in points.</p>
+<p>As can be seen in the resulting Figure <a href="#fig-jitter-example-plot-2">Figure&nbsp;<span>7.5</span></a>, in this case jittering doesn’t really provide much new insight. In this particular case, it can be argued that changing the transparency of the points by setting <code>alpha</code> proved more effective. When would it be better to use a jittered scatterplot? When would it be better to alter the points’ transparency? There is no single right answer that applies to all situations. You need to make a subjective choice and own that choice. At the very least when confronted with overplotting, however, we suggest you make both types of plots and see which one better emphasizes the point you are trying to make.</p>
+</section>
+<section id="summary" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.3.3</span> Summary</h3>
+<p>Scatterplots display the relationship between two numerical variables. They are among the most commonly used plots because they can provide an immediate way to see the trend in one numerical variable versus another. However, if you try to create a scatterplot where either one of the two variables is not numerical, you might get strange results. Be careful!</p>
+<p>With medium to large datasets, you may need to play around with the different modifications to scatterplots we saw such as changing the transparency/opacity of the points or by jittering the points. This tweaking is often a fun part of data visualization, since you’ll have the chance to see different relationships emerge as you tinker with your plots.</p>
 
 
 </section>
