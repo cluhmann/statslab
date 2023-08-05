@@ -87,11 +87,11 @@ Let's view this plot through the grammar of graphics.  First, we have actually u
 
 That being said, this is just an example.  Plots can specify points, lines, bars, and a variety of other geometric objects.
 
-Let's summarize the three essential components of the grammar in @tab-grammar-summary.
+Let's summarize the three essential components of the grammar in @tbl-grammar-summary.
 
 ```{r}
 #| echo: false
-#| label: tab-grammar-summary
+#| label: tbl-grammar-summary
 #| tbl-cap: Summary of the grammar of graphics for this plot
 tibble(
   geom = c("line", "line", "line", "point", "point", "point", "point"),
@@ -253,7 +253,7 @@ With medium to large datasets, you may need to play around with the different mo
 
 
 
-## 5NG#2: Linegraphs {#linegraphs}
+## 5NG#2: Linegraphs {#sec-linegraphs}
 
 The next of the five named graphs are linegraphs. Linegraphs show the relationship between two numerical variables when the variable on the x-axis is ordinal; there is an inherent ordering to the variable.
 
@@ -319,7 +319,7 @@ hist_title <- "Plot of players' points per-game point averages."
 
 This gives us a bit of an idea of how the values of `pts` are distributed: note that values range from zero to approximately 20. In addition, there appear to be more values falling between approximately 3 and 10 than there are values falling above this range. However, because of the high degree of overplotting in the points, it's hard to get a sense of exactly how many values are between 5 and 10.
 
-What is commonly produced instead of @fig-temp-on-line is known as a *histogram*.  A histogram is a plot that visualizes the *distribution* of a numerical value as follows:
+What is commonly produced instead of @fig-pts-on-line is known as a *histogram*.  A histogram is a plot that visualizes the *distribution* of a numerical value as follows:
 
 1. We first cut up the x-axis into a series of *bins*, where each bin represents a range of values. 
 1. For each bin, we count the number of observations that fall in the range corresponding to that bin.
@@ -557,7 +557,7 @@ Let's now create a side-by-side boxplot of players' average points per game spli
 
 ```{r}
 #| warning: true
-#| label: badbox
+#| label: fig-badbox
 #| fig-cap: "Invalid boxplot specification."
 ggplot(data = nba, mapping = aes(x = season_int, y = pts)) +
   geom_boxplot()
@@ -802,7 +802,7 @@ Barplots are a common way of displaying the distribution of a categorical variab
 
 ### Summary table
 
-Let's recap all five of the five named graphs (5NG) in @tab-viz-summary-table summarizing their differences. Using these 5NG, you'll be able to visualize the distributions and relationships of variables contained in a wide array of datasets. This will be even more the case as we start to map more variables to more of each `geom`etric object's `aes`thetic attribute options, further unlocking the awesome power of the `ggplot2` package.
+Let's recap all five of the five named graphs (5NG) in @tbl-viz-summary-table summarizing their differences. Using these 5NG, you'll be able to visualize the distributions and relationships of variables contained in a wide array of datasets. This will be even more the case as we start to map more variables to more of each `geom`etric object's `aes`thetic attribute options, further unlocking the awesome power of the `ggplot2` package.
 
 | Named graph  | Shows | Geometric object | Notes |
 |------|------|------|------|
@@ -829,5 +829,5 @@ ggplot(flights, aes(x = team_abbreviation)) +
   geom_bar()
 ```
 
-You'll notice that both code segments create the same barplot, even though in the second segment we omitted the `data = ` and `mapping = ` code argument names. This is because the `ggplot()` function by default assumes that the `data` argument comes first and the `mapping` argument comes second. As long as you specify the data frame in question first and the `aes()` mapping second, you can omit the explicit statement of the argument names `data = ` and `mapping = `.  That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the `data=` argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for reability and clarity purposes.
+You'll notice that both code segments create the same barplot, even though in the second segment we omitted the `data = ` and `mapping = ` code argument names. This is because the `ggplot()` function by default assumes that the `data` argument comes first and the `mapping` argument comes second. As long as you specify the data frame in question first and the `aes()` mapping second, you can omit the explicit statement of the argument names `data = ` and `mapping = `.  That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the `data=` argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for readability and clarity purposes.
 
