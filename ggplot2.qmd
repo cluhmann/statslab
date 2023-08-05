@@ -61,28 +61,30 @@ Now that we have time represented as a numeric column in our data set, we can us
 ggplot(
     data =
         nba %>%
-        group_by(college, season_int) %>%
+        group_by(team_abbreviation, season_int) %>%
         summarize(
             m_pts = mean(pts),
             m_ast = mean(ast),
-            college = first(college),
+            team = first(team_abbreviation),
             season_int = first(season_int)
         )  %>%
-        filter(college %in% c("Maryland", "Yale", "Butler")) %>%
-    arrange(season_int)
-        ,
-    aes(x = m_ast, y = m_pts, color = college)
+        filter(team %in% c("LAL", "NYK", "PHX")) %>%
+        arrange(season_int)
+    ,
+    aes(x = season_int, y = m_pts, color = team)
 ) +
-    geom_path(arrow = arrow(type = "closed", angle=20))
+    geom_line() + 
+    geom_point(aes(size=m_ast))
 ```
 
-Let's view this plot through the grammar of graphics:
+Let's view this plot through the grammar of graphics.  First, we have actually used two type of `geom`etric object here: a line object and a point object. The point object provides the small circular data points. The line object provides the line segments connecting the points.
 
-1. The `data` variable **ast** gets mapped to the `x`-position `aes`thetic of the points.
-1. The `data` variable **pts** gets mapped to the `y`-position `aes`thetic of the points.
-1. The `data` variable **college** gets mapped to the `color` `aes`thetic of the points.
+1. The `data` variable **season_int** gets mapped to the `x`-position `aes`thetic of the lines and the points.
+1. The `data` variable **pts** gets mapped to the `y`-position `aes`thetic of the lines and the points.
+1. The `data` variable **team** gets mapped to the `color` `aes`thetic of the lines and the points.
+1. The `data` variable **ast** gets mapped to the `size` `aes`thetic of the points.
 
-Furthermore, we have actually used two type of `geom`etric object here: point object and a path object.  The point object provides the small circular data points. The path object provides the line segments connecting the points and the arrow indicating which "direction" the path goes (here, we have sorted the data according to `season_int`, so the arrow indicates the how the data has evolved over time). That being said, this is just an example.  Plots can specify points, lines, bars, and a variety of other geometric objects.
+That being said, this is just an example.  Plots can specify points, lines, bars, and a variety of other geometric objects.
 
 Let's summarize the three essential components of the grammar in @tab-grammar-summary.
 
@@ -91,9 +93,9 @@ Let's summarize the three essential components of the grammar in @tab-grammar-su
 #| label: tab-grammar-summary
 #| tbl-cap: Summary of the grammar of graphics for this plot
 tibble(
-  `data variable` = c("pts", "ast", "college"),
-  aes = c("x", "y", "color"),
-  geom = c("path", "path", "path")
+  geom = c("line", "line", "line", "point", "point", "point", "point"),
+  aes = c("x", "y", "color", "x", "y", "color", "size"),
+  `data variable` = c("season_int", "pts", "team", "season_int", "pts",  "team", "ast")
 )
 ```
 
@@ -174,7 +176,7 @@ To stress the importance of adding the layer specifying the `geom`etric object, 
 #| label: fig-nolayers
 #| fig-cap: Assists versus points 
 ggplot(data = nba, mapping = aes(x = pts, y = ast))
-```
+```     
 
 
 ### Overplotting {#overplotting}
@@ -188,16 +190,16 @@ The large mass of points near (0, 0) in Figure can cause some confusion since it
 
 The first way of addressing overplotting is to change the transparency/opacity of the points by setting the `alpha` argument in `geom_point()`. We can change the `alpha` argument to be any value between `0` and `1`, where `0` sets the points to be 100% transparent and `1` sets the points to be 100% opaque. By default, `alpha` is set to `1`. In other words, if we don't explicitly set an `alpha` value, R will use `alpha = 1`.
 
-Note how the following code is identical to the code in Section \@ref(scatterplots) that created the scatterplot with overplotting, but with `alpha = 0.2` added to the `geom_point()` function:
+Note how the following code is identical to the code in Section \@ref(scatterplots) that created the scatterplot with overplotting, but with `alpha = 0.05` added to the `geom_point()` function:
 
 ```{r}
 #| label: fig-scatter-alpha
 #| fig-cap: Assists versus points 
 ggplot(data = nba, mapping = aes(x = pts, y = ast)) + 
-  geom_point(alpha = 0.1)
+  geom_point(alpha = 0.05)
 ```
 
-The key feature to note in @fig-scatter-alpha is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no `aes()` surrounding `alpha = 0.1`.  This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of `alpha`. In fact, you'll receive an error if you try to change the second line to read `geom_point(aes(alpha = 0.1))`.
+The key feature to note in @fig-scatter-alpha is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no `aes()` surrounding `alpha = 0.05`.  This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of `alpha`. In fact, you'll receive an error if you try to change the second line to read `geom_point(aes(alpha = 0.05))`.
 
 **Method 2: Jittering the points**
 
@@ -247,4 +249,41 @@ As can be seen in the resulting @fig-jitter-example-plot-2, in this case jitteri
 Scatterplots display the relationship between two numerical variables.  They are among the most commonly used plots because they can provide an immediate way to see the trend in one numerical variable versus another.  However, if you try to create a scatterplot where either one of the two variables is not numerical, you might get strange results.  Be careful! 
 
 With medium to large datasets, you may need to play around with the different modifications to scatterplots we saw such as changing the transparency/opacity of the points or by jittering the points. This tweaking is often a fun part of data visualization, since you'll have the chance to see different relationships emerge as you tinker with your plots.
+
+
+
+## 5NG#2: Linegraphs {#linegraphs}
+
+The next of the five named graphs are linegraphs. Linegraphs show the relationship between two numerical variables when the variable on the x-axis is ordinal; there is an inherent ordering to the variable.
+
+The most common examples of linegraphs have some notion of time on the x-axis: hours, days, weeks, years, etc. Since time is naturally ordinal, we connect consecutive observations of the variable on the y-axis with a line. Linegraphs that have some notion of time on the x-axis are also called *time series* plots.
+
+### Linegraphs via `geom_line` {#geomline}
+
+Let's a linegraph to visualize a single NBA player's number of points scored across seasons.  To do so, we'll use `geom_line()`, instead of using `geom_point()` as we did for the scatterplots above:
+
+```{r}
+#hourlytemp, fig.cap="Hourly temperature in Newark for January 1-15, 2013."}
+#| fig-cap: Michael Jordon points over time
+ggplot(
+    data = nba %>%
+        filter(player_name == "Stephen Curry"),
+    mapping = aes(x = season_int, y = pts)
+) +
+    geom_line()
+```
+
+Let's break down this code piece-by-piece in terms of the grammar of graphics.  Within the `ggplot()` function call, we specify two of the components of the grammar of graphics as arguments:
+
+1. The `data`. Here we have provided a filtered version of our `nba` data set, selecting only those row where `player_name=="Stephen Curry"`.
+1. The `aes`thetic `mapping` by setting `mapping = aes(x = season_int, y = pts)`. Specifically, the variable `season_int` maps to the `x` position aesthetic, whereas the variable `pts` maps to the `y` position aesthetic.
+
+We add a layer to the `ggplot()` function call using the `+` sign. The layer in question specifies the third component of the grammar:  the `geom`etric object in question. In this case, the geometric object is a `line` set by specifying `geom_line()`. 
+
+
+
+### Summary
+
+Linegraphs, just like scatterplots, display the relationship between two numerical variables. However, it is preferred to use linegraphs over scatterplots when the variable on the x-axis (i.e., the explanatory variable) has an inherent ordering, such as some notion of time.  
+
 
