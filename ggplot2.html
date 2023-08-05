@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./single.html" rel="next">
+<link href="./descriptives.html" rel="next">
 <link href="./dplyr.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -227,7 +227,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Regressing</span></a>
+ <span class="menu-text">Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -235,20 +235,26 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./single.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,13 +271,30 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simulating Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simulating Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./missingness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Odds &amp; Ends</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
       </ul>
@@ -352,12 +375,12 @@ div.csl-indent {
 
 </header>
 
-<p>We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn’t easily obtain from just looking at the raw data values or even the summaries we generated in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>. To visualizer our data, we’ll be using the <code>ggplot2</code> package, as it provides an easy way to customize your plots. <code>ggplot2</code> is rooted in the data visualization theory known as <em>the grammar of graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span>, developed by Leland Wilkinson.</p>
+<p>We continue the development of your data analysis toolbox with data visualization. By visualizing data, we gain valuable insights we couldn’t easily obtain from just looking at the raw data values or even the summaries we generated in <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>. To visualizer our data, we’ll be using the <code>ggplot2</code> package, as it provides an easy way to customize your plots. <code>ggplot2</code> is rooted in the data visualization theory known as <em>the grammar of graphics</em> <span class="citation" data-cites="wilkinson2005">(<a href="references.html#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span>, developed by Leland Wilkinson.</p>
 <p>At their most basic, graphics/plots/charts (we use these terms interchangeably in this book) provide a nice way to explore the patterns in data, such as the <em>distribution</em> of individual variables and <em>relationships</em> between groups of variables. Graphics are designed to emphasize the findings and insights you want your audience to understand. This does, however, require a balancing act. On the one hand, you want to highlight as many interesting findings as possible. On the other hand, you don’t want to include so much information that it overwhelms your audience.</p>
 <p>As we will see, plots also help us to identify patterns in our data. We’ll see that a common extension of these ideas is to compare the <em>distribution</em> of one numerical variable, such as what are the center and spread of the values, as we go across the levels of a different categorical variable.</p>
 <section id="grammarofgraphics" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="grammarofgraphics"><span class="header-section-number">7.1</span> The grammar of graphics</h2>
-<p>We start with a discussion of a theoretical framework for data visualization known as “the grammar of graphics.” This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this chapter. In <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>, we saw how dplyr provides a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions like <code>filter</code> and <code>mutate</code>). Similar to dplyr’s grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing <em>statistical graphics</em> by combining different types of <em>layers</em>. This grammar was created by Leland Wilkinson <span class="citation" data-cites="wilkinson2005">(<a href="#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span> and has been implemented in a variety of data visualization software platforms like R, but also <a href="https://plot.ly/">Plotly</a> and <a href="https://www.tableau.com/">Tableau</a>.</p>
+<p>We start with a discussion of a theoretical framework for data visualization known as “the grammar of graphics.” This framework serves as the foundation for the <code>ggplot2</code> package which we’ll use extensively in this chapter. In <a href="dplyr.html"><span>Chapter&nbsp;6</span></a>, we saw how dplyr provides a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions like <code>filter</code> and <code>mutate</code>). Similar to dplyr’s grammar of data manipulation, ggplto2 provides a a grammar of graphics that defines a set of rules for constructing <em>statistical graphics</em> by combining different types of <em>layers</em>. This grammar was created by Leland Wilkinson <span class="citation" data-cites="wilkinson2005">(<a href="references.html#ref-wilkinson2005" role="doc-biblioref">Wilkinson 2012</a>)</span> and has been implemented in a variety of data visualization software platforms like R, but also <a href="https://plot.ly/">Plotly</a> and <a href="https://www.tableau.com/">Tableau</a>.</p>
 <section id="components-of-the-grammar" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="components-of-the-grammar"><span class="header-section-number">7.1.1</span> Components of the grammar</h3>
 <p>In short, the grammar tells us that:</p>
@@ -404,9 +427,13 @@ the `.groups` argument.</code></pre>
 <li>The <code>data</code> variable <strong>ast</strong> gets mapped to the <code>size</code> <code>aes</code>thetic of the points.</li>
 </ol>
 <p>That being said, this is just an example. Plots can specify points, lines, bars, and a variety of other geometric objects.</p>
-<p>Let’s summarize the three essential components of the grammar in <span class="citation" data-cites="tab-grammar-summary">(<a href="#ref-tab-grammar-summary" role="doc-biblioref"><strong>tab-grammar-summary?</strong></a>)</span>.</p>
-<div class="cell" data-tbl-cap="Summary of the grammar of graphics for this plot">
-<div class="cell-output cell-output-stdout">
+<p>Let’s summarize the three essential components of the grammar in <span class="quarto-unresolved-ref">?tbl-grammar-summary</span>.</p>
+<div id="tbl-grammar-summary" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Summary of the grammar of graphics for this plot">
+<div class="panel-caption table-caption">
+<p><strong>?(caption)</strong></p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <pre><code># A tibble: 7 × 3
   geom  aes   `data variable`
   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;          
@@ -417,6 +444,7 @@ the `.groups` argument.</code></pre>
 5 point y     pts            
 6 point color team           
 7 point size  ast            </code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -1092,7 +1120,7 @@ the `.groups` argument.</code></pre>
 </section>
 <section id="must-avoid-pie-charts" class="level3" data-number="7.8.2">
 <h3 data-number="7.8.2" class="anchored" data-anchor-id="must-avoid-pie-charts"><span class="header-section-number">7.8.2</span> Must avoid pie charts!</h3>
-<p>One of the most common plots used to visualize the distribution of categorical data is the pie chart. Though they may seem harmless, pie charts actually present a problem in that humans are unable to judge angles well. As Naomi Robbins describes in her book, <em>Creating More Effective Graphs</em> <span class="citation" data-cites="robbins2013">(<a href="#ref-robbins2013" role="doc-biblioref"><strong>robbins2013?</strong></a>)</span>, people tend to overestimate angles greater than 90 degrees and underestimate angles less than 90 degrees. In other words, it is difficult to determine the relative size of one piece of the pie compared to another. So stay away!</p>
+<p>One of the most common plots used to visualize the distribution of categorical data is the pie chart. Though they may seem harmless, pie charts actually present a problem in that humans are unable to judge angles well. As Naomi Robbins describes in her book, <em>Creating More Effective Graphs</em> <span class="citation" data-cites="robbins2013">(<a href="references.html#ref-robbins2013" role="doc-biblioref"><strong>robbins2013?</strong></a>)</span>, people tend to overestimate angles greater than 90 degrees and underestimate angles less than 90 degrees. In other words, it is difficult to determine the relative size of one piece of the pie compared to another. So stay away!</p>
 </section>
 <section id="sec-two-categ-barplot" class="level3" data-number="7.8.3">
 <h3 data-number="7.8.3" class="anchored" data-anchor-id="sec-two-categ-barplot"><span class="header-section-number">7.8.3</span> Two categorical variables</h3>
@@ -1211,7 +1239,7 @@ the `.groups` argument.</code></pre>
 <h2 data-number="7.9" class="anchored" data-anchor-id="sec-data-vis-conclusion"><span class="header-section-number">7.9</span> Conclusion</h2>
 <section id="summary-table" class="level3" data-number="7.9.1">
 <h3 data-number="7.9.1" class="anchored" data-anchor-id="summary-table"><span class="header-section-number">7.9.1</span> Summary table</h3>
-<p>Let’s recap all five of the five named graphs (5NG) in <span class="citation" data-cites="tab-viz-summary-table">(<a href="#ref-tab-viz-summary-table" role="doc-biblioref"><strong>tab-viz-summary-table?</strong></a>)</span> summarizing their differences. Using these 5NG, you’ll be able to visualize the distributions and relationships of variables contained in a wide array of datasets. This will be even more the case as we start to map more variables to more of each <code>geom</code>etric object’s <code>aes</code>thetic attribute options, further unlocking the awesome power of the <code>ggplot2</code> package.</p>
+<p>Let’s recap all five of the five named graphs (5NG) in <a href="#tbl-viz-summary-table">Table&nbsp;<span>7.1</span></a> summarizing their differences. Using these 5NG, you’ll be able to visualize the distributions and relationships of variables contained in a wide array of datasets. This will be even more the case as we start to map more variables to more of each <code>geom</code>etric object’s <code>aes</code>thetic attribute options, further unlocking the awesome power of the <code>ggplot2</code> package.</p>
 <div id="tbl-viz-summary-table" class="anchored">
 <table class="table">
 <caption>Table&nbsp;7.1: My Caption</caption>
@@ -1276,10 +1304,10 @@ the `.groups` argument.</code></pre>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(flights, <span class="fu">aes</span>(<span class="at">x =</span> team_abbreviation)) <span class="sc">+</span></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You’ll notice that both code segments create the same barplot, even though in the second segment we omitted the <code>data =</code> and <code>mapping =</code> code argument names. This is because the <code>ggplot()</code> function by default assumes that the <code>data</code> argument comes first and the <code>mapping</code> argument comes second. As long as you specify the data frame in question first and the <code>aes()</code> mapping second, you can omit the explicit statement of the argument names <code>data =</code> and <code>mapping =</code>. That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the <code>data=</code> argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for reability and clarity purposes.</p>
+<p>You’ll notice that both code segments create the same barplot, even though in the second segment we omitted the <code>data =</code> and <code>mapping =</code> code argument names. This is because the <code>ggplot()</code> function by default assumes that the <code>data</code> argument comes first and the <code>mapping</code> argument comes second. As long as you specify the data frame in question first and the <code>aes()</code> mapping second, you can omit the explicit statement of the argument names <code>data =</code> and <code>mapping =</code>. That being said, explicit is better than implicit. Given the uniformity of the tidyverse packages, you will often see the <code>data=</code> argument name omitted (because the first argument of all tidyverse function is a tibble), but it is good practice to include the names of other arguments for readability and clarity purposes.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2012. <em>The Grammar of Graphics</em>. Springer.
 </div>
@@ -1528,8 +1556,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./single.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Simple</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./descriptives.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
