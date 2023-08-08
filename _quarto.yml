@@ -4,9 +4,13 @@ project:
 
 book:
     title: "statslab"
+    subtitle: "The \"How\" of Statistics"
+    author: Christian C. Luhmann
     repo-url: https://github.com/cluhmann/statslab
+    reader-mode: true
+
     navbar:
-        logo: beta.png
+        logo: images/logos/beta.png
         logo-alt: "Several beta distributions"
         search: false
     search:
@@ -39,12 +43,14 @@ book:
       chapters:
         - simulation.qmd
         - missingness.qmd
-    - part: references.qmd
+    appendices:
+        - references.qmd
 
 bibliography: references.bib
 
 format:
     html:
-        theme: united
+        theme: sandstone
+# theme: sandstone, litera, spacelab, zephyr
         css: styles.css
         toc: true
