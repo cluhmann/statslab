@@ -4,6 +4,7 @@
 #| echo: false
 #| output: false
 library(tidyverse)
+nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
 ```
 
 Any time that you get a new data set to look at, one of the first tasks that you have to do is find ways of summarising the data in a compact, easily understood fashion. This is what **_descriptive statistics_** (as opposed to inferential statistics) is all about. In fact, to many people the term "statistics" is synonymous with descriptive statistics. We already got a bit of an idea about why we need descriptive statistics in @sec-histograms. This chapter will focus primarily on the functions available to calculate a variety of descriptive statistics and, for the most part, assume that you know why you might prefer one over another.
@@ -282,7 +283,7 @@ Interpreting standard deviations is slightly more complex. Because the standard 
 ```{r}
 #| label: fig-age-sd
 #| echo: false
-#| fig-cap="An illustration of the standard deviation, applied to `nba$age`. The red bars in the histogram show how much of the data fall within one standard deviation of the mean."
+#| fig-cap: "An illustration of the standard deviation, applied to `nba$age`. The red bars in the histogram show how much of the data fall within one standard deviation of the mean."
 
 # mean and sd
 h<-hist(nba$age, breaks = 50, plot = FALSE)
@@ -329,9 +330,9 @@ Apart from the weirdness of having to type that `constant = 1` part, this is pre
 Okay, so what exactly is this `constant = 1` argument? I won't go into all the details here, but here's the gist. Although the "raw" MAD value that I've described above is completely interpretable on its own terms, that's not actually how it's used in a lot of real world contexts. Instead, what happens a lot is that the researcher *actually* wants to calculate the standard deviation. However, in the same way that the mean is very sensitive to extreme values, the standard deviation is vulnerable to the exact same issue. So, in much the same way that people sometimes use the median as a "robust" way of calculating "something that is like the mean", it's not uncommon to use MAD as a method for calculating "something that is like the standard deviation". Unfortunately, the *raw* MAD value doesn't do this. Our raw MAD value is 19.5, and our standard deviation was 26.07. However, what some clever person has shown is that, under certain assumptions (normally-distributed), you can multiply the raw MAD value by 1.4826 and obtain a number that is directly comparable to the standard deviation. As a consequence, the default value of `constant` is 1.4826, and so when you use the `mad()` command without manually setting a value, here's what you get:
 
 ```{r}
-mad( afl.margins )
-
+mad(nba$age)
 ```
+
 I should point out, though, that if you want to use this "corrected" MAD value as a robust version of the standard deviation, you really are relying on the assumption that the data are (or at least, are "supposed to be" in some sense) symmetric and basically shaped like a bell curve. That's really *not* true for our `ages` data, so in this case I wouldn't try to use the MAD value this way.
 
 
@@ -482,7 +483,7 @@ To give us a general sense of how closely related two variables are, we can draw
 ```{r}
 #| label: fig-scatterptsast
 #| fig-cap: "Scatterplot showing the relationship between `pts` and `ast`"
-#| echo:false
+#| echo: false
 ggplot(data = nba, mapping = aes(x = player_height, y = player_weight)) + 
   geom_point(alpha = 0.1)
 ggplot(data = nba, mapping = aes(x = pts, y = ast)) + 
@@ -496,7 +497,7 @@ Or we can look at the relationship between players' heights and weights.
 ```{r}
 #| label: fig-scatterheightweight
 #| fig-cap: "Scatterplot showing the relationship between `player_height` and `player_weight`"
-#| echo:false
+#| echo: false
 ggplot(data = nba, mapping = aes(x = player_height, y = player_weight)) + 
   geom_point(alpha = 0.1)
 ```
@@ -506,7 +507,7 @@ It's clear that the relationship is *qualitatively* the same in both cases: more
 ```{r}
 #| label: fig-scatterdraftpts
 #| fig-cap: "Scatterplot showing the relationship between `pts` and `draft_number`"
-#| echo:false
+#| echo: false
 ggplot(data = nba, mapping = aes(x = draft_number, y = pts)) + 
   geom_point(alpha = 0.075)
 ```
@@ -550,7 +551,7 @@ Let's take a quick look at the relationship between a player's draft number and 
 cor(nba$draft_number, nba$pts)
 ```
 
-Here we can see that appears to be a problem. `cor()` has returned the unhelpful result of `NA`. This is because there are missing values in `nba$draft_number` (some players are not drafted and thus have no draft number). So the correlation between these variables is actually undefined. But this isn't super helpful. We may wish to determine the correlation among players who have valid values for both variables, both `draft_number` and `pts`.  To get this, we need to tell `cor` to use any `draft_number`-`pts` pairs that consist of two valid (non-NA) values.  In other words, any "complete" observations.
+Here we can see that appears to be a problem. `cor()` has returned the unhelpful result of `NA`. This is because there are missing values in `nba$draft_number` (we converted the "Undrafted" values to NA when we loaded the CSV file, @sec-whatisdplyr). So the correlation between these variables is actually undefined. But this isn't super helpful. We may wish to determine the correlation among players who have valid values for both variables, both `draft_number` and `pts`.  To get this, we need to tell `cor` to use any `draft_number`-`pts` pairs that consist of two valid (non-NA) values.  In other words, any "complete" observations.
 
 ```{r}
 cor(nba$draft_number, nba$pts, use="complete.obs")
