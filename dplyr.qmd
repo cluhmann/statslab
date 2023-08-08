@@ -181,7 +181,7 @@ nba %>%
 The benefits of this may not be immediately obvious. But the ability to form a *chain* of data wrangling operations by combining tidyverse functions (verbs) into a single sequence will be utilized extensively and is made possible by the pipe operator `%>%`.
 
 
-## summarize
+## summarize {#sec-summarize}
 
 The next common task when working with data frames is to compute *summary statistics*. Summary statistics are single numerical values that summarize a large number of values. Commonly known examples of summary statistics include the mean (i.e., the "average"), the median, and the mode. Other examples of summary statistics that might not immediately come to mind include the *sum*, the smallest value also called the *minimum*, the largest value also called the *maximum*, and the *standard deviation*.
 
@@ -242,7 +242,7 @@ nba %>%
 ```
 
 
-## group_by
+## group_by {#sec-groupby}
 
 Say instead of a single mean number of points for the entire NBA, you would like a mean number of points separately for each college players attended. In other words, we would like to compute the mean number of points split by college. We can do this by "grouping" the `pts` measurements by the values of another variable, in this case by the values of the variable `college` . Run the following code:
 
@@ -328,7 +328,7 @@ by_college_annually_incorrect
 What happened here is that the second `group_by(season)` overwrote the grouping structure meta-data of the earlier `group_by(college)`, so that in the end we are only grouping by `season`. The lesson here is if you want to `group_by()` two or more variables, you should include all the variables at the same time in the same `group_by()` adding a comma between the variable names.
 
 
-## mutate
+## mutate {#sec-mutate}
 
 Another common transformation of data is to create/compute new variables based on existing ones. For example, the heights in our `nba` data set are measured in units of centimeters.  But say you are more comfortable thinking of inches instead of centimeters. The formula to convert centimeters to inches is:
 

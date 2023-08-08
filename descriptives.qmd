@@ -556,8 +556,10 @@ cor(nba$draft_number, nba$pts, use="complete.obs")
 The `cor()` function is actually a bit more powerful than these simple examples suggest. For example, you can also calculate a complete "correlation matrix", between all pairs of variables in a given data frame. Let's do that for a selection of variables in our `nba` data frame. We have some missing values, so we will need to filter those out along the way.
 
 ```{r}
-# correlate all pairs of variables in "parenthood":
-nba %>% select(pts, ast, player_height, player_weight, draft_number) %>% na.exclude %>% cor(use = "complete.obs") %>% round(2)
+nba %>%
+    select(pts, ast, player_height, player_weight, draft_number) %>%
+    cor(use = "complete.obs") %>%
+    round(2)
 ```
 
 Here we can quickly see the positive relationships between `pts` and `ast` and between `player_height` and `player_weight`, as well as the negative relationship between `draft_number` and both `pts` and `ast`.  You might also note the negative relationships between `player_height` (and `player_weight`) and both `ast`. This might may sense to you if you knew anything about basketball (but I don't).

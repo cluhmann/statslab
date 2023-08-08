@@ -39,9 +39,25 @@ book:
         - single.qmd
         - multiple.qmd
         - anova.qmd
+- part: ""
+Correlation overview
+Pearson product-moment correlation
+Correlation for non-continuous variables
+Partial and semi-partial correlation
+Bivariate linear regression
+Multiple linear regression
+Regression assumption checking
+Ordinary least squares estimation
+Data cleaning, transformations, and resampling
+Sequential and statistical regression
+Curvilinear regression
+Regression with categorical IVs
+Interactions in regression
+Regression with categorical DVs
+
     - part: "Odds & Ends"
       chapters:
-        - simulation.qmd
+        - sampling.qmd
         - missingness.qmd
     appendices:
         - references.qmd
