@@ -8,7 +8,7 @@ library(tidyverse)
 
 Once you have data loaded, it's time to begin what is variously called "wrangling", "munging", cleaning, or "pre-processing".  These various terms refer to the activities that are almost always necessary between the point at which you acquire your "raw" data and the point at which you are ready to begin your statistical analyses.  For example, you might wish to add together several different variables to get a new variable that is the sum. Or you might need to normalize a variable's measured values so that it has a mean of zero and standard deviation of zero.
 
-## What is dplyr {sec-whatisdplyr}
+## What is dplyr {#sec-whatisdplyr}
 
 In the tidyverse, the package responsible for such activities is called `dplyr`. This package contains a set of functions, each of which manipulates data in a particular way.  Each of these functions is very useful on its own. However, the real power of dplyr comes from the fact that you can repeatedly applying dplyr functions, each operating on the result from the previous. These "chains" of functions allow you to **compose** complex data manipulation operations that ultimately transform your data into whatever you need.  For this reason, dplyr is sometimes said to instantiate a "grammar" of data manipulation, a grammar which is made up of several "verbs" (functions).  These function include:
 
