@@ -305,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-dplyr" id="toc-what-is-dplyr" class="nav-link active" data-scroll-target="#what-is-dplyr"><span class="header-section-number">6.1</span> What is dplyr</a></li>
+  <li><a href="#sec-whatisdplyr" id="toc-sec-whatisdplyr" class="nav-link active" data-scroll-target="#sec-whatisdplyr"><span class="header-section-number">6.1</span> What is dplyr</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">6.2</span> filter</a></li>
   <li><a href="#pipe" id="toc-pipe" class="nav-link" data-scroll-target="#pipe"><span class="header-section-number">6.3</span> pipe</a></li>
   <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize"><span class="header-section-number">6.4</span> summarize</a></li>
@@ -340,8 +340,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>Once you have data loaded, it’s time to begin what is variously called “wrangling”, “munging”, cleaning, or “pre-processing”. These various terms refer to the activities that are almost always necessary between the point at which you acquire your “raw” data and the point at which you are ready to begin your statistical analyses. For example, you might wish to add together several different variables to get a new variable that is the sum. Or you might need to normalize a variable’s measured values so that it has a mean of zero and standard deviation of zero.</p>
-<section id="what-is-dplyr" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="what-is-dplyr"><span class="header-section-number">6.1</span> What is dplyr</h2>
+<section id="sec-whatisdplyr" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-whatisdplyr"><span class="header-section-number">6.1</span> What is dplyr</h2>
 <p>In the tidyverse, the package responsible for such activities is called <code>dplyr</code>. This package contains a set of functions, each of which manipulates data in a particular way. Each of these functions is very useful on its own. However, the real power of dplyr comes from the fact that you can repeatedly applying dplyr functions, each operating on the result from the previous. These “chains” of functions allow you to <strong>compose</strong> complex data manipulation operations that ultimately transform your data into whatever you need. For this reason, dplyr is sometimes said to instantiate a “grammar” of data manipulation, a grammar which is made up of several “verbs” (functions). These function include:</p>
 <ol type="1">
 <li><code>filter()</code>: select a subset of rows from a data frame</li>
