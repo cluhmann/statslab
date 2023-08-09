@@ -250,7 +250,7 @@ virtual_prop_red
 As with our 33 groups of friends' tactile samples, there is variation in the resulting 33 virtual proportions red. Let's visualize this variation in a histogram in @fig-samplingdistribution-virtual. Note that we add `binwidth = 0.05` and `boundary = 0.4` arguments as well. Recall that setting `boundary = 0.4` ensures a binning scheme with one of the bins' boundaries at 0.4. Since the `binwidth = 0.05` is also set, this will create bins with boundaries at 0.30, 0.35, 0.45, 0.5, etc. as well.
 
 ```{r}
-#| eval: false
+#| echo: false
 #| label: fig-samplingdistribution-virtual
 #| fig-cap: "Distribution of 33 proportions based on 33 samples of size 50."
 ggplot(virtual_prop_red, aes(x = prop_red)) +
@@ -433,6 +433,7 @@ comparing_sampling_distributions <- ggplot(virtual_prop, aes(x = prop_red)) +
     title = "Comparing distributions of proportions red for three different shovel sizes."
   ) +
   facet_wrap(~n)
+comparing_sampling_distributions
 ```
 
 Observe that as the sample size increases, the variation of the 1000 replicates of the proportion of red decreases. In other words, as the sample size increases, there are fewer differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing Figure @fig-comparing-sampling-distributions, all three histograms appear to center around roughly 40%.
@@ -460,6 +461,7 @@ Let's compare these three measures of distributional variation in @tbl-comparing
 ```{r}
 #| label: tbl-comparing-n
 #| echo: false
+#| tbl-cap: "Comparing standard deviations of proportions red for three different shovels"
 comparing_n_table <- virtual_prop %>%
   group_by(n) %>%
   summarize(sd = sd(prop_red)) %>%
@@ -468,7 +470,6 @@ comparing_n_table <- virtual_prop %>%
 comparing_n_table %>%
   kable(
     digits = 3,
-    caption = "Comparing standard deviations of proportions red for three different shovels",
     booktabs = TRUE,
     linesep = ""
   )
