@@ -266,8 +266,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./simulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Simulating Data</span></span></a>
+  <a href="./sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -308,12 +308,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-whatisdplyr" id="toc-sec-whatisdplyr" class="nav-link active" data-scroll-target="#sec-whatisdplyr"><span class="header-section-number">6.1</span> What is dplyr</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">6.2</span> filter</a></li>
   <li><a href="#pipe" id="toc-pipe" class="nav-link" data-scroll-target="#pipe"><span class="header-section-number">6.3</span> pipe</a></li>
-  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize"><span class="header-section-number">6.4</span> summarize</a></li>
-  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">6.5</span> group_by</a>
+  <li><a href="#sec-summarize" id="toc-sec-summarize" class="nav-link" data-scroll-target="#sec-summarize"><span class="header-section-number">6.4</span> summarize</a></li>
+  <li><a href="#sec-groupby" id="toc-sec-groupby" class="nav-link" data-scroll-target="#sec-groupby"><span class="header-section-number">6.5</span> group_by</a>
   <ul class="collapse">
   <li><a href="#grouping-by-more-than-one-variable" id="toc-grouping-by-more-than-one-variable" class="nav-link" data-scroll-target="#grouping-by-more-than-one-variable"><span class="header-section-number">6.5.1</span> Grouping by more than one variable</a></li>
   </ul></li>
-  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">6.6</span> mutate</a></li>
+  <li><a href="#sec-mutate" id="toc-sec-mutate" class="nav-link" data-scroll-target="#sec-mutate"><span class="header-section-number">6.6</span> mutate</a></li>
   <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><span class="header-section-number">6.7</span> arrange</a></li>
   <li><a href="#sec-tibblesactivities" id="toc-sec-tibblesactivities" class="nav-link" data-scroll-target="#sec-tibblesactivities"><span class="header-section-number">6.8</span> Activities</a></li>
   </ul>
@@ -485,8 +485,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The benefits of this may not be immediately obvious. But the ability to form a <em>chain</em> of data wrangling operations by combining tidyverse functions (verbs) into a single sequence will be utilized extensively and is made possible by the pipe operator <code>%&gt;%</code>.</p>
 </section>
-<section id="summarize" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="summarize"><span class="header-section-number">6.4</span> summarize</h2>
+<section id="sec-summarize" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-summarize"><span class="header-section-number">6.4</span> summarize</h2>
 <p>The next common task when working with data frames is to compute <em>summary statistics</em>. Summary statistics are single numerical values that summarize a large number of values. Commonly known examples of summary statistics include the mean (i.e., the “average”), the median, and the mode. Other examples of summary statistics that might not immediately come to mind include the <em>sum</em>, the smallest value also called the <em>minimum</em>, the largest value also called the <em>maximum</em>, and the <em>standard deviation</em>.</p>
 <p>Let’s calculate two summary statistics of the <code>draft_round</code> variable in the <code>nba</code> data frame: the mean and standard deviation. To compute these summary statistics, we need the <code>mean()</code> and <code>sd()</code> <em>summary functions</em> in R. Summary functions in R take in many values and return a single value. More precisely, we’ll use the <code>mean()</code> and <code>sd()</code> summary functions within the <code>summarize()</code> function from the <code>dplyr</code> package. The <code>summarize()</code> function takes in a data frame and returns a data frame with only one row corresponding to the value of the summary statistic(s).</p>
 <p>We’ll save the results in a new data frame called <code>summary_round</code> that will have two columns/variables: the <code>mean</code> and the <code>std_dev</code>:</p>
@@ -563,8 +563,8 @@ Sometimes missingness is data
 </div>
 </div>
 </section>
-<section id="group_by" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="group_by"><span class="header-section-number">6.5</span> group_by</h2>
+<section id="sec-groupby" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-groupby"><span class="header-section-number">6.5</span> group_by</h2>
 <p>Say instead of a single mean number of points for the entire NBA, you would like a mean number of points separately for each college players attended. In other words, we would like to compute the mean number of points split by college. We can do this by “grouping” the <code>pts</code> measurements by the values of another variable, in this case by the values of the variable <code>college</code> . Run the following code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
@@ -772,8 +772,8 @@ Sometimes missingness is data
 <p>What happened here is that the second <code>group_by(season)</code> overwrote the grouping structure meta-data of the earlier <code>group_by(college)</code>, so that in the end we are only grouping by <code>season</code>. The lesson here is if you want to <code>group_by()</code> two or more variables, you should include all the variables at the same time in the same <code>group_by()</code> adding a comma between the variable names.</p>
 </section>
 </section>
-<section id="mutate" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="mutate"><span class="header-section-number">6.6</span> mutate</h2>
+<section id="sec-mutate" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-mutate"><span class="header-section-number">6.6</span> mutate</h2>
 <p>Another common transformation of data is to create/compute new variables based on existing ones. For example, the heights in our <code>nba</code> data set are measured in units of centimeters. But say you are more comfortable thinking of inches instead of centimeters. The formula to convert centimeters to inches is:</p>
 <p><span class="math display">\[
 \text{height in inches} = \frac{\text{height in centimeters.}}{2.54}
