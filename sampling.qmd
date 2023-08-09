@@ -25,7 +25,7 @@ One way to answer this question would be to perform an exhaustive count: remove 
 
 ### Using the shovel once 
 
-Instead of performing an exhaustive count, let's insert a shovel into the bowl as seen in @fig-sampling-exercise-2. Using the shovel, let's remove $5 \cdot 10 = 50$ balls, as seen in Figure @fig-sampling-exercise-3.
+Instead of performing an exhaustive count, let's insert a shovel into the bowl as seen in @fig-sampling-exercise-2. Using the shovel, let's remove $5 \cdot 10 = 50$ balls, as seen in @fig-sampling-exercise-3.
 
 ![Inserting a shovel into the bowl.](images/sampling_bowl_2.jpg){#fig-sampling-exercise-2}
 
@@ -35,7 +35,7 @@ Observe that 17 of the balls are red and thus 0.34 = 34% of the shovel's balls a
 
 However, say, we started this activity over from the beginning. In other words, we replace the 50 balls back into the bowl and start over. Would we remove exactly 17 red balls again? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% again? Maybe? 
 
-What if we repeated this activity several times following the process shown in Figure \@ref(fig:sampling-exercise-3b)? Would we obtain exactly 17 red balls each time? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% every time? Surely not. Let's repeat this exercise several times with the help of 33 groups of friends to understand how the value differs with repetition.
+What if we repeated this activity several times following the process shown in @fig-sampling-exercise-3b? Would we obtain exactly 17 red balls each time? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% every time? Surely not. Let's repeat this exercise several times with the help of 33 groups of friends to understand how the value differs with repetition.
 
 
 ### Using the shovel 33 times {#sec-student-shovels}
@@ -98,7 +98,7 @@ In the exercise above, we performed a *tactile* sampling activity by hand. In ot
 
 ### Using the virtual shovel once
 
-Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in Figure @fig-sampling-exercise-1. To this end, we included a data frame named `bowl` in the `moderndive` package. The rows of `bowl` correspond exactly with the contents of the actual bowl. 
+Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in @fig-sampling-exercise-1. To this end, we included a data frame named `bowl` in the `moderndive` package. The rows of `bowl` correspond exactly with the contents of the actual bowl. 
 
 ```{r}
 bowl<-read_csv("data/bowl.csv")
@@ -261,7 +261,7 @@ ggplot(virtual_prop_red, aes(x = prop_red)) +
 
 Observe that we occasionally obtained proportions red that are less than 30%. On the other hand, we occasionally obtained proportions that are greater than 45%. However, the most frequently occurring proportions were between 35% and 40%. Why do we have these differences in proportions red? Because of *sampling variation*. 
 
-Let's now compare our virtual results with our tactile results from the previous section in Figure \@ref(fig:tactile-vs-virtual). Observe that both histograms are somewhat similar in their center and variation, although not identical. These slight differences are again due to random sampling variation. Furthermore, observe that both distributions are somewhat bell-shaped.
+Let's now compare our virtual results with our tactile results from the previous section in @fig-tactile-vs-virtual. Observe that both histograms are somewhat similar in their center and variation, although not identical. These slight differences are again due to random sampling variation. Furthermore, observe that both distributions are somewhat bell-shaped.
 
 ```{r}
 #| label: fig-tactile-vs-virtual
@@ -436,7 +436,7 @@ comparing_sampling_distributions <- ggplot(virtual_prop, aes(x = prop_red)) +
 comparing_sampling_distributions
 ```
 
-Observe that as the sample size increases, the variation of the 1000 replicates of the proportion of red decreases. In other words, as the sample size increases, there are fewer differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing Figure @fig-comparing-sampling-distributions, all three histograms appear to center around roughly 40%.
+Observe that as the sample size increases, the variation of the 1000 replicates of the proportion of red decreases. In other words, as the sample size increases, there are fewer differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing @fig-comparing-sampling-distributions, all three histograms appear to center around roughly 40%.
 
 We can be numerically explicit about the amount of variability in our three sets of 1000 values of `prop_red` using the *standard deviation* (@sec-sd).  For all three sample sizes, let's compute the standard deviation of the 1000 proportions red by running the following data wrangling code that uses the `sd()` summary function.
 
@@ -620,7 +620,7 @@ So as the sample size increases, the standard deviation of the proportion of red
 
 Similarly to confusion between *sampling distributions* with *a sample's distribution*, people often confuse the *standard error* with the *standard deviation*. This is especially the case since a standard error is itself a kind of standard deviation. The best advice we can give is that a standard error is merely a *kind* of standard deviation: the standard deviation of any point estimate from sampling. In other words, all standard errors are standard deviations, but not every standard deviation is necessarily a standard error. 
 
-To help reinforce these concepts, let's re-display @fig-comparing-sampling-distributions but using our new terminology, notation, and definitions relating to sampling in Figure @fig-comparing-sampling-distributions-2.
+To help reinforce these concepts, let's re-display @fig-comparing-sampling-distributions but using our new terminology, notation, and definitions relating to sampling in @fig-comparing-sampling-distributions-2.
 
 ```{r}
 #| label: fig-comparing-sampling-distributions-2
