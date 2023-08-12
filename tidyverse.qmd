@@ -10,11 +10,11 @@ library(kableExtra)
 
 From here out on we will be utilizing a set of inter-related packages collectively known as the "tidyverse".  These packages share conventions and revolve around a specific flavor of dataframe (known as a "tibble") which stores data in a specific format (the "tidy" format, described below). This standardization of input and output makes transitions between different functions within the different tidyverse packages relatively seamless. For more information, check out the [tidyverse.org](https://www.tidyverse.org/) webpage for the package.  In this chapter, we cover what the tidyverse libraries are, how to install them, and how to load them.
 
-## "Tidy" data {#tidy-data-ex}
+## "Tidy" data {#sec-tidy-data-ex}
 
 Let's now learn about the concept of "tidy" data format.
 
-### Definition of "tidy" data {#tidy-definition}
+### Definition of "tidy" data {#sec-tidy-definition}
 
 You have surely heard the word "tidy" in your life:
 
@@ -115,18 +115,9 @@ stocks %>%
 In this case, even though the variable "Boeing Price" occurs just like in our non-"tidy" data, the data *is* "tidy" since there are three variables corresponding to three unique pieces of information: Date, Boeing price, and the Weather that particular day.
 
 
-## `tidyverse` package {#tidyverse-package}
+## `tidyverse` package {#sec-tidyverse-package}
 
-The following four packages, which are among four of the most frequently used R packages for data science, will be heavily used throughout the book:
-
-```{r}
-#| eval: false
-
-library(ggplot2)
-library(dplyr)
-library(readr)
-library(tidyr)
-```
+The following four packages, which are among four of the most frequently used R packages for data science, will be heavily used throughout the book: `ggplot2`, `dplyr`, `readr`, and `tidyr`.
 
 The `ggplot2` package is for data visualization, `dplyr` is for data wrangling, `readr` is for importing CSV files into R (we used it in @sec-loadingcsv), and `tidyr` is for converting data to "tidy" format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the `tidyverse` package. The `tidyverse` package acts as an "umbrella" package whereby installing/loading it will install/load multiple packages at once for you. 
 
@@ -154,9 +145,12 @@ library(forcats)
 ```
 
 
-The `purrr`, `tibble`, `stringr`, and `forcats` are left for a more advanced book; check out [*R for Data Science*](http://r4ds.had.co.nz/) to learn about these packages.
+For the remainder of this book, we'll start every chapter by running `library(tidyverse)` instead of loading the various component packages individually. The `tidyverse` "umbrella" package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in "tidy" format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information (including the more advanced packages, `purrr`, `tibble`, `stringr`, and `forcats`), check out the [tidyverse.org](https://www.tidyverse.org/) webpage for the package and the book [_ggplot2: Elegant Graphics ofr Data Analysis_](https://ggplot2-book.org/).
 
-For the remainder of this book, we'll start every chapter by running `library(tidyverse)` instead of loading the various component packages individually. The `tidyverse` "umbrella" package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in "tidy" format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information, check out the [tidyverse.org](https://www.tidyverse.org/) webpage for the package.
+
+## `tidymodels` package {#sec-tidymodels-package}
+
+In addition to the packages listed above, there are also a variety of packages that live in a sort of "extended" tidyverse.  These include packages such as `lubridate` (for handling dates and times) and `magrittr` (providing pipe operators).  One particularly useful package is `modelr` which is used for for creating analysis pipelines.  However, the `modelr` package has been superseded by a collection of packages called `tidymodels`.  Like `tidyverse`, `tidymodels` is an umbrella package encapsulating: `rsample`, `parsnip`, `recipes`, `broom` and other packages designed to facilitate machine learning-style data analysis.  We will make particular use of a package called `infer`, which provides a high-level interface for performing statistical inference.  For more information, check out  [www.tidymodels.org](https://www.tidymodels.org) and the book [_Tidy Modeling with R_](https://www.tmwr.org/).
 
 
 ## Activities  {#sec-rlangactivities}

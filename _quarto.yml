@@ -36,6 +36,7 @@ book:
     - part: "Statistics"
       chapters:
         - descriptives.qmd
+        - hypothesis.qmd
 #        - correlation.qmd
         - single.qmd
         - multiple.qmd

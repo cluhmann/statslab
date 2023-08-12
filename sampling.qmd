@@ -96,9 +96,9 @@ The purpose of this sampling activity was to develop an understanding of two key
 In the exercise above, we performed a *tactile* sampling activity by hand. In other words, we used a physical bowl of balls and a physical shovel. We performed this sampling activity by hand first so that we could develop a firm understanding of the root ideas behind sampling. In this section, we'll mimic this tactile sampling activity with a *virtual* sampling activity using a computer. In other words, we'll use a virtual analog to the bowl of balls and a virtual analog to the shovel. 
 
 
-### Using the virtual shovel once
+### Using the virtual shovel once  {#sec-shovel-once}
 
-Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in @fig-sampling-exercise-1. To this end, we included a data frame named `bowl` in the `moderndive` package. The rows of `bowl` correspond exactly with the contents of the actual bowl. 
+Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in @fig-sampling-exercise-1. To this end, we have created a CSV file named `bowl.csv` The rows of `bowl` correspond exactly with the contents of the actual bowl. 
 
 ```{r}
 bowl<-read_csv("data/bowl.csv")
@@ -223,7 +223,7 @@ virtual_shovel %>%
 Great! `r virtual_shovel_perc_red`% of `virtual_shovel`'s 50 balls were red! So based on this particular sample of 50 balls, our guess at the proportion of the `bowl`'s balls that are red is `r virtual_shovel_perc_red`%. But remember from our earlier tactile sampling activity that if we repeat this sampling, we will not necessarily obtain the same value of `r virtual_shovel_perc_red`% again. There will likely be some variation. In fact, our 33 groups of friends computed 33 such proportions whose distribution we visualized in @fig-samplingdistribution-tactile. We saw that these estimates *varied*. Let's now perform the virtual analog of having 33 groups of students use the sampling shovel!
 
 
-### Using the virtual shovel 33 times
+### Using the virtual shovel 33 times {#sec-shovel-33-times}
 
 Recall that in our tactile sampling exercise in @sec-sampling-activity, we had 33 groups of students each use the shovel, yielding 33 samples of size 50 balls. We then used these 33 samples to compute 33 proportions. In other words, we repeated/replicated using the shovel 33 times. We can perform this repeated/replicated sampling virtually by once again using our virtual shovel function `rep_sample_n()`, but by adding the `reps = 33` argument. This is telling R that we want to repeat the sampling 33 times. 
 
@@ -602,6 +602,7 @@ For example, observe the centers of all three sampling distributions: they are a
 ```{r}
 #| label: tbl-comparing-n-repeat
 #| echo: false
+#| tbl-cap: "Previously seen comparing standard deviations of proportions red for three different shovels"
 comparing_n_table <- virtual_prop %>%
   group_by(n) %>%
   summarize(sd = sd(prop_red)) %>%
@@ -610,7 +611,6 @@ comparing_n_table <- virtual_prop %>%
 comparing_n_table %>%
   kable(
     digits = 3,
-    caption = "Previously seen comparing standard deviations of proportions red for three different shovels",
     booktabs = TRUE,
     linesep = ""
   )
@@ -753,6 +753,7 @@ In this chapter, we performed both tactile and virtual sampling exercises to inf
 ```{r}
 #| label: tbl-ch8
 #| echo: false
+#| tbl-cap: "Scenarios of sampling for inference"
 # The following Google Doc is published to CSV and loaded using read_csv():
 # https://docs.google.com/spreadsheets/d/1QkOpnBGqOXGyJjwqx1T2O5G5D72wWGfWlPyufOgtkk4/edit#gid=0
 
@@ -760,10 +761,8 @@ sampling_scenarios <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRd6bBgNw
     read_csv(na = "") %>%
     slice(1:5)
 
-
 sampling_scenarios %>%
   kable(
-    caption = "\\label{tab:summarytable-ch8}Scenarios of sampling for inference",
     booktabs = TRUE,
     escape = FALSE,
     linesep = ""
@@ -774,16 +773,6 @@ sampling_scenarios %>%
   column_spec(4, width = "1.5in") %>%
   column_spec(5, width = "0.6in")
 ```
-
-In the rest of this book, we'll cover all the remaining scenarios as follows:
-
-* In Chapter \@ref(confidence-intervals), we'll cover examples of statistical inference for
-    + Scenario 2: The mean age $\mu$ of all pennies in circulation in the US.
-    + Scenario 3: The difference $p_1 - p_2$ in the proportion of people who yawn *when seeing someone else yawn first* minus the proportion of people who yawn *without seeing someone else yawn first*. This is an example of *two-sample* inference\index{two-sample inference}.
-* In Chapter \@ref(hypothesis-testing), we'll cover an example of statistical inference for
-    + Scenario 4: The difference $\mu_1 - \mu_2$ in mean IMDb ratings for action and romance movies. This is another example of *two-sample* inference.
-* In Chapter \@ref(inference-for-regression), we'll cover an example of statistical inference for regression by revisiting the regression models for teaching score as a function of various instructor demographic variables you saw in Chapters \@ref(regression) and \@ref(multiple-regression).
-    + Scenario 5: The slope $\beta_1$ of the population regression line.
 
 
 ### Theory-based standard-errors {#sec-theory-se}
