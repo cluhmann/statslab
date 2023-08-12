@@ -235,20 +235,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./single.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
       </ul>
@@ -265,13 +271,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./missingness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -460,7 +466,7 @@ Warning
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>( <span class="at">file =</span> <span class="st">"./data/booksales.Rdata"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Another strategy would be to first change the working directory to whatever directory contains the desired file (<code>setwd()</code> or Session-&gt;Set Working Directory) and then load the file using only the file name (e.g., <code>load(file = "booksales.Rdata")</code>). This may seem tempting, but we will avoid doing this because changing the working directory can be confusing if you’re not paying close attention. Instead, we will assume that a) our working directory is the “statslab” directory we created previously (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.3</span></a>) and b) all of our data files (CSVs and workspaces) are located in the “data” subdirectory. Outside of this class, however, you may not be able to move data files and/or R scripts. In such cases, it may be easier to modify the working directory. Just be aware that you may need to change the working directory both <strong>before</strong> and <strong>after</strong> loading the desired file(s). Don’t get lost (you can always figure out what the current working directory is with <code>getwd()</code>)!</p>
+<p>Another strategy would be to first change the working directory to whatever directory contains the desired file (<code>setwd()</code> or Session-&gt;Set Working Directory) and then load the file using only the file name (e.g., <code>load(file = "booksales.Rdata")</code>). This may seem tempting, but we will avoid doing this because changing the working directory can be confusing if you’re not paying close attention. Instead, we will assume that a) our working directory is the “statslab” directory we created previously (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.4</span></a>) and b) all of our data files (CSVs and workspaces) are located in the “data” subdirectory. Outside of this class, however, you may not be able to move data files and/or R scripts. In such cases, it may be easier to modify the working directory. Just be aware that you may need to change the working directory both <strong>before</strong> and <strong>after</strong> loading the desired file(s). Don’t get lost (you can always figure out what the current working directory is with <code>getwd()</code>)!</p>
 </section>
 <section id="loading-workspace-files-using-rstudio" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="loading-workspace-files-using-rstudio"><span class="header-section-number">3.1.4</span> Loading workspace files using RStudio</h3>
@@ -521,7 +527,7 @@ Warning
 <ul>
 <li>Download data</li>
 <li>Download the following file: <a href="">TBD</a></li>
-<li>Inside the “statslab” directory/folder you created at the end of the previous chapter (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.3</span></a>), create a sub-directory/folder and name it “data”</li>
+<li>Inside the “statslab” directory/folder you created at the end of the previous chapter (<a href="tidyverse.html#sec-rlangactivities"><span>Section&nbsp;4.4</span></a>), create a sub-directory/folder and name it “data”</li>
 <li>Unzip the data files and place them in the “data” directory/folder you just created</li>
 <li>Open the 2015 data file (<code>nba_all_seasons.csv</code>) in your favorite spreadsheet software (e.g., Microsoft Excel)</li>
 <li>Briefly review the content of this file.</li>

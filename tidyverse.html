@@ -238,20 +238,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./single.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,13 +274,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./missingness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -306,12 +312,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tidy-data-ex" id="toc-tidy-data-ex" class="nav-link active" data-scroll-target="#tidy-data-ex"><span class="header-section-number">4.1</span> “Tidy” data</a>
+  <li><a href="#sec-tidy-data-ex" id="toc-sec-tidy-data-ex" class="nav-link active" data-scroll-target="#sec-tidy-data-ex"><span class="header-section-number">4.1</span> “Tidy” data</a>
   <ul class="collapse">
-  <li><a href="#tidy-definition" id="toc-tidy-definition" class="nav-link" data-scroll-target="#tidy-definition"><span class="header-section-number">4.1.1</span> Definition of “tidy” data</a></li>
+  <li><a href="#sec-tidy-definition" id="toc-sec-tidy-definition" class="nav-link" data-scroll-target="#sec-tidy-definition"><span class="header-section-number">4.1.1</span> Definition of “tidy” data</a></li>
   </ul></li>
-  <li><a href="#tidyverse-package" id="toc-tidyverse-package" class="nav-link" data-scroll-target="#tidyverse-package"><span class="header-section-number">4.2</span> <code>tidyverse</code> package</a></li>
-  <li><a href="#sec-rlangactivities" id="toc-sec-rlangactivities" class="nav-link" data-scroll-target="#sec-rlangactivities"><span class="header-section-number">4.3</span> Activities</a></li>
+  <li><a href="#sec-tidyverse-package" id="toc-sec-tidyverse-package" class="nav-link" data-scroll-target="#sec-tidyverse-package"><span class="header-section-number">4.2</span> <code>tidyverse</code> package</a></li>
+  <li><a href="#sec-tidymodels-package" id="toc-sec-tidymodels-package" class="nav-link" data-scroll-target="#sec-tidymodels-package"><span class="header-section-number">4.3</span> <code>tidymodels</code> package</a></li>
+  <li><a href="#sec-rlangactivities" id="toc-sec-rlangactivities" class="nav-link" data-scroll-target="#sec-rlangactivities"><span class="header-section-number">4.4</span> Activities</a></li>
   </ul>
 </nav>
     </div>
@@ -336,11 +343,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>From here out on we will be utilizing a set of inter-related packages collectively known as the “tidyverse”. These packages share conventions and revolve around a specific flavor of dataframe (known as a “tibble”) which stores data in a specific format (the “tidy” format, described below). This standardization of input and output makes transitions between different functions within the different tidyverse packages relatively seamless. For more information, check out the <a href="https://www.tidyverse.org/">tidyverse.org</a> webpage for the package. In this chapter, we cover what the tidyverse libraries are, how to install them, and how to load them.</p>
-<section id="tidy-data-ex" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="tidy-data-ex"><span class="header-section-number">4.1</span> “Tidy” data</h2>
+<section id="sec-tidy-data-ex" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-tidy-data-ex"><span class="header-section-number">4.1</span> “Tidy” data</h2>
 <p>Let’s now learn about the concept of “tidy” data format.</p>
-<section id="tidy-definition" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="tidy-definition"><span class="header-section-number">4.1.1</span> Definition of “tidy” data</h3>
+<section id="sec-tidy-definition" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-tidy-definition"><span class="header-section-number">4.1.1</span> Definition of “tidy” data</h3>
 <p>You have surely heard the word “tidy” in your life:</p>
 <ul>
 <li>“Tidy up your room!”</li>
@@ -477,36 +484,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this case, even though the variable “Boeing Price” occurs just like in our non-“tidy” data, the data <em>is</em> “tidy” since there are three variables corresponding to three unique pieces of information: Date, Boeing price, and the Weather that particular day.</p>
 </section>
 </section>
-<section id="tidyverse-package" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="tidyverse-package"><span class="header-section-number">4.2</span> <code>tidyverse</code> package</h2>
-<p>The following four packages, which are among four of the most frequently used R packages for data science, will be heavily used throughout the book:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="sec-tidyverse-package" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-tidyverse-package"><span class="header-section-number">4.2</span> <code>tidyverse</code> package</h2>
+<p>The following four packages, which are among four of the most frequently used R packages for data science, will be heavily used throughout the book: <code>ggplot2</code>, <code>dplyr</code>, <code>readr</code>, and <code>tidyr</code>.</p>
 <p>The <code>ggplot2</code> package is for data visualization, <code>dplyr</code> is for data wrangling, <code>readr</code> is for importing CSV files into R (we used it in <a href="data.html#sec-loadingcsv"><span>Section&nbsp;3.1.1</span></a>), and <code>tidyr</code> is for converting data to “tidy” format. There is a much quicker way to load these packages than by individually loading them: by installing and loading the <code>tidyverse</code> package. The <code>tidyverse</code> package acts as an “umbrella” package whereby installing/loading it will install/load multiple packages at once for you.</p>
 <p>After installing the <code>tidyverse</code> package as you would a normal package (see <a href="rlang.html#sec-packages"><span>Section&nbsp;1.5</span></a>), running:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>accomplishes the the same things as running:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code> are left for a more advanced book; check out <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> to learn about these packages.</p>
-<p>For the remainder of this book, we’ll start every chapter by running <code>library(tidyverse)</code> instead of loading the various component packages individually. The <code>tidyverse</code> “umbrella” package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in “tidy” format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information, check out the <a href="https://www.tidyverse.org/">tidyverse.org</a> webpage for the package.</p>
+<p>For the remainder of this book, we’ll start every chapter by running <code>library(tidyverse)</code> instead of loading the various component packages individually. The <code>tidyverse</code> “umbrella” package gets its name from the fact that all the functions in all its packages are designed to have common inputs and outputs: data frames that are in “tidy” format. This standardization of input and output makes transitions between different functions in the different packages as seamless as possible. For more information (including the more advanced packages, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>), check out the <a href="https://www.tidyverse.org/">tidyverse.org</a> webpage for the package and the book <a href="https://ggplot2-book.org/"><em>ggplot2: Elegant Graphics ofr Data Analysis</em></a>.</p>
 </section>
-<section id="sec-rlangactivities" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="sec-rlangactivities"><span class="header-section-number">4.3</span> Activities</h2>
+<section id="sec-tidymodels-package" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-tidymodels-package"><span class="header-section-number">4.3</span> <code>tidymodels</code> package</h2>
+<p>In addition to the packages listed above, there are also a variety of packages that live in a sort of “extended” tidyverse. These include packages such as <code>lubridate</code> (for handling dates and times) and <code>magrittr</code> (providing pipe operators). One particularly useful package is <code>modelr</code> which is used for for creating analysis pipelines. However, the <code>modelr</code> package has been superseded by a collection of packages called <code>tidymodels</code>. Like <code>tidyverse</code>, <code>tidymodels</code> is an umbrella package encapsulating: <code>rsample</code>, <code>parsnip</code>, <code>recipes</code>, <code>broom</code> and other packages designed to facilitate machine learning-style data analysis. We will make particular use of a package called <code>infer</code>, which provides a high-level interface for performing statistical inference. For more information, check out <a href="https://www.tidymodels.org">www.tidymodels.org</a> and the book <a href="https://www.tmwr.org/"><em>Tidy Modeling with R</em></a>.</p>
+</section>
+<section id="sec-rlangactivities" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-rlangactivities"><span class="header-section-number">4.4</span> Activities</h2>
 <ul>
 <li>Open RStudio</li>
 <li>If you have not done so already, install the <code>tidyverse</code> package using the instructions found in <a href="rlang.html#sec-packageinstall"><span>Section&nbsp;1.5.1</span></a></li>

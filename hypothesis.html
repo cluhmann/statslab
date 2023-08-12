@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>statslab - 9&nbsp; Hypothesis Testing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./single.html" rel="next">
+<link href="./descriptives.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logos/beta.png" alt="Several beta distributions" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">statslab</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+    <a href="https://github.com/cluhmann/statslab" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptives.html">Statistics</a></li><li class="breadcrumb-item"><a href="./hypothesis.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Beginnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rlang.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R &amp; RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R as a Calculator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Exploring</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tibbles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dataframes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Manipulating Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hypothesis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./single.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Odds &amp; Ends</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./missingness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-ht-activity" id="toc-sec-ht-activity" class="nav-link active" data-scroll-target="#sec-ht-activity"><span class="header-section-number">9.1</span> Promotions activity</a>
+  <ul class="collapse">
+  <li><a href="#does-gender-affect-promotions-at-a-bank" id="toc-does-gender-affect-promotions-at-a-bank" class="nav-link" data-scroll-target="#does-gender-affect-promotions-at-a-bank"><span class="header-section-number">9.1.1</span> Does gender affect promotions at a bank?</a></li>
+  <li><a href="#shuffling-once" id="toc-shuffling-once" class="nav-link" data-scroll-target="#shuffling-once"><span class="header-section-number">9.1.2</span> Shuffling once</a></li>
+  <li><a href="#shuffling-16-times" id="toc-shuffling-16-times" class="nav-link" data-scroll-target="#shuffling-16-times"><span class="header-section-number">9.1.3</span> Shuffling 16 times</a></li>
+  <li><a href="#sec-ht-what-did-we-just-do" id="toc-sec-ht-what-did-we-just-do" class="nav-link" data-scroll-target="#sec-ht-what-did-we-just-do"><span class="header-section-number">9.1.4</span> What did we just do?</a></li>
+  </ul></li>
+  <li><a href="#sec-understanding-ht" id="toc-sec-understanding-ht" class="nav-link" data-scroll-target="#sec-understanding-ht"><span class="header-section-number">9.2</span> Understanding hypothesis tests</a></li>
+  <li><a href="#sec-ht-infer" id="toc-sec-ht-infer" class="nav-link" data-scroll-target="#sec-ht-infer"><span class="header-section-number">9.3</span> Conducting hypothesis tests</a>
+  <ul class="collapse">
+  <li><a href="#sec-infer-workflow-ht" id="toc-sec-infer-workflow-ht" class="nav-link" data-scroll-target="#sec-infer-workflow-ht"><span class="header-section-number">9.3.1</span> <code>infer</code> package workflow</a></li>
+  <li><a href="#sec-only-one-test" id="toc-sec-only-one-test" class="nav-link" data-scroll-target="#sec-only-one-test"><span class="header-section-number">9.3.2</span> “There is only one test”</a></li>
+  </ul></li>
+  <li><a href="#sec-ht-interpretation" id="toc-sec-ht-interpretation" class="nav-link" data-scroll-target="#sec-ht-interpretation"><span class="header-section-number">9.4</span> Interpreting hypothesis tests</a>
+  <ul class="collapse">
+  <li><a href="#sec-trial" id="toc-sec-trial" class="nav-link" data-scroll-target="#sec-trial"><span class="header-section-number">9.4.1</span> Two possible outcomes</a></li>
+  <li><a href="#types-of-errors" id="toc-types-of-errors" class="nav-link" data-scroll-target="#types-of-errors"><span class="header-section-number">9.4.2</span> Types of errors</a></li>
+  <li><a href="#sec-choosing-alpha" id="toc-sec-choosing-alpha" class="nav-link" data-scroll-target="#sec-choosing-alpha"><span class="header-section-number">9.4.3</span> How do we choose alpha?</a></li>
+  </ul></li>
+  <li><a href="#sec-ht-case-study" id="toc-sec-ht-case-study" class="nav-link" data-scroll-target="#sec-ht-case-study"><span class="header-section-number">9.5</span> Case study: Who’s the GOAT?</a>
+  <ul class="collapse">
+  <li><a href="#sampling-scenario" id="toc-sampling-scenario" class="nav-link" data-scroll-target="#sampling-scenario"><span class="header-section-number">9.5.1</span> Sampling scenario</a></li>
+  <li><a href="#conducting-the-hypothesis-test" id="toc-conducting-the-hypothesis-test" class="nav-link" data-scroll-target="#conducting-the-hypothesis-test"><span class="header-section-number">9.5.2</span> Conducting the hypothesis test</a></li>
+  </ul></li>
+  <li><a href="#sec-nhst-conclusion" id="toc-sec-nhst-conclusion" class="nav-link" data-scroll-target="#sec-nhst-conclusion"><span class="header-section-number">9.6</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#sec-theory-hypo" id="toc-sec-theory-hypo" class="nav-link" data-scroll-target="#sec-theory-hypo"><span class="header-section-number">9.6.1</span> Theory-based hypothesis tests</a></li>
+  <li><a href="#when-inference-is-not-needed" id="toc-when-inference-is-not-needed" class="nav-link" data-scroll-target="#when-inference-is-not-needed"><span class="header-section-number">9.6.2</span> When inference is not needed</a></li>
+  <li><a href="#problems-with-p-values" id="toc-problems-with-p-values" class="nav-link" data-scroll-target="#problems-with-p-values"><span class="header-section-number">9.6.3</span> Problems with p-values</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-hypothesis-testing" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="sec-ht-activity" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-ht-activity"><span class="header-section-number">9.1</span> Promotions activity</h2>
+<p>Let’s start with an activity studying the effect of gender on promotions at a bank.</p>
+<section id="does-gender-affect-promotions-at-a-bank" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="does-gender-affect-promotions-at-a-bank"><span class="header-section-number">9.1.1</span> Does gender affect promotions at a bank?</h3>
+<p>Say you are working at a bank in the 1970s and you are submitting your resume to apply for a promotion. Will your gender affect your chances of getting promoted? To answer this question, we’ll focus on data from a study published in the <em>Journal of Applied Psychology</em> in 1974. This data is also used in the <a href="https://www.openintro.org/"><em>OpenIntro</em></a> series of statistics textbooks.</p>
+<p>To begin the study, 48 bank supervisors were asked to assume the role of a hypothetical director of a bank with multiple branches. Every one of the bank supervisors was given a resume and asked whether or not the candidate on the resume was fit to be promoted to a new position in one of their branches.</p>
+<p>However, each of these 48 resumes were identical in all respects except one: the name of the applicant at the top of the resume Of the supervisors, 24 were randomly given resumes with stereotypically “male” names, while 24 of the supervisors were randomly given resumes with stereotypically “female” names. Since only (binary) gender varied from resume to resume, researchers could isolate the effect of this variable in promotion rates.</p>
+<p>While many people today (including us, the authors) disagree with such binary views of gender, it is important to remember that this study was conducted at a time where more nuanced views of gender were not as prevalent. Despite this imperfection, we decided to still use this example as we feel it presents ideas still relevant today about how we could study discrimination in the workplace.</p>
+<p>We have the data on the 48 applicants in a <code>promotions.csv</code> file that we can then load as a data frame. Let’s explore this data by looking at six randomly selected rows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>promotions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/promotions.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 48 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): decision, gender
+dbl (1): id
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+     id decision gender
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; 
+1    11 promoted male  
+2    26 promoted female
+3    28 promoted female
+4    36 not      male  
+5    37 not      male  
+6    46 not      female</code></pre>
+</div>
+</div>
+<p>The variable <code>id</code> acts as an identification variable for all 48 rows, the <code>decision</code> variable indicates whether the applicant was selected for promotion or not, while the <code>gender</code> variable indicates the gender of the name used on the resume. Recall that this data does not pertain to 24 actual men and 24 actual women, but rather 48 identical resumes of which 24 were assigned stereotypically “male” names and 24 were assigned stereotypically “female” names.</p>
+<p>Let’s perform an exploratory data analysis of the relationship between the two categorical variables <code>decision</code> and <code>gender</code>. Recall that we saw in <a href="ggplot2.html#sec-two-categ-barplot"><span>Section&nbsp;7.8.3</span></a> that one way we can visualize such a relationship is by using a stacked barplot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-promotions-barplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-promotions-barplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.1: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Observe in <a href="#fig-promotions-barplot">Figure&nbsp;<span>9.1</span></a> that it appears that resumes with female names were much less likely to be accepted for promotion. Let’s quantify these promotion rates by computing the proportion of resumes accepted for promotion for each group using the <code>dplyr</code> package for data wrangling. Note the use of the <code>tally()</code> function here which is a shortcut for <code>summarize(n = n())</code> to get counts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, decision) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   gender [2]
+  gender decision     n
+  &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+1 female not         10
+2 female promoted    14
+3 male   not          3
+4 male   promoted    21</code></pre>
+</div>
+</div>
+<p>So of the 24 resumes with male names, 21 were selected for promotion, for a proportion of 21/24 = 0.875 = 87.5%. On the other hand, of the 24 resumes with female names, 14 were selected for promotion, for a proportion of 14/24 = 0.583 = 58.3%. Comparing these two rates of promotion, it appears that resumes with male names were selected for promotion at a rate 0.875 - 0.583 = 0.292 = 29.2% higher than resumes with female names. This is suggestive of an advantage for resumes with a male name on it.</p>
+<p>The question is, however, does this provide <em>conclusive</em> evidence that there is gender discrimination in promotions at banks? Could a difference in promotion rates of 29.2% still occur by chance, even in a hypothetical world where no gender-based discrimination existed? In other words, what is the role of <em>sampling variation</em> in this hypothesized world? To answer this question, we’ll again rely on a computer to run <em>simulations</em>.</p>
+</section>
+<section id="shuffling-once" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="shuffling-once"><span class="header-section-number">9.1.2</span> Shuffling once</h3>
+<p>First, try to imagine a hypothetical universe where no gender discrimination in promotions existed. In such a hypothetical universe, the gender of an applicant would have no bearing on their chances of promotion. Bringing things back to our <code>promotions</code> data frame, the <code>gender</code> variable would thus be an irrelevant label. If these <code>gender</code> labels were irrelevant, then we could randomly reassign them by “shuffling” them to no consequence!</p>
+<p>To illustrate this idea, let’s narrow our focus to 6 arbitrarily chosen resumes of the 48 in <a href="#fig-compare-six">Figure&nbsp;<span>9.2</span></a>). The <code>decision</code> column shows that 3 resumes resulted in promotion while 3 didn’t. The <code>gender</code> column shows what the original gender of the resume name was.</p>
+<p>However, in our hypothesized universe of no gender discrimination, gender is irrelevant and thus it is of no consequence to randomly “shuffle” the values of <code>gender</code>. The <code>shuffled_gender</code> column shows one such possible random shuffling. Observe in the fourth column how the number of male and female names remains the same at 3 each, but they are now listed in a different order.</p>
+<div class="cell">
+<div id="fig-compare-six" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+resume number
+</th>
+<th style="text-align:left;">
+decision
+</th>
+<th style="text-align:left;">
+gender
+</th>
+<th style="text-align:left;">
+shuffled gender
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+male
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+male
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+not
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+female
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+promoted
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+female
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+promoted
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+female
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+promoted
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+male
+</td>
+</tr>
+</tbody>
+
+</table>
+<figcaption class="figure-caption">Figure&nbsp;9.2: One example of shuffling gender variable</figcaption>
+</figure>
+</div>
+</div>
+<p>Again, such random shuffling of the gender label only makes sense in our hypothesized universe of no gender discrimination. How could we extend this shuffling of the gender variable to all 48 resumes by hand? One way would be by using standard deck of 52 playing cards, which we display in <a href="#fig-deck-of-cards">Figure&nbsp;<span>9.3</span></a>.</p>
+<div id="fig-deck-of-cards" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/shutterstock_670789453.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.3: Standard deck of 52 playing cards.</figcaption>
+</figure>
+</div>
+<p>Since half the cards are red (diamonds and hearts) and the other half are black (spades and clubs), by removing two red cards and two black cards, we would end up with 24 red cards and 24 black cards. After shuffling these 48 cards, we can flip the cards over one-by-one, assigning “male” for each red card and “female” for each black card.</p>
+<p>We’ve saved one such shuffling in the <code>promotions_shuffled</code> data frame of the <code>moderndive</code> package. If you compare the original <code>promotions</code> and the shuffled <code>promotions_shuffled</code> data frames, you’ll see that while the <code>decision</code> variable is identical, the <code>gender</code> variable has changed.</p>
+<p>Let’s repeat the same exploratory data analysis we did for the original <code>promotions</code> data on our <code>promotions_shuffled</code> data frame. Let’s create a barplot visualizing the relationship between <code>decision</code> and the new shuffled <code>gender</code> variable and compare this to the original unshuffled version in <a href="#fig-promotions-barplot-permuted">Figure&nbsp;<span>9.4</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(promotions_shuffled, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> decision)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Gender of resume name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'gender'. You can override using the
+`.groups` argument.
+`summarise()` has grouped output by 'gender'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-promotions-barplot-permuted" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-promotions-barplot-permuted-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.4: Barplots of relationship of promotion with gender (left) and shuffled gender (right).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>It appears the difference in “male names” versus “female names” promotion rates is now different. Compared to the original data in the left barplot, the new “shuffled” data in the right barplot has promotion rates that are much more similar.</p>
+<p>Let’s also compute the proportion of resumes accepted for promotion for each group:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>promotions_shuffled <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, decision) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="co"># Same as summarize(n = n())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   gender [2]
+  gender decision     n
+  &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+1 female not          5
+2 female promoted    19
+3 male   not          8
+4 male   promoted    16</code></pre>
+</div>
+</div>
+<p>So in this hypothetical universe of no discrimination, <span class="math inline">\(16/24 = 0.667 = 66.7\%\)</span> of “male” resumes were selected for promotion. On the other hand, <span class="math inline">\(19/24 = 0.792 = 79.2\%\)</span> of “female” resumes were selected for promotion.</p>
+<p>Let’s next compare these two values. It appears that resumes with stereotypically male names were selected for promotion at a rate that was <span class="math inline">\(0.667 - 0.792 = -0.125 = -12.5\%\)</span> different than resumes with stereotypically female names.</p>
+<p>Observe how this difference in rates is not the same as the difference in rates of 0.292 = 29.2% we originally observed. This is once again due to <em>sampling variation</em>. How can we better understand the effect of this sampling variation? By repeating this shuffling several times!</p>
+</section>
+<section id="shuffling-16-times" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="shuffling-16-times"><span class="header-section-number">9.1.3</span> Shuffling 16 times</h3>
+<p>We recruited 16 groups of our friends to repeat this shuffling exercise. They recorded these values in a <a href="https://docs.google.com/spreadsheets/d/1Q-ENy3o5IrpJshJ7gn3hJ5A0TOWV2AZrKNHMsshQtiE/">shared spreadsheet</a>; we display a snapshot of the first 10 rows and 5 columns in <a href="#fig-tactile-shuffling">Figure&nbsp;<span>9.5</span></a>.</p>
+<div id="fig-tactile-shuffling" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/shared_spreadsheet.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.5: Snapshot of shared spreadsheet of shuffling results (m for male, f for female).</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 48 Columns: 18
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (17): decision, Cassandra, Nox, Priya, Jenny, Eindra, Maddie, Grace, Ste...
+dbl  (1): id
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>For each of these 16 columns of <em>shuffles</em>, we computed the difference in promotion rates, and in <a href="#fig-null-distribution-1">Figure&nbsp;<span>9.6</span></a> we display their distribution in a histogram. We also mark the observed difference in promotion rate that occurred in real life of 0.292 = 29.2% with a dark line.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-null-distribution-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-null-distribution-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.6: Distribution of shuffled differences in promotions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Before we discuss the distribution of the histogram, we emphasize the key thing to remember: this histogram represents differences in promotion rates that one would observe in our <em>hypothesized universe</em> of no gender discrimination.</p>
+<p>Observe first that the histogram is roughly centered at 0. Saying that the difference in promotion rates is 0 is equivalent to saying that both genders had the same promotion rate. In other words, the center of these 16 values is consistent with what we would expect in our hypothesized universe of no gender discrimination.</p>
+<p>However, while the values are centered at 0, there is variation about 0. This is because even in a hypothesized universe of no gender discrimination, you will still likely observe small differences in promotion rates because of chance <em>sampling variation</em>. Looking at the histogram in <a href="#fig-null-distribution-1">Figure&nbsp;<span>9.6</span></a>, such differences could even be as extreme as -0.292 or 0.208.</p>
+<p>Turning our attention to what we observed in real life: the difference of 0.292 = 29.2% is marked with a vertical dark line. Ask yourself: in a hypothesized world of no gender discrimination, how likely would it be that we observe this difference? While opinions here may differ, in our opinion not often! Now ask yourself: what do these results say about our hypothesized universe of no gender discrimination?</p>
+<!--
+v2 TODO: Consider adding;
+
+Now each of our 33 friends does the following:
+
+1. Takes the two decks of cards.
+2. Shuffles the cards corresponding to gender.
+3. Assigns the shuffled cards to the original deck of supervisors' decisions.
+4. Count how many cards fall into each of the four categories:
+  - Promoted males
+  - Non-promoted males
+  - Promoted females
+  - Non-promoted females
+5. Determines the proportion of promoted males out of 24.
+6. Determines the proportion of promoted females out of 24.
+7. Subtracts those two differences to get a new value of the test statistic, assuming the null hypothesis is true.
+
+Let's see what this leads to for our friends in terms of results and label where the observed test statistic falls in relation to our friends' statistics:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+obs_diff_prop <- promotions %>% 
+  specify(decision ~ gender, success = "promoted") %>% 
+  calculate(stat = "diff in props", order = c("male", "female"))
+obs_diff_prop
+```
+:::
+
+::: {.cell}
+
+:::
+
+
+We see that of the 33 samples we selected only one is close to as extreme as what we observed. Thus, we might guess that we are starting to see some data suggesting that gender discrimination might be at play. Many of the statistics calculated appear close to 0 with the vast remainder appearing around values of a difference of -0.1 and 0.1. So what further evidence would we need to make this suggestion a little clearer? More simulations! As we've done before in Chapters \@ref(sampling) and \@ref(confidence-intervals), we'll use the computer to simulate these permutations and calculations many times. Let's do just that with the `infer` package in the next section.
+-->
+</section>
+<section id="sec-ht-what-did-we-just-do" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="sec-ht-what-did-we-just-do"><span class="header-section-number">9.1.4</span> What did we just do?</h3>
+<p>What we just demonstrated in this activity is the statistical procedure known as <em>hypothesis testing</em> using a <em>permutation test</em>. The term “permutation” is the mathematical term for “shuffling”: taking a series of values and reordering them randomly, as you did with the playing cards.</p>
+<p>In fact, permutations are a form of <em>resampling</em>. Permutation methods involve resampling <em>without</em> replacement. In contrast, our exploration of sampling variation back in <a href="sampling.html"><span>Chapter&nbsp;13</span></a> was a slightly different type of resampling (known as bootstrapping) which involved resampling <em>with</em> replacement. After using our shovel once, we put everything back into the bowl before usign the shovel again. Now think of our deck of cards. After drawing a card, you laid it out in front of you, recorded the color, and then you <em>did not</em> put it back in the deck.</p>
+<p>In our previous example, we tested the validity of the hypothesized universe of no gender discrimination. The evidence contained in our observed sample of 48 resumes was somewhat inconsistent with our hypothesized universe. Thus, we would be inclined to <em>reject</em> this hypothesized universe and declare that the evidence suggests there is gender discrimination.</p>
+<p>In the case of sampling from the bowl (<a href="sampling.html"><span>Chapter&nbsp;13</span></a>) involved an inference about an unknown population proportion. This time, it will be <span class="math inline">\(p_{m} - p_{f}\)</span>, where <span class="math inline">\(p_{m}\)</span> is the population proportion of resumes with male names being recommended for promotion and <span class="math inline">\(p_{f}\)</span> is the equivalent for resumes with female names. Recall that this is one of the scenarios for inference we’ve seen so far in <a href="#tbl-table-diff-prop">Table&nbsp;<span>9.1</span></a>.</p>
+<div id="tbl-table-diff-prop" class="anchored">
+<table class="table">
+<caption>Table&nbsp;9.1: Scenarios of sampling for inference</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Population parameter</th>
+<th>Notation</th>
+<th>Point estimate</th>
+<th>Symbol(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Population proportion</td>
+<td><span class="math inline">\(p\)</span></td>
+<td>Sample proportion</td>
+<td><span class="math inline">\(\widehat{p}\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Population mean</td>
+<td><span class="math inline">\(\mu\)</span></td>
+<td>Sample mean</td>
+<td><span class="math inline">\(\overline{x}\)</span> or <span class="math inline">\(\widehat{\mu}\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Difference in population proportions</td>
+<td><span class="math inline">\(p_1 - p_2\)</span></td>
+<td>Difference in sample proportions</td>
+<td><span class="math inline">\(\widehat{p}_1 - \widehat{p}_2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>So, based on our sample of <span class="math inline">\(n_m\)</span> = 24 “male” applicants and <span class="math inline">\(n_w\)</span> = 24 “female” applicants, the <em>point estimate</em> for <span class="math inline">\(p_{m} - p_{f}\)</span> is the <em>difference in sample proportions</em> <span class="math inline">\(\widehat{p}_{m} -\widehat{p}_{f}\)</span> = 0.875 - 0.583 = 0.292 = 29.2%. This difference in favor of “male” resumes of 0.292 is greater than 0, suggesting discrimination in favor of men.</p>
+<p>However, the question we asked ourselves was “is this difference meaningfully greater than 0?”. In other words, is that difference indicative of true discrimination, or can we just attribute it to <em>sampling variation</em>? Hypothesis testing allows us to make such distinctions.</p>
+</section>
+</section>
+<section id="sec-understanding-ht" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-understanding-ht"><span class="header-section-number">9.2</span> Understanding hypothesis tests</h2>
+<p>Much like the terminology, notation, and definitions relating to sampling you saw in <a href="sampling.html#sec-sampling-framework"><span>Section&nbsp;13.3</span></a>, there are a lot of terminology, notation, and definitions related to hypothesis testing as well. Learning these may seem like a very daunting task at first. However, with practice, practice, and more practice, anyone can master them.</p>
+<p>First, a <strong>hypothesis</strong> is a statement about the value of an unknown population parameter. In our resume activity, our population parameter of interest is the difference in population proportions <span class="math inline">\(p_{m} - p_{f}\)</span>.</p>
+<p>Second, a <strong>hypothesis test</strong> consists of a test between two competing hypotheses: (1) a <strong>null hypothesis</strong> <span class="math inline">\(H_0\)</span> (pronounced “H-naught”) versus (2) an <strong>alternative hypothesis</strong> <span class="math inline">\(H_A\)</span> (also denoted <span class="math inline">\(H_1\)</span>).</p>
+<p>Generally the null hypothesis is a claim that there is “no effect” or “no difference of interest.” In many cases, the null hypothesis represents the status quo or a situation that nothing interesting is happening. Furthermore, generally the alternative hypothesis is the claim the experimenter or researcher wants to establish or find evidence to support. It is viewed as a “challenger” hypothesis to the null hypothesis <span class="math inline">\(H_0\)</span>. In our resume activity, an appropriate hypothesis test would be:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \text{men and women are promoted at the same rate}\\
+\text{vs } H_A &amp;: \text{men are promoted at a higher rate than women}
+\end{aligned}
+\]</span></p>
+<p>Note some of the choices we have made. First, we set the null hypothesis <span class="math inline">\(H_0\)</span> to be that there is no difference in promotion rate and the “challenger” alternative hypothesis <span class="math inline">\(H_A\)</span> to be that there is a difference. While it would not be wrong in principle to reverse the two, it is a convention in statistical inference that the null hypothesis is set to reflect a “null” situation where “nothing is going on.” As we discussed earlier, in this case, <span class="math inline">\(H_0\)</span> corresponds to there being no difference in promotion rates. Furthermore, we set <span class="math inline">\(H_A\)</span> to be that men are promoted at a <em>higher</em> rate, a subjective choice reflecting a prior suspicion we have that this is the case. We call such alternative hypotheses <em>one-sided alternatives</em>. If someone else however does not share such suspicions and only wants to investigate that there is a difference, whether higher or lower, they would set what is known as a <em>two-sided alternative</em>.</p>
+<p>We can re-express the formulation of our hypothesis test using the mathematical notation for our population parameter of interest, the difference in population proportions <span class="math inline">\(p_{m} - p_{f}\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: p_{m} - p_{f} = 0\\
+\text{vs } H_A&amp;: p_{m} - p_{f} &gt; 0
+\end{aligned}
+\]</span></p>
+<p>Observe how the alternative hypothesis <span class="math inline">\(H_A\)</span> is one-sided with <span class="math inline">\(p_{m} - p_{f} &gt; 0\)</span>. Had we opted for a two-sided alternative, we would have set <span class="math inline">\(p_{m} - p_{f} \neq 0\)</span>. To keep things simple for now, we’ll stick with the simpler one-sided alternative. We’ll present an example of a two-sided alternative in <a href="#sec-ht-case-study"><span>Section&nbsp;9.5</span></a>.</p>
+<p>Third, a <strong>test statistic</strong> is a <em>point estimate/sample statistic</em> formula used for hypothesis testing. Note that a sample statistic is merely a summary statistic based on a sample of observations. Recall we saw in #sec-summarize that a summary statistic takes in many values and returns only one. Here, the samples would be the <span class="math inline">\(n_m\)</span> = 24 resumes with male names and the <span class="math inline">\(n_f\)</span> = 24 resumes with female names. Hence, the point estimate of interest is the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span>.</p>
+<p>Fourth, the <strong>observed test statistic</strong> is the value of the test statistic that we observed in real life. In our case, we computed this value using the data saved in the <code>promotions</code> data frame. It was the observed difference of <span class="math inline">\(\widehat{p}_{m} -\widehat{p}_{f} = 0.875 - 0.583 = 0.292 = 29.2\%\)</span> in favor of résumés with male names.</p>
+<p>Fifth, the <strong>null distribution</strong> is the sampling distribution of the test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>. Ooof! That’s a long one! Let’s unpack it slowly. The key to understanding the null distribution is that the null hypothesis <span class="math inline">\(H_0\)</span> is <em>assumed</em> to be true. We’re not saying that <span class="math inline">\(H_0\)</span> is true at this point, we’re only assuming it to be true for hypothesis testing purposes. In our case, this corresponds to our hypothesized universe of no gender discrimination in promotion rates. Assuming the null hypothesis <span class="math inline">\(H_0\)</span>, also stated as “Under <span class="math inline">\(H_0\)</span>,” how does the test statistic vary due to sampling variation? In our case, how will the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> vary due to sampling under <span class="math inline">\(H_0\)</span>? Recall from <a href="sampling.html#sec-sampling-definitions"><span>Section&nbsp;13.3.2</span></a> that distributions displaying how point estimates vary due to sampling variation are called <em>sampling distributions</em>. The only additional thing to keep in mind about null distributions is that they are sampling distributions <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>.</p>
+<p>In our case, we previously visualized a null distribution in <a href="#fig-null-distribution-1">Figure&nbsp;<span>9.6</span></a>, which we re-display in <a href="#fig-null-distribution-2">Figure&nbsp;<span>9.7</span></a> using our new notation and terminology. It is the distribution of the 16 differences in sample proportions our friends computed <em>assuming</em> a hypothetical universe of no gender discrimination. We also mark the value of the observed test statistic of 0.292 with a vertical line.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-null-distribution-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-null-distribution-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.7: Null distribution and observed test statistic.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Sixth, the <strong><span class="math inline">\(p\)</span>-value</strong> is the probability of obtaining a test statistic just as extreme or more extreme than the observed test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>. Double ooof! Let’s unpack this slowly as well. You can think of the <span class="math inline">\(p\)</span>-value as a quantification of “surprise”: assuming <span class="math inline">\(H_0\)</span> is true, how surprised are we with what we observed? Or in our case, in our hypothesized universe of no gender discrimination, how surprised are we that we observed a difference in promotion rates of 0.292 from our collected samples assuming <span class="math inline">\(H_0\)</span> is true? Very surprised? Somewhat surprised?</p>
+<p>The <span class="math inline">\(p\)</span>-value quantifies this probability, or in the case of our 16 differences in sample proportions in <a href="#fig-null-distribution-2">Figure&nbsp;<span>9.7</span></a>, what proportion had a more “extreme” result? Here, extreme is defined in terms of the alternative hypothesis <span class="math inline">\(H_A\)</span> that “male” applicants are promoted at a higher rate than “female” applicants. In other words, how often was the discrimination in favor of men <em>even more</em> pronounced than <span class="math inline">\(0.875 - 0.583 = 0.292 = 29.2\%\)</span>?</p>
+<p>In this case, 0 times out of 16, we obtained a difference in proportion greater than or equal to the observed difference of 0.292 = 29.2%. A very rare (in fact, not occurring) outcome! Given the rarity of such a pronounced difference in promotion rates in our hypothesized universe of no gender discrimination, we’re inclined to <em>reject</em> our hypothesized universe. Instead, we favor the hypothesis stating there is discrimination in favor of the “male” applicants. In other words, we reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_A\)</span>.</p>
+<!--
+v2 TODO: Including observed test stat in p-value computation
+
+We'll see later on however, the $p$-value isn't quite 1/16, but
+rather (0 + 1)/(16 + 1) = 1/17 = 0.059 as
+we need to include the observed test statistic in our calculation.
+-->
+<p>Seventh and lastly, in many hypothesis testing procedures, it is commonly recommended to set the <strong>significance level</strong> of the test beforehand. It is denoted by the Greek letter <span class="math inline">\(\alpha\)</span> (pronounced “alpha”). This value acts as a cutoff on the <span class="math inline">\(p\)</span>-value, where if the <span class="math inline">\(p\)</span>-value falls below <span class="math inline">\(\alpha\)</span>, we would “reject the null hypothesis <span class="math inline">\(H_0\)</span>.”</p>
+<p>Alternatively, if the <span class="math inline">\(p\)</span>-value does not fall below <span class="math inline">\(\alpha\)</span>, we would “fail to reject <span class="math inline">\(H_0\)</span>.” Note the latter statement is not quite the same as saying we “accept <span class="math inline">\(H_0\)</span>.” This distinction is rather subtle and not immediately obvious. So we’ll revisit it later in <a href="#sec-ht-interpretation"><span>Section&nbsp;9.4</span></a>.</p>
+<p>Though different fields tend to use different values of <span class="math inline">\(\alpha\)</span>, some commonly used values for <span class="math inline">\(\alpha\)</span> are 0.1, 0.01, and 0.05; with 0.05 being the choice people often make without putting much thought into it. We’ll talk more about <span class="math inline">\(\alpha\)</span> significance levels in <a href="#sec-ht-interpretation"><span>Section&nbsp;9.4</span></a>, but first let’s fully conduct the hypothesis test corresponding to our promotions activity using the <code>infer</code> package (part of the <code>tidymodels</code> family discussed back in <a href="tidyverse.html#sec-tidymodels-package"><span>Section&nbsp;4.3</span></a>).</p>
+</section>
+<section id="sec-ht-infer" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-ht-infer"><span class="header-section-number">9.3</span> Conducting hypothesis tests</h2>
+<p>The <code>infer</code> package provides a workflow that emphasizes each of the steps in the overall process of conducting a hypothesis test <a href="#fig-inferht">Figure&nbsp;<span>9.8</span></a>. It does so providing functions (“verbs”) that are intuitively named to indicate their role in the process:</p>
+<ol type="1">
+<li><code>specify()</code> the variables of interest in your data frame.</li>
+<li><code>generate()</code> replicates of bootstrap resamples with replacement.</li>
+<li><code>calculate()</code> the summary statistic of interest.</li>
+<li><code>visualize()</code> the resulting bootstrap distribution.</li>
+</ol>
+<p>In this section, we’ll now show you how to use <code>infer</code> to conduct hypothesis tests. The workflow is illustrated in <a href="#fig-inferht">Figure&nbsp;<span>9.8</span></a>.</p>
+<div id="fig-inferht" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/ht.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.8: Hypothesis testing with the infer package.</figcaption>
+</figure>
+</div>
+<section id="sec-infer-workflow-ht" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="sec-infer-workflow-ht"><span class="header-section-number">9.3.1</span> <code>infer</code> package workflow</h3>
+<section id="specify-variables" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="specify-variables">1. <code>specify</code> variables</h4>
+<p>We use the <code>specify()</code> verb to specify the response variable and, if needed, any explanatory variables for our study. In this case, because we are interested in any potential effects of gender on promotion decisions, we set <code>decision</code> as the response variable and <code>gender</code> as the explanatory variable. We do so using <code>formula = response ~ explanatory</code> where <code>response</code> is the name of the response variable in the data frame and <code>explanatory</code> is the name of the explanatory variable. So in our case it is <code>decision ~ gender</code>. The format of this, including the <code>~</code>, is something we will see repeatedly as we build increasingly complex statistical models. So it may seem a bit odd now, but it is it not unique to the <code>infer</code> and you might as well get familiar with it now.</p>
+<p>Given that we are interested in the proportion of resumes <code>"promoted"</code>, and not the proportion of resumes <code>not</code> promoted, we set the argument <code>success</code> to <code>"promoted"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>promotions <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(<span class="at">formula =</span> decision <span class="sc">~</span> gender,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">success =</span> <span class="st">"promoted"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: decision (factor)
+Explanatory: gender (factor)
+# A tibble: 48 × 2
+   decision gender
+   &lt;fct&gt;    &lt;fct&gt; 
+ 1 promoted male  
+ 2 promoted male  
+ 3 promoted male  
+ 4 promoted male  
+ 5 promoted male  
+ 6 promoted male  
+ 7 promoted male  
+ 8 promoted male  
+ 9 promoted male  
+10 promoted male  
+# ℹ 38 more rows</code></pre>
+</div>
+</div>
+<p>Again, notice how the <code>promotions</code> data itself doesn’t change, but the <code>Response: decision (factor)</code> and <code>Explanatory: gender (factor)</code> <em>meta-data</em> do. This is similar to how the <code>group_by()</code> verb from <code>dplyr</code> doesn’t change the data, but only adds “grouping” meta-data, as we saw in <a href="dplyr.html#sec-groupby"><span>Section&nbsp;6.5</span></a>.</p>
+</section>
+<section id="hypothesize-the-null" class="level4" data-number="9.3.1.1">
+<h4 data-number="9.3.1.1" class="anchored" data-anchor-id="hypothesize-the-null"><span class="header-section-number">9.3.1.1</span> 2. <code>hypothesize</code> the null</h4>
+<p>In order to conduct hypothesis tests using the <code>infer</code> workflow, we need a new step not present for confidence intervals: <code>hypothesize()</code>. Recall from <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a> that our hypothesis test was</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: p_{m} - p_{f} = 0\\
+\text{vs. } H_A&amp;: p_{m} - p_{f} &gt; 0
+\end{aligned}
+\]</span></p>
+<p>In other words, the null hypothesis <span class="math inline">\(H_0\)</span> corresponding to our “hypothesized universe” stated that there was no difference in gender-based discrimination rates. We set this null hypothesis <span class="math inline">\(H_0\)</span> in our <code>infer</code> workflow using the <code>null</code> argument of the <code>hypothesize()</code> function to either:</p>
+<ul>
+<li><code>"point"</code> for hypotheses involving a single sample or</li>
+<li><code>"independence"</code> for hypotheses involving two samples.</li>
+</ul>
+<p>In our case, since we have two samples (the resumes with “male” and “female” names), we set <code>null = "independence"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> decision <span class="sc">~</span> gender, <span class="at">success =</span> <span class="st">"promoted"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: decision (factor)
+Explanatory: gender (factor)
+Null Hypothesis: independence
+# A tibble: 48 × 2
+   decision gender
+   &lt;fct&gt;    &lt;fct&gt; 
+ 1 promoted male  
+ 2 promoted male  
+ 3 promoted male  
+ 4 promoted male  
+ 5 promoted male  
+ 6 promoted male  
+ 7 promoted male  
+ 8 promoted male  
+ 9 promoted male  
+10 promoted male  
+# ℹ 38 more rows</code></pre>
+</div>
+</div>
+<p>Again, the data has not changed yet. This will occur at the upcoming <code>generate()</code> step; we’re merely setting meta-data for now.</p>
+<p>Where do the terms <code>"point"</code> and <code>"independence"</code> come from? These are two technical statistical terms. The term “point” relates from the fact that for a single group of observations, you will test the value of a single point.</p>
+<p>The term “independence” relates to the fact that for two groups of observations, you are testing whether or not the response variable is <em>independent</em> of the explanatory variable that assigns the groups. In our case, we are testing whether the <code>decision</code> response variable is “independent” of the explanatory variable <code>gender</code> that assigns each resume to either of the two groups.</p>
+</section>
+<section id="generate-replicates" class="level4" data-number="9.3.1.2">
+<h4 data-number="9.3.1.2" class="anchored" data-anchor-id="generate-replicates"><span class="header-section-number">9.3.1.2</span> 3. <code>generate</code> replicates</h4>
+<p>After we <code>hypothesize()</code> the null hypothesis, we <code>generate()</code> replicates of “shuffled” datasets assuming the null hypothesis is true. We do this by repeating the shuffling exercise you performed in <a href="#sec-ht-activity"><span>Section&nbsp;9.1</span></a> several times. Instead of merely doing it 16 times as our groups of friends did, let’s use the computer to repeat this 1000 times by setting <code>reps = 1000</code> in the <code>generate()</code> function. However, unlike for confidence intervals where we generated replicates using <code>type = "bootstrap"</code> resampling with replacement, we’ll now perform shuffles/permutations by setting <code>type = "permute"</code>. Recall that shuffles/permutations are a kind of resampling, but unlike the bootstrap method, they involve resampling <em>without</em> replacement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>promotions_generate <span class="ot">&lt;-</span> promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> decision <span class="sc">~</span> gender, <span class="at">success =</span> <span class="st">"promoted"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(promotions_generate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48000</code></pre>
+</div>
+</div>
+<!-- 
+v2 TODO: Consider:
+
+infer:::permute_once() shuffles the y variable instead of the x. This ends up being the same thing but isn't as intuitive
+to explain given how we set up the cards tactile example before. I think it's best to avoid displaying `promotions_generate`
+here since it has `decision` shuffled. 
+-->
+<p>Observe that the resulting data frame has 48000 rows. This is because we performed shuffles/permutations for each of the 48 rows 1000 times and <span class="math inline">\(48000 = 1000 \cdot 48\)</span>. If you explore the <code>promotions_generate</code> data frame with <code>View()</code>, you’ll notice that the variable <code>replicate</code> indicates which resample each row belongs to. So it has the value <code>1</code> 48 times, the value <code>2</code> 48 times, all the way through to the value <code>1000</code> 48 times.</p>
+</section>
+<section id="calculate-summary-statistics" class="level4" data-number="9.3.1.3">
+<h4 data-number="9.3.1.3" class="anchored" data-anchor-id="calculate-summary-statistics"><span class="header-section-number">9.3.1.3</span> 4. <code>calculate</code> summary statistics</h4>
+<p>Now that we have generated 1000 replicates of “shuffles” assuming the null hypothesis is true, let’s <code>calculate()</code> the appropriate summary statistic for each of our 1000 shuffles. From <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a>, point estimates related to hypothesis testing have a specific name: <em>test statistics</em>. Since the unknown population parameter of interest is the difference in population proportions <span class="math inline">\(p_{m} - p_{f}\)</span>, the test statistic here is the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span>.</p>
+<p>For each of our 1000 shuffles, we can calculate this test statistic by setting <code>stat = "diff in props"</code>. Furthermore, since we are interested in <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> we set <code>order = c("male", "female")</code>. As we stated earlier, the order of the subtraction does not matter, so long as you stay consistent throughout your analysis and tailor your interpretations accordingly.</p>
+<p>Let’s save the result in a data frame called <code>null_distribution</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> decision <span class="sc">~</span> gender, <span class="at">success =</span> <span class="st">"promoted"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>null_distribution</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: decision (factor)
+Explanatory: gender (factor)
+Null Hypothesis: independence
+# A tibble: 1,000 × 2
+   replicate    stat
+       &lt;int&gt;   &lt;dbl&gt;
+ 1         1 -0.125 
+ 2         2 -0.0417
+ 3         3 -0.0417
+ 4         4 -0.0417
+ 5         5 -0.0417
+ 6         6  0.208 
+ 7         7 -0.125 
+ 8         8  0.125 
+ 9         9 -0.0417
+10        10  0.208 
+# ℹ 990 more rows</code></pre>
+</div>
+</div>
+<p>Observe that we have 1000 values of <code>stat</code>, each representing one instance of <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> in a hypothesized world of no gender discrimination. Observe as well that we chose the name of this data frame carefully: <code>null_distribution</code>. Recall once again from <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a> that sampling distributions when the null hypothesis <span class="math inline">\(H_0\)</span> is assumed to be true have a special name: the <em>null distribution</em>.</p>
+<p>What was the <em>observed</em> difference in promotion rates? In other words, what was the <em>observed test statistic</em> <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span>? Recall from <a href="#sec-ht-activity"><span>Section&nbsp;9.1</span></a> that we computed this observed difference by hand to be 0.875 - 0.583 = 0.292 = 29.2%. We can also compute this value using the previous <code>infer</code> code but with the <code>hypothesize()</code> and <code>generate()</code> steps removed. Let’s save this in <code>obs_diff_prop</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>obs_diff_prop <span class="ot">&lt;-</span> promotions <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(decision <span class="sc">~</span> gender, <span class="at">success =</span> <span class="st">"promoted"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>obs_diff_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: decision (factor)
+Explanatory: gender (factor)
+# A tibble: 1 × 1
+   stat
+  &lt;dbl&gt;
+1 0.292</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize-the-p-value" class="level4" data-number="9.3.1.4">
+<h4 data-number="9.3.1.4" class="anchored" data-anchor-id="visualize-the-p-value"><span class="header-section-number">9.3.1.4</span> 5. <code>visualize</code> the p-value</h4>
+<p>The final step is to measure how surprised we are by a promotion difference of 29.2% in a hypothesized universe of no gender discrimination. If the observed difference of 0.292 is highly unlikely, then we would be inclined to reject the validity of our hypothesized universe.</p>
+<p>We start by visualizing the <em>null distribution</em> of our 1000 values of <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> using <code>visualize()</code> in <a href="#fig-null-distribution-infer">Figure&nbsp;<span>9.9</span></a>. Recall that these are values of the difference in promotion rates assuming <span class="math inline">\(H_0\)</span> is true. This corresponds to being in our hypothesized universe of no gender discrimination.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-null-distribution-infer" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-null-distribution-infer-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.9: <strong>?(caption)</strong></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s now add what happened in real life to <a href="#fig-null-distribution-infer">Figure&nbsp;<span>9.9</span></a>, the observed difference in promotion rates of 0.875 - 0.583 = 0.292 = 29.2%. However, instead of merely adding a vertical line using <code>geom_vline()</code>, let’s use the <code>shade_p_value()</code> function with <code>obs_stat</code> set to the observed test statistic value we saved in <code>obs_diff_prop</code>.</p>
+<p>Furthermore, we’ll set the <code>direction = "right"</code> reflecting our alternative hypothesis <span class="math inline">\(H_A: p_{m} - p_{f} &gt; 0\)</span>. Recall our alternative hypothesis <span class="math inline">\(H_A\)</span> is that <span class="math inline">\(p_{m} - p_{f} &gt; 0\)</span>, stating that there is a difference in promotion rates in favor of resumes with male names. “More extreme” here corresponds to differences that are “bigger” or “more positive” or “more to the right.” Hence we set the <code>direction</code> argument of <code>shade_p_value()</code> to be <code>"right"</code>.</p>
+<p>On the other hand, had our alternative hypothesis <span class="math inline">\(H_A\)</span> been the other possible one-sided alternative <span class="math inline">\(p_{m} - p_{f} &lt; 0\)</span>, suggesting discrimination in favor of resumes with female names, we would’ve set <code>direction = "left"</code>. Had our alternative hypothesis <span class="math inline">\(H_A\)</span> been two-sided <span class="math inline">\(p_{m} - p_{f} \neq 0\)</span>, suggesting discrimination in either direction, we would’ve set <code>direction = "both"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_diff_prop, <span class="at">direction =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-null-distribution-infer-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-null-distribution-infer-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.10: Shaded histogram to show <span class="math inline">\(p\)</span>-value.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the resulting <a href="#fig-null-distribution-infer-2">Figure&nbsp;<span>9.10</span></a>, the solid dark line marks 0.292 = 29.2%. However, what does the shaded-region correspond to? This is the <em><span class="math inline">\(p\)</span>-value</em>. Recall the definition of the <span class="math inline">\(p\)</span>-value from <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a>:</p>
+<blockquote class="blockquote">
+<p>A <span class="math inline">\(p\)</span>-value is the probability of obtaining a test statistic just as or more extreme than the observed test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>.</p>
+</blockquote>
+<p>So judging by the shaded region in <a href="#fig-null-distribution-infer-2">Figure&nbsp;<span>9.10</span></a>, it seems we would somewhat rarely observe differences in promotion rates of 0.292 = 29.2% or more in a hypothesized universe of no gender discrimination. In other words, the <span class="math inline">\(p\)</span>-value is somewhat small. Hence, we would be inclined to reject this hypothesized universe, or using statistical language we would “reject <span class="math inline">\(H_0\)</span>.”</p>
+<p>What fraction of the null distribution is shaded? In other words, what is the exact value of the <span class="math inline">\(p\)</span>-value? We can compute it using the <code>get_p_value()</code> function with the same arguments as the previous <code>shade_p_value()</code> code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_diff_prop, <span class="at">direction =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.024</code></pre>
+</div>
+</div>
+<p>Keeping the definition of a <span class="math inline">\(p\)</span>-value in mind, the probability of observing a difference in promotion rates as large as 0.292 = 29.2% due to sampling variation alone in the null distribution is 0.024 = 2.4%. Since this <span class="math inline">\(p\)</span>-value is smaller than our pre-specified significance level <span class="math inline">\(\alpha\)</span> = 0.05, we reject the null hypothesis <span class="math inline">\(H_0: p_{m} - p_{f} = 0\)</span>. In other words, this <span class="math inline">\(p\)</span>-value is sufficiently small to reject our hypothesized universe of no gender discrimination. We instead have enough evidence to change our mind in favor of gender discrimination being a likely culprit here. Observe that whether we reject the null hypothesis <span class="math inline">\(H_0\)</span> or not depends in large part on our choice of significance level <span class="math inline">\(\alpha\)</span>. We’ll discuss this more in <a href="#sec-choosing-alpha"><span>Section&nbsp;9.4.3</span></a>.</p>
+</section>
+</section>
+<section id="sec-only-one-test" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-only-one-test"><span class="header-section-number">9.3.2</span> “There is only one test”</h3>
+<p>Let’s recap the steps necessary to conduct a hypothesis test using the terminology, notation, and definitions related to sampling you saw in <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a> and the <code>infer</code> workflow from <a href="#sec-infer-workflow-ht"><span>Section&nbsp;9.3.1</span></a>:</p>
+<ol type="1">
+<li><code>specify()</code> the variables of interest in your data frame.</li>
+<li><code>hypothesize()</code> the null hypothesis <span class="math inline">\(H_0\)</span>. In other words, set a “model for the universe” assuming <span class="math inline">\(H_0\)</span> is true.</li>
+<li><code>generate()</code> shuffles assuming <span class="math inline">\(H_0\)</span> is true. In other words, <em>simulate</em> data assuming <span class="math inline">\(H_0\)</span> is true.</li>
+<li><code>calculate()</code> the <em>test statistic</em> of interest, both for the observed data and your <em>simulated</em> data.</li>
+<li><code>visualize()</code> the resulting <em>null distribution</em> and compute the <em><span class="math inline">\(p\)</span>-value</em> by comparing the null distribution to the observed test statistic.</li>
+</ol>
+<p>While this is a lot to digest, especially the first time you encounter hypothesis testing, the nice thing is that once you understand this general framework, then you can understand <em>any</em> hypothesis test. In a famous blog post, computer scientist Allen Downey called this the <a href="http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html">“There is only one test”</a> framework, for which he created the flowchart displayed in <a href="#fig-htdowney">Figure&nbsp;<span>9.11</span></a>.</p>
+<div id="fig-htdowney" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/there_is_only_one_test.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.11: Allen Downey’s hypothesis testing framework.</figcaption>
+</figure>
+</div>
+<p>Notice its similarity with the “hypothesis testing with <code>infer</code>” diagram you saw in <a href="#fig-inferht">Figure&nbsp;<span>9.8</span></a>. That’s because the <code>infer</code> package was explicitly designed to match the “There is only one test” framework. So if you can understand the framework, you can easily generalize these ideas for all hypothesis testing scenarios. Whether for population proportions <span class="math inline">\(p\)</span>, population means <span class="math inline">\(\mu\)</span>, differences in population proportions <span class="math inline">\(p_1 - p_2\)</span>, differences in population means <span class="math inline">\(\mu_1 - \mu_2\)</span>, and as you’ll see in Chapter @ref(inference-for-regression) on inference for regression, population regression slopes <span class="math inline">\(\beta_1\)</span> as well. In fact, it applies more generally even than just these examples to more complicated hypothesis tests and test statistics as well.</p>
+</section>
+</section>
+<section id="sec-ht-interpretation" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-ht-interpretation"><span class="header-section-number">9.4</span> Interpreting hypothesis tests</h2>
+<p>Interpreting the results of hypothesis tests is one of the more challenging aspects of this method for statistical inference. In this section, we’ll focus on ways to help with deciphering the process and address some common misconceptions.</p>
+<section id="sec-trial" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="sec-trial"><span class="header-section-number">9.4.1</span> Two possible outcomes</h3>
+<p>In <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a>, we mentioned that given a pre-specified significance level <span class="math inline">\(\alpha\)</span> there are two possible outcomes of a hypothesis test:</p>
+<ul>
+<li>If the <span class="math inline">\(p\)</span>-value is less than <span class="math inline">\(\alpha\)</span>, then we <em>reject</em> the null hypothesis <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_A\)</span>.</li>
+<li>If the <span class="math inline">\(p\)</span>-value is greater than or equal to <span class="math inline">\(\alpha\)</span>, we <em>fail to reject</em> the null hypothesis <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<p>Unfortunately, the latter result is often misinterpreted as “accepting the null hypothesis <span class="math inline">\(H_0\)</span>.” While at first glance it may seem that the statements “failing to reject <span class="math inline">\(H_0\)</span>” and “accepting <span class="math inline">\(H_0\)</span>” are equivalent, there actually is a subtle difference. Saying that we “accept the null hypothesis <span class="math inline">\(H_0\)</span>” is equivalent to stating that “we think the null hypothesis <span class="math inline">\(H_0\)</span> is true.” However, saying that we “fail to reject the null hypothesis <span class="math inline">\(H_0\)</span>” is saying something else: “While <span class="math inline">\(H_0\)</span> might still be false, we don’t have enough evidence to say so.” In other words, there is an absence of enough proof. However, the absence of proof is not proof of absence.</p>
+<p>To further shed light on this distinction, let’s use the United States criminal justice system as an analogy. A criminal trial in the United States is a similar situation to hypothesis tests whereby a choice between two contradictory claims must be made about a defendant who is on trial:</p>
+<ol type="1">
+<li>The defendant is truly either “innocent” or “guilty.”</li>
+<li>The defendant is presumed “innocent until proven guilty.”</li>
+<li>The defendant is found guilty only if there is <em>strong evidence</em> that the defendant is guilty. The phrase “beyond a reasonable doubt” is often used as a guideline for determining a cutoff for when enough evidence exists to find the defendant guilty.</li>
+<li>The defendant is found to be either “not guilty” or “guilty” in the ultimate verdict.</li>
+</ol>
+<p>In other words, <em>not guilty</em> verdicts are not suggesting the defendant is <em>innocent</em>, but instead that “while the defendant may still actually be guilty, there wasn’t enough evidence to prove this fact.” Now let’s make the connection with hypothesis tests:</p>
+<ol type="1">
+<li>Either the null hypothesis <span class="math inline">\(H_0\)</span> or the alternative hypothesis <span class="math inline">\(H_A\)</span> is true.</li>
+<li>Hypothesis tests are conducted assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true.</li>
+<li>We reject the null hypothesis <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_A\)</span> only if the evidence found in the sample suggests that <span class="math inline">\(H_A\)</span> is true. The significance level <span class="math inline">\(\alpha\)</span> is used as a guideline to set the threshold on just how strong of evidence we require.</li>
+<li>We ultimately decide to either “fail to reject <span class="math inline">\(H_0\)</span>” or “reject <span class="math inline">\(H_0\)</span>.”</li>
+</ol>
+<p>So while gut instinct may suggest “failing to reject <span class="math inline">\(H_0\)</span>” and “accepting <span class="math inline">\(H_0\)</span>” are equivalent statements, they are not. “Accepting <span class="math inline">\(H_0\)</span>” is equivalent to finding a defendant innocent. However, courts do not find defendants “innocent,” but rather they find them “not guilty.” Putting things differently, defense attorneys do not need to prove that their clients are innocent, rather they only need to prove that clients are not “guilty beyond a reasonable doubt”.</p>
+<p>So going back to our resumes activity in <a href="#sec-ht-infer"><span>Section&nbsp;9.3</span></a>, recall that our hypothesis test was <span class="math inline">\(H_0: p_{m} - p_{f} = 0\)</span> versus <span class="math inline">\(H_A: p_{m} - p_{f} &gt; 0\)</span> and that we used a pre-specified significance level of <span class="math inline">\(\alpha\)</span> = 0.05. We found a <span class="math inline">\(p\)</span>-value of 0.024. Since the <span class="math inline">\(p\)</span>-value was smaller than <span class="math inline">\(\alpha\)</span> = 0.05, we rejected <span class="math inline">\(H_0\)</span>. In other words, we found needed levels of evidence in this particular sample to say that <span class="math inline">\(H_0\)</span> is false at the <span class="math inline">\(\alpha\)</span> = 0.05 significance level. We also state this conclusion using non-statistical language: we found enough evidence in this data to suggest that there was gender discrimination at play.</p>
+</section>
+<section id="types-of-errors" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="types-of-errors"><span class="header-section-number">9.4.2</span> Types of errors</h3>
+<p>Unfortunately, there is some chance a jury or a judge can make an incorrect decision in a criminal trial by reaching the wrong verdict. For example, finding a truly innocent defendant “guilty”. Or on the other hand, finding a truly guilty defendant “not guilty.” This can often stem from the fact that prosecutors don’t have access to all the relevant evidence, but instead are limited to whatever evidence the police can find.</p>
+<p>The same holds for hypothesis tests. We can make incorrect decisions about a population parameter because we only have a sample of data from the population and thus sampling variation can lead us to incorrect conclusions.</p>
+<p>There are two possible erroneous conclusions in a criminal trial: either (1) a truly innocent person is found guilty or (2) a truly guilty person is found not guilty. Similarly, there are two possible errors in a hypothesis test: either (1) rejecting <span class="math inline">\(H_0\)</span> when in fact <span class="math inline">\(H_0\)</span> is true, called a <strong>Type I error</strong> or (2) failing to reject <span class="math inline">\(H_0\)</span> when in fact <span class="math inline">\(H_0\)</span> is false, called a <strong>Type II error</strong>. Another term used for “Type I error” is “false positive,” while another term for “Type II error” is “false negative.”</p>
+<p>This risk of error is the price researchers pay for basing inference on a sample instead of performing a census on the entire population. But as we’ve seen in our numerous examples and activities so far, censuses are often very expensive and other times impossible, and thus researchers have no choice but to use a sample. Thus in any hypothesis test based on a sample, we have no choice but to tolerate some chance that a Type I error will be made and some chance that a Type II error will occur.</p>
+<p>To help understand the concepts of Type I error and Type II errors, we apply these terms to our criminal justice analogy in <a href="#fig-trial-errors-table">Figure&nbsp;<span>9.12</span></a>.</p>
+<div id="fig-trial-errors-table" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/gt_error_table.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.12: Type I and Type II errors in criminal trials</figcaption>
+</figure>
+</div>
+<p>Thus a Type I error corresponds to incorrectly putting a truly innocent person in jail, whereas a Type II error corresponds to letting a truly guilty person go free. Let’s show the corresponding table in <a href="#fig-trial-errors-table-ht">Figure&nbsp;<span>9.13</span></a> for hypothesis tests.</p>
+<div id="fig-trial-errors-table-ht" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/gt_error_table_ht.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.13: Type I and Type II errors in hypothesis tests.</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-choosing-alpha" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="sec-choosing-alpha"><span class="header-section-number">9.4.3</span> How do we choose alpha?</h3>
+<p>If we are using a sample to make inferences about a population, we run the risk of making errors. For confidence intervals, a corresponding “error” would be constructing a confidence interval that does not contain the true value of the population parameter. For hypothesis tests, this would be making either a Type I or Type II error. Obviously, we want to minimize the probability of either error; we want a small probability of making an incorrect conclusion:</p>
+<ul>
+<li>The probability of a Type I Error occurring is denoted by <span class="math inline">\(\alpha\)</span>. The value of <span class="math inline">\(\alpha\)</span> is called the <em>significance level</em> of the hypothesis test, which we defined in <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a>.</li>
+<li>The probability of a Type II Error is denoted by <span class="math inline">\(\beta\)</span>. The value of <span class="math inline">\(1-\beta\)</span> is known as the <em>power</em> of the hypothesis test.</li>
+</ul>
+<p>In other words, <span class="math inline">\(\alpha\)</span> corresponds to the probability of incorrectly rejecting <span class="math inline">\(H_0\)</span> when in fact <span class="math inline">\(H_0\)</span> is true. On the other hand, <span class="math inline">\(\beta\)</span> corresponds to the probability of incorrectly failing to reject <span class="math inline">\(H_0\)</span> when in fact <span class="math inline">\(H_0\)</span> is false.</p>
+<p>Ideally, we want <span class="math inline">\(\alpha = 0\)</span> and <span class="math inline">\(\beta = 0\)</span>, meaning that the chance of making either error is 0. However, this can never be the case in any situation where we are sampling for inference. There will always be the possibility of making either error when we use sample data. Furthermore, these two error probabilities are inversely related. As the probability of a Type I error goes down, the probability of a Type II error goes up.</p>
+<p>What is typically done in practice is to fix the probability of a Type I error by pre-specifying a significance level <span class="math inline">\(\alpha\)</span> and then try to minimize <span class="math inline">\(\beta\)</span>. In other words, we will tolerate a certain fraction of incorrect rejections of the null hypothesis <span class="math inline">\(H_0\)</span>, and then try to minimize the fraction of incorrect non-rejections of <span class="math inline">\(H_0\)</span>.</p>
+<p>So for example if we used <span class="math inline">\(\alpha\)</span> = 0.01, we would be using a hypothesis testing procedure that in the long run would incorrectly reject the null hypothesis <span class="math inline">\(H_0\)</span> one percent of the time. This is analogous to setting the confidence level of a confidence interval.</p>
+<p>So what value should you use for <span class="math inline">\(\alpha\)</span>? Different fields have different conventions, but some commonly used values include 0.10, 0.05, 0.01, and 0.001. However, it is important to keep in mind that if you use a relatively small value of <span class="math inline">\(\alpha\)</span>, then all things being equal, <span class="math inline">\(p\)</span>-values will have a harder time being less than <span class="math inline">\(\alpha\)</span>. Thus we would reject the null hypothesis less often. In other words, we would reject the null hypothesis <span class="math inline">\(H_0\)</span> only if we have <em>very strong</em> evidence to do so. This is known as a “conservative” test.</p>
+<p>On the other hand, if we used a relatively large value of <span class="math inline">\(\alpha\)</span>, then all things being equal, <span class="math inline">\(p\)</span>-values will have an easier time being less than <span class="math inline">\(\alpha\)</span>. Thus we would reject the null hypothesis more often. In other words, we would reject the null hypothesis <span class="math inline">\(H_0\)</span> even if we only have <em>mild</em> evidence to do so. This is known as a “liberal” test.</p>
+</section>
+</section>
+<section id="sec-ht-case-study" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-ht-case-study"><span class="header-section-number">9.5</span> Case study: Who’s the GOAT?</h2>
+<p>Let’s apply our knowledge of hypothesis testing to answer the question: “Who is better, Michael Jordan or Steph Curry?”. We’ll investigate if, on average, Michael Jordan or Steph Curry averaged more points per game.</p>
+<p>Let’s perform an exploratory data analysis of the relevant data. Let’s first filter our data set down so that we only have rows corresponding to either Michael Jordan or Steph Curry.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(player_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>, <span class="st">"Stephen Curry"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use a box plot to show the relationship between a numerical and a categorical variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> player_name, <span class="at">y =</span> pts)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Points per Game"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-jordan-curry-boxplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-jordan-curry-boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.14: Boxplot of <code>pts</code> vs.&nbsp;<code>player_name</code>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Eyeballing <a href="#fig-jordan-curry-boxplot">Figure&nbsp;<span>9.14</span></a>, Jordan has a higher median. Do we have reason to believe, however, that there is a <em>significant</em> difference between the mean <code>pts</code> for Michael Jordan compared to Steph Curry? It’s hard to say just based on this plot. The boxplot does show that the median of Jordan’s <code>pts</code> is higher than Curry’s median.</p>
+<p>However, there is a large amount of overlap between the boxes. Recall that the median isn’t necessarily the same as the mean either, depending on whether the distribution is skewed.</p>
+<p>Let’s calculate some summary statistics split by the binary categorical variable <code>player_name</code>: the number of seasons for which we have observations, the mean of <code>pts</code>, and the standard deviation split by <code>player_name</code>. We’ll do this using <code>dplyr</code> data wrangling verbs. Notice in particular how we count the number of rows associated with each player using the <code>n()</code> summary function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">mean_pts =</span> <span class="fu">mean</span>(pts),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(pts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  player_name        n mean_pts std_dev
+  &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 Michael Jordan     4     25.3    4.62
+2 Stephen Curry     13     23.8    4.92</code></pre>
+</div>
+</div>
+<p>Observe that Jordan has an average <code>pts</code> value of 25.3 and Curry has an average <code>pts</code> value of 23.762. The difference in these is thus 25.3 - 23.762 = 1.538. So there appears to be an edge of 1.538 points in favor of Jordan. The question is, however, are these results indicative of a true difference for <em>all</em> Jordan’s and Curry’s seasons? Or could we attribute this difference to chance <em>sampling variation</em>?</p>
+<section id="sampling-scenario" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="sampling-scenario"><span class="header-section-number">9.5.1</span> Sampling scenario</h3>
+<p>Let’s now revisit this study in terms of terminology and notation related to sampling we studied in <a href="sampling.html#sec-terminology-and-notation"><span>Section&nbsp;13.3.1</span></a>. The <em>study population</em> includes all the seasons that Michael Jordan played and all the seasons that Steph Curry played. However, we do not have all of Michael Jordan’s season averages (the data set begins in 1996, but Jordan’s rookie season was 1984) nor do we have all of Steph Curry’s season averages (he is currently continuing to play). Thus, we have a <em>sample</em> from the population consisting of 17 rows in the <code>nba</code> dataset corresponding to these two players (we will ignore the fact that we do not have a <strong>random</strong> sample from either player).</p>
+<p>When conducting a hypothesis test, our goal is to generalize from our sample to the entire population. What are the relevant <em>population parameter</em> and <em>point estimates</em>? We introduce the fourth sampling scenario in <a href="#tbl-summarytable-ch10">Table&nbsp;<span>9.2</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-summarytable-ch10" class="anchored">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Table&nbsp;9.2: Scenarios of sampling for inference</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Scenario</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Population parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Notation</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Point estimate</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Symbol(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right; width: 0.5in;">1</td>
+<td style="text-align: left; width: 0.7in;">Population proportion</td>
+<td style="text-align: left; width: 1in;">$p$</td>
+<td style="text-align: left; width: 1.1in;">Sample proportion</td>
+<td style="text-align: left; width: 1in;">$\widehat{p}$</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; width: 0.5in;">2</td>
+<td style="text-align: left; width: 0.7in;">Population mean</td>
+<td style="text-align: left; width: 1in;">$\mu$</td>
+<td style="text-align: left; width: 1.1in;">Sample mean</td>
+<td style="text-align: left; width: 1in;">$\overline{x}$ or $\widehat{\mu}$</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right; width: 0.5in;">3</td>
+<td style="text-align: left; width: 0.7in;">Difference in population proportions</td>
+<td style="text-align: left; width: 1in;">$p_1 - p_2$</td>
+<td style="text-align: left; width: 1.1in;">Difference in sample proportions</td>
+<td style="text-align: left; width: 1in;">$\widehat{p}_1 - \widehat{p}_2$</td>
+</tr>
+<tr class="even">
+<td style="text-align: right; width: 0.5in;">4</td>
+<td style="text-align: left; width: 0.7in;">Difference in population means</td>
+<td style="text-align: left; width: 1in;">$\mu_1 - \mu_2$</td>
+<td style="text-align: left; width: 1.1in;">Difference in sample means</td>
+<td style="text-align: left; width: 1in;">$\overline{x}_1 - \overline{x}_2$ or $\widehat{\mu}_1 - \widehat{\mu}_2$</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>So, whereas the sampling bowl exercise in <a href="sampling.html#sec-sampling-activity"><span>Section&nbsp;13.1</span></a> concerned <em>proportions</em>, we are now concerned with <em>differences in means</em>.</p>
+<p>In other words, the population parameter of interest is the difference in population mean ratings <span class="math inline">\(\mu_{MJ} - \mu_{SC}\)</span>, where <span class="math inline">\(\mu_{MJ}\)</span> is the mean <code>pts</code> of all of Jordan’s observations and <span class="math inline">\(\mu_{SC}\)</span> is the mean <code>pts</code> of all of Curry’s observations. Additionally the point estimate/sample statistic of interest is the difference in sample means <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>, where <span class="math inline">\(\overline{x}_{MJ}\)</span> is the mean <code>pts</code> of the <span class="math inline">\(n_{MJ}\)</span> = 4 movies in our sample and <span class="math inline">\(\overline{x}_{SC}\)</span> is the mean rating of the <span class="math inline">\(n_{SC}\)</span> = 13 in our sample. Based on our earlier exploratory data analysis, our estimate <span class="math inline">\(\overline{x}_{SC} - \overline{x}_{SC}\)</span> is <span class="math inline">\(25.3 - 23.762 = 1.538\)</span>.</p>
+<p>So there appears to be a slight difference of 1.538 in favor of Jordan. The question is, however, could this difference of 1.538 be merely due to chance and sampling variation? Or are these results indicative of a true difference in points scored for <em>all</em> of Jordan’s and Curry’s seasons? To answer this question, we’ll use hypothesis testing.</p>
+</section>
+<section id="conducting-the-hypothesis-test" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="conducting-the-hypothesis-test"><span class="header-section-number">9.5.2</span> Conducting the hypothesis test</h3>
+<p>We’ll be testing:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \mu_{MJ} - \mu_{SC} = 0\\
+\text{vs } H_A&amp;: \mu_{MJ} - \mu_{SC} \neq 0
+\end{aligned}
+\]</span></p>
+<p>In other words, the null hypothesis <span class="math inline">\(H_0\)</span> suggests that both Jordan and Curry have the same mean <code>pts</code>. This is the “hypothesized universe” we’ll <em>assume</em> is true. On the other hand, the alternative hypothesis <span class="math inline">\(H_A\)</span> suggests that there is a difference. Unlike the one-sided alternative we used in the promotions exercise <span class="math inline">\(H_A: p_m - p_f &gt; 0\)</span>, we are now considering a two-sided alternative of <span class="math inline">\(H_A: \mu_{MJ} - \mu_{SC} \neq 0\)</span>.</p>
+<section id="specify-variables-1" class="level4" data-number="9.5.2.1">
+<h4 data-number="9.5.2.1" class="anchored" data-anchor-id="specify-variables-1"><span class="header-section-number">9.5.2.1</span> 1. <code>specify</code> variables</h4>
+<p>Let’s now perform all the steps of the <code>infer</code> workflow. We first <code>specify()</code> the variables of interest in our data using the formula <code>pts ~ player_name</code>. This tells <code>infer</code> that the numerical variable <code>pts</code> is the outcome variable, while the variable <code>player_name</code> (which is now dichotomous because we filtered out any rows that didn’t correspond to either Jordan or Curry) is the explanatory variable. Note that unlike previously when we were interested in proportions, since we are now interested in the mean of a numerical variable, we do not need to set the <code>success</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: pts (numeric)
+Explanatory: player_name (factor)
+# A tibble: 17 × 2
+     pts player_name   
+   &lt;dbl&gt; &lt;fct&gt;         
+ 1  29.6 Michael Jordan
+ 2  28.7 Michael Jordan
+ 3  22.9 Michael Jordan
+ 4  20   Michael Jordan
+ 5  17.5 Stephen Curry 
+ 6  18.6 Stephen Curry 
+ 7  14.7 Stephen Curry 
+ 8  22.9 Stephen Curry 
+ 9  24   Stephen Curry 
+10  23.8 Stephen Curry 
+11  30.1 Stephen Curry 
+12  25.3 Stephen Curry 
+13  26.4 Stephen Curry 
+14  27.3 Stephen Curry 
+15  20.8 Stephen Curry 
+16  32   Stephen Curry 
+17  25.5 Stephen Curry </code></pre>
+</div>
+</div>
+<p>Observe at this point that the data in <code>mjsc</code> has not changed. The only change so far is the newly defined <code>Response: pts (numeric)</code> and <code>Explanatory: player_name (factor)</code> <em>meta-data</em>.</p>
+</section>
+<section id="hypothesize-the-null-1" class="level4" data-number="9.5.2.2">
+<h4 data-number="9.5.2.2" class="anchored" data-anchor-id="hypothesize-the-null-1"><span class="header-section-number">9.5.2.2</span> 2. <code>hypothesize</code> the null</h4>
+<p>We set the null hypothesis <span class="math inline">\(H_0: \mu_{MJ} - \mu_{SC} = 0\)</span> by using the <code>hypothesize()</code> function. Since we have two samples, action and romance movies, we set <code>null</code> to be <code>"independence"</code> as we described in <a href="#sec-ht-infer"><span>Section&nbsp;9.3</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: pts (numeric)
+Explanatory: player_name (factor)
+Null Hypothesis: independence
+# A tibble: 17 × 2
+     pts player_name   
+   &lt;dbl&gt; &lt;fct&gt;         
+ 1  29.6 Michael Jordan
+ 2  28.7 Michael Jordan
+ 3  22.9 Michael Jordan
+ 4  20   Michael Jordan
+ 5  17.5 Stephen Curry 
+ 6  18.6 Stephen Curry 
+ 7  14.7 Stephen Curry 
+ 8  22.9 Stephen Curry 
+ 9  24   Stephen Curry 
+10  23.8 Stephen Curry 
+11  30.1 Stephen Curry 
+12  25.3 Stephen Curry 
+13  26.4 Stephen Curry 
+14  27.3 Stephen Curry 
+15  20.8 Stephen Curry 
+16  32   Stephen Curry 
+17  25.5 Stephen Curry </code></pre>
+</div>
+</div>
+</section>
+<section id="generate-replicates-1" class="level4" data-number="9.5.2.3">
+<h4 data-number="9.5.2.3" class="anchored" data-anchor-id="generate-replicates-1"><span class="header-section-number">9.5.2.3</span> 3. <code>generate</code> replicates</h4>
+<p>After we have set the null hypothesis, we generate “shuffled” replicates assuming the null hypothesis is true by repeating the shuffling/permutation exercise you performed in <a href="#sec-ht-activity"><span>Section&nbsp;9.1</span></a>.</p>
+<p>We’ll repeat this resampling without replacement of <code>type = "permute"</code> a total of <code>reps = 1000</code> times. Feel free to run the code below to check out what the <code>generate()</code> step produces.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">View</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculate-summary-statistics-1" class="level4" data-number="9.5.2.4">
+<h4 data-number="9.5.2.4" class="anchored" data-anchor-id="calculate-summary-statistics-1"><span class="header-section-number">9.5.2.4</span> 4. <code>calculate</code> summary statistics</h4>
+<p>Now that we have 1000 replicated “shuffles” assuming the null hypothesis <span class="math inline">\(H_0\)</span> that both Jordan and Curry average the same numebr of points per game, let’s <code>calculate()</code> the appropriate summary statistic for these 1000 replicated shuffles. From <a href="#sec-understanding-ht"><span>Section&nbsp;9.2</span></a>, summary statistics relating to hypothesis testing have a specific name: <em>test statistics</em>. Since the unknown population parameter of interest is the difference in population means <span class="math inline">\(\mu_{MJ} - \mu_{SC}\)</span>, the test statistic of interest here is the difference in sample means <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>.</p>
+<p>For each of our 1000 shuffles, we can calculate this test statistic by setting <code>stat = "diff in means"</code>. Furthermore, since we are interested in <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>, we set <code>order = c("Michael Jordan", "Stephen Curry")</code>. Let’s save the results in a data frame called <code>null_distribution_movies</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>null_distribution_mjsc <span class="ot">&lt;-</span> mjsc <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Stephen Curry"</span>))</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>null_distribution_mjsc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: pts (numeric)
+Explanatory: player_name (factor)
+Null Hypothesis: independence
+# A tibble: 1,000 × 2
+   replicate   stat
+       &lt;int&gt;  &lt;dbl&gt;
+ 1         1  1.70 
+ 2         2 -2.55 
+ 3         3 -3.59 
+ 4         4 -2.12 
+ 5         5  3.57 
+ 6         6 -2.42 
+ 7         7 -0.292
+ 8         8  0.688
+ 9         9  2.68 
+10        10 -1.11 
+# ℹ 990 more rows</code></pre>
+</div>
+</div>
+<p>Observe that we have 1000 values of <code>stat</code>, each representing one instance of <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>. The 1000 values form the <em>null distribution</em>, which is the technical term for the sampling distribution of the difference in sample means <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span> assuming <span class="math inline">\(H_0\)</span> is true. What happened in real life? What was the observed difference in promotion rates? What was the <em>observed test statistic</em> <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>? Recall from our earlier data wrangling, this observed difference in means was <span class="math inline">\(25.3 - 23.762 = 1.538\)</span>. We can also achieve this using the code that constructed the null distribution <code>null_distribution_mjsc</code> but with the <code>hypothesize()</code> and <code>generate()</code> steps removed. Let’s save this in <code>obs_diff_means</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>obs_diff_means <span class="ot">&lt;-</span> mjsc <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Stephen Curry"</span>))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>obs_diff_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: pts (numeric)
+Explanatory: player_name (factor)
+# A tibble: 1 × 1
+   stat
+  &lt;dbl&gt;
+1  1.54</code></pre>
+</div>
+</div>
+</section>
+<section id="visualize-the-p-value-1" class="level4" data-number="9.5.2.5">
+<h4 data-number="9.5.2.5" class="anchored" data-anchor-id="visualize-the-p-value-1"><span class="header-section-number">9.5.2.5</span> 5. <code>visualize</code> the p-value</h4>
+<p>Lastly, in order to compute the <span class="math inline">\(p\)</span>-value, we have to assess how “extreme” the observed difference in means of 1.538 is. We do this by comparing 1.538 to our null distribution, which was constructed in a hypothesized universe of no true difference between Jordan and Curry. Let’s visualize both the null distribution and the <span class="math inline">\(p\)</span>-value in <a href="#fig-null-distribution-mjsc-2">Figure&nbsp;<span>9.15</span></a>. Unlike our example in <a href="#sec-infer-workflow-ht"><span>Section&nbsp;9.3.1</span></a> involving promotions, since we have a two-sided <span class="math inline">\(H_A: \mu_{MJ} - \mu_{SC} \neq 0\)</span>, we have to allow for both possibilities for <em>more extreme</em>, so we set <code>direction = "both"</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-null-distribution-mjsc-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-null-distribution-mjsc-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.15: Null distribution, observed test statistic, and <span class="math inline">\(p\)</span>-value.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s go over the elements of this plot. First, the histogram is the <em>null distribution</em>. Second, the solid line is the <em>observed test statistic</em>, or the difference in sample means we observed in real life of <span class="math inline">\(25.3 - 23.762 = 1.538\)</span>. Third, the two shaded areas of the histogram form the <em><span class="math inline">\(p\)</span>-value</em>, or the probability of obtaining a test statistic just as or more extreme than the observed test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>.</p>
+<p>What proportion of the null distribution is shaded? In other words, what is the numerical value of the <span class="math inline">\(p\)</span>-value? We use the <code>get_p_value()</code> function to compute this value:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>p_value_mjsc <span class="ot">&lt;-</span> null_distribution_mjsc <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_diff_means, <span class="at">direction =</span> <span class="st">"both"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_value =</span> <span class="fu">round</span>(p_value, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This <span class="math inline">\(p\)</span>-value of 0.612 is extremely modest. In other words, there is a very good chance that we’d observe a difference of 25.3 - 23.762 = 1.538 in a hypothesized universe where there was truly no difference in ratings.</p>
+<p>This <span class="math inline">\(p\)</span>-value is larger than our <span class="math inline">\(\alpha\)</span> of 0.05. Thus, we fail to reject the null hypothesis <span class="math inline">\(H_0: \mu_{MJ} - \mu_{SC} = 0\)</span>. In non-statistical language, the conclusion is: we do not have the evidence needed in this sample of data to suggest that we should reject the hypothesis that there is no difference in points per game between Michael Jordan and Steph Curry.</p>
+</section>
+</section>
+</section>
+<section id="sec-nhst-conclusion" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-nhst-conclusion"><span class="header-section-number">9.6</span> Conclusion</h2>
+<section id="sec-theory-hypo" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="sec-theory-hypo"><span class="header-section-number">9.6.1</span> Theory-based hypothesis tests</h3>
+<p>Most of the time researchers conduct hypothesis tests, they are using traditional, theory-based methods (also known as “parametric” test). These methods rely on probability models, probability distributions, and a few assumptions to construct the null distribution. This stands in stark contrast to the approach we’ve just seen where we relied on computer simulations to construct the null distribution.</p>
+<p>These traditional theory-based methods have been used for decades mostly because researchers didn’t have access to computers that could run thousands of calculations quickly and efficiently. Now that computing power is much cheaper and more accessible, simulation-based methods are much more feasible. However, researchers in many fields continue to use theory-based methods. Hence, we make it a point to include an example here.</p>
+<section id="two-sample-t-statistic" class="level4" data-number="9.6.1.1">
+<h4 data-number="9.6.1.1" class="anchored" data-anchor-id="two-sample-t-statistic"><span class="header-section-number">9.6.1.1</span> Two-sample t-statistic</h4>
+<p>Let’s reconsider the question we asked in <a href="#sec-ht-case-study"><span>Section&nbsp;9.5</span></a>: is Michael Jordan better than Steph Curry? We’ll again investigate if, on average, Michael Jordan or Steph Curry averaged more points per game.</p>
+<p>Let’s revisit the null distribution for our test. We can construct the distribution for the test statistic <span class="math inline">\(\bar{x}_{MJ} - \bar{x}_{SC}\)</span> as we did in <a href="#sec-ht-case-study"><span>Section&nbsp;9.5</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct null distribution of t:</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>null_distribution_mjsc <span class="ot">&lt;-</span> mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Notice we switched stat from "diff in means" to "t"</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>, <span class="st">"Stephen Curry"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>infer</code> package also includes some built-in theory-based test statistics as well. So instead of calculating the test statistic of interest as the <code>"diff in means"</code> <span class="math inline">\(\bar{x}_{MJ} - \bar{x}_{SC}\)</span>, we can calculate this defined two-sample <span class="math inline">\(t\)</span>-statistic by setting <code>stat = "t"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct null distribution of t:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>null_distribution_mjsc_t <span class="ot">&lt;-</span> mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Notice we switched stat from "diff in means" to "t"</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"t"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>, <span class="st">"Stephen Curry"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then visualize how these two compare <a href="#fig-t-stat-3">Figure&nbsp;<span>9.16</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution_mjsc_t, <span class="at">bins =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Check to make sure the conditions have been met for the theoretical
+method. {infer} currently does not check these for you.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(density)` instead.
+ℹ The deprecated feature was likely used in the infer package.
+  Please report the issue at &lt;https://github.com/tidymodels/infer/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-t-stat-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-t-stat-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.16: Null distribution using t-statistic and t-distribution.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Observe that the curve does a good job of approximating the histogram here. To calculate the <span class="math inline">\(p\)</span>-value in this case, we need to figure out how much of the total area under the <span class="math inline">\(t\)</span>-distribution curve is at or “more extreme” than our observed two-sample <span class="math inline">\(t\)</span>-statistic. Since <span class="math inline">\(H_A: \mu_a - \mu_r \neq 0\)</span> is a two-sided alternative, we need to add up the areas in both tails.</p>
+<p>We first compute the observed two-sample <span class="math inline">\(t\)</span>-statistic using <code>infer</code> verbs. This shortcut calculation further assumes that the null hypothesis is true: that the population of action and romance movies have an equal average rating.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>obs_two_sample_t <span class="ot">&lt;-</span> mjsc <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">formula =</span> pts <span class="sc">~</span> player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"t"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Michael Jordan"</span>, <span class="st">"Stephen Curry"</span>))</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>obs_two_sample_t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response: pts (numeric)
+Explanatory: player_name (factor)
+# A tibble: 1 × 1
+   stat
+  &lt;dbl&gt;
+1 0.574</code></pre>
+</div>
+</div>
+<p>We want to find the percentage of values that are at or below <code>obs_two_sample_t</code> <span class="math inline">\(= 0.574\)</span> or at or above <code>-obs_two_sample_t</code> <span class="math inline">\(= -0.574\)</span>. We use the <code>shade_p_value()</code> function with the <code>direction</code> argument set to <code>"both"</code> to do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution_mjsc_t, <span class="at">method =</span> <span class="st">"both"</span>) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_two_sample_t, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Check to make sure the conditions have been met for the theoretical
+method. {infer} currently does not check these for you.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/t-stat-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Null distribution using t-statistic and t-distribution with <span class="math inline">\(p\)</span>-value shaded.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>(We’ll discuss this warning message shortly.) What is the <span class="math inline">\(p\)</span>-value? We apply <code>get_p_value()</code> to our null distribution saved in <code>null_distribution_movies_t</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>null_distribution_mjsc_t <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_two_sample_t, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1    0.58</code></pre>
+</div>
+</div>
+<p>Our <span class="math inline">\(p\)</span>-value is even closer to 1.0 than it was in <a href="#sec-ht-case-study"><span>Section&nbsp;9.5</span></a>, and thus we are again reject <span class="math inline">\(H_0\)</span>.</p>
+<p>Let’s come back to that earlier warning message: <code>Check to make sure the conditions have been met for the theoretical method. {infer} currently does not check these for you.</code> To be able to use the <span class="math inline">\(t\)</span>-test and other such theoretical methods, there are always a few conditions to check. The <code>infer</code> package does not automatically check these conditions, hence the warning message we received. These conditions are necessary so that the underlying mathematical theory holds. In order for the results of our two-sample <span class="math inline">\(t\)</span>-test to be valid, three conditions must be met:</p>
+<ol type="1">
+<li>Nearly normal populations or large sample sizes. A general rule of thumb that works in many (but not all) situations is that the sample size <span class="math inline">\(n\)</span> should be greater than 30.</li>
+<li>Both samples are selected independently of each other.</li>
+<li>All observations are independent from each other.</li>
+</ol>
+<p>Let’s see if these conditions hold for our <code>mjsc</code> data:</p>
+<ol type="1">
+<li>This is unlikely to be met because <span class="math inline">\(n_a\)</span> = 4 and <span class="math inline">\(n_r\)</span> = 13 are both smaller than than 30, violating our rule of thumb.</li>
+<li>This is not met because we didn’t sampled the seasons (neither Jordan’s nor Curry’s) at random and in an unbiased fashion from all seasons each player has played.</li>
+<li>Observations are not independent. For example, Curry had very little playing time early in his career (he was not a starter) and thus had fewer opportunities to score. As his skill increased, he was given more and more playing time and scored more. For all players, one would expect that <code>pts</code> taken from two consecutive seasons would be more similar than <code>pts</code> taken from two seasons that are far apart.</li>
+</ol>
+<p>If we assumed that all three conditions are met, then we can be reasonably certain that the theory-based <span class="math inline">\(t\)</span>-test results are valid. If any of the conditions are not met, we cannot put as much trust into the results of our hypothesis test. On the other hand, the only assumption that needs to be met in the simulation-based method is that the sample is selected at random. Thus, there are many reasons to prefer simulation-based methods: they have fewer assumptions, they are conceptually easier to understand, and because computing power has become easily accessible, they can be run quickly. That being said, because much of the world’s research still relies on traditional theory-based methods, we also believe it is important to understand them.</p>
+<p>You may be wondering why we chose <code>reps = 1000</code> for these simulation-based methods. We’ve noticed that after around 1000 replicates for the null distribution. You can change this value to something like 10,000 if you would like even finer detail, but this will take more time to compute. Feel free to iterate on this as you like to get an even better idea about the shape of the distributions as you wish.</p>
+</section>
+</section>
+<section id="when-inference-is-not-needed" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="when-inference-is-not-needed"><span class="header-section-number">9.6.2</span> When inference is not needed</h3>
+<p>We’ve now walked through several different examples of how to use the <code>infer</code> package to perform statistical inference: constructing confidence intervals and conducting hypothesis tests. For each of these examples, we made it a point to always perform an exploratory data analysis (EDA) first; specifically, by looking at the raw data values, by using data visualization with <code>ggplot2</code>, and by data wrangling with <code>dplyr</code> beforehand. We <em>highly</em> encourage you to always do the same. As a beginner to statistics, EDA helps you develop intuition as to what statistical methods like confidence intervals and hypothesis tests can tell us. Even as a seasoned practitioner of statistics, EDA helps guide your statistical investigations. In particular, is statistical inference even needed?</p>
+<p>Let’s consider an example. Say we’re interested in another pair of players. Let’s say you wanted to know whether Steph Curry’s average points per game was higher than that of his father, Dell Curry. Let’s filter this data frame to only include Hawaiian and Alaska Airlines using their <code>carrier</code> codes <code>HA</code> and <code>AS</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>scdc <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(player_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Stephen Curry"</span>, <span class="st">"Dell Curry"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are two possible statistical inference methods we could use to answer such questions. First, we could construct a 95% confidence interval for the difference in population means <span class="math inline">\(\mu_{SC} - \mu_{DC}\)</span>, where <span class="math inline">\(\mu_{SC}\)</span> is the mean of all of Steph’s rows and <span class="math inline">\(\mu_{DC}\)</span> is the mean air time of all of Dell’s. We could then check if the entirety of the interval is greater than 0, suggesting that <span class="math inline">\(\mu_{SC} - \mu_{DC} &gt; 0\)</span>, or, in other words suggesting that <span class="math inline">\(\mu_{SC} &gt; \mu_{DC}\)</span>. Second, we could perform a hypothesis test of the null hypothesis <span class="math inline">\(H_0: \mu_{SC} - \mu_{DC} = 0\)</span> versus the alternative hypothesis <span class="math inline">\(H_A: \mu_{SC} - \mu_{DC}} &gt; 0\)</span>.</p>
+<p>However, let’s first construct an exploratory visualization as we suggested earlier. Since <code>pts</code> is numerical and <code>player_name</code> is categorical, a boxplot can display the relationship between these two variables, which we display in <a href="#fig-scdc-boxplot">Figure&nbsp;<span>9.17</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>scdc <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> player_name, <span class="at">y =</span> pts)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Player"</span>, <span class="at">y =</span> <span class="st">"Points per Game"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-scdc-boxplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hypothesis_files/figure-html/fig-scdc-boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9.17: Air time for Hawaiian and Alaska Airlines flights departing NYC in 2013.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is what we like to call “no PhD in Statistics needed” moments. You don’t have to be an expert in statistics to know that Alaska Airlines and Hawaiian Airlines have <em>significantly</em> different air times. The two boxplots don’t even overlap! Constructing a confidence interval or conducting a hypothesis test would frankly not provide much more insight than <a href="#fig-scdc-boxplot">Figure&nbsp;<span>9.17</span></a>.</p>
+<p>Let’s investigate why we observe such a clear cut difference between these two players using data wrangling. Let’s first group by the rows of our data, not only by <code>carrier</code> but also by destination <code>dest</code>. Subsequently, we’ll compute two summary statistics: the number of observations using <code>n()</code> and the mean airtime:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>scdc <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(player_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean_pts =</span> <span class="fu">mean</span>(pts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  player_name       n mean_pts
+  &lt;chr&gt;         &lt;int&gt;    &lt;dbl&gt;
+1 Dell Curry        6     9.05
+2 Stephen Curry    13    23.8 </code></pre>
+</div>
+</div>
+<p>It turns out that we only have a few seasons Dell Curry and his scoring is consistently low. Given the clear difference between the two players, it will not be surprising when we observe a difference (<em>statistically significantly different</em>, in fact) between these two players’ <code>pts</code>.</p>
+<p>This is a clear example of not needing to do anything more than a simple exploratory data analysis using data visualization and descriptive statistics to get an appropriate conclusion. This is why we highly recommend you perform an EDA of any sample data before running statistical inference methods like confidence intervals and hypothesis tests.</p>
+</section>
+<section id="problems-with-p-values" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="problems-with-p-values"><span class="header-section-number">9.6.3</span> Problems with p-values</h3>
+<p>On top of the many common misunderstandings about hypothesis testing and <span class="math inline">\(p\)</span>-values we listed in <a href="#sec-ht-interpretation"><span>Section&nbsp;9.4</span></a>), another unfortunate consequence of the expanded use of <span class="math inline">\(p\)</span>-values and hypothesis testing is a phenomenon known as “p-hacking.” p-hacking is the act of “cherry-picking” only results that are “statistically significant” while dismissing those that aren’t, even if at the expense of the scientific ideas. There are lots of articles written recently about misunderstandings and the problems with <span class="math inline">\(p\)</span>-values. We encourage you to check some of them out:</p>
+<ol type="1">
+<li><a href="https://en.wikipedia.org/wiki/Misunderstandings_of_p-values">Misunderstandings of <span class="math inline">\(p\)</span>-values</a></li>
+<li><a href="https://www.vox.com/science-and-health/2017/7/31/16021654/p-values-statistical-significance-redefine-0005">What a nerdy debate about <span class="math inline">\(p\)</span>-values shows about science - and how to fix it</a></li>
+<li><a href="https://www.nature.com/news/statisticians-issue-warning-over-misuse-of-p-values-1.19503">Statisticians issue warning over misuse of <span class="math inline">\(P\)</span> values</a></li>
+<li><a href="https://fivethirtyeight.com/features/you-cant-trust-what-you-read-about-nutrition/">You Can’t Trust What You Read About Nutrition</a></li>
+<li><a href="http://www.fharrell.com/post/pval-litany/">A Litany of Problems with p-values</a></li>
+</ol>
+<p>Such issues were getting so problematic that the American Statistical Association (ASA) put out a statement in 2016 titled, <a href="https://www.amstat.org/asa/files/pdfs/P-ValueStatement.pdf">“The ASA Statement on Statistical Significance and <span class="math inline">\(P\)</span>-Values,”</a> with six principles underlying the proper use and interpretation of <span class="math inline">\(p\)</span>-values. The ASA released this guidance on <span class="math inline">\(p\)</span>-values to improve the conduct and interpretation of quantitative science and to inform the growing emphasis on reproducibility of science research.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./descriptives.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./single.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
