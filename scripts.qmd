@@ -2,6 +2,7 @@
 
 ```{r}
 #| echo: false
+#| warning: false
 library(tidyverse)
 ```
 
@@ -326,7 +327,8 @@ To give you a feel for how you can use `if` and `else` to do something useful, t
 ## --- ifelseexample.R
 # find out what day it is...
 today <- now()       # pull the date from the system clock
-day <- wday(today, label=TRUE)  # what day of the week it is_
+day <- weekdays(today) # what day of the week it is_
+
 
 # now make a choice depending on the day...
 if ( day == "Monday" ) {
@@ -336,7 +338,7 @@ if ( day == "Monday" ) {
 }
 ```
 
-Since today happens to be a `r as.character(wday(now(), label=TRUE))`, when I run the script here's what happens:
+Since today happens to be a `r weekdays(now())`, when I run the script here's what happens:
 
 ```{r}
 #| echo: false
