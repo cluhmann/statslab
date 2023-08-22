@@ -45,6 +45,7 @@ There are two main differences.
 
 For your purposes, this also means that you can easily copy code from any of these code blocks and paste it into your RStudio console in order to execute.
 
+
 ### Be very careful to avoid typos
 
 Before we go on to talk about other types of calculations that we can do with R, there's a few other things I want to point out. The first thing is that, though R is good software, it's still software. R, like any programming language, is pretty stupid and because it's stupid it can't handle typos. It takes it on faith that you meant to type *exactly* what you actually typed. For example, suppose that you forgot to hit the shift key when trying to type `+`, and as a result your command ended up being `10 = 20` rather than `10 + 20`. Here's what happens:
@@ -62,7 +63,6 @@ Even more subtle is the fact that some typos won't produce errors at all, becaus
 10 - 20
 ```
 
-
 In this case, R produces the right answer, but to the the wrong question. 
 
 To some extent, I'm stating the obvious here, but it's important. The people who wrote R are smart. You, the user, are smart. But R is a programming language and programming languages are a way to tell computers what to do and computers are dumb. And because they are dumb, they are mindlessly obedient. R does *exactly* what you tell it to do. R will not try and second-guess what you "actually meant"; there is no "autocorrect". This is for good reason. When doing advanced stuff -- and even the simplest of statistics is pretty advanced in a lot of ways -- it's risky to let a mindless automaton like R try to overrule the human user. So it's your responsibility to be careful. Always make sure you type *exactly what you mean*. When dealing with computers, it's not enough to type "approximately" the right thing. In general, you absolutely *must* be precise in what you tell R to do ... like all machines it is too stupid to be anything other than absurdly literal in its interpretation.
@@ -76,6 +76,7 @@ Of course, now that I've been so uptight about the importance of always being pr
 ```
 
 or this
+
 ```{r}
 10+20
 ```
@@ -86,20 +87,21 @@ Okay, now that we've discussed some of the tedious details associated with typin
 
 ### Adding, subtracting, multiplying and dividing
 
-So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, @tbl-arithmetic1 lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
+So, now that we have the terminology, let's learn how to perform some arithmetic operations in R. To that end, @fig-arithmetic1 lists the operators that correspond to the basic arithmetic we learned in primary school: addition, subtraction, multiplication and division. 
 
 ```{r}
-#| label: tbl-arithmetic1
+#| label: fig-arithmetic1
 #| echo: FALSE
+#| fig-cap: "Basic arithmetic operations in R. These five operators are used very frequently throughout the text, so it's important to be familiar with them at the outset."
 knitr::kable(rbind(
               c("addition", "`+`", "10 + 2", 12),
               c("subtraction", "`-`", "9 - 3", 6),
               c("multiplication", "`*`", "5 * 5", 25),
-              c("division", "`/`", "10 / 3", 3),
+              c("division", "`/`", "10 / 3", 3.333333),
               c("power", "`^`", "5 ^ 2", 25)
 ),
-caption = 'Basic arithmetic operations in R. These five operators are used very frequently throughout the text, so it\'s important to be familiar with them at the outset.',col.names = c("operation", "operator", "example input" , "example output"), align="lccc",
-  booktabs = TRUE)
+col.names = c("operation", "operator", "example input" , "example output"), align="lccc",
+booktabs = TRUE)
 ```
 
 As you can see, R uses fairly standard symbols to denote each of the different operations you might want to perform: addition is done using the `+` operator, subtraction is performed by the `-` operator, and so on. So if I wanted to find out what 57 times 61 is (and who wouldn't?), I can use R instead of a calculator, like so:
@@ -107,18 +109,18 @@ As you can see, R uses fairly standard symbols to denote each of the different o
 57 * 61
 ```
 
-So that's handy. 
+So that's handy.
 
 
 ### Taking powers
 
-The first four operations listed in @tab-arithmetic1 are things we all learned at a young age, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the most important is probably taking powers.
+The first four operations listed in @fig-arithmetic1 are things we all learned at a young age, but they aren't the only arithmetic operations built into R. There are three other arithmetic operations that I should probably mention: taking powers, doing integer division, and calculating a modulus. Of the three, the most important is probably taking powers.
 
 For those of you who can still remember your high school math, this should be familiar. And if not, it's not complicated. As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this:
+
 $$
 5^4 = 5 \times 5 \times 5 \times 5 
 $$
-
 One way that we could calculate $5^4$ in R would be to type in the complete multiplication as it is shown in the equation above. That is, we could do this
 
 ```{r}
@@ -126,13 +128,14 @@ One way that we could calculate $5^4$ in R would be to type in the complete mult
 ```
 
 but it does seem a bit tedious. It would be very annoying indeed if you wanted to calculate $5^{15}$, since the command would end up being quite long. Therefore, to make our lives easier, we use the power operator instead. When we do that, our command to calculate $5^4$ goes like this:
+
 ```{r}
 5 ^ 4
 ```
 Much easier.
 
 
-### Doing calculations in the right order{#bedmas}
+### Doing calculations in the right order {#sec-bedmas}
 
 Okay. At this point, you know how to take one of the most powerful pieces of statistical software in the world, and use it as a \$2 calculator. And as a bonus, you've learned a few very basic programming concepts. That's not nothing (you could argue that you've just saved yourself \$2) but on the other hand, it's not very much either. In order to use R more effectively, we need to introduce more programming concepts.
 
@@ -164,15 +167,15 @@ All of the above being said, it's helpful to remember that *parentheses always c
 
 One of the most important things to be able to do in R (or any programming language, for that matter) is to store information in **_variables_**. At a conceptual level you can think of a variable as *label* for a certain piece of information, or even several different pieces of information. For example, when using R as a calculator, there may be times when you want to store an intermediate result along the way.  For example, when calculating an average (the sum divided by the count), you might wish to save the sum before dividing that sum by the count. Let's look at the very basics for how we create variables and work with them. 
 
-### Variable assignment using `<-` and `->`
+### Variable assignment using `<-`
 
-Since we've been working with numbers so far, let's start by creating variables to store our numbers. And since most people like concrete examples, let's invent one. Suppose I'm trying to calculate how much money I'm going to make selling this book. There's several different numbers I might want to store. Firstly, I need to figure out how many copies I'll sell. This isn't exactly *Harry Potter*, so let's assume I'm only going to sell one copy per student in my class. That's 30 sales, so let's create a variable called `sales`. What I want to do is assign a **_value_** to my variable `sales`, and that value should be `30`. We do this by using the **_assignment operator_**, which is `<-`. Here's how we do it:
+Since we've been working with numbers so far, let's start by creating variables to store our numbers. And since most people like concrete examples, let's invent one. Suppose I'm trying to calculate how much money I'm going to make selling this book. There's several different numbers I might want to store. Firstly, I need to figure out how many copies I'll sell. This isn't exactly *Harry Potter*, so let's assume I'm only going to sell one copy per student in my class. Let's assume there are 30 students, so that's 30 sales. Let's create a variable called `sales`. What I want to do is assign a **_value_** to my variable `sales`, and that value should be `30`. We do this by using the **_assignment operator_**, which is `<-`. Here's how we do it:
 
 ```{r}
 sales <- 30
 ```
 
-When you hit enter, R doesn't print out any output. It just gives you another command prompt. However, behind the scenes R has created a variable called `sales` and given it a value of `30`. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do *that* is to type the name of the variable and hit enter.
+When you hit enter, R doesn't print out any output. It just gives you another command prompt. However, behind the scenes R has created a variable called `sales` and assign the value `30` to it. You can check that this has happened by asking R to print the variable on screen. And the simplest way to do *that* is to type the name of the variable and hit enter.
 
 ```{r}
 sales
@@ -180,15 +183,33 @@ sales
 
 So that's nice to know. Anytime you can't remember what R has got stored in a particular variable, you can just type the name of the variable and hit enter. 
 
-Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in @sec-functionarguments. As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
+Okay, so now we know how to assign variables. Actually, there's a bit more you should know. Firstly, one of the curious features of R is that there are several different ways of making assignments. In addition to the `<-` operator, we can also use `->` and `=`, and it's pretty important to understand the differences between them. Let's start by considering `->`, since that's the easy one (we'll discuss the use of `=` in @sec-functionarguments). As you might expect from just looking at the symbol, it's almost identical to `<-`. It's just that the arrow (i.e., the assignment) goes from left to right. So if I wanted to define my `sales` variable using `->`, I would write it like this:
 
 ```{r}
 30 -> sales
 ```
-This has the same effect: and it *still* means that I'm only going to sell `30` copies. Sigh. Apart from this superficial difference, `<-` and `->` are identical. In fact, as far as R is concerned, they're actually the same operator, just in a "left form" and a "right form".
+
+This has the same effect.  And, just to be confusing, this also has the same effect:
+
+```{r}
+sales = 30
+```
+
+... and so does this:
+
+```{r}
+assign("sales", 30)
+```
 
 
-### Doing calculations using variables
+::: {.callout-caution}
+
+Apart from superficial differences, these various approaches to assignment are functionally identical.  Despite this equivalence, you are **strongly** encouraged to use the `<-` operator. Because the use of `<-` is so conventional within the R language, those familiar with R will have a much more difficult time reading R code that uses anything else. Soon enough, you will too will be familiar with R and will thus come to expect the use of `<-`.
+
+:::
+
+
+### Calculations using variables
 
 Okay, let's get back to my original story. In my quest to become rich, I've written this textbook. To figure out how good a strategy is, I've started creating some variables in R. In addition to defining a `sales` variable that counts the number of copies I'm going to sell, I can also create a variable called `royalty`, indicating how much money I get per copy. Let's say that my royalties are about $7 per book:
 
@@ -216,7 +237,7 @@ revenue <- sales * royalty
 revenue
 ```
 
-That's fairly straightforward. A slightly more subtle thing we can do is reassign the value of my variable, based on its current value. For instance, suppose that one of my students (no doubt under the influence of psychotropic drugs) loves the book so much that he or she donates me an extra \$550. The simplest way to capture this is by a command like this:
+That's fairly straightforward. A slightly more subtle thing we can do is reassign the value of my variable, based on its current value. For instance, suppose that one of my students (no doubt under the influence of psychotropic drugs) loves the book so much that he or she donates an extra \$550 to me. The simplest way to capture this is by a command like this:
 
 ```{r}
 revenue <- revenue + 550
@@ -240,10 +261,17 @@ In addition to those rules that R enforces, there are some informal conventions 
 
 - Use informative variable names. As a general rule, using meaningful names like `sales` and `revenue` is preferred over arbitrary ones like `variable1` and `variable2`. Otherwise it's very hard to remember what the contents of different variables are, and it becomes hard to understand what your commands actually do. 
 - Use short variable names. Typing is a pain and no-one likes doing it. So we much prefer to use a name like `sales` over a name like `sales.for.this.book.that.you.are.reading`. Obviously there's a bit of a tension between using informative names (which tend to be long) and using short names (which tend to be meaningless), so use a bit of common sense when trading off these two conventions.
-- Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores "my new salary". Obviously I can't include spaces in the variable name, so how should I do this? There are two main conventions that you sometimes see R users employing. First, there is "camel case" in which you use capital letters at the beginning of each constituent word (except the first one), which gives you `myNewSalary` as the variable name. Second, there is "snake case" in which you separate words using underscores, as in `my_new_salary`. Finally, you may also see some R users separating words using periods, which would give you `my.new.salary`. Do not do this because it is syntactically ambiguous (and thus makes your code difficult to read/understand).
+- Use one of the conventional naming styles for multi-word variable names. Suppose I want to name a variable that stores "my new salary". Obviously I can't include spaces in the variable name, so how should I do this? There are two main conventions that you sometimes see R users employing. First, there is "camel case" in which you use capital letters at the beginning of each constituent word (except the first one), which gives you `myNewSalary` as the variable name. Second, there is "snake case" in which you separate words using underscores, as in `my_new_salary`. Finally, you may also see some R users separating words using periods, which would give you `my.new.salary`.
 
 
-## Functions {#sec-functions}
+::: {.callout-caution}
+
+Though you may sometimes see R users separating words within a variable name using periods (e.g., `my.new.salary`), it is syntactically ambiguous for those who know other programming languages.  Many languages use periods to indicate hierarchical relationships (e.g., `obj.func` will refer to the `func` that belongs to `obj`).  I thus **strongly discourage** such practices because it makes your code difficult to read/understand.  Camel case is recommended.
+
+:::
+
+
+## Functions {#sec-usingfunctions}
 
 The symbols `+`, `-`, `*`, etc. are examples of operators. As we've seen, you can do quite a lot of calculations just by using these operators. However, in order to do more advanced calculations (and later on, to do actual statistics), you're going to need to start using **_functions_**. We'll see more detail about functions and how they work later, but for now let's just dive in and use a few. To get started, suppose I wanted to take the square root of 225. The  square root, in case your high school math is a bit rusty, is just the opposite of squaring a number. So, for instance, since "5 squared is 25" I can say that "5 is the square root of 25". This is the usual notation:
 
@@ -260,13 +288,13 @@ This second way of writing it is kind of useful to "remind" you of the mathemati
 You may be able to calculate the square root of 25 in your head. But it gets more difficult when the numbers get bigger, and pretty much impossible if they're not whole numbers. This is where something like R comes in very handy. Let's say I wanted to calculate $\sqrt{225}$, the square root of 225. There's two ways I could do this using R. First, since the square root of 255 is the same thing as raising 225 to the power of 0.5, we could use the power operator `^`, just like we did earlier:
 
 ```{r}
-225 ^ 0.5
+225^0.5
 ```
 
 However, there's a second way that we can do this, since R also provides a ***square root function***, `sqrt()`. To calculate the square root of 255 using this function, what I do is insert the number `225` in the parentheses. That is, the command I type is this:
 
 ```{r}
-sqrt( 225 )
+sqrt(225)
 ```
 
 As you might expect from our previous discussion, the spaces in between the parentheses are purely cosmetic. We could have typed `sqrt(225)` or `sqrt( 225   )` and gotten the same result. When we use a function to do something, we generally refer to this as **_calling_** the function, and the values that we type into the function (there can be more than one) are referred to as the **_arguments_** of that function. 
@@ -274,13 +302,13 @@ As you might expect from our previous discussion, the spaces in between the pare
 Obviously, the `sqrt()` function doesn't really give us any new functionality, since we already knew how to do square root calculations by using the power operator `^`, though it maybe be more explicit, clearer, and thus easier to read to use `sqrt()`. However, there are lots of other functions in R: in fact, almost everything of interest that I'll talk about in this book is an R function of some kind. For example, one function that we will need to use in this book is the ***absolute value function***. Compared to the square root function, it's extremely simple: it just converts negative numbers to positive numbers, and leaves positive numbers alone. Mathematically, the absolute value of $x$ is written $|x|$ or sometimes $\mbox{abs}(x)$. Calculating absolute values in R is pretty easy, since R provides the `abs()` function that you can use for this purpose. When you feed it a positive number...
 
 ```{r}
-abs( 21 )
+abs(21)
 ```
 
 the absolute value function does nothing to it at all. But when you feed it a negative number, it spits out the positive version of the same number, like this:
 
 ```{r}
-abs( -13 )
+abs(-13)
 ```
 
 In all honesty, there's nothing that the absolute value function does that you couldn't do just by looking at the number and erasing the minus sign if there is one. However, there's a few places later in the book where we have to use absolute values, so I thought it might be a good idea to explain the meaning of the term early on.
@@ -299,18 +327,18 @@ When R executes this command, starts out by calculating the value of `abs(-8)`, 
 There's two more fairly important things that you need to understand about how functions work in R, and that's the use of "named" arguments, and "default values" for arguments. Not surprisingly, that's not to say that this is the last we'll hear about how functions work, but they are the last things we desperately need to discuss in order to get you started. To understand what these two concepts are all about, I'll introduce another function. The `round()` function can be used to round some value to the nearest whole number. For example, I could type this:
 
 ```{r}
-round( 3.1415 )
+round(3.1415)
 ```
 
 Pretty straightforward, really. However, suppose I only wanted to round it to two decimal places: that is, I want to get `3.14` as the output. The `round()` function supports this, by allowing you to input a second argument to the function that specifies the number of decimal places that you want to round the number to. In other words, I could do this: 
 
 ```{r}
-round( 3.14165, 2 )
+round(3.14165, 2)
 ```
 
 What's happening here is that I've specified *two* arguments: the first argument is the number that needs to be rounded (i.e., `3.14165`), the second argument is the number of decimal places that it should be rounded to (i.e., `2`), and the two arguments are separated by a comma. In this simple example, it's quite easy to remember which one argument comes first and which one comes second, but for more complicated functions this is not easy. Fortunately, most R functions make use of ***argument names***. For the `round()` function, for example the number that needs to be rounded is specified using the `x` argument, and the number of decimal points that you want it rounded to is specified using the `digits` argument. Because we have these names available to us, we can specify the arguments to the function by name. We do so like this:
 ```{r}
-round( x = 3.1415, digits = 2 )
+round(x=3.1415, digits=2)
 ```
 
 Notice that this is kind of similar in spirit to variable assignment, except that `=` is used here, rather than `<-`. In both cases we're specifying specific values to be associated with a label. However, there are some differences between what we were doing earlier on when creating variables, and what we're doing here when specifying arguments, and so as a consequence it's important that you use `=` in this context.
@@ -318,15 +346,15 @@ Notice that this is kind of similar in spirit to variable assignment, except tha
 As you can see, specifying the arguments by name involves a lot more typing, but it's also explicit and thus a lot easier to read. Because of this, the commands in this book will usually specify arguments by name, since that makes it clearer to you what I'm doing. However, one important thing to note is that when specifying the arguments using their names, it doesn't matter what order you type them in. But if you don't use the argument names, then you have to input the arguments in the correct order. In other words, these three commands all produce the same output...
 
 ```{r}
-round( 3.14165, 2 )
-round( x = 3.1415, digits = 2 )
-round( digits = 2, x = 3.1415 )
+round(x=3.1415, 2)
+round(x=3.1415, digits=2)
+round(digits=2, x=3.1415)
 ```
 
 but this one does not...
 
 ```{r}
-round( 2, 3.14165 )
+round(2, 3.14165)
 ```
 
 How do you find out what the correct order is? There's a few different ways, but the easiest one is to look at the help documentation for the function (e.g., `? round`). However, if you're ever unsure, it's probably best to actually type in the argument name.
@@ -383,13 +411,13 @@ To get back to the main story, let's consider the problem of how to get informat
 sales.by.month[2]
 ```
 
-Yep, that's the February sales all right. But there's a subtle detail to be aware of here: notice that R outputs `[1] 100`, *not* `[2] 100`. This is because R is being extremely literal. When we typed in `sales.by.month[2]`, we asked R to find exactly *one* thing, and that one thing happens to be the second element of our `sales.by.month` vector. So, when it outputs `[1] 100` what R is saying is that the first number *that we just asked for* is `100`. This behaviour makes more sense when you realise that we can use this trick to create new variables. For example, I could create a `february.sales` variable like this:
+Yep, that's the February sales all right. But there's a subtle detail to be aware of here: notice that R outputs `[1] 100`, *not* `[2] 100`. This is because R is being extremely literal. When we typed in `sales.by.month[2]`, we asked R to find exactly *one* thing, and that one thing happens to be the second element of our `sales.by.month` vector. So, when it outputs `[1] 100` what R is saying is that the first number *that we just asked for* is `100`. This behavior makes more sense when you realize that we can use this trick to create new variables. For example, I could create a `february.sales` variable like this:
 
 ```{r}
 february.sales <- sales.by.month[2]
 february.sales
 ```
-Obviously, the new variable `february.sales` should only have one element and so when I print it out this new variable, the R output begins with a `[1]` because `100` is the value of the first (and only) element of `february.sales`. The fact that this also happens to be the value of the second element of `sales.by.month` is irrelevant. We'll pick this topic up again shortly ( @sec-indexing).
+Obviously, the new variable `february.sales` should only have one element and so when I print it out this new variable, the R output begins with a `[1]` because `100` is the value of the first (and only) element of `february.sales`. The fact that this also happens to be the value of the second element of `sales.by.month` is irrelevant. We'll pick this topic up again shortly (@sec-indexing).
 
 ### Altering the elements of a vector
 
@@ -403,12 +431,12 @@ sales.by.month
 Another way to edit variables is to use the `edit()` or `fix()` functions. I won't discuss them in detail right now, but you can check them out on your own. 
 
 
-### Useful things to know about vectors{#veclength}
+### Useful things to know about vectors {#veclength}
 
 Before moving on, I want to mention a couple of other things about vectors. Firstly, you often find yourself wanting to know how many elements there are in a vector (usually because you've forgotten). You can use the `length()` function to do this. It's quite straightforward:
 
 ```{r}
-length( x = sales.by.month )
+length(x = sales.by.month)
 ```
 
 
@@ -417,6 +445,7 @@ Secondly, you often want to alter all of the elements of a vector at once. For i
 ```{r}
 sales.by.month * 7
 ```
+
 In other words, when you multiply a vector by a single number, all elements in the vector get multiplied. The same is true for addition, subtraction, division and taking powers. So that's neat. On the other hand, suppose I wanted to know how much money I was making per day, rather than per month. Since not every month has the same number of days, I need to do something slightly different. Firstly, I'll create two new vectors:
 
 ```{r}
@@ -429,85 +458,109 @@ Obviously, the `profit` variable is the same one we created earlier, and the `da
 ```{r}
 profit / days.per.month
 ```
+
 I still don't like all those zeros, but that's not what matters here. Notice that the second element of the output is 25, because R has divided the second element of `profit` (i.e. 700) by the second element of `days.per.month` (i.e. 28). Similarly, the third element of the output is equal to 1400 divided by 31, and so on. We'll talk more about calculations involving vectors later on, but that's enough detail for now.
 
 ## Storing text data{#sec-text}
 
 A lot of the time your data will be numeric in nature, but not always. Sometimes your data really needs to be described using text, not using numbers. To address this, we need to consider the situation where our variables store text. To create a variable that stores the word "hello", we can type this:
+
 ```{r}
 greeting <- "hello"
 greeting
 ```
+
 When interpreting this, it's important to recognise that the quote marks here *aren't* part of the string itself. They're just something that we use to make sure that R knows to treat the characters that they enclose as a piece of text data, known as a **_character string_**. In other words, R treats `"hello"` as a string containing the word "hello"; but if I had typed `hello` instead, R would go looking for a variable by that name! You can also use `'hello'` to specify a character string.
 
 Okay, so that's how we store the text. Next, it's important to recognise that when we do this, R stores the entire word `"hello"` as a *single* element: our `greeting` variable is *not* a vector of five different letters. Rather, it has only the one element, and that element corresponds to the entire character string `"hello"`. To illustrate this, if I actually ask R to find the first element of `greeting`, it prints the whole string:
+
 ```{r}
 greeting[1]
 ```
+
 Of course, there's no reason why I can't create a vector of character strings. For instance, if we were to continue with the example of my attempts to look at the monthly sales data for my book, one variable I might want would include the names of all 12 `months`. To do so, I could type in a command like this
+
 ```{r}
 months <- c("January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", 
             "December")
 ```
+
 This is a **_character vector_** containing 12 elements, each of which is the name of a month. So if I wanted R to tell me the name of the fourth month, all I would do is this:
+
 ```{r}
 months[4]
 ```
 
 
-### Working with text{#simpletext}
+### Working with text {#simpletext}
 
 Working with text data is somewhat more complicated than working with numeric data. There is much to discuss here, but for purposes of the current chapter we only need this bare bones sketch. The only other thing I want to do before moving on is show you an example of a function that can be applied to text data. So far, most of the functions that we have seen (i.e., `sqrt()`, `abs()` and `round()`) only make sense when applied to numeric data (e.g., you can't calculate the square root of "hello"), and we've seen one function that can be applied to pretty much any variable or vector (i.e., `length()`). So it might be nice to see an example of a function that can be applied to text. 
 
 The function I'm going to introduce you to is called `nchar()`, and what it does is count the number of individual characters that make up a string. Recall earlier that when we tried to calculate the `length()` of our `greeting` variable it returned a value of `1`: the `greeting` variable contains only the one string, which happens to be `"hello"`. But what if I want to know how many letters there are in the word? Sure, I could *count* them, but that's boring, and more to the point it's a terrible strategy if what I wanted to know was the number of letters in *War and Peace*. That's where the `nchar()` function is helpful:
+
 ```{r}
 nchar( x = greeting )
 ```
+
 That makes sense, since there are in fact 5 letters in the string `"hello"`. Better yet, you can apply `nchar()` to whole vectors. So, for instance, if I want R to tell me how many letters there are in the names of each of the 12 months, I can do this:
+
 ```{r}
 nchar( x = months )
 ```
+
 So that's nice to know. The `nchar()` function can do a bit more than this, and there's a lot of other functions that you can do to extract more information from text or do all sorts of fancy things. However, the goal here is not to teach any of that! The goal right now is just to see an example of a function that actually does work when applied to text. 
 
 
-## Storing "true or false" data{#logicals}
+## Storing "true or false" data {#logicals}
 
 Time to move onto a third kind of data. A key concept in that a lot of R relies on is the idea of a **_logical value_**. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely `TRUE` and `FALSE`. Despite the simplicity, a logical values are very useful things. Let's see how they work.
 
 ### Assessing mathematical truths
 
 In George Orwell's classic book *1984*, one of the slogans used by the totalitarian Party was "two plus two equals five", the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths. It's a terrifying thought, especially when the protagonist Winston Smith finally breaks down under torture and agrees to the proposition. "Man is infinitely malleable", the book says. I'm pretty sure that this isn't true of humans but it's definitely not true of R. R is not infinitely malleable. It has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate `2 + 2`, it always gives the same answer, and it's not bloody 5:
+
 ```{r}
 2 + 2
 ```
+
 Of course, so far R is just doing the calculations. I haven't asked it to explicitly assert that $2+2 = 4$ is a true statement. If I want R to make an explicit judgement, I can use a command like this: 
+
 ```{r}
 2 + 2 == 4
 ```
+
 What I've done here is use the **_equality operator_**, `==`, to force R to make a "true or false" judgement. Okay, let's see what R thinks of the Party slogan:
+
 ```{r}
 2+2 == 5
 ```
+
 Booyah! Freedom and ponies for all! Or something like that. Anyway, it's worth having a look at what happens if I try to *force* R to believe that two plus two is five by making an assignment statement like  `2 + 2 = 5` or `2 + 2 <- 5`. When I do this, here's what happens:
+
 ```{r}
 #| error: TRUE
 2 + 2 = 5
 ```
-R doesn't like this very much. It recognises that `2 + 2` is *not* a variable (that's what the "non-language object" part is saying), and it won't let you try to "reassign" it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number `2`. 
+
+R doesn't like this very much. It recognizes that `2 + 2` is *not* a variable (that's what the "non-language object" part is saying), and it won't let you try to "reassign" it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number `2`. 
 
 That's probably for the best.
 
 ### Logical operations
+
 So now we've seen logical operations at work, but so far we've only seen the simplest possible example. You probably won't be surprised to discover that we can combine logical operations with other operations and functions in a more complicated way, like this:
+
 ```{r}
 3*3 + 4*4 == 5*5
-
 ``` 
+
 or this
+
 ```{r}
 sqrt( 25 ) == 5
 ```
+
 Not only that, but as Table @tbl-logicals illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
 
 ```{r}
@@ -529,28 +582,32 @@ knitr::kable(rbind(
 ```
 
 Hopefully these are all pretty self-explanatory: for example, the **_less than_** operator `<` checks to see if the number on the left is less than the number on the right. If it's less, then R returns an answer of `TRUE`:
+
 ```{r}
 99 < 100
 ```
+
 but if the two numbers are equal, or if the one on the right is larger, then R returns an answer of `FALSE`, as the following two examples illustrate:
+
 ```{r}
 100 < 100
 
 100 < 99
 ```
+
 In contrast, the **_less than or equal to_** operator `<=` will do exactly what it says. It returns a value of `TRUE` if the number of the left hand side is less than or equal to the number on the right hand side. So if we repeat the previous two examples using `<=`, here's what we get: 
+
 ```{r}
 100 <= 100
 
 100 <= 99
-
 ```
+
 And at this point I hope it's pretty obvious what the **_greater than_** operator `>` and the **_greater than or equal to_** operator `>=` do! Next on the list of logical operators is the **_not equal to_** operator `!=` which -- as with all the others -- does what it says it does. It returns a value of `TRUE` when things on either side are not identical to each other. Therefore, since $2+2$ isn't equal to $5$, we get:
+
 ```{r}
 2 + 2 != 5
 ```
-
-
 
 We're not quite done yet. There are three more logical operations that are worth knowing about, listed in Table @tbl-logicals2.
 
@@ -570,58 +627,68 @@ knitr::kable(rbind(
 
 
 These are the **_not_** operator `!`, the **_and_** operator `&`, and the **_or_** operator `|`. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that "either $2+2 = 4$ *or* $2+2 = 5$" you'd say that it's true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the `|` operator does:
+
 ```{r}
 (2+2 == 4) | (2+2 == 5)
-
 ```
+
 On the other hand, if I ask you to assess the claim that "both $2+2 = 4$ *and* $2+2 = 5$" you'd say that it's false. Since this is an *and* statement we need both parts to be true. And that's what the `&` operator does:
+
 ```{r}
 (2+2 == 4) & (2+2 == 5)
-
 ```
-Finally, there's the *not* operator, which is simple but annoying to describe in English. If I ask you to assess my claim that "it is not true that $2+2 = 5$" then you would say that my claim is true; because my claim is that "$2+2 = 5$ is false". And I'm right. If we write this as an R command we get this:  
+
+Finally, there's the *not* operator, which is simple but annoying to describe in English. If I ask you to assess my claim that "it is not true that $2+2 = 5$" then you would say that my claim is true; because my claim is that "$2+2 = 5$ is false". And I'm right. If we write this as an R command we get this:
+
 ```{r}
 ! (2+2 == 5)
-
 ```
+
 In other words, since `2+2 == 5` is a `FALSE` statement, it must be the case that `!(2+2 == 5)` is a `TRUE` one. Essentially, what we've really done is claim that "not false" is the same thing as "true". Obviously, this isn't really quite right in real life. But R lives in a much more black or white world: for R everything is either true or false. No shades of gray are allowed. We can actually see this much more explicitly, like this:
+
 ```{r}
 ! FALSE
 ```
+
 Of course, in our $2+2 = 5$ example, we didn't really need to use "not" `!` and "equals to" `==` as two separate operators. We could have just used the "not equals to" operator `!=` like this:
+
 ```{r}
 2+2 != 5
-
 ```
+
 But there are many situations where you really do need to use the `!` operator. We'll see some later on.
  
 ### Storing and using logical data
 
 Up to this point, I've introduced *numeric data* (@sec-assign and @sec-vectors) and *character data* (@sec-text). So you might not be surprised to discover that these `TRUE` and `FALSE` values that R has been producing are actually a third kind of data, called *logical data*. That is, when I asked R if `2 + 2 == 5` and it said `[1] FALSE` in reply, it was actually producing information that we can store in variables. For instance, I could create a variable called `is.the.Party.correct`, which would store R's opinion:
+
 ```{r}
 is.the.Party.correct <- 2 + 2 == 5
 is.the.Party.correct
-
 ```
+
 Alternatively, you can assign the value directly, by typing `TRUE` or `FALSE` in your command. Like this:
+
 ```{r}
 is.the.Party.correct <- FALSE
 is.the.Party.correct
-
 ```
+
 Better yet, because it's kind of tedious to type `TRUE` or `FALSE` over and over again, R provides you with a shortcut: you can use `T` and `F` instead (but it's case sensitive: `t` and `f` won't work).
 
-::: {.callout-caution}
 ## TRUE and FALSE
 
 `TRUE` and `FALSE` are reserved keywords in R, so you can trust that they always mean what they say they do. Unfortunately, the shortcut versions `T` and `F` do not have this property. It's even possible to create variables that set up the reverse meanings, by typing commands like `T <- FALSE` and `F <- TRUE`. This is kind of insane, and something that is generally thought to be a design flaw in R. Anyway, the long and short of it is that it's safer to use `TRUE` and `FALSE`.:::
 
 So this works:
+
 ```{r}
 is.the.Party.correct <- F
 is.the.Party.correct
 ```
+
 but this doesn't:
+
 ```{r}
 #| error: TRUE
 is.the.Party.correct <- f
@@ -630,21 +697,25 @@ is.the.Party.correct <- f
 ### Vectors of logicals
 
 The next thing to mention is that you can store vectors of logical values in exactly the same way that you can store vectors of numbers (@sec-vectors) and vectors of text data (@sec-text). Again, we can define them directly via the `c()` function, like this:
+
 ```{r}
 x <- c(TRUE, TRUE, FALSE)
 x
 ```
-or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let's unpack it slowly. First, let's suppose we have a vector of numbers (i.e., a "non-logical vector"). For instance, we could use the `sales.by.month` vector that we were using in @sec-vectors. Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this: 
+
+or you can produce a vector of logicals by applying a logical operator to a vector. This might not make a lot of sense to you, so let's unpack it slowly. First, let's suppose we have a vector of numbers (i.e., a "non-logical vector"). For instance, we could use the `sales.by.month` vector that we were using in @sec-vectors. Suppose I wanted R to tell me, for each month of the year, whether I actually sold a book in that month. I can do that by typing this:
+
 ```{r}
 sales.by.month > 0
-
 ```
+
 and again, I can store this in a vector if I want, as the example below illustrates:
+
 ```{r}
 any.sales.this.month <- sales.by.month > 0
 any.sales.this.month
-
 ```
+
 In other words, `any.sales.this.month` is a logical vector whose elements are `TRUE` only if the corresponding element of `sales.by.month` is greater than zero. For instance, since I sold zero books in January, the first element is `FALSE`. 
 
 
@@ -653,89 +724,114 @@ In other words, `any.sales.this.month` is a logical vector whose elements are `T
 In a moment (@sec-indexing) I'll show you why these logical operations and logical vectors are so handy, but before I do so I want to very briefly point out that you can apply them to text as well as to logical data. It's just that we need to be a bit more careful in understanding how R interprets the different operations. In this section I'll talk about how the equal to operator `==` applies to text, since this is the most important one. Obviously, the not equal to operator `!=` gives the exact opposite answers to `==` so I'm implicitly talking about that one too, but I won't give specific commands showing the use of `!=`. There are a variety of other operators, but those will do for now. 
 
 Okay, let's see how it works. In one sense, it's very simple. For instance, I can ask R if the word `"cat"` is the same as the word `"dog"`, like this:
+
 ```{r}
 "cat" == "dog"
-
 ```
-That's pretty obvious, and it's good to know that even R can figure that out. Similarly, R does recognise that a `"cat"` is a `"cat"`:
+
+That's pretty obvious, and it's good to know that even R can figure that out. Similarly, R does recognize that a `"cat"` is a `"cat"`:
+
 ```{r}
 "cat" == "cat"
 ```
+
 Again, that's exactly what we'd expect. However, what you need to keep in mind is that R is not at all tolerant when it comes to grammar and spacing. If two strings differ in any way whatsoever, R will say that they're not equal to each other, as the following examples indicate:
+
 ```{r}
 " cat" == "cat"
 
 "cat" == "CAT"
 
 "cat" == "c a t"
-
 ```
 
 
 
-## Indexing vectors{#sec-indexing} 
+## Indexing vectors {#sec-indexing} 
 
 One last thing to add before finishing up this chapter. So far, whenever I've had to get information out of a vector, all I've done is typed something like `months[4]`; and when I do this R prints out the fourth element of the `months` vector. In this section, I'll show you two additional tricks for getting information out of the vector.
 
 ### Extracting multiple elements
 
 One very useful thing we can do is pull out more than one element at a time. In the previous example, we only used a single number (i.e., `2`) to indicate which element we wanted. Alternatively, we can use a vector. So, suppose I wanted the data for February, March and April. What I could do is use the vector `c(2,3,4)` to indicate which elements I want R to pull out. That is, I'd type this:
+
 ```{r}
 sales.by.month[ c(2,3,4) ]
 ```
+
 Notice that the order matters here. If I asked for the data in the reverse order (i.e., April first, then March, then February) by using the vector `c(4,3,2)`, then R outputs the data in the reverse order:
+
 ```{r}
 sales.by.month[ c(4,3,2) ]
-
 ```
 
 A second thing to be aware of is that R provides you with handy shortcuts for very common situations. For instance, suppose that I wanted to extract everything from the 2nd month through to the 8th month. One way to do this is to do the same thing I did above, and use the vector `c(2,3,4,5,6,7,8)` to indicate the elements that I want. That works just fine
+
 ```{r}
 sales.by.month[ c(2,3,4,5,6,7,8) ]
 ```
+
 but it's kind of a lot of typing. To help make this easier, R lets you use `2:8` as shorthand for `c(2,3,4,5,6,7,8)`, which makes things a lot simpler. First, let's just check that this is true:
+
 ```{r}
 2:8
 ```
+
 Next, let's check that we can use the `2:8` shorthand as a way to pull out the 2nd through 8th elements of `sales.by.months`:
+
 ```{r}
 sales.by.month[2:8]
 ```
+
 So that's kind of neat.
 
 ### Logical indexing
 
 At this point, I can introduce an extremely useful tool called **_logical indexing_**. In the last section, I created a logical vector `any.sales.this.month`, whose elements are `TRUE` for any month in which I sold at least one book, and `FALSE` for all the others. However, that big long list of `TRUE`s and `FALSE`s is a little bit hard to read, so what I'd like to do is to have R select the names of the `months` for which I sold any books. Earlier on, I created a vector `months` that contains the names of each of the months. This is where logical indexing is handy. What I need to do is this:
+
 ```{r}
 months[ sales.by.month > 0 ]
 ```
+
 To understand what's happening here, it's helpful to notice that `sales.by.month > 0` is the same logical expression that we used to create the `any.sales.this.month` vector in the last section. In fact, I could have just done this:
+
 ```{r}
 months[ any.sales.this.month ]
 ```
+
 and gotten exactly the same result. In order to figure out which elements of `months` to include in the output, what R does is look to see if the corresponding element in `any.sales.this.month` is `TRUE`. Thus, since element 1 of `any.sales.this.month` is `FALSE`, R does not include `"January"` as part of the output; but since element 2 of `any.sales.this.month` is `TRUE`, R does include `"February"` in the output. Note that there's no reason why I can't use the same trick to find the actual sales numbers for those months. The command to do that would just be this:
+
 ```{r}
 sales.by.month [ sales.by.month > 0 ]
 ```
+
 In fact, we can do the same thing with text. Here's an example. Suppose that -- to continue the saga of the textbook sales -- I later find out that the bookshop only had sufficient stocks for a few months of the year. They tell me that early in the year they had `"high"` stocks, which then dropped to `"low"` levels, and in fact for one month they were `"out"` of copies of the book for a while before they were able to replenish them. Thus I might have a variable called `stock.levels` which looks like this:
+
 ```{r}
 stock.levels<-c("high", "high", "low", "out", "out", "high",
                 "high", "high", "high", "high", "high", "high")
 
 stock.levels
 ```
+
 Thus, if I want to know the months for which the bookshop was out of my book, I could apply the logical indexing trick, but with the character vector `stock.levels`, like this:
+
 ```{r}
 months[stock.levels == "out"]
 ```
+
 Alternatively, if I want to know when the bookshop was either low on copies or out of copies, I could do this:
+
 ```{r}
 months[stock.levels == "out" | stock.levels == "low"]
 ```
+
 or this
+
 ```{r}
 months[stock.levels != "high" ]
 ```
+
 Either way, I get the answer I want.
 
 At this point, I hope you can see why logical indexing is such a useful thing. It's a very basic, yet very powerful way to manipulate data. Subsequent chapters will talk a lot more about how to manipulate data, since it's a critical skill for real world research that is often overlooked in introductory statistics courses It does take a bit of practice to become completely comfortable using logical indexing, so it's a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like "how do I get R to spit out all the elements that are [blah]". Practice makes perfect, and it's only by practicing logical indexing that you'll perfect the art of yelling frustrated insults at your computer.
@@ -743,4 +839,4 @@ At this point, I hope you can see why logical indexing is such a useful thing. I
 
 ## Activities
 
-- Open RStudio and 
+- Open RStudio and ...

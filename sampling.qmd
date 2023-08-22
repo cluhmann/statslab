@@ -35,7 +35,7 @@ Observe that 17 of the balls are red and thus 0.34 = 34% of the shovel's balls a
 
 However, say, we started this activity over from the beginning. In other words, we replace the 50 balls back into the bowl and start over. Would we remove exactly 17 red balls again? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% again? Maybe? 
 
-What if we repeated this activity several times following the process shown in @fig-sampling-exercise-3b? Would we obtain exactly 17 red balls each time? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% every time? Surely not. Let's repeat this exercise several times with the help of 33 groups of friends to understand how the value differs with repetition.
+What if we repeated this activity several times following the process shown in @fig-sampling-exercise-3? Would we obtain exactly 17 red balls each time? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% every time? Surely not. Let's repeat this exercise several times with the help of 33 groups of friends to understand how the value differs with repetition.
 
 
 ### Using the shovel 33 times {#sec-student-shovels}
@@ -647,6 +647,7 @@ Furthermore, let's re-display @tbl-comparing-n but using our new terminology, no
 ```{r}
 #| label: tbl-comparing-n-2
 #| echo: false
+#| tbl-cap: "Standard errors of the sample proportion based on sample sizes of 25, 50, and 100"
 comparing_n_table <- virtual_prop %>%
   group_by(n) %>%
   summarize(sd = sd(prop_red)) %>%
@@ -654,19 +655,18 @@ comparing_n_table <- virtual_prop %>%
     n = str_c("n = ", n),
     n = factor(n, levels = c("n = 25", "n = 50", "n = 100"))
   ) %>%
-  rename(`Sample size (n)` = n, `Standard error of $\\widehat{p}$` = sd)
+  rename("Sample size (n)" = n, "Standard error of $\\widehat{p}$" = sd)
 
 comparing_n_table %>%
   kable(
     digits = 3,
-    caption = "Standard errors of the sample proportion based on sample sizes of 25, 50, and 100",
     booktabs = TRUE,
     escape = FALSE,
-    linesep = ""
-  )
+    linesep = "",
+)
 ```
 
-Remember the key message of this last table: that as the sample size $n$ goes up, the "typical" error of your point estimate will go down, as quantified by the *standard error*. In fact, in Subsection \@ref(theory-se) we'll see that the standard error for the sample proportion $\widehat{p}$ can also be approximated via a mathematical theory-based formula, a formula that has $n$ in the denominator. 
+Remember the key message of this last table: that as the sample size $n$ goes up, the "typical" error of your point estimate will go down, as quantified by the *standard error*.
 
 
 ### The moral of the story {#sec-moral-of-the-story}

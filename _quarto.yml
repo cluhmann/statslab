@@ -26,6 +26,7 @@ book:
       chapters:
         - rlang.qmd
         - programming.qmd
+        - scripts.qmd
         - data.qmd
     - part: "Exploring"
       chapters:
@@ -50,6 +51,7 @@ book:
         - missingness.qmd
     appendices:
         - references.qmd
+        - rannoyances.qmd
 
 bibliography: references.bib
 

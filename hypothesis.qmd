@@ -743,7 +743,7 @@ Observe that Jordan has an average `pts` value of `r x_bar_mj %>% round(3)` and 
 
 ### Sampling scenario
 
-Let's now revisit this study in terms of terminology and notation related to sampling we studied in @sec-terminology-and-notation. The *study population* includes all the seasons that Michael Jordan played and all the seasons that Steph Curry played. However, we do not have all of Michael Jordan's season averages (the data set begins in 1996, but Jordan's rookie season was 1984) nor do we have all of Steph Curry's season averages (he is currently continuing to play).  Thus, we have a *sample* from the population consisting of `r n_mj_sc` rows in the `nba` dataset corresponding to these two players (we will ignore the fact that we do not have a **random** sample from either player).
+Let's now revisit this study in terms of terminology and notation related to sampling we studied in @sec-terminology-and-notation. The *study population* includes all the seasons that Michael Jordan played and all the seasons that Steph Curry played. However, we do not have all of Michael Jordan's season averages (the data set begins in 1996, but Jordan's rookie season was 1984) nor do we have all of Steph Curry's season averages (he is currently continuing to play).  Thus, we have a *sample* from the population consisting of `r n_mj_sc` rows in the `nba` dataset corresponding to these two players (the fact that we do not have a **random** sample from either player will be discussed in @sec-theory-hypo).
 
 When conducting a hypothesis test, our goal is to generalize from our sample to the entire population. What are the relevant *population parameter* and *point estimates*? We introduce the fourth sampling scenario in @tbl-summarytable-ch10.
 
@@ -897,9 +897,7 @@ These traditional theory-based methods have been used for decades mostly because
 
 #### Two-sample t-statistic
 
-Let's reconsider the question we asked in @sec-ht-case-study: is Michael Jordan better than Steph Curry? We'll again investigate if, on average, Michael Jordan or Steph Curry averaged more points per game.
-
-Let's revisit the null distribution for our test.  We can construct the distribution for the test statistic $\bar{x}_{MJ} - \bar{x}_{SC}$ as we did in @sec-ht-case-study.
+Let's reconsider the question we asked in @sec-ht-case-study: is Michael Jordan better than Steph Curry? We'll again investigate if, on average, Michael Jordan or Steph Curry averaged more points per game.  Recall that we can construct the distribution of the test statistic $\bar{x}_{MJ} - \bar{x}_{SC}$ assuming that the null hypothesis is true, just as we did in @sec-ht-case-study.
 
 ```{r}
 # Construct null distribution of t:
@@ -924,9 +922,10 @@ null_distribution_mjsc_t <- mjsc %>%
 ```
 
 
-We can then visualize how these two compare @fig-t-stat-3.
+We can then visualize how these two compare in @fig-t-stat-3.
 
 ```{r}
+#| warning: false
 #| label: fig-t-stat-3
 #| fig-cap: "Null distribution using t-statistic and t-distribution." 
 
@@ -947,9 +946,10 @@ obs_two_sample_t
 We want to find the percentage of values that are at or below `obs_two_sample_t` $= `r pull(obs_two_sample_t) %>% round(3)`$ or at or above `-obs_two_sample_t` $= `r -pull(obs_two_sample_t) %>% round(3)`$. We use the `shade_p_value()` function with the `direction` argument set to `"both"` to do this:
 
 ```{r}
+#| warning: false
 #| label: t-stat-4
 #| fig-cap: "Null distribution using t-statistic and t-distribution with $p$-value shaded."
-#| warning: true
+
 visualize(null_distribution_mjsc_t, method = "both") +
   shade_p_value(obs_stat = obs_two_sample_t, direction = "both")
 ```
@@ -992,7 +992,7 @@ scdc <- nba %>%
   filter(player_name %in% c("Stephen Curry", "Dell Curry"))
 ```
 
-There are two possible statistical inference methods we could use to answer such questions. First, we could construct a 95% confidence interval for the difference in population means $\mu_{SC} - \mu_{DC}$, where $\mu_{SC}$ is the mean of all of Steph's rows and $\mu_{DC}$ is the mean air time of all of Dell's. We could then check if the entirety of the interval is greater than 0, suggesting that $\mu_{SC} - \mu_{DC} > 0$, or, in other words suggesting that $\mu_{SC} > \mu_{DC}$. Second, we could perform a hypothesis test of the null hypothesis $H_0: \mu_{SC} - \mu_{DC} = 0$ versus the alternative hypothesis $H_A: \mu_{SC} - \mu_{DC}} > 0$.
+There are two possible statistical inference methods we could use to answer such questions. First, we could construct a 95% confidence interval for the difference in population means $\mu_{SC} - \mu_{DC}$, where $\mu_{SC}$ is the mean of all of Steph's rows and $\mu_{DC}$ is the mean air time of all of Dell's. We could then check if the entirety of the interval is greater than 0, suggesting that $\mu_{SC} - \mu_{DC} > 0$, or, in other words suggesting that $\mu_{SC} > \mu_{DC}$. Second, we could perform a hypothesis test of the null hypothesis $H_0: \mu_{SC} - \mu_{DC} = 0$ versus the alternative hypothesis $H_A: \mu_{SC} - \mu_{DC} > 0$.
 
 However, let's first construct an exploratory visualization as we suggested earlier. Since `pts` is numerical and `player_name` is categorical, a boxplot can display the relationship between these two variables, which we display in @fig-scdc-boxplot.
 
