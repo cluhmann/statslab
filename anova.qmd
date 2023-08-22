@@ -1,4 +1,0 @@
-# ANOVA
-
-- What is ANOVA
-- What is ANCOVA

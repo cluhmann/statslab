@@ -39,9 +39,9 @@ book:
         - descriptives.qmd
         - hypothesis.qmd
 #        - correlation.qmd
-        - single.qmd
-        - multiple.qmd
-        - anova.qmd
+#        - single.qmd
+#        - multiple.qmd
+#        - anova.qmd
 #        - interactions.qmd
 #        - polynomial.qmd
 #        - glm.qmd
