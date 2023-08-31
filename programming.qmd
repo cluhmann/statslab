@@ -851,3 +851,6 @@ At this point, I hope you can see why logical indexing is such a useful thing. I
 1. Modify this vector so that all the odd numbers are removed.
 1. Calculate the sum of the values currently in the vector.
 1. Imagine a study in which participants must weigh less than 90 kg and be between 18 and 60 years of age.  Define a vector of weights as `weight <- c(80, 75, 92, 105, 60)` and a vector of ages `age <- c(50, 17, 39, 27, 90)`. Now calculate a vector of logical values, each of which indicates whether the corresponding participant is eligible for the study.
+1. Calculate the sum of 0.1 and 0.2.
+1. Calculate 10 times the sum of 0.1 and 0.2.
+1. Determine whether 10 times the sum of 0.1 and 0.2 is equal to 3.
