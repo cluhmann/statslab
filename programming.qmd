@@ -514,7 +514,7 @@ So that's nice to know. The `nchar()` function can do a bit more than this, and 
 
 ## Storing "true or false" data {#logicals}
 
-Time to move onto a third kind of data. A key concept in that a lot of R relies on is the idea of a **_logical value_**. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely `TRUE` and `FALSE`. Despite the simplicity, a logical values are very useful things. Let's see how they work.
+Time to move onto a third kind of data. A key concept in that a lot of R relies on is the idea of a **_logical value_** or (Boolean value). A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely `TRUE` and `FALSE`. Despite the simplicity, a logical values are very useful things. Let's see how they work.
 
 ### Assessing mathematical truths
 
@@ -626,25 +626,25 @@ knitr::kable(rbind(
 ```
 
 
-These are the **_not_** operator `!`, the **_and_** operator `&`, and the **_or_** operator `|`. Like the other logical operators, their behaviour is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that "either $2+2 = 4$ *or* $2+2 = 5$" you'd say that it's true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the `|` operator does:
+These are the **_not_** operator `!`, the **_and_** operator `&`, and the **_or_** operator `|`. Like the other logical operators, their behavior is more or less exactly what you'd expect given their names. For instance, if I ask you to assess the claim that either $2+2 = 4$ *or* $2+2 = 5$, then you'd say that claim is true. Since it's an "either-or" statement, all we need is for one of the two parts to be true. That's what the `|` operator does:
 
 ```{r}
 (2+2 == 4) | (2+2 == 5)
 ```
 
-On the other hand, if I ask you to assess the claim that "both $2+2 = 4$ *and* $2+2 = 5$" you'd say that it's false. Since this is an *and* statement we need both parts to be true. And that's what the `&` operator does:
+On the other hand, if I ask you to assess the claim that both $2+2 = 4$ *and* $2+2 = 5$, then you'd say that claim is false. Since this is an *and* statement we need both parts to be true. And that's what the `&` operator does:
 
 ```{r}
 (2+2 == 4) & (2+2 == 5)
 ```
 
-Finally, there's the *not* operator, which is simple but annoying to describe in English. If I ask you to assess my claim that "it is not true that $2+2 = 5$" then you would say that my claim is true; because my claim is that "$2+2 = 5$ is false". And I'm right. If we write this as an R command we get this:
+Finally, there's the *not* operator, which is simple but annoying to describe in English. If I ask you to assess my claim that "it is not true that $2+2 = 5$", then you would say that claim is true; because my claim is that "$2+2 = 5$ is false". And I'm right. If we write this as an R command we get this:
 
 ```{r}
 ! (2+2 == 5)
 ```
 
-In other words, since `2+2 == 5` is a `FALSE` statement, it must be the case that `!(2+2 == 5)` is a `TRUE` one. Essentially, what we've really done is claim that "not false" is the same thing as "true". Obviously, this isn't really quite right in real life. But R lives in a much more black or white world: for R everything is either true or false. No shades of gray are allowed. We can actually see this much more explicitly, like this:
+In other words, since `2+2 == 5` is a `FALSE` statement, it must be the case that `!(2+2 == 5)` is a `TRUE` one. Essentially, what we've really done is claim that "not false" is the same thing as "true". Obviously, this isn't really quite right in real life. But logical values encode a black and white world: any given logical statement is either true or false. No shades of gray are allowed. We can actually see this much more explicitly, like this:
 
 ```{r}
 ! FALSE

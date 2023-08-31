@@ -45,10 +45,13 @@ book:
 #        - interactions.qmd
 #        - polynomial.qmd
 #        - glm.qmd
-    - part: "Odds & Ends"
+    - part: "Activities"
       chapters:
         - sampling.qmd
-        - missingness.qmd
+        - samplepvalues.qmd
+#        - missingness.qmd
+#    - part: "Odds & Ends"
+#      chapters:
     appendices:
         - references.qmd
         - rannoyances.qmd

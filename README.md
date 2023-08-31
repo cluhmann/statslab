@@ -20,6 +20,12 @@ https://psyteachr.github.io/resources.html
 
 Licensed under creative commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0)
 
+_Improving Your Statistical Inferences_ by Daniel Lakens
+
+https://lakens.github.io/statistical_inference
+
+Licensed under a creative commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0).
+
 ## Packages required to build the site/book
 - tidyverse
 - kable
