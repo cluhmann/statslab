@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./single.html" rel="next">
+<link href="./sampling.html" rel="next">
 <link href="./descriptives.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic programming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Programming</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -250,30 +250,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./single.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simple</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./multiple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Odds &amp; Ends</span></a>
+ <span class="menu-text">Activities</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -282,13 +264,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./missingness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Missing Data</span></span></a>
+  <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -608,14 +590,14 @@ male
 # Groups:   gender [2]
   gender decision     n
   &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
-1 female not          6
-2 female promoted    18
-3 male   not          7
-4 male   promoted    17</code></pre>
+1 female not          8
+2 female promoted    16
+3 male   not          5
+4 male   promoted    19</code></pre>
 </div>
 </div>
-<p>So in this hypothetical universe of no discrimination, <span class="math inline">\(17/24 = 0.708 = 70.8\%\)</span> of “male” resumes were selected for promotion. On the other hand, <span class="math inline">\(18/24 = 0.75 = 75\%\)</span> of “female” resumes were selected for promotion.</p>
-<p>Let’s next compare these two values. It appears that resumes with stereotypically male names were selected for promotion at a rate that was <span class="math inline">\(0.708 - 0.75 = -0.042 = -4.2\%\)</span> different than resumes with stereotypically female names.</p>
+<p>So in this hypothetical universe of no discrimination, <span class="math inline">\(19/24 = 0.792 = 79.2\%\)</span> of “male” resumes were selected for promotion. On the other hand, <span class="math inline">\(16/24 = 0.667 = 66.7\%\)</span> of “female” resumes were selected for promotion.</p>
+<p>Let’s next compare these two values. It appears that resumes with stereotypically male names were selected for promotion at a rate that was <span class="math inline">\(0.792 - 0.667 = 0.125 = 12.5\%\)</span> different than resumes with stereotypically female names.</p>
 <p>Observe how this difference in rates is not the same as the difference in rates of 0.292 = 29.2% we originally observed. This is once again due to <em>sampling variation</em>. How can we better understand the effect of this sampling variation? By repeating this shuffling several times!</p>
 </section>
 <section id="shuffling-16-times" class="level3" data-number="10.1.3">
@@ -699,9 +681,9 @@ We see that of the 33 samples we selected only one is close to as extreme as wha
 <section id="sec-ht-what-did-we-just-do" class="level3" data-number="10.1.4">
 <h3 data-number="10.1.4" class="anchored" data-anchor-id="sec-ht-what-did-we-just-do"><span class="header-section-number">10.1.4</span> What did we just do?</h3>
 <p>What we just demonstrated in this activity is the statistical procedure known as <em>hypothesis testing</em> using a <em>permutation test</em>. The term “permutation” is the mathematical term for “shuffling”: taking a series of values and reordering them randomly, as you did with the playing cards.</p>
-<p>In fact, permutations are a form of <em>resampling</em>. Permutation methods involve resampling <em>without</em> replacement. In contrast, our exploration of sampling variation back in <a href="sampling.html"><span>Chapter&nbsp;14</span></a> was a slightly different type of resampling (known as bootstrapping) which involved resampling <em>with</em> replacement. After using our shovel once, we put everything back into the bowl before usign the shovel again. Now think of our deck of cards. After drawing a card, you laid it out in front of you, recorded the color, and then you <em>did not</em> put it back in the deck.</p>
+<p>In fact, permutations are a form of <em>resampling</em>. Permutation methods involve resampling <em>without</em> replacement. In contrast, our exploration of sampling variation back in <a href="sampling.html"><span>Chapter&nbsp;11</span></a> was a slightly different type of resampling (known as bootstrapping) which involved resampling <em>with</em> replacement. After using our shovel once, we put everything back into the bowl before usign the shovel again. Now think of our deck of cards. After drawing a card, you laid it out in front of you, recorded the color, and then you <em>did not</em> put it back in the deck.</p>
 <p>In our previous example, we tested the validity of the hypothesized universe of no gender discrimination. The evidence contained in our observed sample of 48 resumes was somewhat inconsistent with our hypothesized universe. Thus, we would be inclined to <em>reject</em> this hypothesized universe and declare that the evidence suggests there is gender discrimination.</p>
-<p>In the case of sampling from the bowl (<a href="sampling.html"><span>Chapter&nbsp;14</span></a>) involved an inference about an unknown population proportion. This time, it will be <span class="math inline">\(p_{m} - p_{f}\)</span>, where <span class="math inline">\(p_{m}\)</span> is the population proportion of resumes with male names being recommended for promotion and <span class="math inline">\(p_{f}\)</span> is the equivalent for resumes with female names. Recall that this is one of the scenarios for inference we’ve seen so far in <a href="#tbl-table-diff-prop">Table&nbsp;<span>10.1</span></a>.</p>
+<p>In the case of sampling from the bowl (<a href="sampling.html"><span>Chapter&nbsp;11</span></a>) involved an inference about an unknown population proportion. This time, it will be <span class="math inline">\(p_{m} - p_{f}\)</span>, where <span class="math inline">\(p_{m}\)</span> is the population proportion of resumes with male names being recommended for promotion and <span class="math inline">\(p_{f}\)</span> is the equivalent for resumes with female names. Recall that this is one of the scenarios for inference we’ve seen so far in <a href="#tbl-table-diff-prop">Table&nbsp;<span>10.1</span></a>.</p>
 <div id="tbl-table-diff-prop" class="anchored">
 <table class="table">
 <caption>Table&nbsp;10.1: Scenarios of sampling for inference</caption>
@@ -752,7 +734,7 @@ We see that of the 33 samples we selected only one is close to as extreme as wha
 </section>
 <section id="sec-understanding-ht" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="sec-understanding-ht"><span class="header-section-number">10.2</span> Understanding hypothesis tests</h2>
-<p>Much like the terminology, notation, and definitions relating to sampling you saw in <a href="sampling.html#sec-sampling-framework"><span>Section&nbsp;14.3</span></a>, there are a lot of terminology, notation, and definitions related to hypothesis testing as well. Learning these may seem like a very daunting task at first. However, with practice, practice, and more practice, anyone can master them.</p>
+<p>Much like the terminology, notation, and definitions relating to sampling you saw in <a href="sampling.html#sec-sampling-framework"><span>Section&nbsp;11.3</span></a>, there are a lot of terminology, notation, and definitions related to hypothesis testing as well. Learning these may seem like a very daunting task at first. However, with practice, practice, and more practice, anyone can master them.</p>
 <p>First, a <strong>hypothesis</strong> is a statement about the value of an unknown population parameter. In our resume activity, our population parameter of interest is the difference in population proportions <span class="math inline">\(p_{m} - p_{f}\)</span>.</p>
 <p>Second, a <strong>hypothesis test</strong> consists of a test between two competing hypotheses: (1) a <strong>null hypothesis</strong> <span class="math inline">\(H_0\)</span> (pronounced “H-naught”) versus (2) an <strong>alternative hypothesis</strong> <span class="math inline">\(H_A\)</span> (also denoted <span class="math inline">\(H_1\)</span>).</p>
 <p>Generally the null hypothesis is a claim that there is “no effect” or “no difference of interest.” In many cases, the null hypothesis represents the status quo or a situation that nothing interesting is happening. Furthermore, generally the alternative hypothesis is the claim the experimenter or researcher wants to establish or find evidence to support. It is viewed as a “challenger” hypothesis to the null hypothesis <span class="math inline">\(H_0\)</span>. In our resume activity, an appropriate hypothesis test would be:</p>
@@ -773,7 +755,7 @@ H_0 &amp;: p_{m} - p_{f} = 0\\
 <p>Observe how the alternative hypothesis <span class="math inline">\(H_A\)</span> is one-sided with <span class="math inline">\(p_{m} - p_{f} &gt; 0\)</span>. Had we opted for a two-sided alternative, we would have set <span class="math inline">\(p_{m} - p_{f} \neq 0\)</span>. To keep things simple for now, we’ll stick with the simpler one-sided alternative. We’ll present an example of a two-sided alternative in <a href="#sec-ht-case-study"><span>Section&nbsp;10.5</span></a>.</p>
 <p>Third, a <strong>test statistic</strong> is a <em>point estimate/sample statistic</em> formula used for hypothesis testing. Note that a sample statistic is merely a summary statistic based on a sample of observations. Recall we saw in #sec-summarize that a summary statistic takes in many values and returns only one. Here, the samples would be the <span class="math inline">\(n_m\)</span> = 24 resumes with male names and the <span class="math inline">\(n_f\)</span> = 24 resumes with female names. Hence, the point estimate of interest is the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span>.</p>
 <p>Fourth, the <strong>observed test statistic</strong> is the value of the test statistic that we observed in real life. In our case, we computed this value using the data saved in the <code>promotions</code> data frame. It was the observed difference of <span class="math inline">\(\widehat{p}_{m} -\widehat{p}_{f} = 0.875 - 0.583 = 0.292 = 29.2\%\)</span> in favor of résumés with male names.</p>
-<p>Fifth, the <strong>null distribution</strong> is the sampling distribution of the test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>. Ooof! That’s a long one! Let’s unpack it slowly. The key to understanding the null distribution is that the null hypothesis <span class="math inline">\(H_0\)</span> is <em>assumed</em> to be true. We’re not saying that <span class="math inline">\(H_0\)</span> is true at this point, we’re only assuming it to be true for hypothesis testing purposes. In our case, this corresponds to our hypothesized universe of no gender discrimination in promotion rates. Assuming the null hypothesis <span class="math inline">\(H_0\)</span>, also stated as “Under <span class="math inline">\(H_0\)</span>,” how does the test statistic vary due to sampling variation? In our case, how will the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> vary due to sampling under <span class="math inline">\(H_0\)</span>? Recall from <a href="sampling.html#sec-sampling-definitions"><span>Section&nbsp;14.3.2</span></a> that distributions displaying how point estimates vary due to sampling variation are called <em>sampling distributions</em>. The only additional thing to keep in mind about null distributions is that they are sampling distributions <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>.</p>
+<p>Fifth, the <strong>null distribution</strong> is the sampling distribution of the test statistic <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>. Ooof! That’s a long one! Let’s unpack it slowly. The key to understanding the null distribution is that the null hypothesis <span class="math inline">\(H_0\)</span> is <em>assumed</em> to be true. We’re not saying that <span class="math inline">\(H_0\)</span> is true at this point, we’re only assuming it to be true for hypothesis testing purposes. In our case, this corresponds to our hypothesized universe of no gender discrimination in promotion rates. Assuming the null hypothesis <span class="math inline">\(H_0\)</span>, also stated as “Under <span class="math inline">\(H_0\)</span>,” how does the test statistic vary due to sampling variation? In our case, how will the difference in sample proportions <span class="math inline">\(\widehat{p}_{m} - \widehat{p}_{f}\)</span> vary due to sampling under <span class="math inline">\(H_0\)</span>? Recall from <a href="sampling.html#sec-sampling-definitions"><span>Section&nbsp;11.3.2</span></a> that distributions displaying how point estimates vary due to sampling variation are called <em>sampling distributions</em>. The only additional thing to keep in mind about null distributions is that they are sampling distributions <em>assuming the null hypothesis <span class="math inline">\(H_0\)</span> is true</em>.</p>
 <p>In our case, we previously visualized a null distribution in <a href="#fig-null-distribution-1">Figure&nbsp;<span>10.6</span></a>, which we re-display in <a href="#fig-null-distribution-2">Figure&nbsp;<span>10.7</span></a> using our new notation and terminology. It is the distribution of the 16 differences in sample proportions our friends computed <em>assuming</em> a hypothetical universe of no gender discrimination. We also mark the value of the observed test statistic of 0.292 with a vertical line.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1136,7 +1118,7 @@ Explanatory: gender (factor)
 <p>Observe that Jordan has an average <code>pts</code> value of 25.3 and Curry has an average <code>pts</code> value of 23.762. The difference in these is thus 25.3 - 23.762 = 1.538. So there appears to be an edge of 1.538 points in favor of Jordan. The question is, however, are these results indicative of a true difference for <em>all</em> Jordan’s and Curry’s seasons? Or could we attribute this difference to chance <em>sampling variation</em>?</p>
 <section id="sampling-scenario" class="level3" data-number="10.5.1">
 <h3 data-number="10.5.1" class="anchored" data-anchor-id="sampling-scenario"><span class="header-section-number">10.5.1</span> Sampling scenario</h3>
-<p>Let’s now revisit this study in terms of terminology and notation related to sampling we studied in <a href="sampling.html#sec-terminology-and-notation"><span>Section&nbsp;14.3.1</span></a>. The <em>study population</em> includes all the seasons that Michael Jordan played and all the seasons that Steph Curry played. However, we do not have all of Michael Jordan’s season averages (the data set begins in 1996, but Jordan’s rookie season was 1984) nor do we have all of Steph Curry’s season averages (he is currently continuing to play). Thus, we have a <em>sample</em> from the population consisting of 17 rows in the <code>nba</code> dataset corresponding to these two players (the fact that we do not have a <strong>random</strong> sample from either player will be discussed in <a href="#sec-theory-hypo"><span>Section&nbsp;10.6.1</span></a>).</p>
+<p>Let’s now revisit this study in terms of terminology and notation related to sampling we studied in <a href="sampling.html#sec-terminology-and-notation"><span>Section&nbsp;11.3.1</span></a>. The <em>study population</em> includes all the seasons that Michael Jordan played and all the seasons that Steph Curry played. However, we do not have all of Michael Jordan’s season averages (the data set begins in 1996, but Jordan’s rookie season was 1984) nor do we have all of Steph Curry’s season averages (he is currently continuing to play). Thus, we have a <em>sample</em> from the population consisting of 17 rows in the <code>nba</code> dataset corresponding to these two players (the fact that we do not have a <strong>random</strong> sample from either player will be discussed in <a href="#sec-theory-hypo"><span>Section&nbsp;10.6.1</span></a>).</p>
 <p>When conducting a hypothesis test, our goal is to generalize from our sample to the entire population. What are the relevant <em>population parameter</em> and <em>point estimates</em>? We introduce the fourth sampling scenario in <a href="#tbl-summarytable-ch10">Table&nbsp;<span>10.2</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1188,7 +1170,7 @@ Explanatory: gender (factor)
 
 </div>
 </div>
-<p>So, whereas the sampling bowl exercise in <a href="sampling.html#sec-sampling-activity"><span>Section&nbsp;14.1</span></a> concerned <em>proportions</em>, we are now concerned with <em>differences in means</em>.</p>
+<p>So, whereas the sampling bowl exercise in <a href="sampling.html#sec-sampling-activity"><span>Section&nbsp;11.1</span></a> concerned <em>proportions</em>, we are now concerned with <em>differences in means</em>.</p>
 <p>In other words, the population parameter of interest is the difference in population mean ratings <span class="math inline">\(\mu_{MJ} - \mu_{SC}\)</span>, where <span class="math inline">\(\mu_{MJ}\)</span> is the mean <code>pts</code> of all of Jordan’s observations and <span class="math inline">\(\mu_{SC}\)</span> is the mean <code>pts</code> of all of Curry’s observations. Additionally the point estimate/sample statistic of interest is the difference in sample means <span class="math inline">\(\overline{x}_{MJ} - \overline{x}_{SC}\)</span>, where <span class="math inline">\(\overline{x}_{MJ}\)</span> is the mean <code>pts</code> of the <span class="math inline">\(n_{MJ}\)</span> = 4 movies in our sample and <span class="math inline">\(\overline{x}_{SC}\)</span> is the mean rating of the <span class="math inline">\(n_{SC}\)</span> = 13 in our sample. Based on our earlier exploratory data analysis, our estimate <span class="math inline">\(\overline{x}_{SC} - \overline{x}_{SC}\)</span> is <span class="math inline">\(25.3 - 23.762 = 1.538\)</span>.</p>
 <p>So there appears to be a slight difference of 1.538 in favor of Jordan. The question is, however, could this difference of 1.538 be merely due to chance and sampling variation? Or are these results indicative of a true difference in points scored for <em>all</em> of Jordan’s and Curry’s seasons? To answer this question, we’ll use hypothesis testing.</p>
 </section>
@@ -1752,8 +1734,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./single.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simple</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sampling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
