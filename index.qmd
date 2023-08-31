@@ -4,17 +4,24 @@ Content covering statistics, data analysis, and computer programming.  Sections 
 
 
 **Instructor**
+
 Christian Luhmann
 
 **Teaching Assistant**
+
 Emily Bibby
+
+
+## Schedule
+
+_Subject to change_, particularly topics scheduled for later in the semester.
 
 | Week | Date | Lecture | Activity |
 |---|---|---|---|
 | 1 | 09-01 | R & Rstudio, Basic Programming |  |
 | 2 | 09-08 | Adv. Programming and Handling Data in R |  |
 | 3 | 09-15 | Sampling |  |
-| 4 | 09-22 | Christian Out of Town | Sampling: p-values ala Lakens |
+| 4 | 09-22 | **Christian Out of Town** | Sampling: p-values ala Lakens |
 | 5 | 09-29 | The Tidyverse, Tibbles, and dplyr |  |
 | 6 | 10-06 | Plotting |  |
 | 7 | 10-13 | Descriptive Statistics |  |
