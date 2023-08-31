@@ -839,4 +839,15 @@ At this point, I hope you can see why logical indexing is such a useful thing. I
 
 ## Activities
 
-- Open RStudio and ...
+1. Compute $42+17$
+1. Compute $8-3$
+1. Compute $(8-3)^2$
+1. Compute $\frac{42+17}{(8-3)^2}$
+1. Define a vector containing the numbers 29, 63, 7, 23, 84, 10 and 9.
+1. Imagine this vector contains counts in units of months (29 months, 63 months, etc.).  Compute a new vector that contains the same measurement but not in units of years.  That is, divide all the entries in the previous vector by 12. Print these new measurements to the console.
+1. Create two strings (character vectors). One should be `"R rules!"` and the other should be `"r rules!"`.  Determine whether these two vectors are equal.
+1. Create a vector that consists of 6 values: 3 even and 3 odd.
+1. Modify the third value in this vector so that it is now double it's original value.
+1. Modify this vector so that all the odd numbers are removed.
+1. Calculate the sum of the values currently in the vector.
+1. Imagine a study in which participants must weigh less than 90 kg and be between 18 and 60 years of age.  Define a vector of weights as `weight <- c(80, 75, 92, 105, 60)` and a vector of ages `age <- c(50, 17, 39, 27, 90)`. Now calculate a vector of logical values, each of which indicates whether the corresponding participant is eligible for the study.
