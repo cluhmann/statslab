@@ -30,6 +30,6 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 10 | 11-03 | Regression |  |
 | 11 | 11-10 |  | Visualizing Residuals |
 | 12 | 11-17 | Multiple Regression |  |
-| 13 | 11-24 |  | No Class – Thanksgiving Break |
+| 13 | 11-24 | **No Class – Thanksgiving Break** | |
 | 14 | 12-01 | Regression w/ Categorical Predictors |  |
 | 15 | 12-08 | Regression w/ Interactions |  |
