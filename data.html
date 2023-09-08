@@ -281,14 +281,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./data-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data Files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rannoyances.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
   </div>
 </li>
       </ul>
@@ -306,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sec-load" id="toc-sec-load" class="nav-link active" data-scroll-target="#sec-load"><span class="header-section-number">4.1</span> Loading and saving data</a>
   <ul class="collapse">
   <li><a href="#sec-loadingcsv" id="toc-sec-loadingcsv" class="nav-link" data-scroll-target="#sec-loadingcsv"><span class="header-section-number">4.1.1</span> Importing data from CSV files using <code>read_csv</code></a></li>
-  <li><a href="#sec-importing" id="toc-sec-importing" class="nav-link" data-scroll-target="#sec-importing"><span class="header-section-number">4.1.2</span> Importing data from CSV files using RStudio</a></li>
+  <li><a href="#sec-importing" id="toc-sec-importing" class="nav-link" data-scroll-target="#sec-importing"><span class="header-section-number">4.1.2</span> Alternative CSV importation</a></li>
   <li><a href="#loading-workspace-files-using-r" id="toc-loading-workspace-files-using-r" class="nav-link" data-scroll-target="#loading-workspace-files-using-r"><span class="header-section-number">4.1.3</span> Loading workspace files using R</a></li>
   <li><a href="#loading-workspace-files-using-rstudio" id="toc-loading-workspace-files-using-rstudio" class="nav-link" data-scroll-target="#loading-workspace-files-using-rstudio"><span class="header-section-number">4.1.4</span> Loading workspace files using RStudio</a></li>
   <li><a href="#saving-a-workspace-file-using-save" id="toc-saving-a-workspace-file-using-save" class="nav-link" data-scroll-target="#saving-a-workspace-file-using-save"><span class="header-section-number">4.1.5</span> Saving a workspace file using <code>save</code></a></li>
@@ -352,16 +358,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Figure&nbsp;4.1: The booksales.csv data file. On the left, I’ve opened the file in using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right, the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas.</figcaption>
 </figure>
 </div>
-<p>If RStudio were not available to you, the easiest way to open this file would be to use the <code>read.csv()</code> function. This function is pretty flexible, and I’ll talk a lot more about it’s capabilities in <a href="#sec-importing"><span>Section&nbsp;4.1.2</span></a> for more details, but for now there’s only two arguments to the function that I’ll mention:</p>
+<p>The easiest way to open this file will be to use the <code>read_csv()</code> function. This function is pretty flexible and there are lots of options that you can tweak. For now there’s only a single argument to the function that I’ll mention:</p>
 <ul>
 <li><code>file</code>. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.</li>
-<li><code>header</code>. This is a logical value indicating whether or not the first row of the file contains variable names. The default value is <code>TRUE</code>.</li>
 </ul>
 <p>Therefore, to import the CSV file, the command I need is:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>books <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/booksales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>There are two very important points to notice here. Firstly, notice that I <em>didn’t</em> try to use the <code>load()</code> function, because that function is only meant to be used for .Rdata files. If you try to use <code>load()</code> on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called <code>books</code> file. There’s a reason for this. The idea behind an <code>.Rdata</code> file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you’d see that the data file keeps track of all the variables and their names. So when you <code>load()</code> the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores <em>one</em> variable, but that variable is big table. So when you import that table into the workspace, R expects <em>you</em> to give it a name.] Let’s have a look at what we’ve got:</p>
+<p>There are two very important points to notice here. First, notice that I <em>didn’t</em> try to use the <code>load()</code> function, because that function is only meant to be used for .Rdata files. If you try to use <code>load()</code> on other types of data, you get an error. Second, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called <code>books</code> file. There’s a reason for this. The idea behind an <code>.Rdata</code> file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you’d see that the data file keeps track of all the variables and their names. So when you <code>load()</code> the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores <em>one</em> variable, but that variable is big table. So when you import that table into the workspace, R expects <em>you</em> to give it a name. Let’s have a look at what we’ve got:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(books)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -403,7 +408,7 @@ Note
 </div>
 </section>
 <section id="sec-importing" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-importing"><span class="header-section-number">4.1.2</span> Importing data from CSV files using RStudio</h3>
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-importing"><span class="header-section-number">4.1.2</span> Alternative CSV importation</h3>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -440,7 +445,7 @@ Warning
 </ul>
 <p>One nice thing about the RStudio window is that it shows you the raw data file at the top of the window, and it shows you a preview of the data at the bottom. If the data at the bottom doesn’t look right, try changing some of the settings on the left hand side. Once you’re happy, click “Import”. When you do, two commands appear in the R console:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>booksales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Rbook/data/booksales.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>booksales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/booksales.csv"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(booksales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first of these commands is the one that loads the data. The second one will display a pretty table showing the data in RStudio.</p>
@@ -448,7 +453,7 @@ Warning
 </section>
 <section id="loading-workspace-files-using-r" class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="loading-workspace-files-using-r"><span class="header-section-number">4.1.3</span> Loading workspace files using R</h3>
-<p>When I used the <code>list.files()</code> command to list the contents of the <code>/Users/dan/Rbook/data</code> directory, the output referred to a file called booksales.Rdata. Let’s say I want to load the data from this file into my workspace. The way I do this is with the <code>load()</code> function. There are two arguments to this function, but the only one we’re interested in is</p>
+<p>When I used the <code>list.files()</code> command to list the contents of the <code>data</code> directory, the output referred to a file called booksales.Rdata. Let’s say I want to load the data from this file into my workspace. The way I do this is with the <code>load()</code> function. There are two arguments to this function, but the only one we’re interested in is</p>
 <ul>
 <li><code>file</code>. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.</li>
 </ul>

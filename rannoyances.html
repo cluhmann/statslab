@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - Appendix B — A Running List of Annoying R Things</title>
+<title>statslab - Appendix C — A Running List of Annoying R Things</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">Appendices</a></li><li class="breadcrumb-item"><a href="./rannoyances.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-files.html">Appendices</a></li><li class="breadcrumb-item"><a href="./rannoyances.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -246,14 +246,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./data-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data Files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./rannoyances.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,11 +274,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-poordocs" id="toc-sec-poordocs" class="nav-link active" data-scroll-target="#sec-poordocs"><span class="header-section-number">B.1</span> Consistently poor documentation</a></li>
-  <li><a href="#sec-dispatching" id="toc-sec-dispatching" class="nav-link" data-scroll-target="#sec-dispatching"><span class="header-section-number">B.2</span> Generic functions &amp; dispatching</a></li>
-  <li><a href="#inconsistent-acknowledgement-of-namespaces" id="toc-inconsistent-acknowledgement-of-namespaces" class="nav-link" data-scroll-target="#inconsistent-acknowledgement-of-namespaces"><span class="header-section-number">B.3</span> Inconsistent acknowledgement of namespaces</a></li>
-  <li><a href="#everything-is-a-package" id="toc-everything-is-a-package" class="nav-link" data-scroll-target="#everything-is-a-package"><span class="header-section-number">B.4</span> Everything is a package</a></li>
-  <li><a href="#how-does-r-work-lazy-evaluation" id="toc-how-does-r-work-lazy-evaluation" class="nav-link" data-scroll-target="#how-does-r-work-lazy-evaluation"><span class="header-section-number">B.5</span> How does R work? &amp; “lazy evaluation”</a></li>
+  <li><a href="#sec-poordocs" id="toc-sec-poordocs" class="nav-link active" data-scroll-target="#sec-poordocs"><span class="header-section-number">C.1</span> Consistently poor documentation</a></li>
+  <li><a href="#sec-dispatching" id="toc-sec-dispatching" class="nav-link" data-scroll-target="#sec-dispatching"><span class="header-section-number">C.2</span> Generic functions &amp; dispatching</a></li>
+  <li><a href="#inconsistent-acknowledgement-of-namespaces" id="toc-inconsistent-acknowledgement-of-namespaces" class="nav-link" data-scroll-target="#inconsistent-acknowledgement-of-namespaces"><span class="header-section-number">C.3</span> Inconsistent acknowledgement of namespaces</a></li>
+  <li><a href="#everything-is-a-package" id="toc-everything-is-a-package" class="nav-link" data-scroll-target="#everything-is-a-package"><span class="header-section-number">C.4</span> Everything is a package</a></li>
+  <li><a href="#how-does-r-work-lazy-evaluation" id="toc-how-does-r-work-lazy-evaluation" class="nav-link" data-scroll-target="#how-does-r-work-lazy-evaluation"><span class="header-section-number">C.5</span> How does R work? &amp; “lazy evaluation”</a></li>
   </ul>
 </nav>
     </div>
@@ -281,7 +287,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-rannoyances" class="quarto-section-identifier">Appendix B — A Running List of Annoying R Things</span></h1>
+<h1 class="title"><span id="sec-rannoyances" class="quarto-section-identifier">Appendix C — A Running List of Annoying R Things</span></h1>
 </div>
 
 
@@ -296,16 +302,16 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="sec-poordocs" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="sec-poordocs"><span class="header-section-number">B.1</span> Consistently poor documentation</h2>
+<section id="sec-poordocs" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="sec-poordocs"><span class="header-section-number">C.1</span> Consistently poor documentation</h2>
 <ul>
 <li>e.g., CRAN reference manuals come in PDF form.</li>
 <li>e.g., CRAN reference manuals covers package functions/data in <strong>alphabetical order</strong> with no guidance about which functions might be more or less important/useful/central to the package.</li>
 <li>e.g., Documentation for the tidymodels package <code>parsnip</code> does not tell you what engines it supports (despite engines being the heart of what <code>parsnip</code> does). It does, however, tell you that you can call the function <code>parsnip::show_engines()</code> if you want to know that information. Of course, this requires you to first install the package.</li>
 </ul>
 </section>
-<section id="sec-dispatching" class="level2" data-number="B.2">
-<h2 data-number="B.2" class="anchored" data-anchor-id="sec-dispatching"><span class="header-section-number">B.2</span> Generic functions &amp; dispatching</h2>
+<section id="sec-dispatching" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="sec-dispatching"><span class="header-section-number">C.2</span> Generic functions &amp; dispatching</h2>
 <ul>
 <li>Whenever you call a R function, you never know what code you are about to invoke with certainty. Part of this ambiguity is intentional. R uses what I called “dispatching” to decide which of the many <code>print()</code> functions or which of the many <code>describe()</code> functions to actually execute based on the class of the <strong>first argument</strong> passed to the function. One of the major benefits of dispatching is that package authors may tweak standard functions (e.g., <code>print()</code>) to do special things for the objects their package instantiates and users never have to know that there are new functions available and never have to worry about which one(s) to use when.</li>
 <li>But ignoring whose code you are invoking can also lead to problems. When I call the function <code>filter()</code> what can I expect to happen? It entirely depends what packages happen to be loaded at the time. Worse than this, it depends on <strong>the order in which those packages were loaded</strong> because R defaults to selecting functions from more-recently loaded packages.</li>
@@ -313,23 +319,23 @@ ul.task-list li input[type="checkbox"] {
 <li>Packages such as <code>conflicted</code> seek to address this, by allowing for greater control over how conflicts are resolved (e.g., specifying that you want <code>filter()</code> to invoke <code>stats::filter()</code> rather than the more-recently loaded <code>dplyr::filter()</code>. However, this places all responsibility for handling all relevant conflicts to the user. Furthermore, how these conflicts are resolved is still implicit when the functions are actually being called (my code still looks likes <code>filter()</code> and you need to go hunting to see if there’s a conflict and if/when/how I asked the conflict to be resolved).</li>
 </ul>
 </section>
-<section id="inconsistent-acknowledgement-of-namespaces" class="level2" data-number="B.3">
-<h2 data-number="B.3" class="anchored" data-anchor-id="inconsistent-acknowledgement-of-namespaces"><span class="header-section-number">B.3</span> Inconsistent acknowledgement of namespaces</h2>
+<section id="inconsistent-acknowledgement-of-namespaces" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="inconsistent-acknowledgement-of-namespaces"><span class="header-section-number">C.3</span> Inconsistent acknowledgement of namespaces</h2>
 <ul>
-<li>One way to solve the ambiguity described in <a href="#sec-dispatching"><span>Section&nbsp;B.2</span></a> is to be explicit when calling functions (e.g., <code>dplyr::filter()</code> instead of <code>filter()</code>). However, the complaint is that this causes your code to be <a href="https://www.tidyverse.org/blog/2023/08/teach-tidyverse-23/#conflict-resolution-in-the-tidyverse">“pretty busy”</a>. Of course, there is a healthy conversation to be had about clean-and-mysterious vs.&nbsp;busy-by-transparent.</li>
+<li>One way to solve the ambiguity described in <a href="#sec-dispatching"><span>Section&nbsp;C.2</span></a> is to be explicit when calling functions (e.g., <code>dplyr::filter()</code> instead of <code>filter()</code>). However, the complaint is that this causes your code to be <a href="https://www.tidyverse.org/blog/2023/08/teach-tidyverse-23/#conflict-resolution-in-the-tidyverse">“pretty busy”</a>. Of course, there is a healthy conversation to be had about clean-and-mysterious vs.&nbsp;busy-by-transparent.</li>
 <li>But ignoring the fact that functions are “attached” to specific packages is mirrored elsewhere. For example, there is a tendency to ignore the fact that data sets are also “attached” to specific packages. When one loads a package into the R environment, (e.g., <code>library(fivethirtyeight)</code>), a variety of data sets may become immediately available (e.g., <code>drinks</code>). I would encourage you to try and find evidence that the <code>drinks</code> dataframe is in any way associated with the <code>fivethirtyeight</code> package. RStudio will tell you that your environment is empty, which is a bit odd given that you now have access to a data frame that you didn’t when you first started up RStudio. If you check immediately before and after loading <code>fivethirtyeight</code>, you might see that <code>drinks</code> is available after, but not before, doing so. You might also see that the documentation for <code>drinks</code> (e.g., <code>?drinks</code>) tells you that it is part of the <code>fivethirtyeight</code> package. But this is all a bit mysterious. When one runs a series of <code>library()</code> statements and a variety of new dataframes pop into existence, how does one determine where they all came from? You wade through lots of (<a href="@sec-poordocs">poor</a>) documentation. Or, in RStudio, you can step through the individual package environments, one by one.</li>
 </ul>
 </section>
-<section id="everything-is-a-package" class="level2" data-number="B.4">
-<h2 data-number="B.4" class="anchored" data-anchor-id="everything-is-a-package"><span class="header-section-number">B.4</span> Everything is a package</h2>
+<section id="everything-is-a-package" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="everything-is-a-package"><span class="header-section-number">C.4</span> Everything is a package</h2>
 <ul>
 <li>When you update R (not RStudio) it will remove all the packages you have installed. This is undesirable.</li>
 <li>If you poke around for a solution, you may come upon the <code>installr</code> package. The fact that this is a package and not a feature of R itself is odd (why not contribute this code/functionality to the R project itself?).</li>
 <li>The R ecosystem is extremely fragmented and weirdly territorial. Do we have an R package that provides generalized linear modeling functionality? No.&nbsp;<a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html">We have 13 of them</a>! Or 37 of them? It’s not clear. How is this sort of situation can be maintained as an equilibrium is unclear. Why is all this effort sunk into “one more GLM package” as opposed to adding features to existing packages? Are the maintainers not open to such additions? If so, why is everyone using their packages and not starting a more open, more contributor-friendly project?</li>
 </ul>
 </section>
-<section id="how-does-r-work-lazy-evaluation" class="level2" data-number="B.5">
-<h2 data-number="B.5" class="anchored" data-anchor-id="how-does-r-work-lazy-evaluation"><span class="header-section-number">B.5</span> How does R work? &amp; “lazy evaluation”</h2>
+<section id="how-does-r-work-lazy-evaluation" class="level2" data-number="C.5">
+<h2 data-number="C.5" class="anchored" data-anchor-id="how-does-r-work-lazy-evaluation"><span class="header-section-number">C.5</span> How does R work? &amp; “lazy evaluation”</h2>
 <ul>
 <li>R code such as <code>mpg %&gt;% filter(model == "mustang")</code> is not valid because <code>model</code> is not the name of an R variable or anything else that R might be aware of. To see this, type <code>model</code> at the console and you will get an <code>Error: object 'model' not found</code> message. But this code becomes valid once you load the <code>tidyverse</code> package (or <code>dyplyr</code>). How this happens it mysterious, but the short version is that R allows packages to decide and change how R itself works.</li>
 </ul>
@@ -574,7 +580,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./references.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bibliography</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Bibliography</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
