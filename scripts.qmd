@@ -1,4 +1,4 @@
-# Basic Programming {#scripting}
+# Basic Programming {#sec-scripting}
 
 ```{r}
 #| echo: false
