@@ -39,7 +39,7 @@ books <- read_csv("./data/booksales.csv")
 books <- read_csv("./data/booksales.csv")
 ```
 
-There are two very important points to notice here. First, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
+There are two very important points to notice here. First, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Second, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name. Let's have a look at what we've got:
 
 ```{r}
 print(books)
@@ -61,7 +61,7 @@ In a lot of books you'll see the `read.table()` or `read.csv()` functions used f
 :::
 
 
-### Importing data from CSV files using RStudio {#sec-importing}
+### Alternative CSV importation {#sec-importing}
 
 ::: {.callout-warning}
 As detailed above, `read_csv()` is how we will import CSV data files into R. This section details an alternative way to import CSV data files, but it will not produce the same kind of variable.  Using RStudio's built-in "Import Dataset" functionality will produce a dataframe, whereas `read_csv` produces a "tibble". We will Further information about the difference between plain dataframes and tibbles can be found in @sec-dataframes.
@@ -88,7 +88,7 @@ One nice thing about the RStudio window is that it shows you the raw data file a
 
 ```{r}
 #| eval: false
-booksales <- read.csv("~/Rbook/data/booksales.csv")
+booksales <- read.csv("./data/booksales.csv")
 View(booksales)
 ```
 
@@ -99,7 +99,7 @@ Note, however, that this variable looks a bit different from the `sales` variabl
 
 ### Loading workspace files using R
 
-When I used the `list.files()` command to list the contents of the `/Users/dan/Rbook/data` directory, the output referred to a file called booksales.Rdata. Let's say I want to load the data from this file into my workspace. The way I do this is with the `load()` function. There are two arguments to this function, but the only one we're interested in is
+When I used the `list.files()` command to list the contents of the `data` directory, the output referred to a file called booksales.Rdata. Let's say I want to load the data from this file into my workspace. The way I do this is with the `load()` function. There are two arguments to this function, but the only one we're interested in is
 
 - `file`. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.
 
