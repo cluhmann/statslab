@@ -53,6 +53,7 @@ book:
 #    - part: "Odds & Ends"
 #      chapters:
     appendices:
+        - data-files.qmd
         - references.qmd
         - rannoyances.qmd
 

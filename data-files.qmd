@@ -1,0 +1,8 @@
+# Data Files {#sec-datafiles}
+
+Below are links to the various data file we use throughout the book.
+
+[bookssales.csv](https://raw.githubusercontent.com/cluhmann/statslab/main/data/booksales.csv)
+
+[nba_all_seasons.csv](https://raw.githubusercontent.com/cluhmann/statslab/main/data/nba_all_seasons.csv)
+
