@@ -21,10 +21,9 @@ One quite commonly used data format is the humble "comma separated value" file, 
 ![The booksales.csv data file. On the left, I've opened the file in using a spreadsheet program (OpenOffice), which shows that the file is basically a table. On the right, the same file is open in a standard text editor (the TextEdit program on a Mac), which shows how the file is formatted. The entries in the table are wrapped in quote marks and separated by commas.](images/mechanics/booksalescsv.jpg){#fig-booksalescsv}
 
 
-If RStudio were not available to you, the easiest way to open this file would be to use the `read.csv()` function. This function is pretty flexible, and I'll talk a lot more about it's capabilities in @sec-importing for more details, but for now there's only two arguments to the function that I'll mention:
+The easiest way to open this file will be to use the `read_csv()` function. This function is pretty flexible and there are lots of options that you can tweak. For now there's only a single argument to the function that I'll mention:
 
 - `file`. This should be a character string that specifies a path to the file that needs to be loaded. You can use an absolute path or a relative path to do so.
-- `header`. This is a logical value indicating whether or not the first row of the file contains variable names. The default value is `TRUE`. 
 
 Therefore, to import the CSV file, the command I need is:
 
@@ -40,7 +39,7 @@ books <- read_csv("./data/booksales.csv")
 books <- read_csv("./data/booksales.csv")
 ```
 
-There are two very important points to notice here. Firstly, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
+There are two very important points to notice here. First, notice that I *didn't* try to use the `load()` function, because that function is only meant to be used for .Rdata files. If you try to use `load()` on other types of data, you get an error. Secondly, notice that when I imported the CSV file I assigned the result to a variable, which I imaginatively called `books` file. There's a reason for this. The idea behind an `.Rdata` file is that it stores a whole workspace. So, if you had the ability to look inside the file yourself you'd see that the data file keeps track of all the variables and their names. So when you `load()` the file, R restores all those original names. CSV files are treated differently: as far as R is concerned, the CSV only stores *one* variable, but that variable is big table. So when you import that table into the workspace, R expects *you* to give it a name.] Let's have a look at what we've got:
 
 ```{r}
 print(books)

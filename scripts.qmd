@@ -85,7 +85,7 @@ When writing up your data analysis as a script, one thing that is generally a go
 #| eval: false
 ## --- itngscript.R
 # A script to analyse nightgarden.Rdata_
-#  author: Dan Navarro_
+#  author: Danielle Navarro_
 #  date: 22/11/2011_
 
 # Load the data, and tell the user that this is what we're
