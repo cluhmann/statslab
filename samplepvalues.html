@@ -763,15 +763,15 @@ mean in group Friends Daniel   mean in group Friends Kyra
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -1.46837405 -1.11612129 -1.06607782 -1.48758329 -1.08272215 -0.63486230
- [7] -0.82460280 -1.39955685  0.53225810 -0.65880929  0.31830127 -1.02021902
-[13] -0.04733054  0.69695864  0.37443897  0.58399394  0.20080860 -1.66959887
-[19]  1.37206953 -1.45515866 -0.72343201 -1.26769670  0.95367744 -1.35558907
-[25]  0.62613965 -0.49991649  0.08609273  0.21322193 -0.04756693  1.87979859
-[31]  0.72850775  0.09261311  0.80252041 -0.46865790 -0.42946181  0.58283441
-[37]  0.27273744 -1.24398132 -1.41628938 -0.08397535 -1.61239396 -0.68052217
-[43]  0.37460480 -0.13678203  1.57821766 -0.53846941 -1.99090661 -1.02374590
-[49]  0.21177193 -0.06382137</code></pre>
+<pre><code> [1]  0.01369195 -0.63638384  0.77175610  1.61100108  0.74027317  0.01897193
+ [7]  1.53942654 -0.07738462 -3.00861195  0.08422162 -0.36056174 -0.60849885
+[13] -1.37544585 -0.85388085  1.44971837  0.70904462  0.54797610  0.45356680
+[19] -0.55750423  0.36329247 -1.37177783  0.16121270 -0.35136689 -0.14265963
+[25] -0.35386869 -0.24969401 -0.25705642  1.66592756 -0.18427110 -1.39796847
+[31]  0.56222988  1.39115500  1.08326605 -0.42936985  0.43115395  0.02907343
+[37] -0.03524666 -1.71899918  0.84384773 -0.91566923 -0.99498488  0.43139355
+[43] -1.27558783 -0.61064394 -0.53645064  0.29709621 -1.35371930  0.30744633
+[49]  1.28086482 -0.72578484</code></pre>
 </div>
 </div>
 <p>This command generates 50 random observations from a distribution with a mean of 0 and a standard deviation of 1 (in the long run – the mean and standard deviation will vary in each sample that is generated). Imagine we run this command once, and we observe a mean of 0.5. The figure below visualizes this scenario. We can perform a one-sample <em>t</em>-test against 0, and this test tells us, with a <em>p</em> &lt; .05, that the data we have observed is surprisingly different from 0, assuming the random number generator in R functions as it should and generates data with a true mean of 0.</p>
