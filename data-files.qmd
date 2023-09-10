@@ -1,6 +1,6 @@
 # Data Files {#sec-datafiles}
 
-Below are links to the various data file we use throughout the book.
+Below are links to the various data file we use throughout the book. You may have to right-click and select "Save As..." or you can cut and paste the contents into an empty file and save it with the same file name appearing in the link below.
 
 [bookssales.csv](https://raw.githubusercontent.com/cluhmann/statslab/main/data/booksales.csv)
 
