@@ -89,7 +89,6 @@ We set the arguments to `pivot_longer()` as follows:
 The third argument here of `cols` is a little nuanced, so let's consider code that's written slightly differently but that produces the same output: 
 
 ```{r}
-#|eval: false
 drinks_smaller %>% 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
@@ -103,16 +102,8 @@ drinks_smaller %>%
   pivot_longer(names_to = "type", 
                values_to = "servings", 
                cols = beer:wine)
-drinks_smaller_tidy <- drinks_smaller %>%
-  gather(type, servings, -country)
 ```
 
-Let's see what our "tidy" formatted dataframe, `drinks_smaller_tidy`, looks like.
-
-```{r}
-#| echo: false
-drinks_smaller_tidy
-```
 
 Converting "wide" format data to "tidy" format often confuses new R users. The only way to learn to get comfortable with the `pivot_longer()` function is with practice, practice, and more practice using different data sets. For example, run `?pivot_longer` and look at the examples in the bottom of the help file.
 
