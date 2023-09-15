@@ -61,7 +61,7 @@ Observe for each `group` that we have their names, the number of `red_balls` the
 
 ```{r}
 #| echo: false
-#| label: fig-samplingdistribution-tactile
+#| fig-cap: fig-samplingdistribution-tactile
 ggplot(tactile_prop_red, aes(x = prop_red)) +
   geom_histogram(binwidth = 0.05, boundary = 0.4, color = "white") +
   labs(x = "Proportion of 50 balls that were red", 
