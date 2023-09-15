@@ -436,11 +436,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>The third argument here of <code>cols</code> is a little nuanced, so let’s consider code that’s written slightly differently but that produces the same output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(beer, spirit, wine))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"type"</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"servings"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(beer, spirit, wine))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    country      type   servings
@@ -482,28 +481,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 11 USA          spirit      158
 12 USA          wine         84</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>drinks_smaller_tidy <span class="ot">&lt;-</span> drinks_smaller <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(type, servings, <span class="sc">-</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Let’s see what our “tidy” formatted dataframe, <code>drinks_smaller_tidy</code>, looks like.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 3
-   country      type   servings
-   &lt;chr&gt;        &lt;chr&gt;     &lt;int&gt;
- 1 China        beer         79
- 2 Italy        beer         85
- 3 Saudi Arabia beer          0
- 4 USA          beer        249
- 5 China        spirit      192
- 6 Italy        spirit       42
- 7 Saudi Arabia spirit        5
- 8 USA          spirit      158
- 9 China        wine          8
-10 Italy        wine        237
-11 Saudi Arabia wine          0
-12 USA          wine         84</code></pre>
-</div>
 </div>
 <p>Converting “wide” format data to “tidy” format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice using different data sets. For example, run <code>?pivot_longer</code> and look at the examples in the bottom of the help file.</p>
 <p>If however you want to convert a “tidy” dataframe to “wide” format, you will need to use the <code>pivot_wider()</code> function instead. Run <code>?pivot_wider</code> and look at the examples in the bottom of the help file for examples.</p>
@@ -515,13 +492,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Let’s load data we downloaded back in <a href="data.html#sec-dataactivities"><span>Section&nbsp;4.2</span></a>. Run the following:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Now let’s take a quick peek at what’s in there by running the following:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Consider the following questions:
@@ -542,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Let’s take a closer look. Open the data in RStudio’s spreadsheet viewer by running the following:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(nba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(nba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>Inspect the <code>college</code> column. Do you see any unusual values?</li>
