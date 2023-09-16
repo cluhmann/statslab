@@ -837,7 +837,7 @@ Either way, I get the answer I want.
 At this point, I hope you can see why logical indexing is such a useful thing. It's a very basic, yet very powerful way to manipulate data. Subsequent chapters will talk a lot more about how to manipulate data, since it's a critical skill for real world research that is often overlooked in introductory statistics courses It does take a bit of practice to become completely comfortable using logical indexing, so it's a good idea to play around with these sorts of commands. Try creating a few different variables of your own, and then ask yourself questions like "how do I get R to spit out all the elements that are [blah]". Practice makes perfect, and it's only by practicing logical indexing that you'll perfect the art of yelling frustrated insults at your computer.
 
 
-## Activities
+## Exercises
 
 1. Compute $42+17$
 1. Compute $8-3$

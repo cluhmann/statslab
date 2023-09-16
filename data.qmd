@@ -181,7 +181,7 @@ save.image("~/Desktop/Untitled.RData")
 
 Pretty straightforward, really.
 
-## Activities {#sec-dataactivities}
+## Exercises {#sec-dataactivities}
 
 - Download data (see @sec-datafiles)
 - Inside the "statslab" directory/folder you created at the end of @sec-rlangactivities, create a sub-directory/folder and name it "data"

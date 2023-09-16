@@ -133,7 +133,7 @@ What does this actually *mean*? What's going on is that R wants to know if you w
 
 In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again (see @fig-rstudio-quit). On a Mac, you can open this window by going to the "RStudio" menu and selecting "Preferences". On a Windows machine you go to the "Tools" menu and select "Global Options". Under the "General" tab you'll see an option that reads "Save workspace to .Rdata on exit". By default this is set to "ask". If you want R to stop asking, change it to "never".
 
-## Activities  {#sec-rlangactivities}
+## Exercises  {#sec-rlangactivities}
 
 - Install both R and RStudio using the instructions found in @sec-install
 - Open RStudio

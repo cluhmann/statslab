@@ -153,7 +153,7 @@ For the remainder of this book, we'll start every chapter by running `library(ti
 In addition to the packages listed above, there are also a variety of packages that live in a sort of "extended" tidyverse.  These include packages such as `lubridate` (for handling dates and times) and `magrittr` (providing pipe operators).  One particularly useful package is `modelr` which is used for for creating analysis pipelines.  However, the `modelr` package has been superseded by a collection of packages called `tidymodels`.  Like `tidyverse`, `tidymodels` is an umbrella package encapsulating: `rsample`, `parsnip`, `recipes`, `broom` and other packages designed to facilitate machine learning-style data analysis.  We will make particular use of a package called `infer`, which provides a high-level interface for performing statistical inference.  For more information, check out  [www.tidymodels.org](https://www.tidymodels.org) and the book [_Tidy Modeling with R_](https://www.tmwr.org/).
 
 
-## Activities  {#sec-rlangactivities}
+## Exercises  {#sec-rlangactivities}
 
 - Open RStudio
 - If you have not done so already, install the `tidyverse` package using the instructions found in @sec-packageinstall

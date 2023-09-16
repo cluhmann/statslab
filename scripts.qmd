@@ -495,7 +495,7 @@ The `tapply()` and `by()` functions are quite handy things to know about, and ar
 Before moving on, I should mention that there are several other functions that work along similar lines, and have suspiciously similar names: `lapply`, `mapply`, `apply`, `vapply`, `rapply` and `eapply`. However, none of these come up anywhere else in this book, so all I wanted to do here is draw your attention to the fact that they exist.
 
 
-## Activities
+## Exercises
 
 1. Write a script to print the first 10 values of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence).
 1. Write a **function** that accepts an integer argument (e.g., `i`) and prints 10 values of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence): the ith Fibonacci number, the 1+ith Fibonacci number, the 2+ith Fibonacci number ... the 10+ith Fibonacci number.
