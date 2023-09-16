@@ -332,6 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#theres-more-to-functions-than-this" id="toc-theres-more-to-functions-than-this" class="nav-link" data-scroll-target="#theres-more-to-functions-than-this"><span class="header-section-number">3.4.2</span> There’s more to functions than this</a></li>
   </ul></li>
   <li><a href="#sec-vectorised" id="toc-sec-vectorised" class="nav-link" data-scroll-target="#sec-vectorised"><span class="header-section-number">3.5</span> Implicit loops</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.6</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -947,7 +948,7 @@ month 356 : balance -1554 </code></pre>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>( <span class="st">"I'm a happy little automaton"</span> )</span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Since today happens to be a Friday, when I run the script here’s what happens:</p>
+<p>Since today happens to be a Saturday, when I run the script here’s what happens:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I'm a happy little automaton"</code></pre>
@@ -1084,6 +1085,24 @@ gender: male
 </div>
 <p>The <code>tapply()</code> and <code>by()</code> functions are quite handy things to know about, and are pretty widely used. However, although I do make passing reference to the <code>tapply()</code> later on, I don’t make much use of them in this book.</p>
 <p>Before moving on, I should mention that there are several other functions that work along similar lines, and have suspiciously similar names: <code>lapply</code>, <code>mapply</code>, <code>apply</code>, <code>vapply</code>, <code>rapply</code> and <code>eapply</code>. However, none of these come up anywhere else in this book, so all I wanted to do here is draw your attention to the fact that they exist.</p>
+</section>
+<section id="exercises" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.6</span> Exercises</h2>
+<ol type="1">
+<li>Write a script to print the first 10 values of the <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>.</li>
+<li>Write a <strong>function</strong> that accepts an integer argument (e.g., <code>i</code>) and prints 10 values of the <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci sequence</a>: the ith Fibonacci number, the 1+ith Fibonacci number, the 2+ith Fibonacci number … the 10+ith Fibonacci number.</li>
+<li>Modify the function you just wrote to accept a second integer argument (e.g., <code>n</code>) and prints <code>n</code> Fibonacci numbers (i.e., the ith Fibonacci number through the n+ith Fibonacci number).</li>
+<li>Modify your function so that the default value of <code>i</code> is <code>0</code> and the default value of <code>n</code> is <code>10</code>.</li>
+<li>Modify your function so that any <strong>even</strong> Fibonacci numbers are labeled as such (e.g., <code>even: 2</code>) and any <strong>odd</strong> Fibonacci numbers are labeled as such (e.g., <code>odd: 3</code>) (hint: check out <code>paste()</code>, though there are other approaches as well).</li>
+<li>Write a function that accepts a numeric vector and tests whether any elements of the vector are greater than 10. Return TRUE or FALSE to indicate whether there are or not.</li>
+<li>Write a function that accepts a argument that is a vector containing numeric values. Have the function print the second highest value in the vector.</li>
+<li>Write a function that accepts a argument that is a vector containing numeric values and an integer argument <code>n</code>. Have the function print the <code>second</code>n`th highest value in the vector.</li>
+<li>Write a function that accepts two arguments (e.g., <code>n</code> and <code>vector</code>). Print out every <code>n</code>th element of <code>vector</code> (i.e., n, 2n, 3n, etc.).</li>
+<li>Write a function that accepts two vector arguments (e.g., <code>a</code> and <code>b</code>). Find all elements that are both in <code>a</code> and in <code>b</code> and print them.</li>
+<li>Write a function that accepts two vector arguments (e.g., <code>a</code> and <code>b</code>). Print all elements that are <strong>either</strong> in <code>a</code> <strong>or</strong> in <code>b</code> but not both.</li>
+<li>Write a function that accepts an integer argument (e.g., <code>n</code>). Print <code>n!</code> (n factorial): <code>1*2*3*4...*n</code>. Use a loop (<code>for</code> or <code>while</code>).</li>
+<li>Write a function that accepts an integer argument (e.g., <code>n</code>). Print <code>n!</code> (n factorial): <code>1*2*3*4...*n</code>. <strong>Do not</strong> use a loop <strong>of any kind</strong>.</li>
+</ol>
 
 
 </section>
