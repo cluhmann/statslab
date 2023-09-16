@@ -183,9 +183,8 @@ Pretty straightforward, really.
 
 ## Activities {#sec-dataactivities}
 
-- Download data
-- Download the following file: [TBD]()
-- Inside the "statslab" directory/folder you created at the end of the previous chapter (@sec-rlangactivities), create a sub-directory/folder and name it "data"
+- Download data (see @sec-datafiles)
+- Inside the "statslab" directory/folder you created at the end of @sec-rlangactivities, create a sub-directory/folder and name it "data"
 - Unzip the data files and place them in the "data" directory/folder you just created
-- Open the 2015 data file (`nba_all_seasons.csv`) in your favorite spreadsheet software (e.g., Microsoft Excel)
+- Open NBA data file (`nba_all_seasons.csv`) in your favorite spreadsheet software (e.g., Microsoft Excel).
 - Briefly review the content of this file.

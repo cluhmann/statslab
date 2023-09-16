@@ -493,3 +493,20 @@ by( data = age, INDICES = gender, FUN = mean )
 The `tapply()` and `by()` functions are quite handy things to know about, and are pretty widely used. However, although I do make passing reference to the `tapply()` later on, I don't make much use of them in this book.
 
 Before moving on, I should mention that there are several other functions that work along similar lines, and have suspiciously similar names: `lapply`, `mapply`, `apply`, `vapply`, `rapply` and `eapply`. However, none of these come up anywhere else in this book, so all I wanted to do here is draw your attention to the fact that they exist.
+
+
+## Activities
+
+1. Write a script to print the first 10 values of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence).
+1. Write a **function** that accepts an integer argument (e.g., `i`) and prints 10 values of the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence): the ith Fibonacci number, the 1+ith Fibonacci number, the 2+ith Fibonacci number ... the 10+ith Fibonacci number.
+1. Modify the function you just wrote to accept a second integer argument (e.g., `n`) and prints `n` Fibonacci numbers (i.e., the ith Fibonacci number through the n+ith Fibonacci number).
+1. Modify your function so that the default value of `i` is `0` and the default value of `n` is `10`.
+1. Modify your function so that any **even** Fibonacci numbers are labeled as such (e.g., `even: 2`) and any **odd** Fibonacci numbers are labeled as such (e.g., `odd: 3`) (hint: check out `paste()`, though there are other approaches as well).
+1. Write a function that accepts a numeric vector and tests whether any elements of the vector are greater than 10. Return TRUE or FALSE to indicate whether there are or not.
+1. Write a function that accepts a argument that is a vector containing numeric values. Have the function print the second highest value in the vector.
+1. Write a function that accepts a argument that is a vector containing numeric values and an integer argument `n`. Have the function print the `second`n`th highest value in the vector.
+1. Write a function that accepts two arguments (e.g., `n` and `vector`). Print out every `n`th element of `vector` (i.e., n, 2n, 3n, etc.).
+1. Write a function that accepts two vector arguments (e.g., `a` and `b`). Find all elements that are both in `a` and in `b` and print them.
+1. Write a function that accepts two vector arguments (e.g., `a` and `b`). Print all elements that are **either** in `a` **or** in `b` but not both.
+1. Write a function that accepts an integer argument (e.g., `n`). Print `n!` (n factorial): `1*2*3*4...*n`. Use a loop (`for` or `while`).
+1. Write a function that accepts an integer argument (e.g., `n`). Print `n!` (n factorial): `1*2*3*4...*n`. **Do not** use a loop **of any kind**.
