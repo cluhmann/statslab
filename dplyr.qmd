@@ -511,7 +511,13 @@ nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
 1. Produce a data frame consisting exclusively of players under the age of 25 **and** attended "Marquette".
 1. Determine the average height of all players.
 1. Determine the median height of all players who attended "Connecticut".
-1. For each college appearing in the data set, what is the average `pts` and `ast` of players who attended that college?
+1. Use `select` to produce a data frame that only includes columns containing player names and team abbreviations.
+1. Use `select` to produce a data frame that includes **all** columns **except** those containing player names and team abbreviations.
+1. Use `select` to produce a data frame that includes **all** columns whose column names include the string "ea" (hint: use `constains()`).
+1. Use `select` to produce a data frame that includes **all** columns whose column names **does not** include an underscore (i.e., "_").
+1. **Bonus:** Use `select` to produce a data frame that includes **all** columns whose column names contain more than 11 characters (hint: you may need to use some combination of `names()` and `nchar()`).
+
+1. For each college appearing in the data set, what is the average (mean) of `pts` and `ast` among players who attended that college?
 1. Try calculating these school-wise averages separately for each season.
 1. Create a new column in the data set called `reb_diff` and calculate it as the difference between the offensive rebound percentage (`oreb_pct`) and the defensive rebound percentage (`dreb_pct`).
 1. What is the standard deviation of `reb_diff`?
