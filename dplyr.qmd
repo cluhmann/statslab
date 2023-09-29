@@ -467,7 +467,7 @@ nba <- nba %>%
 ```
 
 
-## arrange
+## arrange {#sec-arrange}
 
 One of the most commonly performed data wrangling tasks is to sort a data frame's rows in the alphanumeric order of one of the variables. The `dplyr` package's `arrange()` function allows us to sort/reorder a data frame's rows according to the values of the specified variable.
 
@@ -496,6 +496,62 @@ mean_pts %>%
 ```
 
 
+## slice {#sec-slice}
+
+Now that you can put the rows of a data frame into some sensible order, we will learn how to select rows based on their position within the data frame (contrast this with the earlier advice about ignoring the position/order of _columns_ within the data frame). Within dplyr, there is a very useful function called `slice()`. In some ways, this function is similar to `filter()`.  However, `filter()` produces subsets rows based on TRUE or FALSE values (e.g., whether values are greater than zero).  Instead, `slice()` takes rows numbers (i.e., integers) and returns the rows in the corresponding positions.  Let's look at a few examples.
+
+```{r}
+nba %>%
+    slice(1, 2, 1048)
+```
+
+This code grabs rows 1, 2, and 1048 and returns a data frame including these three rows.  As usual, you can instead use ranges instead of writing things like `slice(1, 2, 3, 4, 5, 6, ...)`:
+
+
+```{r}
+# grab the first 10 rows
+nba %>%
+    slice(1:10)
+```
+
+We can also grab the last several rows:
+
+```{r}
+nba %>%
+    slice(12000:nrow(nba))
+```
+
+Note, however, that this method uses the number of rows (`nrow()`) in the full data frame. As a result, this will probably only work if we are applying `slice()` directly to our `nba` data frame and not do not have any additional verbs in our chain before our call to `slice()`.  How can we grab the last `N` rows if we don't (necessarily) know how many rows are in the data frame we are applying `slice()` to? A more robust approach would be to use the closely related `slice_tail()` function.  This function is specifically designed to produce the **last** rows of a data frame:
+
+```{r}
+nba %>%
+    slice_tail(n = 10)
+```
+
+Ok. This all seems fine. But unless you know ahead of time what data might live in particular rows, this may not seem all that useful.  The real power comes when you combine `slice()` with something like `arrange()`.  Let's see how these verbs work together to produce something a bit more useful.
+
+```{r}
+nba %>%
+    arrange(desc(pts)) %>%
+    slice(1:10) %>%
+    select("player_name", "season", "pts")
+```
+
+This code first sorts the data frame by the `pts` column (highest to lowest because of our application of `desc()`) and the grabs the first 10 rows. Because we first use `arrange()`, we know that these 10 rows are associated with the 10 highest season scoring averages in our data set. We then `select()` a relatively small number of columns so we can view it easily.
+
+We have seen `slice()` and `slice_tail()` in action. But there are more functions in the family.  Like `slice_tail()`, there is also `slice_head()`, which selected the first rows of a data frame.  There are also the functions `slice_min()` and `slice_max()`, which combine sorting and slicing operations.  So we can redo our code above to find the 10 highest season scoring averages in our data set using `slice_max()`:
+
+```{r}
+nba %>%
+    slice_max(pts, n = 10) %>%
+    select("player_name", "season", "pts")
+```
+
+All of these functions (except `slice()` itself) accept either an `n` argument (the number of rows to grab) or a `prop` argument (the proportion of all rows to grab).  As with all functions in dplyr and the tidyverse, the real power is ultimately realized by including these function into extended chains of operations. You can `group_by` and then `slice()`, you can `mutate()` and then `arrange()` and then `slice_tail()`, etc. etc.  There are an infinite possibilities.
+
+
+
+
 ## Activities {#sec-tibblesactivities}
 
 If you haven't already, load the `nba` data set we downloaded back in @sec-dataactivities. And let's pass `c("Undrafted")` as the `na` argument:
@@ -510,15 +566,24 @@ nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
 1. Produce a data frame consisting exclusively of players who are **either** under the age of 25 **or** attended "Marquette".
 1. Produce a data frame consisting exclusively of players under the age of 25 **and** attended "Marquette".
 1. Determine the average height of all players.
+1. Determine the minimum weight in the `nba` data set.
+1. Determine the range of ages seen in the `nba` data set.
+1. Determine the interquartile range of all `pts` seen in the `nba` data set.
 1. Determine the median height of all players who attended "Connecticut".
 1. Use `select` to produce a data frame that only includes columns containing player names and team abbreviations.
 1. Use `select` to produce a data frame that includes **all** columns **except** those containing player names and team abbreviations.
 1. Use `select` to produce a data frame that includes **all** columns whose column names include the string "ea" (hint: use `constains()`).
 1. Use `select` to produce a data frame that includes **all** columns whose column names **does not** include an underscore (i.e., "_").
 1. **Bonus:** Use `select` to produce a data frame that includes **all** columns whose column names contain more than 11 characters (hint: you may need to use some combination of `names()` and `nchar()`).
-
 1. For each college appearing in the data set, what is the average (mean) of `pts` and `ast` among players who attended that college?
-1. Try calculating these school-wise averages separately for each season.
+1. Calculate the mean of `player_weight` and the mean of `player_height` for each season in the data set.
+1. Try calculating these per-school averages separately for each season (e.g. means for each combination of `college` and `season`).
 1. Create a new column in the data set called `reb_diff` and calculate it as the difference between the offensive rebound percentage (`oreb_pct`) and the defensive rebound percentage (`dreb_pct`).
-1. What is the standard deviation of `reb_diff`?
+1. Calculate the mean and standard deviation of `reb_diff`.
+1. Find the 10 largest values of `reb_diff`.
+1. Create a new column in the data set called `pts_over_mean` and calculate it as the difference between that row's `pts` value and the overall mean of `pts` in the entire data set.
+1. Generate a data frame with 3 columns: the player's name, season, and `pts_over_mean` so that you can quickly view your new column and who and when it is associated with.
+1. Use `filter()` to find those rows corresponding to players who went to "UCLA", and then use arrange() to order the data by `pts`.
 1. For each college appearing in the data set, what is the average `pts`of players who attended that college.  Which college has produced the highest average?  Which college has produced the lowest average?
+1. Use `filter()` to select those data associated with the New York Knicks (abbreviated `NYK`), and then use `select()` to remove the column containing the team abbreviation column.  Next, remove all undrafted players (e.g., those who do not have a valid `draft_year`). Of these players, find the 6 players with the highest `pts`. If there are duplicates (i.e., any player appearing multiple times in the top 6), find the 6 _unique_ players with the highest `pts` (so that there are 6 players but no duplicates).
+1. Group the data by `college` and `team_abbreviation`. Now calculate the sum of `pts` for each of these combinations. Now add up all these means. You should have a single number (the sum of some large number of means). Does the chain of operations you initially try work as expected? Does the documentation on dplyr's `ungroup()` function help?
