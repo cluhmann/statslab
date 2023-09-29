@@ -21,7 +21,7 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 1 | 09-01 | R & Rstudio, Basic Programming |  |
 | 2 | 09-08 | Adv. Programming and Handling Data in R |  |
 | 3 | 09-15 | The Tidyverse, Tibbles |  |
-| 4 | 09-22 | **Christian Out of Town** |  |
+| 4 | 09-22 | **Christian Out of Town** | Review of material to date |
 | 5 | 09-29 | Data Wrangling with dplyr |  |
 | 6 | 10-06 |  | Sampling |
 | 7 | 10-13 | Plotting with ggplot2 |  |
