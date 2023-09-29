@@ -436,13 +436,13 @@ dbl (3): replicate, red_balls, prop_red
 </div>
 </div>
 <p>Observe for each <code>group</code> that we have their names, the number of <code>red_balls</code> they obtained, and the corresponding proportion out of 50 balls that were red named <code>prop_red</code>. We also have a <code>replicate</code> variable enumerating each of the 33 groups. We chose this name because each row can be viewed as one instance of a replicated (in other words repeated) activity: using the shovel to remove 50 balls and computing the proportion of those balls that are red.</p>
-<p><span class="quarto-unresolved-ref">?fig-samplingdistribution-tactile</span> visualizes the distribution of these 33 proportions using a histogram (see <a href="ggplot2.html#sec-histograms"><span>Section&nbsp;8.5</span></a> for a refresher on histograms).</p>
+<p><a href="#fig-samplingdistribution-tactile">Figure&nbsp;<span>11.4</span></a> visualizes the distribution of these 33 proportions using a histogram (see <a href="ggplot2.html#sec-histograms"><span>Section&nbsp;8.5</span></a> for a refresher on histograms).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-samplingdistribution-tactile" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="sampling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">fig-samplingdistribution-tactile</figcaption>
+<p><img src="sampling_files/figure-html/fig-samplingdistribution-tactile-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11.4: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
@@ -458,7 +458,7 @@ dbl (3): replicate, red_balls, prop_red
 <section id="sec-sampling-what-did-we-just-do" class="level3" data-number="11.1.4">
 <h3 data-number="11.1.4" class="anchored" data-anchor-id="sec-sampling-what-did-we-just-do"><span class="header-section-number">11.1.4</span> What did we just do?</h3>
 <p>What we just demonstrated in this activity is the statistical concept of <em>sampling</em>. We would like to know the proportion of the bowl’s balls that are red. Because the bowl has a large number of balls, performing an exhaustive count of the red and white balls would be time-consuming. We thus extracted a <em>sample</em> of 50 balls using the shovel to make an <em>estimate</em>. Using this sample of 50 balls, we estimated the proportion of the <em>bowl’s</em> balls that are red to be 34%.</p>
-<p>Moreover, because we mixed the balls before each use of the shovel, the samples were randomly drawn. Because each sample was drawn at random, the samples were different from each other. Because the samples were different from each other, we obtained the different proportions red observed in <span class="quarto-unresolved-ref">?fig-samplingdistribution-tactile</span>. This is known as the concept of <em>sampling variation</em>.</p>
+<p>Moreover, because we mixed the balls before each use of the shovel, the samples were randomly drawn. Because each sample was drawn at random, the samples were different from each other. Because the samples were different from each other, we obtained the different proportions red observed in <a href="#fig-samplingdistribution-tactile">Figure&nbsp;<span>11.4</span></a>. This is known as the concept of <em>sampling variation</em>.</p>
 <p>The purpose of this sampling activity was to develop an understanding of two key concepts relating to sampling:</p>
 <ol type="1">
 <li>Understanding the effect of sampling variation.</li>
@@ -528,11 +528,11 @@ dbl (1): ball_ID
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
 # Groups:   replicate [1]
-  replicate fruit    
-      &lt;int&gt; &lt;chr&gt;    
-1         1 Mango    
-2         1 Lime     
-3         1 Tangerine</code></pre>
+  replicate fruit       
+      &lt;int&gt; &lt;chr&gt;       
+1         1 Pamplemousse
+2         1 Tangerine   
+3         1 Lime        </code></pre>
 </div>
 </div>
 <p>Now let’s try asking for 4 different samples.</p>
@@ -543,18 +543,18 @@ dbl (1): ball_ID
 # Groups:   replicate [4]
    replicate fruit       
        &lt;int&gt; &lt;chr&gt;       
- 1         1 Tangerine   
- 2         1 Apricot     
- 3         1 Mango       
- 4         2 Pamplemousse
- 5         2 Mango       
- 6         2 Lime        
- 7         3 Lime        
- 8         3 Tangerine   
- 9         3 Pamplemousse
-10         4 Tangerine   
-11         4 Pamplemousse
-12         4 Apricot     </code></pre>
+ 1         1 Apricot     
+ 2         1 Mango       
+ 3         1 Pamplemousse
+ 4         2 Mango       
+ 5         2 Pamplemousse
+ 6         2 Tangerine   
+ 7         3 Apricot     
+ 8         3 Lime        
+ 9         3 Mango       
+10         4 Apricot     
+11         4 Tangerine   
+12         4 Mango       </code></pre>
 </div>
 </div>
 <p>Note that the <code>replicate</code> variable indicates which “use” of our virtual shovel that row corresponds to. So rows where <code>replicate=1</code> correspond to our first “scoop” of fruit, rows where <code>replicate=12</code> correspond to our second “scoop” of fruit, and so on.</p>
@@ -568,21 +568,21 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    2347 white
- 2         1     278 white
- 3         1    1066 red  
- 4         1    2029 white
- 5         1     427 red  
- 6         1    1913 white
- 7         1    1840 white
- 8         1    1743 red  
- 9         1    2098 red  
-10         1    1946 white
+ 1         1     265 red  
+ 2         1    1689 red  
+ 3         1    1294 white
+ 4         1     633 red  
+ 5         1    1590 white
+ 6         1    1045 red  
+ 7         1    1099 white
+ 8         1    2167 red  
+ 9         1    2006 red  
+10         1     715 red  
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
 <p>Observe that <code>virtual_shovel</code> has 50 rows corresponding to our virtual sample of size 50. The <code>ball_ID</code> variable identifies which of the 2400 balls from <code>bowl</code> are included in our sample of 50 balls while <code>color</code> denotes its color, and <code>replicate</code> again indicates which “scoop” the row came from.</p>
-<p>Let’s compute the proportion of balls in our virtual sample that are red using the <code>dplyr</code> data wrangling verbs you learned in <a href="dplyr.html"><span>Chapter&nbsp;7</span></a> First, for each of our 50 sampled balls, let’s identify if it is red or not using a test for equality with <code>==</code>. Let’s create a new Boolean variable <code>is_red</code> using the <code>mutate()</code> function from <a href="dplyr.html#sec-mutate"><span>Section&nbsp;7.6</span></a>:</p>
+<p>Let’s compute the proportion of balls in our virtual sample that are red using the <code>dplyr</code> data wrangling verbs you learned in <a href="dplyr.html"><span>Chapter&nbsp;7</span></a> First, for each of our 50 sampled balls, let’s identify if it is red or not using a test for equality with <code>==</code>. Let’s create a new Boolean variable <code>is_red</code> using the <code>mutate()</code> function from <a href="dplyr.html#sec-mutate"><span>Section&nbsp;7.7</span></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>virtual_shovel <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_red =</span> (color <span class="sc">==</span> <span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -591,16 +591,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color is_red
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt; 
- 1         1    2347 white FALSE 
- 2         1     278 white FALSE 
- 3         1    1066 red   TRUE  
- 4         1    2029 white FALSE 
- 5         1     427 red   TRUE  
- 6         1    1913 white FALSE 
- 7         1    1840 white FALSE 
- 8         1    1743 red   TRUE  
- 9         1    2098 red   TRUE  
-10         1    1946 white FALSE 
+ 1         1     265 red   TRUE  
+ 2         1    1689 red   TRUE  
+ 3         1    1294 white FALSE 
+ 4         1     633 red   TRUE  
+ 5         1    1590 white FALSE 
+ 6         1    1045 red   TRUE  
+ 7         1    1099 white FALSE 
+ 8         1    2167 red   TRUE  
+ 9         1    2006 red   TRUE  
+10         1     715 red   TRUE  
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -614,10 +614,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 2
   replicate num_red
       &lt;int&gt;   &lt;int&gt;
-1         1      23</code></pre>
+1         1      26</code></pre>
 </div>
 </div>
-<p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of balls where <code>color</code> is <code>red</code>. In our case, 23 of the 50 balls were red. However, you might have gotten a different number red because of the randomness of the virtual sampling.</p>
+<p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of balls where <code>color</code> is <code>red</code>. In our case, 26 of the 50 balls were red. However, you might have gotten a different number red because of the randomness of the virtual sampling.</p>
 <p>Third and lastly, let’s compute the proportion of the 50 sampled balls that are red by dividing <code>num_red</code> by 50:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>virtual_shovel <span class="sc">%&gt;%</span> </span>
@@ -628,10 +628,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      23     0.46</code></pre>
+1         1      26     0.52</code></pre>
 </div>
 </div>
-<p>In other words, 46% of this virtual sample’s balls were red. Let’s make this code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
+<p>In other words, 52% of this virtual sample’s balls were red. Let’s make this code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>virtual_shovel <span class="sc">%&gt;%</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_red =</span> <span class="fu">sum</span>(color <span class="sc">==</span> <span class="st">"red"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -640,10 +640,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      23     0.46</code></pre>
+1         1      26     0.52</code></pre>
 </div>
 </div>
-<p>Great! 46% of <code>virtual_shovel</code>’s 50 balls were red! So based on this particular sample of 50 balls, our guess at the proportion of the <code>bowl</code>’s balls that are red is 46%. But remember from our earlier tactile sampling activity that if we repeat this sampling, we will not necessarily obtain the same value of 46% again. There will likely be some variation. In fact, our 33 groups of friends computed 33 such proportions whose distribution we visualized in <span class="quarto-unresolved-ref">?fig-samplingdistribution-tactile</span>. We saw that these estimates <em>varied</em>. Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel!</p>
+<p>Great! 52% of <code>virtual_shovel</code>’s 50 balls were red! So based on this particular sample of 50 balls, our guess at the proportion of the <code>bowl</code>’s balls that are red is 52%. But remember from our earlier tactile sampling activity that if we repeat this sampling, we will not necessarily obtain the same value of 52% again. There will likely be some variation. In fact, our 33 groups of friends computed 33 such proportions whose distribution we visualized in <a href="#fig-samplingdistribution-tactile">Figure&nbsp;<span>11.4</span></a>. We saw that these estimates <em>varied</em>. Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel!</p>
 </section>
 <section id="sec-shovel-33-times" class="level3" data-number="11.2.2">
 <h3 data-number="11.2.2" class="anchored" data-anchor-id="sec-shovel-33-times"><span class="header-section-number">11.2.2</span> Using the virtual shovel 33 times</h3>
@@ -658,21 +658,21 @@ dbl (1): ball_ID
 # Groups:   replicate [33]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1067 white
- 2         1     122 white
- 3         1    1090 white
- 4         1     397 red  
- 5         1     154 white
- 6         1     396 red  
- 7         1      65 white
- 8         1     259 white
- 9         1     149 red  
-10         1     731 white
+ 1         1    1174 white
+ 2         1      84 white
+ 3         1    1757 white
+ 4         1    1511 white
+ 5         1     264 white
+ 6         1    1058 red  
+ 7         1     610 white
+ 8         1    1177 red  
+ 9         1    1391 white
+10         1     752 red  
 # ℹ 1,640 more rows</code></pre>
 </div>
 </div>
 <p>Observe in the spreadsheet viewer that the first 50 rows of <code>replicate</code> are equal to <code>1</code> while the next 50 rows of <code>replicate</code> are equal to <code>2</code>. This is telling us that the first 50 rows correspond to the first sample of 50 balls while the next 50 rows correspond to the second sample of 50 balls. This pattern continues for all <code>reps = 33</code> replicates and thus <code>virtual_samples</code> has 33 <span class="math inline">\(\cdot\)</span> 50 = 1650 rows.</p>
-<p>Let’s now take <code>virtual_samples</code> and compute the resulting 33 proportions red. We’ll use the same <code>dplyr</code> verbs as before, but this time with an additional <code>group_by()</code> of the <code>replicate</code> variable. Recall from Section <a href="dplyr.html#sec-groupby"><span>Section&nbsp;7.5</span></a> that by assigning the grouping variable “meta-data” before we <code>summarize()</code>, we’ll obtain 33 different proportions red. We display a preview of the first 10 out of 33 rows:</p>
+<p>Let’s now take <code>virtual_samples</code> and compute the resulting 33 proportions red. We’ll use the same <code>dplyr</code> verbs as before, but this time with an additional <code>group_by()</code> of the <code>replicate</code> variable. Recall from Section <a href="dplyr.html#sec-groupby"><span>Section&nbsp;7.6</span></a> that by assigning the grouping variable “meta-data” before we <code>summarize()</code>, we’ll obtain 33 different proportions red. We display a preview of the first 10 out of 33 rows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>virtual_prop_red <span class="ot">&lt;-</span> virtual_samples <span class="sc">%&gt;%</span> </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">%&gt;%</span> </span>
@@ -683,32 +683,32 @@ dbl (1): ball_ID
 <pre><code># A tibble: 33 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    20     0.4 
- 2         2    25     0.5 
- 3         3    13     0.26
- 4         4    16     0.32
+ 1         1    10     0.2 
+ 2         2    17     0.34
+ 3         3    18     0.36
+ 4         4    26     0.52
  5         5    18     0.36
- 6         6    16     0.32
- 7         7    21     0.42
- 8         8    13     0.26
- 9         9    19     0.38
-10        10    17     0.34
+ 6         6    18     0.36
+ 7         7    19     0.38
+ 8         8    20     0.4 
+ 9         9    21     0.42
+10        10    14     0.28
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
-<p>As with our 33 groups of friends’ tactile samples, there is variation in the resulting 33 virtual proportions red. Let’s visualize this variation in a histogram in <a href="#fig-samplingdistribution-virtual">Figure&nbsp;<span>11.4</span></a>. Note that we add <code>binwidth = 0.05</code> and <code>boundary = 0.4</code> arguments as well. Recall that setting <code>boundary = 0.4</code> ensures a binning scheme with one of the bins’ boundaries at 0.4. Since the <code>binwidth = 0.05</code> is also set, this will create bins with boundaries at 0.30, 0.35, 0.45, 0.5, etc. as well.</p>
+<p>As with our 33 groups of friends’ tactile samples, there is variation in the resulting 33 virtual proportions red. Let’s visualize this variation in a histogram in <a href="#fig-samplingdistribution-virtual">Figure&nbsp;<span>11.5</span></a>. Note that we add <code>binwidth = 0.05</code> and <code>boundary = 0.4</code> arguments as well. Recall that setting <code>boundary = 0.4</code> ensures a binning scheme with one of the bins’ boundaries at 0.4. Since the <code>binwidth = 0.05</code> is also set, this will create bins with boundaries at 0.30, 0.35, 0.45, 0.5, etc. as well.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-samplingdistribution-virtual" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-samplingdistribution-virtual-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.4: Distribution of 33 proportions based on 33 samples of size 50.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.5: Distribution of 33 proportions based on 33 samples of size 50.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Observe that we occasionally obtained proportions red that are less than 30%. On the other hand, we occasionally obtained proportions that are greater than 45%. However, the most frequently occurring proportions were between 35% and 40%. Why do we have these differences in proportions red? Because of <em>sampling variation</em>.</p>
-<p>Let’s now compare our virtual results with our tactile results from the previous section in <a href="#fig-tactile-vs-virtual">Figure&nbsp;<span>11.5</span></a>. Observe that both histograms are somewhat similar in their center and variation, although not identical. These slight differences are again due to random sampling variation. Furthermore, observe that both distributions are somewhat bell-shaped.</p>
+<p>Let’s now compare our virtual results with our tactile results from the previous section in <a href="#fig-tactile-vs-virtual">Figure&nbsp;<span>11.6</span></a>. Observe that both histograms are somewhat similar in their center and variation, although not identical. These slight differences are again due to random sampling variation. Furthermore, observe that both distributions are somewhat bell-shaped.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    virtual_prop_red <span class="sc">%&gt;%</span></span>
@@ -729,7 +729,7 @@ dbl (1): ball_ID
 <div id="fig-tactile-vs-virtual" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-tactile-vs-virtual-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.5: Comparing 33 virtual and 33 tactile proportions red.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.6: Comparing 33 virtual and 33 tactile proportions red.</figcaption>
 </figure>
 </div>
 </div>
@@ -747,16 +747,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1,000]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1721 white
- 2         1    2174 red  
- 3         1     731 white
- 4         1     844 white
- 5         1    1845 white
- 6         1     461 white
- 7         1     188 white
- 8         1     572 white
- 9         1    1834 white
-10         1    1918 white
+ 1         1    1523 red  
+ 2         1     939 red  
+ 3         1     197 red  
+ 4         1    2063 white
+ 5         1     326 white
+ 6         1    1987 white
+ 7         1     681 red  
+ 8         1     664 red  
+ 9         1      18 red  
+10         1    1282 white
 # ℹ 49,990 more rows</code></pre>
 </div>
 </div>
@@ -771,20 +771,20 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1,000 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    15     0.3 
- 2         2    20     0.4 
- 3         3    22     0.44
- 4         4    19     0.38
- 5         5    15     0.3 
- 6         6    16     0.32
- 7         7    10     0.2 
- 8         8    17     0.34
- 9         9    15     0.3 
-10        10    21     0.42
+ 1         1    22     0.44
+ 2         2    13     0.26
+ 3         3    26     0.52
+ 4         4    21     0.42
+ 5         5    17     0.34
+ 6         6    19     0.38
+ 7         7    17     0.34
+ 8         8    16     0.32
+ 9         9    16     0.32
+10        10    17     0.34
 # ℹ 990 more rows</code></pre>
 </div>
 </div>
-<p>Observe that we now have 1000 replicates of <code>prop_red</code>, the proportion of 50 balls that are red. Using the same code as earlier, let’s now visualize the distribution of these 1000 replicates of <code>prop_red</code> in a histogram in <a href="#fig-samplingdistribution-virtual-1000">Figure&nbsp;<span>11.6</span></a>.</p>
+<p>Observe that we now have 1000 replicates of <code>prop_red</code>, the proportion of 50 balls that are red. Using the same code as earlier, let’s now visualize the distribution of these 1000 replicates of <code>prop_red</code> in a histogram in <a href="#fig-samplingdistribution-virtual-1000">Figure&nbsp;<span>11.7</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(virtual_prop_red, <span class="fu">aes</span>(<span class="at">x =</span> prop_red)) <span class="sc">+</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
@@ -794,7 +794,7 @@ dbl (1): ball_ID
 <div id="fig-samplingdistribution-virtual-1000" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-samplingdistribution-virtual-1000-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.6: Distribution of 1000 proportions based on 1000 samples of size 50.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.7: Distribution of 1000 proportions based on 1000 samples of size 50.</figcaption>
 </figure>
 </div>
 </div>
@@ -807,7 +807,7 @@ dbl (1): ball_ID
 <div id="fig-three-shovels" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/three_shovels.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.7: Three shovels to extract three different sample sizes.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.8: Three shovels to extract three different sample sizes.</figcaption>
 </figure>
 </div>
 <p>If your goal is still to estimate the proportion of the bowl’s balls that are red, which shovel would you choose? In our experience, most people would choose the largest shovel with 100 slots because it would yield the “best” guess of the proportion of the bowl’s balls that are red. Let’s define some criteria for “best” in this subsection.</p>
@@ -869,18 +869,18 @@ dbl (1): ball_ID
 <span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">boundary =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
 <span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion of 100 balls that were red"</span>, <span class="at">title =</span> <span class="st">"100"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a>.</p>
+<p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-comparing-sampling-distributions" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-comparing-sampling-distributions-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.8: Comparing the distributions of proportion red for different sample sizes.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.9: Comparing the distributions of proportion red for different sample sizes.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Observe that as the sample size increases, the variation of the 1000 replicates of the proportion of red decreases. In other words, as the sample size increases, there are fewer differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a>, all three histograms appear to center around roughly 40%.</p>
+<p>Observe that as the sample size increases, the variation of the 1000 replicates of the proportion of red decreases. In other words, as the sample size increases, there are fewer differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a>, all three histograms appear to center around roughly 40%.</p>
 <p>We can be numerically explicit about the amount of variability in our three sets of 1000 values of <code>prop_red</code> using the <em>standard deviation</em> (<a href="descriptives.html#sec-sd"><span>Section&nbsp;9.2.5</span></a>). For all three sample sizes, let’s compute the standard deviation of the 1000 proportions red by running the following data wrangling code that uses the <code>sd()</code> summary function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n = 25</span></span>
@@ -914,11 +914,11 @@ dbl (1): ball_ID
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
-<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.070</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">0.048</td>
 </tr>
 </tbody>
 </table>
@@ -927,12 +927,12 @@ dbl (1): ball_ID
 
 </div>
 </div>
-<p>As we observed in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a>, as the sample size increases, the variation decreases. In other words, there is less variation in the 1000 values of the proportion red. So as the sample size increases, our guesses at the true proportion of the bowl’s balls that are red get more precise.</p>
+<p>As we observed in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a>, as the sample size increases, the variation decreases. In other words, there is less variation in the 1000 values of the proportion red. So as the sample size increases, our guesses at the true proportion of the bowl’s balls that are red get more precise.</p>
 </section>
 </section>
 <section id="sec-sampling-framework" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="sec-sampling-framework"><span class="header-section-number">11.3</span> Sampling framework</h2>
-<p>In both our tactile and our virtual sampling activities, we used sampling for the purpose of estimation. We extracted samples in order to <em>estimate</em> the proportion of the bowl’s balls that are red. We used sampling as a less time-consuming approach than performing an exhaustive count of all the balls. Our virtual sampling activity built up to the results shown in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a> and <a href="#tbl-comparing-n">Table&nbsp;<span>11.1</span></a>: comparing 1000 proportions red based on samples of size 25, 50, and 100. This was our first attempt at understanding two key concepts relating to sampling for estimation:</p>
+<p>In both our tactile and our virtual sampling activities, we used sampling for the purpose of estimation. We extracted samples in order to <em>estimate</em> the proportion of the bowl’s balls that are red. We used sampling as a less time-consuming approach than performing an exhaustive count of all the balls. Our virtual sampling activity built up to the results shown in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a> and <a href="#tbl-comparing-n">Table&nbsp;<span>11.1</span></a>: comparing 1000 proportions red based on samples of size 25, 50, and 100. This was our first attempt at understanding two key concepts relating to sampling for estimation:</p>
 <ol type="1">
 <li>The effect of <em>sampling variation</em> on our estimates.</li>
 <li>The effect of sample size on <em>sampling variation</em>.</li>
@@ -999,16 +999,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1     176 white
- 2         1      23 white
- 3         1    1300 red  
- 4         1    1351 white
- 5         1    1102 red  
- 6         1    1013 white
- 7         1    2162 red  
- 8         1    1227 red  
- 9         1    2286 white
-10         1    1375 white
+ 1         1     347 red  
+ 2         1    1433 white
+ 3         1    1129 white
+ 4         1     281 white
+ 5         1    1318 white
+ 6         1    1077 white
+ 7         1    1371 white
+ 8         1     808 red  
+ 9         1     416 white
+10         1     439 white
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -1021,7 +1021,7 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      24     0.48</code></pre>
+1         1      17     0.34</code></pre>
 </div>
 </div>
 <p>So in our case, the value of <code>prop_red</code> is the <strong>point estimate</strong> of the population proportion <span class="math inline">\(p\)</span> since it estimates the latter’s value. Furthermore, this point estimate has a specific name when considering proportions: the <em>sample proportion</em>. It is denoted using <span class="math inline">\(\widehat{p}\)</span> because it is a common convention in statistics to use a “hat” symbol to denote point estimates.</p>
@@ -1057,13 +1057,13 @@ dbl (1): ball_ID
 </section>
 <section id="sec-sampling-definitions" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="sec-sampling-definitions"><span class="header-section-number">11.3.2</span> Statistical definitions</h3>
-<p>To further attach words and labels to the various sampling concepts we’ve seen so far, we also introduce some important statistical definitions related to sampling. As a refresher of our 1000 repeated/replicated virtual samples of size <span class="math inline">\(n\)</span> = 25, <span class="math inline">\(n\)</span> = 50, and <span class="math inline">\(n\)</span> = 100 in Section <a href="#sec-sampling-simulation"><span>Section&nbsp;11.2</span></a>, let’s display <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a> again as <a href="#fig-comparing-sampling-distributions-1b">Figure&nbsp;<span>11.9</span></a>.</p>
+<p>To further attach words and labels to the various sampling concepts we’ve seen so far, we also introduce some important statistical definitions related to sampling. As a refresher of our 1000 repeated/replicated virtual samples of size <span class="math inline">\(n\)</span> = 25, <span class="math inline">\(n\)</span> = 50, and <span class="math inline">\(n\)</span> = 100 in Section <a href="#sec-sampling-simulation"><span>Section&nbsp;11.2</span></a>, let’s display <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a> again as <a href="#fig-comparing-sampling-distributions-1b">Figure&nbsp;<span>11.10</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-comparing-sampling-distributions-1b" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-comparing-sampling-distributions-1b-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.9: Previously seen three distributions of the sample proportion <span class="math inline">\(\widehat{p}\)</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.10: Previously seen three distributions of the sample proportion <span class="math inline">\(\widehat{p}\)</span>.</figcaption>
 </figure>
 </div>
 </div>
@@ -1088,11 +1088,11 @@ dbl (1): ball_ID
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
-<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.070</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">0.048</td>
 </tr>
 </tbody>
 </table>
@@ -1103,13 +1103,13 @@ dbl (1): ball_ID
 </div>
 <p>So as the sample size increases, the standard deviation of the proportion of red balls decreases. This type of standard deviation has another special name: <strong>standard error of a point estimate</strong>. Standard errors quantify the effect of sampling variation induced on our estimates. In other words, they quantify how much we can expect different proportions of a shovel’s balls that are red <em>to vary</em> from one sample to another sample to another sample, and so on. As a general rule, as sample size increases, the standard error decreases.</p>
 <p>Similarly to confusion between <em>sampling distributions</em> with <em>a sample’s distribution</em>, people often confuse the <em>standard error</em> with the <em>standard deviation</em>. This is especially the case since a standard error is itself a kind of standard deviation. The best advice we can give is that a standard error is merely a <em>kind</em> of standard deviation: the standard deviation of any point estimate from sampling. In other words, all standard errors are standard deviations, but not every standard deviation is necessarily a standard error.</p>
-<p>To help reinforce these concepts, let’s re-display <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a> but using our new terminology, notation, and definitions relating to sampling in <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.10</span></a>.</p>
+<p>To help reinforce these concepts, let’s re-display <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a> but using our new terminology, notation, and definitions relating to sampling in <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.11</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-comparing-sampling-distributions-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-comparing-sampling-distributions-2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.10: Three sampling distributions of the sample proportion <span class="math inline">\(\widehat{p}\)</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.11: Three sampling distributions of the sample proportion <span class="math inline">\(\widehat{p}\)</span>.</figcaption>
 </figure>
 </div>
 </div>
@@ -1133,11 +1133,11 @@ dbl (1): ball_ID
 </tr>
 <tr class="even">
 <td style="text-align: left;">n = 50</td>
-<td style="text-align: right;">0.069</td>
+<td style="text-align: right;">0.070</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">n = 100</td>
-<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">0.048</td>
 </tr>
 </tbody>
 </table>
@@ -1153,7 +1153,7 @@ dbl (1): ball_ID
 <p>Let’s recap this section so far. We’ve seen that if a sample is generated at random, then the resulting point estimate is a “good guess” of the true unknown population parameter. In our sampling activities, since we made sure to mix the balls first before extracting a sample with the shovel, the resulting sample proportion <span class="math inline">\(\widehat{p}\)</span> of the shovel’s balls that were red was a “good guess” of the population proportion <span class="math inline">\(p\)</span> of the bowl’s balls that were red.</p>
 <p>However, what do we mean by our point estimate being a “good guess”? Sometimes, we’ll get an estimate that is less than the true value of the population parameter, while at other times we’ll get an estimate that is greater. This is due to sampling variation. However, despite this sampling variation, our estimates will “on average” be correct and thus will be centered at the true value. This is because our sampling was done at random and thus in an unbiased fashion.</p>
 <p>In our sampling activities, sometimes our sample proportion <span class="math inline">\(\widehat{p}\)</span> was less than the true population proportion <span class="math inline">\(p\)</span>, while at other times it was greater. This was due to the sampling variability. However, despite this sampling variation, our sample proportions <span class="math inline">\(\widehat{p}\)</span> were “on average” correct and thus were centered at the true value of the population proportion <span class="math inline">\(p\)</span>. This is because we mixed our bowl before taking samples and thus the sampling was done at random and thus in an unbiased fashion. This is also known as having an <em>accurate</em> estimate.</p>
-<p>Recall from earlier that the value of the population proportion <span class="math inline">\(p\)</span> of the <span class="math inline">\(N\)</span> = 2400 balls in the bowl was 900/2400 = 0.375 = 37.5. We computed this value by performing a virtual census of <code>bowl</code>. Let’s re-display our sampling distributions from <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a> and <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.10</span></a>, but now with a vertical red line marking the true population proportion <span class="math inline">\(p\)</span> of balls that are red = 37.5 in <a href="#fig-comparing-sampling-distributions-3">Figure&nbsp;<span>11.11</span></a>. We see that while there is a certain amount of error in the sample proportions <span class="math inline">\(\widehat{p}\)</span> for all three sampling distributions, on average the <span class="math inline">\(\widehat{p}\)</span> are centered at the true population proportion red <span class="math inline">\(p\)</span>.</p>
+<p>Recall from earlier that the value of the population proportion <span class="math inline">\(p\)</span> of the <span class="math inline">\(N\)</span> = 2400 balls in the bowl was 900/2400 = 0.375 = 37.5. We computed this value by performing a virtual census of <code>bowl</code>. Let’s re-display our sampling distributions from <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a> and <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.11</span></a>, but now with a vertical red line marking the true population proportion <span class="math inline">\(p\)</span> of balls that are red = 37.5 in <a href="#fig-comparing-sampling-distributions-3">Figure&nbsp;<span>11.12</span></a>. We see that while there is a certain amount of error in the sample proportions <span class="math inline">\(\widehat{p}\)</span> for all three sampling distributions, on average the <span class="math inline">\(\widehat{p}\)</span> are centered at the true population proportion red <span class="math inline">\(p\)</span>.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
@@ -1163,17 +1163,17 @@ dbl (1): ball_ID
 <div id="fig-comparing-sampling-distributions-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="sampling_files/figure-html/fig-comparing-sampling-distributions-3-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.11: Three sampling distributions with population proportion <span class="math inline">\(p\)</span> marked by vertical line.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.12: Three sampling distributions with population proportion <span class="math inline">\(p\)</span> marked by vertical line.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>We also saw in this section that as your sample size <span class="math inline">\(n\)</span> increases, your point estimates will vary less and less and be more and more concentrated around the true population parameter. This variation is quantified by the decreasing <em>standard error</em>. In other words, the typical error of your point estimates will decrease. In our sampling exercise, as the sample size increased, the variation of our sample proportions <span class="math inline">\(\widehat{p}\)</span> decreased. You can observe this behavior in <a href="#fig-comparing-sampling-distributions-3">Figure&nbsp;<span>11.11</span></a>. This is also known as having a <em>precise</em> estimate.</p>
-<p>So random sampling ensures our point estimates are <em>accurate</em>, while on the other hand having a large sample size ensures our point estimates are <em>precise</em>. While the terms “accuracy” and “precision” may sound like they mean the same thing, there is a subtle difference. Accuracy describes how “on target” our estimates are, whereas precision describes how “consistent” our estimates are. <a href="#fig-accuracy-vs-precision">Figure&nbsp;<span>11.12</span></a> illustrates the difference.</p>
+<p>We also saw in this section that as your sample size <span class="math inline">\(n\)</span> increases, your point estimates will vary less and less and be more and more concentrated around the true population parameter. This variation is quantified by the decreasing <em>standard error</em>. In other words, the typical error of your point estimates will decrease. In our sampling exercise, as the sample size increased, the variation of our sample proportions <span class="math inline">\(\widehat{p}\)</span> decreased. You can observe this behavior in <a href="#fig-comparing-sampling-distributions-3">Figure&nbsp;<span>11.12</span></a>. This is also known as having a <em>precise</em> estimate.</p>
+<p>So random sampling ensures our point estimates are <em>accurate</em>, while on the other hand having a large sample size ensures our point estimates are <em>precise</em>. While the terms “accuracy” and “precision” may sound like they mean the same thing, there is a subtle difference. Accuracy describes how “on target” our estimates are, whereas precision describes how “consistent” our estimates are. <a href="#fig-accuracy-vs-precision">Figure&nbsp;<span>11.13</span></a> illustrates the difference.</p>
 <div id="fig-accuracy-vs-precision" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/accuracy_vs_precision.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;11.12: Comparing accuracy and precision.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;11.13: Comparing accuracy and precision.</figcaption>
 </figure>
 </div>
 <p>At this point, you might be asking yourself: “Why did we take 1000 repeated samples of size n = 25, 50, and 100? Shouldn’t we be taking only <em>one</em> sample that’s as large as possible?”. If you did ask yourself these questions, your suspicion is correct! Recall from earlier when we asked ourselves “If we had a way of knowing that the proportion of the balls that are red is 37.5, then why did we do any sampling?” Similarly, we took 1000 repeated samples as a simulation of how sampling is done in real-life! We used these simulations to study:</p>
@@ -1188,7 +1188,7 @@ dbl (1): ball_ID
 <h2 data-number="11.4" class="anchored" data-anchor-id="sec-sampling-conclusion-central-limit-theorem"><span class="header-section-number">11.4</span> Central Limit Theorem</h2>
 <p>This chapter began with (virtual) access to a large bowl of balls (our population) and a desire to figure out the proportion of red balls. Despite having access to this population, in reality, you almost <strong>never</strong> will have <strong>access to the population,</strong> either because the population is too large, ever changing, or too expensive to take a census of. Accepting this reality means accepting that we need to use <em>statistical inference.</em></p>
 <p>In <a href="#sec-terminology-and-notation"><span>Section&nbsp;11.3.1</span></a>, we stated that “statistical inference is the act of making a guess about a population using a sample.” But how do we <em>do</em> this inference? In the previous section, we defined the <em>sampling framework</em> only to state that in reality we take one large sample, instead of many samples as done in the sampling framework (which we modeled physically by taking many samples from the bowl).</p>
-<p>In reality, we take <em>only one</em> sample and use that <em>one</em> sample to make statements about the population parameter. This ability of making statements about the population is allowable by a famous theorem, or mathematically proven truth, called the <em>Central Limit Theorem</em>. What you visualized in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.8</span></a> and <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.10</span></a> and summarized in <a href="#tbl-comparing-n">Table&nbsp;<span>11.1</span></a> and <a href="#tbl-comparing-n-2">Table&nbsp;<span>11.3</span></a> was a demonstration of this theorem. It loosely states that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both more and more normally shaped and more and more narrow.</p>
+<p>In reality, we take <em>only one</em> sample and use that <em>one</em> sample to make statements about the population parameter. This ability of making statements about the population is allowable by a famous theorem, or mathematically proven truth, called the <em>Central Limit Theorem</em>. What you visualized in <a href="#fig-comparing-sampling-distributions">Figure&nbsp;<span>11.9</span></a> and <a href="#fig-comparing-sampling-distributions-2">Figure&nbsp;<span>11.11</span></a> and summarized in <a href="#tbl-comparing-n">Table&nbsp;<span>11.1</span></a> and <a href="#tbl-comparing-n-2">Table&nbsp;<span>11.3</span></a> was a demonstration of this theorem. It loosely states that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both more and more normally shaped and more and more narrow.</p>
 <p>In other words, as our sample size gets larger (1) the sampling distribution of a point estimate (like a sample proportion) increasingly follows a <em>normal distribution</em> and (2) the variation of these sampling distributions gets smaller, as quantified by their standard errors.</p>
 <p>Here’s what is so surprising about the Central Limit Theorem: regardless of the shape of the underlying population distribution, the sampling distribution of means (such as the sample mean of bunny weights or the sample mean of the length of dragon wings) and proportions (such as the sample proportion red in our shovels) will be <strong>normal.</strong> Normal distributions are defined by where they are centered and how wide they are, and the Central Limit Theorem gives us both:</p>
 <ol type="1">
@@ -1277,7 +1277,7 @@ dbl (1): Scenario
 <p>For example, say you sampled <span class="math inline">\(n = 50\)</span> balls and observed 21 red balls. This equals a sample proportion <span class="math inline">\(\widehat{p}\)</span> of 21/50 = 0.42. So, using the formula, an approximation of the standard error of <span class="math inline">\(\widehat{p}\)</span> is</p>
 <p><span class="math display">\[\text{SE}_{\widehat{p}} \approx \sqrt{\frac{0.42(1-0.42)}{50}} = \sqrt{0.004872} = 0.0698 \approx 0.070\]</span></p>
 <p>Say instead you sampled <span class="math inline">\(n = 100\)</span> balls and observed 42 red balls. This once again equals a sample proportion <span class="math inline">\(\widehat{p}\)</span> of 42/100 = 0.42. However using the formula, an approximation of the standard error of <span class="math inline">\(\widehat{p}\)</span> is now</p>
-<p><span class="math display">\[\text{SE}_{\widehat{p}} \approx \sqrt{\frac{0.42(1-0.42)}{100}} = \sqrt{0.002436} = 0.0494\]</span> Observe that the standard error has gone down from 0.0698 to 0.0494. In other words, the “typical” error of our estimates using <span class="math inline">\(n\)</span> = 100 will go down relative to <span class="math inline">\(n\)</span> = 50 and hence be more <em>precise</em>. Recall that we illustrated the difference between accuracy and precision of estimates in <a href="#fig-accuracy-vs-precision">Figure&nbsp;<span>11.12</span></a>.</p>
+<p><span class="math display">\[\text{SE}_{\widehat{p}} \approx \sqrt{\frac{0.42(1-0.42)}{100}} = \sqrt{0.002436} = 0.0494\]</span> Observe that the standard error has gone down from 0.0698 to 0.0494. In other words, the “typical” error of our estimates using <span class="math inline">\(n\)</span> = 100 will go down relative to <span class="math inline">\(n\)</span> = 50 and hence be more <em>precise</em>. Recall that we illustrated the difference between accuracy and precision of estimates in <a href="#fig-accuracy-vs-precision">Figure&nbsp;<span>11.13</span></a>.</p>
 <p>The key observation to make in the formula is that there is an <span class="math inline">\(n\)</span> in the denominator. As the sample size <span class="math inline">\(n\)</span> increases, the standard error decreases. We’ve demonstrated this fact using our virtual shovels in <a href="#sec-moral-of-the-story"><span>Section&nbsp;11.3.3</span></a>.</p>
 <p>Furthermore, this is one of the key messages of the Central Limit Theorem we saw in <a href="#sec-sampling-conclusion-central-limit-theorem"><span>Section&nbsp;11.4</span></a>: as the sample size <span class="math inline">\(n\)</span> increases, the distribution of averages gets narrower as quantified by the standard deviation of the sampling distribution of the sample mean. This standard deviation of the sampling distribution of the sample means in turn has a special name: the standard error of the sample mean.</p>
 <p>Why is this formula true? Unfortunately, we don’t have the tools at this point to prove this; you’ll need to take a more advanced course in probability and statistics. (It is related to the concepts of Bernoulli and Binomial Distributions. You can read more about its derivation <a href="http://onlinestatbook.com/2/sampling_distributions/samp_dist_p.html">here</a> if you like.)</p>
