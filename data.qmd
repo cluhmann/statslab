@@ -168,7 +168,7 @@ save( file = "booksales2.Rdata", list = vars_to_save )   # the command to save t
 
 ### Saving a workspace file using RStudio {#sec-save1}
 
-RStudio allows you to save the workspace pretty easily. In the environment panel (@fig:workspace) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 20 years.
+RStudio allows you to save the workspace pretty easily. In the environment panel (@fig-workspace) you can see the "save" button. There's no text, but it's the same icon that gets used on every computer everywhere: it's the one that looks like a floppy disk. You know, those things that haven't been used in about 25 years.
 
 ![The RStudio Environment panel shows you the contents of the workspace. The view shown above is the list view. To switch to the grid view, click on the menu item on the top right that currently reads list. Select grid from the dropdown menu, and then it will switch to a view like the one shown in the other workspace figure](images/mechanics/workspacepanel.png){#fig-workspace}
 
