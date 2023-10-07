@@ -6,3 +6,4 @@ Below are links to the various data file we use throughout the book. You may hav
 
 [nba_all_seasons.csv](https://raw.githubusercontent.com/cluhmann/statslab/main/data/nba_all_seasons.csv)
 
+[bowl.csv](https://raw.githubusercontent.com/cluhmann/statslab/main/data/bowl.csv)

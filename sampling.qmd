@@ -98,7 +98,7 @@ In the exercise above, we performed a *tactile* sampling activity by hand. In ot
 
 ### Using the virtual shovel once  {#sec-shovel-once}
 
-Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in @fig-sampling-exercise-1. To this end, we have created a CSV file named `bowl.csv` The rows of `bowl` correspond exactly with the contents of the actual bowl. 
+Let's start by performing the virtual analog of the tactile sampling exercise. We first need a virtual analog of the bowl seen in @fig-sampling-exercise-1. To this end, we have created a CSV file named `bowl.csv` (you can download this file from @sec-datafiles). The rows of `bowl` correspond exactly with the contents of the actual bowl.
 
 ```{r}
 bowl<-read_csv("data/bowl.csv")
