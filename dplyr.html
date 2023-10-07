@@ -755,7 +755,7 @@ Do not assume columns are ordered
 # ℹ 335 more rows</code></pre>
 </div>
 </div>
-<p>This code is similar to the previous code that created <code>summary_round</code>, but with an extra <code>group_by(college)</code> added before the <code>summarize()</code>. Grouping the <code>nba</code> dataset by <code>college</code> and then applying the <code>summarize()</code> functions yields a data frame that displays the mean and standard deviation temperature split by the different colleges that appear in the data set.</p>
+<p>This code is similar to the previous code that created <code>summary_round</code>, but with an extra <code>group_by(college)</code> added before the <code>summarize()</code>. Grouping the <code>nba</code> dataset by <code>college</code> and then applying the <code>summarize()</code> functions yields a data frame that displays the mean and standard deviation of <code>pts</code> split by the different colleges that appear in the data set.</p>
 <p>It is important to note that the <code>group_by()</code> function doesn’t change data frames by itself. Rather it changes the <em>meta-data</em>, or data about the data, specifically the grouping structure. It is only after we apply the <code>summarize()</code> function that the data frame changes.</p>
 <p>For example, when we run this code:</p>
 <div class="cell">
@@ -807,7 +807,7 @@ Do not assume columns are ordered
 #   ts_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;, season &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Observe that now there is additional meta-data: <code># Groups:   college [345]</code> indicating that the grouping structure meta-data has been set based on the unique values of the variable <code>college</code>. On the other hand, observe that the data has not changed: it is still a table of 12305 <span class="math inline">\(\times\)</span> 22 values.</p>
+<p>Observe that now there is additional meta-data: <code># Groups: college [345]</code> indicating that the grouping structure meta-data has been set based on the unique values of the variable <code>college</code>. On the other hand, observe that the data has not changed: it is still a table of 12305 <span class="math inline">\(\times\)</span> 22 values.</p>
 <p>Only by combining a <code>group_by()</code> with another data wrangling operation, in this case <code>summarize()</code>, will the data actually be transformed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
@@ -856,8 +856,8 @@ Do not assume columns are ordered
 #   ts_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;, season &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Observe how the <code># Groups:   college [345]</code> meta-data is no longer present.</p>
-<p>Let’s now revisit the <code>n()</code> counting summary function we briefly introduced previously. Recall that the <code>n()</code> function counts rows. This is opposed to the <code>sum()</code> summary function that returns the sum of a numerical variable. For example, suppose we’d like to count how many NBA players went to each of the different colleges, we can run this:</p>
+<p>Observe how the <code># Groups: college [345]</code> meta-data is no longer present.</p>
+<p>Let’s now revisit the <code>n()</code> counting summary function we briefly introduced previously. Recall that the <code>n()</code> function counts rows. This is opposed to the <code>sum()</code> summary function that returns the sum of a numerical variable. For example, suppose we’d like to count how many rows in <code>nba</code> are associated with each of the different colleges, we can run this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>by_college <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(college) <span class="sc">%&gt;%</span></span>
@@ -950,37 +950,11 @@ Do not assume columns are ordered
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">player_height_in_inch =</span> player_height <span class="sc">/</span> <span class="fl">2.54</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this code, we <code>mutate()</code> the <code>nba</code> data frame by creating a new variable <code>player_height_in_inch = height / 2.54</code> and then <em>overwrite</em> the original <code>nba</code> data frame. Why did we overwrite the data frame <code>nba</code>, instead of assigning the result to a new data frame like <code>nba_new</code>? As a rough rule of thumb, as long as you are not losing original information that you might need later, it’s acceptable practice to overwrite existing data frames with updated ones, as we did here. On the other hand, why did we not overwrite the variable <code>player_height</code>, but instead created a new variable called <code>player_height_in_inch</code>? Because if we did this, we would have erased the original information contained in <code>player_height</code> of temperatures in centimeters that may still be valuable to us.</p>
-<p>Let’s now compute average heights in both inches and centimeters using the <code>group_by()</code> and <code>summarize()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>summary_college_height <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(college) <span class="sc">%&gt;%</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_height_in_inch_in_cm =</span> <span class="fu">mean</span>(player_height),</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_height_in_inch_in_in =</span> <span class="fu">mean</span>(player_height_in_inch)</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>summary_college_height</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 345 × 3
-   college                  mean_height_in_inch_in_cm mean_height_in_inch_in_in
-   &lt;chr&gt;                                        &lt;dbl&gt;                     &lt;dbl&gt;
- 1 ""                                            204.                      80.2
- 2 "Alabama"                                     200.                      78.6
- 3 "Alabama A&amp;M"                                 211.                      83  
- 4 "Alabama Huntsville"                          185.                      73  
- 5 "Alabama-Birmingham"                          196.                      77.1
- 6 "Albany State (GA)"                           206.                      81  
- 7 "American International"                      196.                      77  
- 8 "American University"                         190.                      75  
- 9 "Arizona"                                     198.                      77.8
-10 "Arizona St."                                 196.                      77  
-# ℹ 335 more rows</code></pre>
-</div>
-</div>
+<p>In this code, we <code>mutate()</code> the <code>nba</code> data frame by creating a new variable <code>player_height_in_inch = height / 2.54</code> and then <em>overwrite</em> the original <code>nba</code> data frame. Why did we overwrite the data frame <code>nba</code>, instead of assigning the result to a new data frame like <code>nba_new</code>? As a rough rule of thumb, as long as you are not losing original information that you might need later, it’s acceptable practice to overwrite existing data frames with updated ones, as we did here. On the other hand, why did we not overwrite the variable <code>player_height</code>, but instead created a new variable called <code>player_height_in_inch</code>? Because if we did this, we would have erased the original information contained in <code>player_height</code> of heights in centimeters that may still be valuable to us.</p>
 <p>Let’s consider another example. We can imagine placing players on a continuum, with one end representing the “star” players and the other end representing “support” players. We can quantify this dimension by by comparing a player’s average points per game (<code>pts</code>) to his average assists per game (<code>ast</code>). Let’s calculate this new variable using the <code>mutate()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">star_support =</span> pts <span class="sc">-</span> ast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">star_support =</span> pts <span class="sc">-</span> ast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s take a look at only the <code>pts</code>, <code>ast</code>, and the resulting <code>star_support</code> variables for a few rows in our updated <code>nba</code> data frame.</p>
 <div class="cell" data-tbl-cap="Five rows showing `star_support`">
@@ -998,18 +972,18 @@ Do not assume columns are ordered
 <p>The player in the third row scored an average of 17.2 points per game and made an average of 3.4 assists per game, so his <code>star_support</code> value is <span class="math inline">\(17.2-3.5=13.8\)</span>. On the other hand, the player in the fourth row averaged 1.5 points and 2.9 assists, so its <code>star_support</code> value is <span class="math inline">\(1.5 - 2.9 = -1.4\)</span>.</p>
 <p>Let’s look at some summary statistics of the <code>star_support</code> variable by considering multiple summary functions at once in the same <code>summarize()</code> code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>star_support_summary <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">min =</span> <span class="fu">min</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">q1 =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">median =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">q3 =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">max =</span> <span class="fu">max</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(star_support))</span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>star_support_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>star_support_summary <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">min =</span> <span class="fu">min</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">q1 =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">median =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">q3 =</span> <span class="fu">quantile</span>(star_support, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">max =</span> <span class="fu">max</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(star_support, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(star_support))</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>star_support_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
     min    q1 median    q3   max  mean    sd missing
@@ -1017,15 +991,15 @@ Do not assume columns are ordered
 1  -2.5   2.6    5.1     9  30.9  6.36  4.97       0</code></pre>
 </div>
 </div>
-<p>We see for example that the average value is 6.36 minutes, whereas the largest is 30.9! This summary contains quite a bit of information. However, it is often easier to visualize data to evaluate how values are distributed. We’ll take a look at that in <a href="ggplot2.html"><span>Chapter&nbsp;8</span></a>.</p>
+<p>We see for example that the average value is 6.36 points, whereas the largest is 30.9! This summary contains quite a bit of information. However, it is often easier to visualize data to evaluate how values are distributed. We’ll take a look at that in <a href="ggplot2.html"><span>Chapter&nbsp;8</span></a>.</p>
 <p>To close out our discussion on the <code>mutate()</code> function to create new variables, note that we can create multiple new variables at once in the same <code>mutate()</code> code. Furthermore, within the same <code>mutate()</code> code we can refer to new variables we just created. Consider following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">player_height_in_inch =</span> player_height <span class="sc">/</span> <span class="fl">2.54</span>,</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">player_weight_in_lbs =</span> player_weight <span class="sc">/</span> <span class="fl">2.2</span>,</span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">bmi =</span> <span class="dv">703</span> <span class="sc">*</span> (player_weight_in_lbs <span class="sc">/</span> (player_height_in_inch <span class="sc">^</span> <span class="dv">2</span>)),</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">player_height_in_inch =</span> player_height <span class="sc">/</span> <span class="fl">2.54</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">player_weight_in_lbs =</span> player_weight <span class="sc">/</span> <span class="fl">2.2</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">bmi =</span> <span class="dv">703</span> <span class="sc">*</span> (player_weight_in_lbs <span class="sc">/</span> (player_height_in_inch <span class="sc">^</span> <span class="dv">2</span>)),</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-arrange" class="level2" data-number="7.8">
@@ -1033,11 +1007,11 @@ Do not assume columns are ordered
 <p>One of the most commonly performed data wrangling tasks is to sort a data frame’s rows in the alphanumeric order of one of the variables. The <code>dplyr</code> package’s <code>arrange()</code> function allows us to sort/reorder a data frame’s rows according to the values of the specified variable.</p>
 <p>Suppose we are interested in determining the average number of points per game scored by NBA players from different colleges:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(college) <span class="sc">%&gt;%</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(pts),</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(pts))</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>mean_pts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(college) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(pts),</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(pts))</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>mean_pts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 345 × 3
    college                   mean std_dev
@@ -1057,8 +1031,8 @@ Do not assume columns are ordered
 </div>
 <p>Observe that by default the rows of the resulting <code>mean_pts</code> data frame are sorted in alphabetical order of <code>college</code>. Say instead we would like to see the same data, but sorted from the highest to the lowest average points (<code>mean</code>) instead:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="sc">%&gt;%</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 345 × 3
    college                         mean std_dev
@@ -1078,8 +1052,8 @@ Do not assume columns are ordered
 </div>
 <p>This is, however, the opposite of what we want. The rows are sorted with the players scoring the least points displayed first. This is because <code>arrange()</code> always returns rows sorted in <strong>ascending</strong> order by default. To switch the ordering to be in “descending” order instead, we use the <code>desc()</code> function as so:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="sc">%&gt;%</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>mean_pts <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 345 × 3
    college                           mean std_dev
@@ -1102,8 +1076,8 @@ Do not assume columns are ordered
 <h2 data-number="7.9" class="anchored" data-anchor-id="sec-slice"><span class="header-section-number">7.9</span> slice</h2>
 <p>Now that you can put the rows of a data frame into some sensible order, we will learn how to select rows based on their position within the data frame (contrast this with the earlier advice about ignoring the position/order of <em>columns</em> within the data frame). Within dplyr, there is a very useful function called <code>slice()</code>. In some ways, this function is similar to <code>filter()</code>. However, <code>filter()</code> produces subsets rows based on TRUE or FALSE values (e.g., whether values are greater than zero). Instead, <code>slice()</code> takes rows numbers (i.e., integers) and returns the rows in the corresponding positions. Let’s look at a few examples.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1048</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1048</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 24
    ...1 player_name  team_abbreviation   age player_height player_weight college
@@ -1120,9 +1094,9 @@ Do not assume columns are ordered
 </div>
 <p>This code grabs rows 1, 2, and 1048 and returns a data frame including these three rows. As usual, you can instead use ranges instead of writing things like <code>slice(1, 2, 3, 4, 5, 6, ...)</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grab the first 10 rows</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grab the first 10 rows</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 24
     ...1 player_name team_abbreviation   age player_height player_weight college
@@ -1146,8 +1120,9 @@ Do not assume columns are ordered
 </div>
 <p>We can also grab the last several rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">12000</span><span class="sc">:</span><span class="fu">nrow</span>(nba))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probably don't do this</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">12000</span><span class="sc">:</span><span class="fu">nrow</span>(nba))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 306 × 24
     ...1 player_name team_abbreviation   age player_height player_weight college
@@ -1172,8 +1147,8 @@ Do not assume columns are ordered
 </div>
 <p>Note, however, that this method uses the number of rows (<code>nrow()</code>) in the full data frame. As a result, this will probably only work if we are applying <code>slice()</code> directly to our <code>nba</code> data frame and not do not have any additional verbs in our chain before our call to <code>slice()</code>. How can we grab the last <code>N</code> rows if we don’t (necessarily) know how many rows are in the data frame we are applying <code>slice()</code> to? A more robust approach would be to use the closely related <code>slice_tail()</code> function. This function is specifically designed to produce the <strong>last</strong> rows of a data frame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 24
     ...1 player_name team_abbreviation   age player_height player_weight college
@@ -1197,10 +1172,10 @@ Do not assume columns are ordered
 </div>
 <p>Ok. This all seems fine. But unless you know ahead of time what data might live in particular rows, this may not seem all that useful. The real power comes when you combine <code>slice()</code> with something like <code>arrange()</code>. Let’s see how these verbs work together to produce something a bit more useful.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(pts)) <span class="sc">%&gt;%</span></span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">"player_name"</span>, <span class="st">"season"</span>, <span class="st">"pts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(pts)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">"player_name"</span>, <span class="st">"season"</span>, <span class="st">"pts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
    player_name       season    pts
@@ -1220,9 +1195,9 @@ Do not assume columns are ordered
 <p>This code first sorts the data frame by the <code>pts</code> column (highest to lowest because of our application of <code>desc()</code>) and the grabs the first 10 rows. Because we first use <code>arrange()</code>, we know that these 10 rows are associated with the 10 highest season scoring averages in our data set. We then <code>select()</code> a relatively small number of columns so we can view it easily.</p>
 <p>We have seen <code>slice()</code> and <code>slice_tail()</code> in action. But there are more functions in the family. Like <code>slice_tail()</code>, there is also <code>slice_head()</code>, which selected the first rows of a data frame. There are also the functions <code>slice_min()</code> and <code>slice_max()</code>, which combine sorting and slicing operations. So we can redo our code above to find the 10 highest season scoring averages in our data set using <code>slice_max()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(pts, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">"player_name"</span>, <span class="st">"season"</span>, <span class="st">"pts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_max</span>(pts, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">"player_name"</span>, <span class="st">"season"</span>, <span class="st">"pts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 11 × 3
    player_name       season    pts
@@ -1246,7 +1221,7 @@ Do not assume columns are ordered
 <h2 data-number="7.10" class="anchored" data-anchor-id="sec-tibblesactivities"><span class="header-section-number">7.10</span> Activities</h2>
 <p>If you haven’t already, load the <code>nba</code> data set we downloaded back in <a href="data.html#sec-dataactivities"><span>Section&nbsp;4.2</span></a>. And let’s pass <code>c("Undrafted")</code> as the <code>na</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"Undrafted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"Undrafted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>Produce a data frame consisting exclusively of players under the age of 25.</li>
