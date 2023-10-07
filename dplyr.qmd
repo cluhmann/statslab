@@ -312,7 +312,7 @@ nba %>%
               std_dev = sd(pts))
 ```
 
-This code is similar to the previous code that created `summary_round`, but with an extra `group_by(college)` added before the `summarize()`. Grouping the `nba` dataset by `college` and then applying the `summarize()` functions yields a data frame that displays the mean and standard deviation temperature split by the different colleges that appear in the data set.
+This code is similar to the previous code that created `summary_round`, but with an extra `group_by(college)` added before the `summarize()`. Grouping the `nba` dataset by `college` and then applying the `summarize()` functions yields a data frame that displays the mean and standard deviation of `pts` split by the different colleges that appear in the data set.
 
 It is important to note that the `group_by()` function doesn't change data frames by itself. Rather it changes the *meta-data*, or data about the data, specifically the grouping structure. It is only after we apply the `summarize()` function that the data frame changes. 
 
@@ -329,7 +329,7 @@ nba %>%
     group_by(college)
 ```
 
-Observe that now there is additional meta-data: `# Groups:   college [345]` indicating that the grouping structure meta-data has been set based on the unique values of the variable `college`. On the other hand, observe that the data has not changed: it is still a table of `r nba %>% nrow()` $\times$ `r nba %>% ncol()` values.
+Observe that now there is additional meta-data: `# Groups: college [345]` indicating that the grouping structure meta-data has been set based on the unique values of the variable `college`. On the other hand, observe that the data has not changed: it is still a table of `r nba %>% nrow()` $\times$ `r nba %>% ncol()` values.
 
 Only by combining a `group_by()` with another data wrangling operation, in this case `summarize()`, will the data actually be transformed. 
 
@@ -347,9 +347,9 @@ nba %>%
     ungroup()
 ```
 
-Observe how the `# Groups:   college [345]` meta-data is no longer present. 
+Observe how the `# Groups: college [345]` meta-data is no longer present. 
 
-Let's now revisit the `n()` counting summary function we briefly introduced previously. Recall that the `n()` function counts rows. This is opposed to the `sum()` summary function that returns the sum of a numerical variable. For example, suppose we'd like to count how many NBA players went to each of the different colleges, we can run this:
+Let's now revisit the `n()` counting summary function we briefly introduced previously. Recall that the `n()` function counts rows. This is opposed to the `sum()` summary function that returns the sum of a numerical variable. For example, suppose we'd like to count how many rows in `nba` are associated with each of the different colleges, we can run this:
 
 ```{r}
 by_college <- nba %>%
@@ -402,19 +402,7 @@ nba <- nba %>%
     mutate(player_height_in_inch = player_height / 2.54)
 ```
 
-In this code, we `mutate()` the `nba` data frame by creating a new variable `player_height_in_inch = height / 2.54` and then *overwrite* the original `nba` data frame. Why did we overwrite the data frame `nba`, instead of assigning the result to a new data frame like `nba_new`? As a rough rule of thumb, as long as you are not losing original information that you might need later, it's acceptable practice to overwrite existing data frames with updated ones, as we did here. On the other hand, why did we not overwrite the variable `player_height`, but instead created a new variable called `player_height_in_inch`?  Because if we did this, we would have erased the original information contained in `player_height` of temperatures in centimeters that may still be valuable to us.
-
-Let's now compute average heights in both inches and centimeters using the `group_by()` and `summarize()`:
-
-```{r}
-summary_college_height <- nba %>%
-    group_by(college) %>%
-    summarize(
-        mean_height_in_inch_in_cm = mean(player_height),
-        mean_height_in_inch_in_in = mean(player_height_in_inch)
-    )
-summary_college_height
-```
+In this code, we `mutate()` the `nba` data frame by creating a new variable `player_height_in_inch = height / 2.54` and then *overwrite* the original `nba` data frame. Why did we overwrite the data frame `nba`, instead of assigning the result to a new data frame like `nba_new`? As a rough rule of thumb, as long as you are not losing original information that you might need later, it's acceptable practice to overwrite existing data frames with updated ones, as we did here. On the other hand, why did we not overwrite the variable `player_height`, but instead created a new variable called `player_height_in_inch`?  Because if we did this, we would have erased the original information contained in `player_height` of heights in centimeters that may still be valuable to us.
 
 Let's consider another example. We can imagine placing players on a continuum, with one end representing the "star" players and the other end representing "support" players.  We can quantify this dimension by by comparing a player's average points per game (`pts`) to his average assists per game (`ast`).  Let's calculate this new variable using the `mutate()` function:
 
@@ -452,7 +440,7 @@ star_support_summary <- nba %>%
 star_support_summary
 ```
 
-We see for example that the average value is 6.36 minutes, whereas the largest is 30.9!  This summary contains quite a bit of information. However, it is often easier to visualize data to evaluate how values are distributed.  We'll take a look at that in @sec-ggplot2.
+We see for example that the average value is 6.36 points, whereas the largest is 30.9!  This summary contains quite a bit of information. However, it is often easier to visualize data to evaluate how values are distributed.  We'll take a look at that in @sec-ggplot2.
 
 To close out our discussion on the `mutate()` function to create new variables, note that we can create multiple new variables at once in the same `mutate()` code. Furthermore, within the same `mutate()` code we can refer to new variables we just created. Consider following:
 
@@ -517,6 +505,7 @@ nba %>%
 We can also grab the last several rows:
 
 ```{r}
+# probably don't do this
 nba %>%
     slice(12000:nrow(nba))
 ```
