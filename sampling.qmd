@@ -62,6 +62,7 @@ Observe for each `group` that we have their names, the number of `red_balls` the
 ```{r}
 #| echo: false
 #| label: fig-samplingdistribution-tactile
+#| fig-cap: Histogram of 33 proportions
 ggplot(tactile_prop_red, aes(x = prop_red)) +
   geom_histogram(binwidth = 0.05, boundary = 0.4, color = "white") +
   labs(x = "Proportion of 50 balls that were red", 
@@ -753,6 +754,7 @@ In this chapter, we performed both tactile and virtual sampling exercises to inf
 ```{r}
 #| label: tbl-ch8
 #| echo: false
+#| warning: false
 #| tbl-cap: "Scenarios of sampling for inference"
 # The following Google Doc is published to CSV and loaded using read_csv():
 # https://docs.google.com/spreadsheets/d/1QkOpnBGqOXGyJjwqx1T2O5G5D72wWGfWlPyufOgtkk4/edit#gid=0
