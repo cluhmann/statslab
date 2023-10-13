@@ -1,0 +1,9 @@
+# Working with Categorical Data {#sec-factors}
+
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+```
+
+Coming soon...

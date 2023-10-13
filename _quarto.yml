@@ -34,6 +34,7 @@ book:
         - tibbles.qmd
         - dplyr.qmd
         - ggplot2.qmd
+        - factors.qmd
     - part: "Statistics"
       chapters:
         - descriptives.qmd
