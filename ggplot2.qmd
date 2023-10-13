@@ -851,7 +851,7 @@ ggplot(data = df,
 ```
 
 
-The topic of themes is a deep one, but to briefly illustrate the effect of themes, let's take a look at the plot we opened the chapter with:
+The topic of themes is a deep one, but to briefly illustrate the effect of themes, let's take a look at the plot we opened the chapter with. The theme that ggplot uses by default is `theme_grey()`:
 
 
 ```{r}
