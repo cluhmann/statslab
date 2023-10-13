@@ -682,7 +682,7 @@ nba %>%
     guides(x = guide_axis(angle = 90))
 ```
 
-Observe in @fig-collegesbar that there are many Knicks players who either did not attend any college ("None") and many who attended Arizona State or Florida. Alternatively, say you had a data frame where the number of flights for each `carrier` was pre-counted as in @fig-colleges-counted.
+Observe in @fig-collegesbar that there are many Knicks players who either did not attend any college ("None") and many who attended Arizona State or Florida. Alternatively, say you had a data frame where the number of players attending each `college` was pre-counted as in @fig-colleges-counted.
 
 ```{r}
 #| echo: false
@@ -802,7 +802,7 @@ Lastly, another type of barplot is a *faceted barplot*. Recall in @sec-facets we
 
 ```{r}
 #| label: fig-facet-bar-vert
-#| fig-cap: "Faceted barplot comparing the number of flights by carrier and origin."
+#| fig-cap: "Faceted barplot comparing the number of players by college and season."
 nba %>%
     group_by(player_name, college) %>%
     filter(team_abbreviation %in% c("NYK"),
