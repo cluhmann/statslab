@@ -953,6 +953,8 @@ ggplot(
 ```
 
 
+Using one of these "complete" themes is a great way to get the overall look of your plot to be close to what you want.  This can be helpful when incorporating plots into slides or a poster.  It is also true that these themes don't give you fine-grained control over individual aspects of your plots. To modify individual elements, you need to use `theme()` to override the default setting for individual elements.  For more information, I strongly encourage readers to check out the book [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/).
+
 ### ggplot Argument Names
 
 Let's go over some important points about specifying the arguments (i.e., inputs) to functions. Run the following two segments of code:
