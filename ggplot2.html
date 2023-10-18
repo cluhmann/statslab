@@ -291,8 +291,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -1465,7 +1471,7 @@ Washington
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The topic of themes is a deep one, but to briefly illustrate the effect of themes, let’s take a look at the plot we opened the chapter with:</p>
+<p>The topic of themes is a deep one, but to briefly illustrate the effect of themes, let’s take a look at the plot we opened the chapter with. The theme that ggplot uses by default is <code>theme_grey()</code>:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ggplot2_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
@@ -1489,6 +1495,7 @@ Washington
 <p><img src="ggplot2_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Using one of these “complete” themes is a great way to get the overall look of your plot to be close to what you want. This can be helpful when incorporating plots into slides or a poster. It is also true that these themes don’t give you fine-grained control over individual aspects of your plots. To modify individual elements, you need to use <code>theme()</code> to override the default setting for individual elements. For more information, I strongly encourage readers to check out the book <a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a>.</p>
 </section>
 <section id="ggplot-argument-names" class="level3" data-number="8.10.2">
 <h3 data-number="8.10.2" class="anchored" data-anchor-id="ggplot-argument-names"><span class="header-section-number">8.10.2</span> ggplot Argument Names</h3>
