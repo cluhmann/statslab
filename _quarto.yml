@@ -49,6 +49,7 @@ book:
     - part: "Activities"
       chapters:
         - sampling.qmd
+        - simulatingpre.qmd
         - samplepvalues.qmd
 #        - missingness.qmd
 #    - part: "Odds & Ends"
