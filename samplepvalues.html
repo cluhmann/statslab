@@ -602,7 +602,7 @@ mean in group Daniel Friends   mean in group Kyra Friends
 </div>
 </div>
 </div>
-<p>On the x-axis we see <em>p</em>-values from 0 to 1 and on the y-axis we see how frequently these <em>p</em>-values were observed. There is a horizontal red line that indicates an alpha of <span class="math inline">\(5%\)</span> (located at a frequency of <span class="math inline">\(100000*0.05 = 5000\)</span>) – but you can ignore this line for now. The statistical power that is achieved in these simulated studies is 50.811%.</p>
+<p>On the x-axis we see <em>p</em>-values from 0 to 1 and on the y-axis we see how frequently these <em>p</em>-values were observed. There is a horizontal red line that indicates an alpha of <span class="math inline">\(5%\)</span> (located at a frequency of <span class="math inline">\(100000*0.05 = 5000\)</span>) – but you can ignore this line for now. The statistical power that is achieved in these simulated studies is 50.542%.</p>
 <p>The simulation result illustrates the <strong>probability density function</strong> of <em>p</em>-values for a <em>t</em>-test. A probability density function provides the probability that a random variable has a specific value. Because the <em>p</em>-value is a random variable, we can use its probability density function to plot the <em>p</em>-value distribution <span class="citation" data-cites="hung1997behavior ulrich2018some">(<a href="#ref-hung1997behavior" role="doc-biblioref">Hung et al. 1997</a>; <a href="#ref-ulrich2018some" role="doc-biblioref">Ulrich and Miller 2018</a>)</span>. In <a href="http://shiny.ieis.tue.nl/d_p_power/">this online Shiny app</a> you can vary the sample size, effect size, and alpha level to examine the effect on the <em>p</em>-value distribution. Increasing the sample size or the effect size will increase the steepness of the <em>p</em>-value distribution, which means that the probability to observe small <em>p</em>-values increases. The <em>p</em>-value distribution is a function of the statistical power of the test.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -755,15 +755,16 @@ mean in group Daniel Friends   mean in group Kyra Friends
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.86359314 -2.62561279  0.65746105  0.30305858 -1.66205230  0.15571383
- [7] -0.13720067 -1.88239200 -1.62913409  0.09320998  0.18444390  0.76495388
-[13] -1.14529507  0.39867575 -0.84778687  1.09287794  1.32325724  1.16000126
-[19] -0.48403613  0.27439500  0.54283074  1.96859121  0.27726432 -0.79864462
-[25]  0.96418855  0.45938626  1.98154072  0.79452657 -1.24828117  1.69672991
-[31] -0.32746421 -0.32553300  1.30898354 -0.43878766  0.53591194  0.14685773
-[37]  0.96831672  0.51017778 -0.59512936 -1.78317596  0.27293459  1.00270576
-[43] -0.40916996 -0.91265681  0.90293953 -0.10070338 -0.16366246  1.63267029
-[49]  0.29069348 -0.53288319</code></pre>
+<pre><code> [1]  0.7925969938  1.8515552465  0.1577716275  0.1479378834  1.0119639401
+ [6]  0.0666530593  0.4461102981 -1.1531976883  1.5293913431  0.3247442604
+[11] -0.2746481658  0.9662041732 -1.5185445548  1.0321633764 -1.9190324345
+[16] -0.3422259981 -0.1966249421  0.7473967420 -2.2815453875 -1.5276011570
+[21] -1.6186324270  0.8728539737  0.3501771460 -0.1832754176  2.4925241812
+[26] -0.3832092870 -1.2844520576  0.0302392702 -0.4075614087 -1.2256477204
+[31]  2.2260091076  1.1255049427 -1.1210694519 -0.0002933809 -0.1949325368
+[36]  0.4723601472 -0.4834240775  0.6740880831 -1.5765568925  1.7574201488
+[41]  0.9177700893  0.6735169379  0.5073152925 -2.2346302848 -1.8180087498
+[46] -0.4821175104 -1.9645790336  0.0799256795  0.0916147111  1.7666963961</code></pre>
 </div>
 </div>
 <p>This command generates 50 random observations from a distribution with a mean of 0 and a standard deviation of 1 (in the long run – the mean and standard deviation will vary in each sample that is generated). Imagine we run this command once, and we observe a mean of 0.5. The figure below visualizes this scenario. We can perform a one-sample <em>t</em>-test against 0, and this test tells us, with a <em>p</em> &lt; .05, that the data we have observed is surprisingly different from 0, assuming the random number generator in R functions as it should and generates data with a true mean of 0.</p>
