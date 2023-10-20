@@ -272,6 +272,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -286,48 +292,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./data-files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data Files</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./rannoyances.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -1012,7 +989,7 @@ draft_number  -0.37 -0.24         -0.11         -0.10         1.00</code></pre>
 <section id="sec-interpretingcorrelations" class="level3" data-number="10.6.3">
 <h3 data-number="10.6.3" class="anchored" data-anchor-id="sec-interpretingcorrelations"><span class="header-section-number">10.6.3</span> Interpreting a correlation</h3>
 <p>Naturally, in real life you don’t see many correlations of 1. So how should you interpret a correlation of, say <span class="math inline">\(r= .4\)</span>? The honest answer is that it really depends on what you want to use the data for, and on how strong the correlations in your field tend to be. A friend of mine in engineering once argued that any correlation less than <span class="math inline">\(.95\)</span> is completely useless (I think he was exaggerating, even for engineering). On the other hand there are real cases – even in psychology – where you should really expect correlations that strong. For instance, one of the benchmark data sets used to test theories of how people judge similarities is so clean that any theory that can’t achieve a correlation of at least <span class="math inline">\(.9\)</span> really isn’t deemed to be successful. However, when looking for (say) elementary correlates of intelligence (e.g., inspection time, response time), if you get a correlation above <span class="math inline">\(.3\)</span> you’re doing very very well. In short, the interpretation of a correlation depends a lot on the context.</p>
-<p>However, something that can never be stressed enough is that you should <em>always</em> look at the scatterplot before attaching any interpretation to a correlation. A correlation might not mean what you think it means. The classic illustration of this is “Anscombe’s Quartet” <span class="citation" data-cites="anscombe1973graphs">Anscombe (<a href="references.html#ref-anscombe1973graphs" role="doc-biblioref">1973</a>)</span>, which is a collection of four data sets. Each data set has two variables, an <span class="math inline">\(X\)</span> and a <span class="math inline">\(Y\)</span>. For each data set, the mean value for <span class="math inline">\(X\)</span> is 9 and the mean for <span class="math inline">\(Y\)</span> is 7.5. The, standard deviations for all <span class="math inline">\(X\)</span> variables are almost identical, as are those for the the <span class="math inline">\(Y\)</span> variables. And in each case the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is <span class="math inline">\(r = 0.816\)</span>. You can verify this yourself, since the data set comes distributed with R. The commands would be:</p>
+<p>However, something that can never be stressed enough is that you should <em>always</em> look at the scatterplot before attaching any interpretation to a correlation. A correlation might not mean what you think it means. The classic illustration of this is “Anscombe’s Quartet” <span class="citation" data-cites="anscombe1973graphs">Anscombe (<a href="#ref-anscombe1973graphs" role="doc-biblioref">1973</a>)</span>, which is a collection of four data sets. Each data set has two variables, an <span class="math inline">\(X\)</span> and a <span class="math inline">\(Y\)</span>. For each data set, the mean value for <span class="math inline">\(X\)</span> is 9 and the mean for <span class="math inline">\(Y\)</span> is 7.5. The, standard deviations for all <span class="math inline">\(X\)</span> variables are almost identical, as are those for the the <span class="math inline">\(Y\)</span> variables. And in each case the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is <span class="math inline">\(r = 0.816\)</span>. You can verify this yourself, since the data set comes distributed with R. The commands would be:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>( anscombe<span class="sc">$</span>x1, anscombe<span class="sc">$</span>y1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1061,7 +1038,7 @@ draft_number  -0.37 -0.24         -0.11         -0.10         1.00</code></pre>
 <p>The default value of the <code>method</code> argument is <code>"pearson"</code>, which is why we didn’t have to specify it earlier on when we were doing Pearson correlations.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-anscombe1973graphs" class="csl-entry" role="listitem">
 Anscombe, Francis J. 1973. <span>“Graphs in Statistical Analysis.”</span> <em>The American Statistician</em> 27 (1): 17–21.
 </div>
