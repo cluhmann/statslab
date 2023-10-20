@@ -251,7 +251,7 @@ qt(my_ps, df = 6)
 Let’s plot a `t` distribution:
 
 ```{r}
-p <- data_frame(x = c(-4, 4)) %>%
+p <- tibble(x = c(-4, 4)) %>%
     ggplot(aes(x = x))
 
 p + stat_function(
@@ -266,7 +266,7 @@ p + stat_function(
 ```
 
 ```{r}
-p <- data_frame(x = c(-4, 4)) %>%
+p <- tibble(x = c(-4, 4)) %>%
     ggplot(aes(x = x))
 
 p + stat_function(
@@ -311,7 +311,7 @@ round(qchisq(0.95, df = my_dfs), 2)
 Again, we can use the probability density function `dchisq()` to plot one or more $\chi^2$ distributions:
 
 ```{r}
-p <- data_frame(x = c(0, 25)) %>%
+p <- tibble(x = c(0, 25)) %>%
     ggplot(aes(x = x))
 
 p + stat_function(
@@ -378,7 +378,7 @@ qf(c(0.95, 0.99), df1 = 2, df2 = 40)
 Let's plot some $F$ distributions using `df()`:
 
 ```{r}
-p <- data_frame(x = c(0, 5)) %>%
+p <- tibble(x = c(0, 5)) %>%
     ggplot(aes(x = x)) +
     stat_function(
         fun = df,
