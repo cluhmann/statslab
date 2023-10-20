@@ -36,23 +36,30 @@ df.sample = tibble(
 df.sample
 ```
 
-Now let's calculate the SSE for each model and then PRE based on those SSEs.
+Now let's calculate the squared error for each observation and model and then the PRE based on those squared errors (note that we call these individual squared differences "SSE"s, but we haven't summed anything yet).
 
 ```{r}
-df.summary = df.sample %>%
+df.sample <- df.sample %>%
     # these are the "predictions" of each model
-    mutate(compact = 50,
-           augmented = mean(value)) %>%
-    summarize(
+    mutate(
+        compact = 50,
+        augmented = mean(value),
         # SSE associated with the compact model
-        sse_compact = sum((value - compact) ^ 2),
+        sse_compact = (value - compact) ^ 2,
         # SSE associated with the augmented model
-        sse_augmented = sum((value - augmented) ^ 2),
+        sse_augmented = (value - augmented) ^ 2,
         # sum of squares reduced (SSR)
         ssr = sse_compact - sse_augmented,
-        # PRE calculation
-        pre = ssr / sse_compact
-    )
+)
+df.sample
+```
+
+Now let's calculate the means across observations and calculate PRE.
+
+```{r}
+df.summary <- df.sample %>%
+    summarise(across(everything(), sum)) %>%
+    mutate(pre = ssr / sse_compact)
 df.summary
 ```
 
