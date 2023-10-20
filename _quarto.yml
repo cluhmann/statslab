@@ -39,6 +39,7 @@ book:
       chapters:
         - descriptives.qmd
         - hypothesis.qmd
+        - distributions.qmd
 #        - correlation.qmd
 #        - single.qmd
 #        - multiple.qmd
@@ -51,10 +52,9 @@ book:
         - sampling.qmd
         - simulatingpre.qmd
         - samplepvalues.qmd
+#        - residuals.qmd
 #        - missingness.qmd
-#    - part: "Odds & Ends"
-#      chapters:
-    appendices:
+appendices:
         - data-files.qmd
         - references.qmd
         - rannoyances.qmd

@@ -26,6 +26,13 @@ https://lakens.github.io/statistical_inference
 
 Licensed under a creative commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0).
 
+
+_Introduction to R_ by Andrew Ellis & Boris Mayer
+
+https://methodenlehre.github.io/SGSCLM-R-course/
+
+Licensed under a Creative Commons Attribution 4.0 International License (CC BY 4.0 Deed).
+
 ## Packages required to build the site/book
 - tidyverse
 - kable
