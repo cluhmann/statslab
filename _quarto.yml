@@ -54,7 +54,7 @@ book:
         - samplepvalues.qmd
 #        - residuals.qmd
 #        - missingness.qmd
-appendices:
+    appendices:
         - data-files.qmd
         - references.qmd
         - rannoyances.qmd
