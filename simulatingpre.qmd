@@ -9,6 +9,13 @@ library(kableExtra)
 
 Here, we explore the concept of the proportional reduction in error, or PRE.  This activity will help to illustrate several ideas simultaneously, including simulation, sampling distributions, and (most importantly) the basic foundation of statistical inference.  Not too bad for a few lines of R.
 
+
+::: {.callout-tip}
+## Relevant Background
+This chapter uses a framework and notation taken from @judd2017data.  Please refer to that work for additional context, explanation, and rationale.
+:::
+
+
 Assume that we have data set and that we have calculated the mean of the data. Let's imagine that our question is whether this mean is equal to some specific value.  For example, we might wish to know whether the mean of a set of IQs is equal to 100 or whether the mean of several samples of boiling water is 212 degrees Fahrenheit.  Formalizing our hypothesis, we propose that $\beta_0 = B_0$, where $B_0$ is the hypothesized value of the mean.  The mean of our particular sample of data, $b_0=\bar{Y}$, will almost never be exactly equal to the hypothesized value, $B_0$.  So we need a statistical approach to decide whether to accept our hypothesis.  To do so, we construct _two_ models, one that embodies our hypothesis (the "compact" model) and a second that embodies the idea that the true mean of the population is some unknown value (the "augmented" model). This latter model estimates $\beta_0$ as $b_0$ and is thus much more flexible than the compact model.
 
 - Model C (compact): $Y_i=50+\epsilon_i$
