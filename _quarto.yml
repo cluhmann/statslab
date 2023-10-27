@@ -34,19 +34,20 @@ book:
         - tibbles.qmd
         - dplyr.qmd
         - ggplot2.qmd
+        - eda.qmd
         - factors.qmd
     - part: "Statistics"
       chapters:
         - descriptives.qmd
         - hypothesis.qmd
         - distributions.qmd
-#        - correlation.qmd
-#        - single.qmd
+        - basicregression.qmd
 #        - multiple.qmd
-#        - anova.qmd
+#        - correlation.qmd
 #        - interactions.qmd
 #        - polynomial.qmd
 #        - glm.qmd
+#        - anova.qmd
     - part: "Activities"
       chapters:
         - sampling.qmd

@@ -25,11 +25,11 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 5 | 09-29 | Data Wrangling with dplyr |  |
 | 6 | 10-06 |  | Sampling |
 | 7 | 10-13 | Plotting with ggplot2 |  |
-| 8 | 10-20 |  | Sampling: p-values ala Lakens |
-| 9 | 10-27 |  | Simulation: PRE sampling distribution |
-| 10 | 11-03 | Regression |  |
+| 8 | 10-20 |  | `rep_sample_n()` from scratch |
+| 9 | 10-27 |  | Simulating the PRE sampling distribution |
+| 10 | 11-03 | Regression 1/n |  |
 | 11 | 11-10 | Regression Diagnostics |  |
-| 12 | 11-17 | Multiple Regression & Interactions |  |
+| 12 | 11-17 | TBD |  |
 | 13 | 11-24 | **No Class – Thanksgiving Break** | |
 | 14 | 12-01 | TBD |  |
-| 15 | 12-08 | TBD |  |
+| 15 | 12-08 | Sampling: p-values ala Lakens |  |

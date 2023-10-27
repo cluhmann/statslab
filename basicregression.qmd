@@ -1,0 +1,215 @@
+# Basic Regression {#sec-basicregression}
+
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+library(broom)
+library(kableExtra)
+nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
+```
+
+::: {.callout-important}
+This chapter makes use of the `broom` package, part of the tidyverse-adjacent family of packages, `tidymodels`.  It can be installed and loaded in the same way that we have installed/loaded other packages (see @sec-packages for a refresher).
+:::
+
+
+## Metric-Predicted Variable with One Metric Predictor {#sec-model1}
+
+Imagine we are interested in the following research question: what factors explain the average number of points scored by a player per game (i.e., the values in the `pts` column of our `nba` data set)?  In this section, we'll keep things simple for now and try to explain `pts` as a function of one other variable: the average number of assists by a player per game (i.e., the values in the `ast` column of our `nba` data set). Could it be that players making more assists will also score more points?  We'll answer this question by modeling the relationship between points and assists using *simple linear regression* where we have:
+
+1. A numerical outcome variable $y$ (`pts`) and
+1. A single numerical explanatory variable $x$ (`ast`).
+
+To simplify further, let's confine our investigation to a small number of teams.
+
+```{r}
+nba_subset <- nba %>%
+    mutate(season_int = substr(nba$season, start = 1, stop = 4))  %>%
+    filter(team_abbreviation %in% c("LAL", "NYK", "GSW"))
+```
+
+It is important to note that the *observational unit* is an individual player in a given season.  Because many players play in more than one season, the same player will appear more than once in the data. Hence there are fewer than `r nrow(nba_subset)` unique players represented in `nba_subset`. We'll revisit this idea later, when we talk about the "independence assumption" for inference for regression.
+
+As we saw in @sec-eda, we can visualize how these two variables are related by generating a scatterplot and a best-fitting trend line:
+
+```{r}
+#| label: fig-scatter-line
+#| fig-cap: Scatterplot of relationship of assists and points
+#| warning: false
+nba %>%
+    ggplot(aes(x = ast, y = pts)) +
+    geom_point(alpha = 0.1) +
+    labs(x = "Avg. Assists per Game", 
+       y = "Avg. Points per Game") +
+    geom_smooth(method = "lm", se = FALSE)
+```
+
+In @sec-eda, we did not discuss how this best-fitting trend line was generated. That is the topic of this chapter.
+
+
+### Simple linear regression {#sec-model1table}
+
+You may recall that the equation of a line is $y = a + bx$. It is defined by two parameters $a$ and $b$. The intercept, $a$, is the value of $y$ when $x = 0$. The slope, $b$, is the increase in $y$ for every increase of one in units of $x$.
+
+When discussing regression, we will often use different notation in which a line is described as $\widehat{y} = b_0 + b_1 \cdot x$. The intercept is $b_0$, so $b_0$ is the value of $\widehat{y}$ when $x = 0$. The slope is $b_1$, i.e., the increase in $\widehat{y}$ for every increase in one one in $x$. Why do we put a "hat" on top of the $y$? It's a form of notation commonly used in statistics to indicate that we have an estimate of $y$ rather than $y$ itself.
+
+From inspecting the regression line in @fig-scatter-line, we know that $b_1$ is positive. Why? Because players who have higher `ast` values also tend to have higher `pts` values. However, what is the numerical value of the slope $b_1$? What about the intercept $b_0$?
+
+We can obtain values of $b_0$ and $b_1$ by using *linear regression*. This is done in two steps:
+
+1. We first fit the linear regression model using the `lm()` function and save it in `result`.
+1. We get the regression table by applying the `get_regression_table()` \index{moderndive!get\_regression\_table()} function from the `moderndive` package to `score_model`.
+
+```{r}
+# fit the model
+model <- lm(pts ~ ast, data = nba)
+
+# get regression table
+summary(model)
+```
+
+Let's first focus on interpreting the output, and then we'll later revisit the code that produced it. In the `Estimate` column are the estimated values of both the intercept, $b_0$, and slope, $b_1$. Thus, the equation of the regression line in Figure @fig-scatter-line is:
+
+$$
+\begin{aligned}
+    \widehat{y} &= b_0 + b_1 \cdot x\\
+    \widehat{pts} &= b_0 + b_{ast} \cdot ast\\
+&= 4.17998 + 2.20111 \cdot ast
+    \end{aligned}
+$$
+
+The estiamted value of the intercept, $b_0 = 4.17998$, is the value of `pts` expected when $ast=0$. Or in graphical terms, $b_0 = 4.17998$ indicates where the regression line intersects the $y$ axis when $x=0$. Note, that the intercept always has a natural a mathematical interpretation, it may well not have a *practical* interpretation.  For example, if `x` were ratings from a scale that ran 1-7, observing $x=0$ would be impossible.
+
+Typically, the slope $b_1 = b_{ast} = 2.20111$, is of primary interested, as it summarizes the relationship between `ast` and `pts`, the two variables we are investigating. Note that the estimate of $b_1 = b_{ast}$ is positive, suggesting a positive relationship between these two variables, higher `ast` values seem to imply `pts`. The other way we might evaluate this relationship would be to calculate a correlation coefficient:
+
+
+```{r}
+cor(nba$pts, nba$ast)
+```
+
+The correlation coefficient and $b_1 = b_{ast}$ are both positive, but are different values. The correlation coefficient's interpretation is often the "strength of linear association". The interpretation of $b_1 = b_{ast}$ is a little different:
+
+> For every increase of 1 unit in `ast`, there is an *systematic and corresponding* increase of 2.20111 units of `pts`.
+
+Note that this statement holds *on average*.  But if you take any two players whose `ast` values differ by exactly 1 assist, we should not expect their `pts` values to differ by exactly 2.20111. What $b_1 = b_{ast} = 2.20111$ means is that across all possible players, the *average* difference in `pts` between two instructors whose `ast` values differ by exactly one is 2.20111.
+
+Now that we've learned how to compute the equation for the regression line using the estimated values of $b_0$ and $b_1$ and how to interpret the resulting estimates, let's revisit the code that generated these estimates:
+
+```{r}
+#| eval: false
+# fit the model
+model <- lm(pts ~ ast, data = nba)
+
+# get regression table
+summary(model)
+```
+
+First, we fit the linear regression model to `data` (our `nba` data in this case) using the `lm()` function and save this as `model`. When we say "fit", we mean that we estimate the parameters of our model ($b_0$ and $b_1$ using our data). The function `lm()` constructs our model for us (`lm` stands for linear model) and is used as follows: `lm(y ~ x, data = data_frame_name)` where:
+
+- `y` is the target variable, followed by a tilde `~`. In our case, `y` is set to `pts`.
+- `x` is the explanatory variable. In our case, `x` is set to `ast`.
+- The combination of `y ~ x` is called a *model formula*. In our case, the model formula is `pts ~ ast`. Target variables appear on the left hand side of the formula and explanatory variables appear on the right.
+- `data_frame_name` is the name of the data frame that contains the variables `y` and `x`. In our case, `data_frame_name` is the `nba` data frame.
+
+Second, we take the saved model in `model` and apply the `summary()` function to obtain a regression table. The `summary()` function produces four columns: `Estimate`, `Std. Error`, `t value`, and `Pr(>|t|)`. These are the estimated value of each model parameter, the standard error of these estimates, the corresponding $t$ values, and associated $p$ values.
+
+
+### Observed values, fitted values, and residuals {#sec-model1points}
+
+We just saw how to get the value of the intercept and the slope of a regression line from the `Estimate` column of the regression table generated by the `summary()` function. Let's say we instead want information on individual observations. For example, let's focus on a single player.  Specifically, let's pull out the row of `nba` that is associated with the Chris Clemons, who appears exactly once in our data set.  The corresponding row is illustrated in @tbl-chrisclemons:
+
+```{r}
+#| label: tbl-chrisclemons
+#| tbl-cap: Row of Data for Chris Clemons
+#| echo: false
+index <- which(nba$player_name == "Chris Clemons")
+target_point <- model %>%
+    augment() %>%
+    slice(index) %>%
+    select(!!c("pts", "ast", ".fitted", ".resid")) %>%
+    rename_at(vars(".fitted"), ~ "pts_hat") %>%
+    rename(residual = .resid)
+x <- nba %>% slice(index) %>% select(ast) %>% pull()
+y <- nba %>% slice(index) %>% select(pts) %>% pull()
+y_hat <- target_point$pts_hat
+resid <- target_point$residual
+nba %>%
+    select(c(player_name, pts, ast, season, gp)) %>%
+    slice(index) %>%
+    kable(
+        digits = 1,
+        booktabs = TRUE,
+        linesep = ""
+    ) %>%
+    kable_styling(font_size = 16)
+```
+
+What is the value $\widehat{y}$ on the regression line corresponding to this player's `ast` value of `r x`? In @fig-numxplot4, we mark three values corresponding to the player and the associated statistical terms:
+
+* Circle: The *observed value*, $y$ = `r y`, is this course's instructor's actual teaching score.
+* Square: The *fitted value*, $\widehat{y}$, is the value on the regression line that corresponds to $x$ = `ast` = `r x`. This value is computed using the intercept and slope in the previous regression table: 
+
+$$\widehat{y} = b_0 + b_1 x =  4.180 + 2.201 \cdot `r x` = `r y_hat`$$
+
+* Arrow: The length of this arrow is the *residual* \index{regression!residual} and is computed by subtracting the fitted value $\widehat{y}$ from the observed value $y$. The residual can be thought of as the error the model generates for a particular observation.  In the case of this course's player, the residual is $y - \widehat{y}$ = `r y` - `r y_hat` = `r resid`.
+
+```{r}
+#| label: fig-numxplot4
+#| fig-cap: Example of observed value, fitted value, and residual.
+#| echo: false
+#| warning: false
+ggplot(nba, aes(x = ast, y = pts)) +
+    geom_point(color = "grey") +
+    labs(x = "Avg. Assists per Game", y = "Avg. Points per Game",) +
+    geom_smooth(method = "lm", se = FALSE) +
+    annotate(
+        "segment",
+        x = x,
+        xend = x,
+        y = y,
+        yend = (.9 * y_hat) + (.1 * y),
+        color = "red",
+        linewidth = 1,
+        arrow = arrow(type = "open", length = unit(0.04, "npc"))
+    ) +
+    annotate(
+        "point",
+        x = x,
+        y = y_hat,
+        col = "red",
+        shape = 15,
+        size = 4
+    ) +
+    annotate(
+        "point",
+        x = x,
+        y = y,
+        col = "red",
+        size = 4
+    ) +
+    coord_cartesian(xlim=c(0,3), ylim=c(0, 10))
+```
+
+Now say we want to compute both the fitted value, $\widehat{y} = b_0 + b_1 x$, and the residual, $y - \widehat{y}$, for *all* `r nrow(nba)` rows in our `nba` data set. We could repeat the previous calculations we performed by hand `r nrow(nba)` times, but that would be somewhat time-consuming. Instead, let's do this using a computer with the `get_regression_points()` function. Just like the `get_regression_table()` function, the `get_regression_points()` function is a "wrapper" function. However, this function returns a different output. Let's apply the `get_regression_points()` function to `score_model`, which is where we saved our `lm()` model in the previous section. In Table \@ref(tab:regression-points-1) we present the results of only the 21st through 24th courses for brevity's sake.
+
+```{r}
+model %>%
+    # expand model result
+    augment() %>%
+    # select relevant columns
+    select(c("pts", "ast", ".fitted", ".resid")) %>%
+    # rename columns
+    rename_at(vars(c(".fitted", ".resid")), ~c("pts_hat", "residual"))
+```
+
+Let's inspect the individual columns and match them with the elements of @fig-numxplot4:
+
+* The `pts` column represents the observed outcome variable, $y$. This column contains the y-position of the `r nrow(nba)` gray data points.
+* The `ast` column represents the values of the explanatory variable, $x$. This is the x-position of the `r nrow(nba)` gray data points.
+* The `pts_hat` column represents the fitted values $\widehat{y}$. This is the corresponding value on the regression line for the `r nrow(nba)` $x$ values.
+* The `residual` column represents the residuals $y - \widehat{y}$. This is the `r nrow(nba)` vertical distances between the `r nrow(nba)` black points and the regression line.
+
+Just as we did for Chris Clemons' single row from `nba`, one can now repeat the calculations for any particular data point (row) in the `nba` data set or, if you so wish, do so for _all_ rows.
+
+In a bit, we'll talk about how conventional ("ordinary least squares") regression takes all of these residuals, squares them (so they are all positive), and finds the model parameters (e.g., $b_0$ and $b_1$) that minimize their sum.
