@@ -32,11 +32,11 @@ pnorm(1.645)
 ```
 
 ```{r}
-# this is 1-p
+# this is p
 pnorm(1.645, lower.tail = FALSE)
 ```
 
-The value of 1.645 of the standard normal distribution is often used as a critical value for the one-tailed significance test. So to left of this value should be 95% of the distribution and to the right of it 5% of the distribution. Here we see that this is not exactly true.
+The value of 1.645 of the standard normal distribution is often used as a critical value for the one-tailed significance test. So to left of this value should be 95% of the distribution and to the right of it 5% of the distribution. Here we see that this is (nearly) true.
 
 For a two-tailed p-value we’ll have to double the one-tailed p-value:
 
@@ -165,6 +165,7 @@ p <- tibble(x = c(-4, 4)) %>%
     ggtitle("Standard Normal Distribution") +
     xlab("x") +
     ylab("dnorm(x)")
+p
 ```
 
 We can also draw a certain z score in the diagram and let us calculate a p-value for this with `pnorm()`:
@@ -181,9 +182,8 @@ p + geom_segment(
         xend = my_z,
         yend = (dnorm(my_z))
     ),
-    color = "grey70",
-    size = 1.5,
-    alpha = 0.8
+    color = "blue",
+    linewidth = 1.5
 )
 ```
 
@@ -207,7 +207,7 @@ c(mean(r_IQ_scores), sd(r_IQ_scores))
 
 ## `t` Distribution
 
-The function arguments for the `t` distribution are the same as for the normal distribution with the following differences: The degrees of freedom (`df`) of the `t` distribution must be specified. The arguments mean and sd are omitted, but there is the non-centrality parameter ncp. This is needed (as the name suggests) for non-central t distributions that do not have a mean of 0. While the central t distribution (with $\mu=0$) is symmetric and corresponds to the $H_0$ distribution required for t tests, the non-central t distributions ($H_1$ distributions) are asymmetric and required for power analysis. We will not look at these distributions here, so we will not use the `ncp` argument.
+The function arguments for the `t` distribution are the same as for the normal distribution with the following differences: The degrees of freedom (`df`) of the `t` distribution must be specified.
 
 ### Cumulative distribution function (CDF)
 
@@ -285,7 +285,7 @@ p + stat_function(
 
 ## Chi-square distribution
 
-For the $\chi^2$ distribution (`help ("chisquare")`) the functionality is the same as for the `t` distribution. The respective degrees of freedom must be specified and there are also non-central distributions, which we will not consider further. The functions are called `pchisq()` (cumulative distribution function), `qchisq()` (quantile function), `dchisq()` (density function) and `rchisq()` (random generation of $\chi^2$-distributed scores).
+For the $\chi^2$ distribution (`help ("chisquare")`) the functionality is the same as for the `t` distribution, so the respective degrees of freedom must be specified. The functions are called `pchisq()` (cumulative distribution function), `qchisq()` (quantile function), `dchisq()` (density function) and `rchisq()` (random generation of $\chi^2$-distributed scores).
 
 ### Cumulative distribution function (CDF)
 
@@ -367,7 +367,7 @@ pf(q = 3.89, df1 = 2, df2 = 40, lower.tail = FALSE)
 
 If we compute an ANOVA by hand (please don't), $F$ distribution tables often do not contain all combinations of degrees of freedoms. With `qf()` we can obtain the quantiles of the $F$ distribution for arbitrary values.
 
-Let's caluclate the critical values for $alpha0.05$, and $\alpha=0.01$ for an $F$ distribution with $df1 = 2$ and $df2 = 40$:
+Let's calculate the critical values for $alpha=0.05$, and $\alpha=0.01$ for an $F$ distribution with $df1 = 2$ and $df2 = 40$:
 
 ```{r}
 qf(c(0.95, 0.99), df1 = 2, df2 = 40)
