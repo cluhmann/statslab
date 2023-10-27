@@ -561,8 +561,8 @@ dbl (1): ball_ID
   replicate fruit       
       &lt;int&gt; &lt;chr&gt;       
 1         1 Lime        
-2         1 Pamplemousse
-3         1 Apricot     </code></pre>
+2         1 Tangerine   
+3         1 Pamplemousse</code></pre>
 </div>
 </div>
 <p>Now let’s try asking for 4 different samples.</p>
@@ -573,18 +573,18 @@ dbl (1): ball_ID
 # Groups:   replicate [4]
    replicate fruit       
        &lt;int&gt; &lt;chr&gt;       
- 1         1 Pamplemousse
- 2         1 Tangerine   
- 3         1 Mango       
- 4         2 Pamplemousse
- 5         2 Mango       
- 6         2 Lime        
- 7         3 Apricot     
- 8         3 Mango       
- 9         3 Tangerine   
+ 1         1 Lime        
+ 2         1 Apricot     
+ 3         1 Pamplemousse
+ 4         2 Lime        
+ 5         2 Tangerine   
+ 6         2 Pamplemousse
+ 7         3 Pamplemousse
+ 8         3 Tangerine   
+ 9         3 Apricot     
 10         4 Tangerine   
-11         4 Lime        
-12         4 Apricot     </code></pre>
+11         4 Mango       
+12         4 Lime        </code></pre>
 </div>
 </div>
 <p>Note that the <code>replicate</code> variable indicates which “use” of our virtual shovel that row corresponds to. So rows where <code>replicate=1</code> correspond to our first “scoop” of fruit, rows where <code>replicate=12</code> correspond to our second “scoop” of fruit, and so on.</p>
@@ -598,16 +598,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1611 red  
- 2         1    1303 red  
- 3         1    2086 white
- 4         1    1137 white
- 5         1     587 white
- 6         1    1563 white
- 7         1     675 white
- 8         1     195 white
- 9         1    1139 red  
-10         1     408 red  
+ 1         1     473 white
+ 2         1     568 red  
+ 3         1     488 white
+ 4         1    2182 white
+ 5         1     569 red  
+ 6         1    1086 red  
+ 7         1    1089 white
+ 8         1     917 white
+ 9         1    2062 white
+10         1     424 white
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -621,16 +621,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color is_red
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt; 
- 1         1    1611 red   TRUE  
- 2         1    1303 red   TRUE  
- 3         1    2086 white FALSE 
- 4         1    1137 white FALSE 
- 5         1     587 white FALSE 
- 6         1    1563 white FALSE 
- 7         1     675 white FALSE 
- 8         1     195 white FALSE 
- 9         1    1139 red   TRUE  
-10         1     408 red   TRUE  
+ 1         1     473 white FALSE 
+ 2         1     568 red   TRUE  
+ 3         1     488 white FALSE 
+ 4         1    2182 white FALSE 
+ 5         1     569 red   TRUE  
+ 6         1    1086 red   TRUE  
+ 7         1    1089 white FALSE 
+ 8         1     917 white FALSE 
+ 9         1    2062 white FALSE 
+10         1     424 white FALSE 
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -644,10 +644,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 2
   replicate num_red
       &lt;int&gt;   &lt;int&gt;
-1         1      19</code></pre>
+1         1      16</code></pre>
 </div>
 </div>
-<p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of balls where <code>color</code> is <code>red</code>. In our case, 19 of the 50 balls were red. However, you might have gotten a different number red because of the randomness of the virtual sampling.</p>
+<p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of balls where <code>color</code> is <code>red</code>. In our case, 16 of the 50 balls were red. However, you might have gotten a different number red because of the randomness of the virtual sampling.</p>
 <p>Third and lastly, let’s compute the proportion of the 50 sampled balls that are red by dividing <code>num_red</code> by 50:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>virtual_shovel <span class="sc">%&gt;%</span> </span>
@@ -658,10 +658,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      19     0.38</code></pre>
+1         1      16     0.32</code></pre>
 </div>
 </div>
-<p>In other words, 38% of this virtual sample’s balls were red. Let’s make this code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
+<p>In other words, 32% of this virtual sample’s balls were red. Let’s make this code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>virtual_shovel <span class="sc">%&gt;%</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_red =</span> <span class="fu">sum</span>(color <span class="sc">==</span> <span class="st">"red"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -670,10 +670,10 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      19     0.38</code></pre>
+1         1      16     0.32</code></pre>
 </div>
 </div>
-<p>Great! 38% of <code>virtual_shovel</code>’s 50 balls were red! So based on this particular sample of 50 balls, our guess at the proportion of the <code>bowl</code>’s balls that are red is 38%. But remember from our earlier tactile sampling activity that if we repeat this sampling, we will not necessarily obtain the same value of 38% again. There will likely be some variation. In fact, our 33 groups of friends computed 33 such proportions whose distribution we visualized in <a href="#fig-samplingdistribution-tactile">Figure&nbsp;<span>15.4</span></a>. We saw that these estimates <em>varied</em>. Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel!</p>
+<p>Great! 32% of <code>virtual_shovel</code>’s 50 balls were red! So based on this particular sample of 50 balls, our guess at the proportion of the <code>bowl</code>’s balls that are red is 32%. But remember from our earlier tactile sampling activity that if we repeat this sampling, we will not necessarily obtain the same value of 32% again. There will likely be some variation. In fact, our 33 groups of friends computed 33 such proportions whose distribution we visualized in <a href="#fig-samplingdistribution-tactile">Figure&nbsp;<span>15.4</span></a>. We saw that these estimates <em>varied</em>. Let’s now perform the virtual analog of having 33 groups of students use the sampling shovel!</p>
 </section>
 <section id="sec-shovel-33-times" class="level3" data-number="15.2.2">
 <h3 data-number="15.2.2" class="anchored" data-anchor-id="sec-shovel-33-times"><span class="header-section-number">15.2.2</span> Using the virtual shovel 33 times</h3>
@@ -688,16 +688,16 @@ dbl (1): ball_ID
 # Groups:   replicate [33]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1007 white
- 2         1    2056 red  
- 3         1    2143 white
- 4         1    1394 red  
- 5         1    1653 white
- 6         1      65 white
- 7         1    2025 red  
- 8         1    1025 red  
- 9         1    1937 white
-10         1    1231 white
+ 1         1    1676 red  
+ 2         1    1027 red  
+ 3         1    1739 red  
+ 4         1    1319 white
+ 5         1    1439 red  
+ 6         1    1680 white
+ 7         1    1226 white
+ 8         1     358 white
+ 9         1     698 red  
+10         1    2269 red  
 # ℹ 1,640 more rows</code></pre>
 </div>
 </div>
@@ -713,15 +713,15 @@ dbl (1): ball_ID
 <pre><code># A tibble: 33 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    15     0.3 
- 2         2    19     0.38
- 3         3    15     0.3 
- 4         4    10     0.2 
- 5         5    21     0.42
- 6         6    19     0.38
+ 1         1    25     0.5 
+ 2         2    23     0.46
+ 3         3    11     0.22
+ 4         4    18     0.36
+ 5         5    23     0.46
+ 6         6    23     0.46
  7         7    16     0.32
- 8         8    10     0.2 
- 9         9    16     0.32
+ 8         8    13     0.26
+ 9         9    20     0.4 
 10        10    18     0.36
 # ℹ 23 more rows</code></pre>
 </div>
@@ -777,16 +777,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1,000]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1541 red  
- 2         1    1166 white
- 3         1    1620 red  
- 4         1    2198 white
- 5         1     843 white
- 6         1    1182 white
- 7         1     678 white
- 8         1     508 red  
- 9         1     127 red  
-10         1     211 white
+ 1         1    1076 white
+ 2         1    1593 white
+ 3         1     136 red  
+ 4         1      19 white
+ 5         1    2116 red  
+ 6         1    2257 white
+ 7         1     112 white
+ 8         1    1234 white
+ 9         1    2171 white
+10         1    2072 white
 # ℹ 49,990 more rows</code></pre>
 </div>
 </div>
@@ -801,15 +801,15 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1,000 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    21     0.42
- 2         2    20     0.4 
- 3         3    16     0.32
- 4         4    20     0.4 
- 5         5    18     0.36
- 6         6    18     0.36
- 7         7    17     0.34
- 8         8    16     0.32
- 9         9    12     0.24
+ 1         1    20     0.4 
+ 2         2    18     0.36
+ 3         3    19     0.38
+ 4         4    15     0.3 
+ 5         5    20     0.4 
+ 6         6    23     0.46
+ 7         7    26     0.52
+ 8         8    17     0.34
+ 9         9    17     0.34
 10        10    15     0.3 
 # ℹ 990 more rows</code></pre>
 </div>
@@ -940,15 +940,15 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
-<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">0.067</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">0.045</td>
 </tr>
 </tbody>
 </table>
@@ -1029,16 +1029,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1    1441 white
- 2         1     976 white
- 3         1    1795 white
- 4         1    2303 white
- 5         1    1178 white
- 6         1    1660 white
- 7         1    1332 red  
- 8         1    1527 white
- 9         1    1272 white
-10         1     914 white
+ 1         1    1455 white
+ 2         1    2393 white
+ 3         1    1075 white
+ 4         1    1871 red  
+ 5         1    1858 white
+ 6         1     963 white
+ 7         1     849 white
+ 8         1    1868 red  
+ 9         1     263 white
+10         1    1578 red  
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -1051,7 +1051,7 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      17     0.34</code></pre>
+1         1      15      0.3</code></pre>
 </div>
 </div>
 <p>So in our case, the value of <code>prop_red</code> is the <strong>point estimate</strong> of the population proportion <span class="math inline">\(p\)</span> since it estimates the latter’s value. Furthermore, this point estimate has a specific name when considering proportions: the <em>sample proportion</em>. It is denoted using <span class="math inline">\(\widehat{p}\)</span> because it is a common convention in statistics to use a “hat” symbol to denote point estimates.</p>
@@ -1114,15 +1114,15 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
-<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">0.067</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">0.045</td>
 </tr>
 </tbody>
 </table>
@@ -1159,15 +1159,15 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">n = 25</td>
-<td style="text-align: right;">0.093</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">n = 50</td>
-<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">0.067</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">n = 100</td>
-<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">0.045</td>
 </tr>
 </tbody>
 </table>
