@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 12&nbsp; Statistical Distributions</title>
+<title>statslab - 13&nbsp; Statistical Distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sampling.html" rel="next">
+<link href="./basicregression.html" rel="next">
 <link href="./hypothesis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptives.html">Statistics</a></li><li class="breadcrumb-item"><a href="./distributions.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptives.html">Statistics</a></li><li class="breadcrumb-item"><a href="./distributions.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -226,8 +226,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,19 +250,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descriptives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./hypothesis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./distributions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Basic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,19 +285,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data Files</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Bibliography</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rannoyances.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">A Running List of Annoying R Things</span></span></a>
   </div>
 </li>
       </ul>
@@ -300,36 +341,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link active" data-scroll-target="#normal-distribution"><span class="header-section-number">12.1</span> Normal Distribution</a>
+  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link active" data-scroll-target="#normal-distribution"><span class="header-section-number">13.1</span> Normal Distribution</a>
   <ul class="collapse">
-  <li><a href="#cumulative-distribution-function-cdf" id="toc-cumulative-distribution-function-cdf" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf"><span class="header-section-number">12.1.1</span> Cumulative distribution function (CDF)</a></li>
-  <li><a href="#quantile-function" id="toc-quantile-function" class="nav-link" data-scroll-target="#quantile-function"><span class="header-section-number">12.1.2</span> Quantile function</a></li>
-  <li><a href="#probability-density-function-pdf" id="toc-probability-density-function-pdf" class="nav-link" data-scroll-target="#probability-density-function-pdf"><span class="header-section-number">12.1.3</span> Probability density function (PDF)</a></li>
-  <li><a href="#plotting-the-standard-normal-distribution" id="toc-plotting-the-standard-normal-distribution" class="nav-link" data-scroll-target="#plotting-the-standard-normal-distribution"><span class="header-section-number">12.1.4</span> Plotting the standard normal distribution</a></li>
-  <li><a href="#data-simulation" id="toc-data-simulation" class="nav-link" data-scroll-target="#data-simulation"><span class="header-section-number">12.1.5</span> Data Simulation</a></li>
+  <li><a href="#cumulative-distribution-function-cdf" id="toc-cumulative-distribution-function-cdf" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf"><span class="header-section-number">13.1.1</span> Cumulative distribution function (CDF)</a></li>
+  <li><a href="#quantile-function" id="toc-quantile-function" class="nav-link" data-scroll-target="#quantile-function"><span class="header-section-number">13.1.2</span> Quantile function</a></li>
+  <li><a href="#probability-density-function-pdf" id="toc-probability-density-function-pdf" class="nav-link" data-scroll-target="#probability-density-function-pdf"><span class="header-section-number">13.1.3</span> Probability density function (PDF)</a></li>
+  <li><a href="#plotting-the-standard-normal-distribution" id="toc-plotting-the-standard-normal-distribution" class="nav-link" data-scroll-target="#plotting-the-standard-normal-distribution"><span class="header-section-number">13.1.4</span> Plotting the standard normal distribution</a></li>
+  <li><a href="#data-simulation" id="toc-data-simulation" class="nav-link" data-scroll-target="#data-simulation"><span class="header-section-number">13.1.5</span> Data Simulation</a></li>
   </ul></li>
-  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">12.2</span> <code>t</code> Distribution</a>
+  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">13.2</span> <code>t</code> Distribution</a>
   <ul class="collapse">
-  <li><a href="#cumulative-distribution-function-cdf-1" id="toc-cumulative-distribution-function-cdf-1" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf-1"><span class="header-section-number">12.2.1</span> Cumulative distribution function (CDF)</a></li>
-  <li><a href="#quantile-function-1" id="toc-quantile-function-1" class="nav-link" data-scroll-target="#quantile-function-1"><span class="header-section-number">12.2.2</span> Quantile function</a></li>
-  <li><a href="#probability-density-function-pdf-1" id="toc-probability-density-function-pdf-1" class="nav-link" data-scroll-target="#probability-density-function-pdf-1"><span class="header-section-number">12.2.3</span> Probability density function (PDF)</a></li>
+  <li><a href="#cumulative-distribution-function-cdf-1" id="toc-cumulative-distribution-function-cdf-1" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf-1"><span class="header-section-number">13.2.1</span> Cumulative distribution function (CDF)</a></li>
+  <li><a href="#quantile-function-1" id="toc-quantile-function-1" class="nav-link" data-scroll-target="#quantile-function-1"><span class="header-section-number">13.2.2</span> Quantile function</a></li>
+  <li><a href="#probability-density-function-pdf-1" id="toc-probability-density-function-pdf-1" class="nav-link" data-scroll-target="#probability-density-function-pdf-1"><span class="header-section-number">13.2.3</span> Probability density function (PDF)</a></li>
   </ul></li>
-  <li><a href="#chi-square-distribution" id="toc-chi-square-distribution" class="nav-link" data-scroll-target="#chi-square-distribution"><span class="header-section-number">12.3</span> Chi-square distribution</a>
+  <li><a href="#chi-square-distribution" id="toc-chi-square-distribution" class="nav-link" data-scroll-target="#chi-square-distribution"><span class="header-section-number">13.3</span> Chi-square distribution</a>
   <ul class="collapse">
-  <li><a href="#cumulative-distribution-function-cdf-2" id="toc-cumulative-distribution-function-cdf-2" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf-2"><span class="header-section-number">12.3.1</span> Cumulative distribution function (CDF)</a></li>
-  <li><a href="#quantile-function-2" id="toc-quantile-function-2" class="nav-link" data-scroll-target="#quantile-function-2"><span class="header-section-number">12.3.2</span> Quantile function</a></li>
-  <li><a href="#probability-density-function-pdf-2" id="toc-probability-density-function-pdf-2" class="nav-link" data-scroll-target="#probability-density-function-pdf-2"><span class="header-section-number">12.3.3</span> Probability density function (PDF)</a></li>
-  <li><a href="#data-simulation-1" id="toc-data-simulation-1" class="nav-link" data-scroll-target="#data-simulation-1"><span class="header-section-number">12.3.4</span> Data simulation</a></li>
+  <li><a href="#cumulative-distribution-function-cdf-2" id="toc-cumulative-distribution-function-cdf-2" class="nav-link" data-scroll-target="#cumulative-distribution-function-cdf-2"><span class="header-section-number">13.3.1</span> Cumulative distribution function (CDF)</a></li>
+  <li><a href="#quantile-function-2" id="toc-quantile-function-2" class="nav-link" data-scroll-target="#quantile-function-2"><span class="header-section-number">13.3.2</span> Quantile function</a></li>
+  <li><a href="#probability-density-function-pdf-2" id="toc-probability-density-function-pdf-2" class="nav-link" data-scroll-target="#probability-density-function-pdf-2"><span class="header-section-number">13.3.3</span> Probability density function (PDF)</a></li>
+  <li><a href="#data-simulation-1" id="toc-data-simulation-1" class="nav-link" data-scroll-target="#data-simulation-1"><span class="header-section-number">13.3.4</span> Data simulation</a></li>
   </ul></li>
-  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution"><span class="header-section-number">12.4</span> <span class="math inline">\(F\)</span> distribution</a>
+  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution"><span class="header-section-number">13.4</span> <span class="math inline">\(F\)</span> distribution</a>
   <ul class="collapse">
-  <li><a href="#cumulative-distribution-function" id="toc-cumulative-distribution-function" class="nav-link" data-scroll-target="#cumulative-distribution-function"><span class="header-section-number">12.4.1</span> Cumulative Distribution Function</a></li>
-  <li><a href="#quantile-function-3" id="toc-quantile-function-3" class="nav-link" data-scroll-target="#quantile-function-3"><span class="header-section-number">12.4.2</span> Quantile function</a></li>
-  <li><a href="#probability-density-function-pdf-3" id="toc-probability-density-function-pdf-3" class="nav-link" data-scroll-target="#probability-density-function-pdf-3"><span class="header-section-number">12.4.3</span> Probability density function (PDF)</a></li>
-  <li><a href="#data-simulation-2" id="toc-data-simulation-2" class="nav-link" data-scroll-target="#data-simulation-2"><span class="header-section-number">12.4.4</span> Data simulation</a></li>
+  <li><a href="#cumulative-distribution-function" id="toc-cumulative-distribution-function" class="nav-link" data-scroll-target="#cumulative-distribution-function"><span class="header-section-number">13.4.1</span> Cumulative Distribution Function</a></li>
+  <li><a href="#quantile-function-3" id="toc-quantile-function-3" class="nav-link" data-scroll-target="#quantile-function-3"><span class="header-section-number">13.4.2</span> Quantile function</a></li>
+  <li><a href="#probability-density-function-pdf-3" id="toc-probability-density-function-pdf-3" class="nav-link" data-scroll-target="#probability-density-function-pdf-3"><span class="header-section-number">13.4.3</span> Probability density function (PDF)</a></li>
+  <li><a href="#data-simulation-2" id="toc-data-simulation-2" class="nav-link" data-scroll-target="#data-simulation-2"><span class="header-section-number">13.4.4</span> Data simulation</a></li>
   </ul></li>
-  <li><a href="#set-of-distributions" id="toc-set-of-distributions" class="nav-link" data-scroll-target="#set-of-distributions"><span class="header-section-number">12.5</span> Set of Distributions</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">12.6</span> Exercises</a></li>
+  <li><a href="#set-of-distributions" id="toc-set-of-distributions" class="nav-link" data-scroll-target="#set-of-distributions"><span class="header-section-number">13.5</span> Set of Distributions</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">13.6</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -338,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-distributions" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></span></h1>
+<h1 class="title"><span id="sec-distributions" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistical Distributions</span></span></h1>
 </div>
 
 
@@ -354,11 +395,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>R provides a very simple and effective way of calculating distribution characteristics for a number of distributions (we only present part of it here).</p>
-<section id="normal-distribution" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">12.1</span> Normal Distribution</h2>
+<section id="normal-distribution" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">13.1</span> Normal Distribution</h2>
 <p>We will introduce the different statistical functions using the normal distribution and then look at other distributions. If you want an overview of the normal distribution, you can <code>help("Normal")</code>.</p>
-<section id="cumulative-distribution-function-cdf" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf"><span class="header-section-number">12.1.1</span> Cumulative distribution function (CDF)</h3>
+<section id="cumulative-distribution-function-cdf" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf"><span class="header-section-number">13.1.1</span> Cumulative distribution function (CDF)</h3>
 <p>The distribution function <code>pnorm()</code> is needed to calculate p-values. The simplest case concerns the left tail (one-tailed) <span class="math inline">\(p\)</span>-value for a given standard-normally distributed empirical z score.</p>
 <p>Example:</p>
 <div class="cell">
@@ -423,8 +464,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quantile-function" class="level3" data-number="12.1.2">
-<h3 data-number="12.1.2" class="anchored" data-anchor-id="quantile-function"><span class="header-section-number">12.1.2</span> Quantile function</h3>
+<section id="quantile-function" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="quantile-function"><span class="header-section-number">13.1.2</span> Quantile function</h3>
 <p>The quantile function <code>qnorm()</code> is the complement to the distribution function. It is also called inverse cumulative distribution function (ICDF). With <code>qnorm()</code> we obtain a <code>z</code>-score (i.e., a quantile of the standard normal distribution) for a given area <span class="math inline">\(p\)</span> representing the first argument of the function. In practice, we often need this function to calculate critical values for a given <span class="math inline">\(\alpha\)</span>-level for one-tailed and two-tailed significance tests.</p>
 <p>The most frequently used z quantiles for <span class="math inline">\(\alpha=0.01\)</span> and <span class="math inline">\(\alpha=0.05\)</span> include:</p>
 <div class="cell">
@@ -466,8 +507,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>With an IQ of just under 120, you thus belong to the smartest 10% of the population!</p>
 </section>
-<section id="probability-density-function-pdf" class="level3" data-number="12.1.3">
-<h3 data-number="12.1.3" class="anchored" data-anchor-id="probability-density-function-pdf"><span class="header-section-number">12.1.3</span> Probability density function (PDF)</h3>
+<section id="probability-density-function-pdf" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3" class="anchored" data-anchor-id="probability-density-function-pdf"><span class="header-section-number">13.1.3</span> Probability density function (PDF)</h3>
 <p>We actually rarely need the probability density function (PDF) of a normally distributed score. As a reminder: the probability of individual values of a continuous random variable is 0, only <em>intervals</em> of values have a probability greater than 0 (corresponding to the area under the curve, the integral). Individual values have a probability <em>density</em>, which corresponds to the “height” of the the probability distribution at the point <span class="math inline">\(X = x\)</span>. Thus, we need the probability density function if we want to plot a normal distribution.</p>
 <p>Before we start plotting, let’s have a look at the definition of the probability density function of the standard normal distribution:</p>
 <p><span class="math display">\[
@@ -511,8 +552,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="plotting-the-standard-normal-distribution" class="level3" data-number="12.1.4">
-<h3 data-number="12.1.4" class="anchored" data-anchor-id="plotting-the-standard-normal-distribution"><span class="header-section-number">12.1.4</span> Plotting the standard normal distribution</h3>
+<section id="plotting-the-standard-normal-distribution" class="level3" data-number="13.1.4">
+<h3 data-number="13.1.4" class="anchored" data-anchor-id="plotting-the-standard-normal-distribution"><span class="header-section-number">13.1.4</span> Plotting the standard normal distribution</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
@@ -552,8 +593,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="data-simulation" class="level3" data-number="12.1.5">
-<h3 data-number="12.1.5" class="anchored" data-anchor-id="data-simulation"><span class="header-section-number">12.1.5</span> Data Simulation</h3>
+<section id="data-simulation" class="level3" data-number="13.1.5">
+<h3 data-number="13.1.5" class="anchored" data-anchor-id="data-simulation"><span class="header-section-number">13.1.5</span> Data Simulation</h3>
 <p>With <code>rnorm()</code>, we can generate normally distributed pseudo-random numbers. It is a <em>pseudo</em>-random number generator because the function only simulates randomness. An actual random number generator is a bit complicated and can not be easily implemented using a deterministic computer. The advantage of the pseudo-random generator is that we can get a reproducible “random” draw using the seed value function. <code>set.seed()</code> starts the draw algorithm at a specific location, so that the same starting numbers always return the same “random” numbers.</p>
 <p>Let’s generate 22 IQ scores:</p>
 <div class="cell">
@@ -576,11 +617,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="t-distribution" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">12.2</span> <code>t</code> Distribution</h2>
+<section id="t-distribution" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">13.2</span> <code>t</code> Distribution</h2>
 <p>The function arguments for the <code>t</code> distribution are the same as for the normal distribution with the following differences: The degrees of freedom (<code>df</code>) of the <code>t</code> distribution must be specified. The arguments mean and sd are omitted, but there is the non-centrality parameter ncp. This is needed (as the name suggests) for non-central t distributions that do not have a mean of 0. While the central t distribution (with <span class="math inline">\(\mu=0\)</span>) is symmetric and corresponds to the <span class="math inline">\(H_0\)</span> distribution required for t tests, the non-central t distributions (<span class="math inline">\(H_1\)</span> distributions) are asymmetric and required for power analysis. We will not look at these distributions here, so we will not use the <code>ncp</code> argument.</p>
-<section id="cumulative-distribution-function-cdf-1" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf-1"><span class="header-section-number">12.2.1</span> Cumulative distribution function (CDF)</h3>
+<section id="cumulative-distribution-function-cdf-1" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf-1"><span class="header-section-number">13.2.1</span> Cumulative distribution function (CDF)</h3>
 <p>Example for a one-tailed (left-tailed) <span class="math inline">\(p\)</span>-value:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="at">q =</span> <span class="sc">-</span><span class="fl">1.73</span>, <span class="at">df =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -612,8 +653,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quantile-function-1" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="quantile-function-1"><span class="header-section-number">12.2.2</span> Quantile function</h3>
+<section id="quantile-function-1" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="quantile-function-1"><span class="header-section-number">13.2.2</span> Quantile function</h3>
 <p>With <code>qt()</code> we get a <code>t</code> score for a given area <span class="math inline">\(p\)</span>. In most <code>t</code> distribution tables, only specific <code>t</code> quantiles are tabulated, but we can calculate quantiles for arbitrary quantiles. Let’s get some quantiles for a <code>t</code>-distribution with <span class="math inline">\(df = 6\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>my_ps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>, <span class="fl">0.99</span>, <span class="fl">0.995</span>)</span>
@@ -623,8 +664,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="probability-density-function-pdf-1" class="level3" data-number="12.2.3">
-<h3 data-number="12.2.3" class="anchored" data-anchor-id="probability-density-function-pdf-1"><span class="header-section-number">12.2.3</span> Probability density function (PDF)</h3>
+<section id="probability-density-function-pdf-1" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="probability-density-function-pdf-1"><span class="header-section-number">13.2.3</span> Probability density function (PDF)</h3>
 <p>Let’s plot a <code>t</code> distribution:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
@@ -665,11 +706,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="chi-square-distribution" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="chi-square-distribution"><span class="header-section-number">12.3</span> Chi-square distribution</h2>
+<section id="chi-square-distribution" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="chi-square-distribution"><span class="header-section-number">13.3</span> Chi-square distribution</h2>
 <p>For the <span class="math inline">\(\chi^2\)</span> distribution (<code>help ("chisquare")</code>) the functionality is the same as for the <code>t</code> distribution. The respective degrees of freedom must be specified and there are also non-central distributions, which we will not consider further. The functions are called <code>pchisq()</code> (cumulative distribution function), <code>qchisq()</code> (quantile function), <code>dchisq()</code> (density function) and <code>rchisq()</code> (random generation of <span class="math inline">\(\chi^2\)</span>-distributed scores).</p>
-<section id="cumulative-distribution-function-cdf-2" class="level3" data-number="12.3.1">
-<h3 data-number="12.3.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf-2"><span class="header-section-number">12.3.1</span> Cumulative distribution function (CDF)</h3>
+<section id="cumulative-distribution-function-cdf-2" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="cumulative-distribution-function-cdf-2"><span class="header-section-number">13.3.1</span> Cumulative distribution function (CDF)</h3>
 <p>When calculating <span class="math inline">\(p\)</span>-values for the <span class="math inline">\(\chi^2\)</span> distribution, in most cases only the upper (right) end of the distribution is needed. This is because most statistical tests are designed in such a way that all deviations from <span class="math inline">\(H_0\)</span> (no matter in which direction) lead to a larger <span class="math inline">\(\chi^2\)</span> value (that’s why these tests always test a non-directional hypothesis, and the <span class="math inline">\(p\)</span>-value therefore corresponds to a two-tailed test). Thus, we always use the argument <code>lower.tail = FALSE</code> to calculate <span class="math inline">\(p\)</span>-values for <span class="math inline">\(\chi^2\)</span> distributions.</p>
 <p>Example for a p-value for <span class="math inline">\(\chi^2(2)=4.56\)</span>:</p>
 <div class="cell">
@@ -679,8 +720,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quantile-function-2" class="level3" data-number="12.3.2">
-<h3 data-number="12.3.2" class="anchored" data-anchor-id="quantile-function-2"><span class="header-section-number">12.3.2</span> Quantile function</h3>
+<section id="quantile-function-2" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="quantile-function-2"><span class="header-section-number">13.3.2</span> Quantile function</h3>
 <p>With <code>qchisq()</code> we obtain the quantiles of the <span class="math inline">\(\chi^2\)</span> distribution, e.g.&nbsp;the critical values for <span class="math inline">\(\alpha=0.05\)</span>. Some statisticians are very proud to know the critical values for the 1, 2, 3, 4, and 5 degrees of freedom of the chi-square distributions by heart, because these are often needed for model comparisons via likelihood ratio tests.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>my_dfs <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
@@ -690,8 +731,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="probability-density-function-pdf-2" class="level3" data-number="12.3.3">
-<h3 data-number="12.3.3" class="anchored" data-anchor-id="probability-density-function-pdf-2"><span class="header-section-number">12.3.3</span> Probability density function (PDF)</h3>
+<section id="probability-density-function-pdf-2" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="probability-density-function-pdf-2"><span class="header-section-number">13.3.3</span> Probability density function (PDF)</h3>
 <p>Again, we can use the probability density function <code>dchisq()</code> to plot one or more <span class="math inline">\(\chi^2\)</span> distributions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">%&gt;%</span></span>
@@ -731,16 +772,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="data-simulation-1" class="level3" data-number="12.3.4">
-<h3 data-number="12.3.4" class="anchored" data-anchor-id="data-simulation-1"><span class="header-section-number">12.3.4</span> Data simulation</h3>
+<section id="data-simulation-1" class="level3" data-number="13.3.4">
+<h3 data-number="13.3.4" class="anchored" data-anchor-id="data-simulation-1"><span class="header-section-number">13.3.4</span> Data simulation</h3>
 <p>With <code>rchisq()</code> we can generate <span class="math inline">\(\chi^2\)</span>-distributed random numbers. The functionality is the same as for the other distributions.</p>
 </section>
 </section>
-<section id="f-distribution" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="f-distribution"><span class="header-section-number">12.4</span> <span class="math inline">\(F\)</span> distribution</h2>
+<section id="f-distribution" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="f-distribution"><span class="header-section-number">13.4</span> <span class="math inline">\(F\)</span> distribution</h2>
 <p>For the <span class="math inline">\(F\)</span> distribution (<code>help ("FDist")</code>), the same rules apply as for the <span class="math inline">\(\chi^2\)</span> distribution and for the t distribution. We have to specify both numerator degrees of freedom (<code>df1</code>) and denominator degrees of freedom (<code>df2</code>). The functions are <code>pf()</code> (cumulative distribution function), <code>qf()</code> (quantile function), <code>df()</code> (probability density function), and <code>rf()</code> (random generation of <span class="math inline">\(F\)</span> distributed scores).</p>
-<section id="cumulative-distribution-function" class="level3" data-number="12.4.1">
-<h3 data-number="12.4.1" class="anchored" data-anchor-id="cumulative-distribution-function"><span class="header-section-number">12.4.1</span> Cumulative Distribution Function</h3>
+<section id="cumulative-distribution-function" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="cumulative-distribution-function"><span class="header-section-number">13.4.1</span> Cumulative Distribution Function</h3>
 <p>When calculating <span class="math inline">\(p\)</span>-values for the <span class="math inline">\(F\)</span> distribution, in most cases only the upper (right) end of the distribution is needed (as with the <span class="math inline">\(\chi^2\)</span> distribution). We therefore always use the argument <code>lower.tail = FALSE</code> to calculate <span class="math inline">\(p\)</span>-values. Probably the most typical application for the <span class="math inline">\(F\)</span> test is the one-factorial analysis of variance (ANOVA). Here we test whether there are any significant differences in the mean values between several groups. All deviations from <span class="math inline">\(H_0\)</span> lead to a larger SSQbetween and thus to a higher empirical <span class="math inline">\(F\)</span>-statistic. That’s also why we consider the entire <span class="math inline">\(\alpha\)</span> at the upper end of the distribution when computing critical <span class="math inline">\(F\)</span> scores (see below “Quantile Function”).</p>
 <p>Example for a <span class="math inline">\(p\)</span>-value for <span class="math inline">\(F = 3.89 (df1 = 2, df2 = 40)\)</span>:</p>
 <div class="cell">
@@ -750,8 +791,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quantile-function-3" class="level3" data-number="12.4.2">
-<h3 data-number="12.4.2" class="anchored" data-anchor-id="quantile-function-3"><span class="header-section-number">12.4.2</span> Quantile function</h3>
+<section id="quantile-function-3" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="quantile-function-3"><span class="header-section-number">13.4.2</span> Quantile function</h3>
 <p>If we compute an ANOVA by hand (please don’t), <span class="math inline">\(F\)</span> distribution tables often do not contain all combinations of degrees of freedoms. With <code>qf()</code> we can obtain the quantiles of the <span class="math inline">\(F\)</span> distribution for arbitrary values.</p>
 <p>Let’s caluclate the critical values for <span class="math inline">\(alpha0.05\)</span>, and <span class="math inline">\(\alpha=0.01\)</span> for an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(df1 = 2\)</span> and <span class="math inline">\(df2 = 40\)</span>:</p>
 <div class="cell">
@@ -761,8 +802,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="probability-density-function-pdf-3" class="level3" data-number="12.4.3">
-<h3 data-number="12.4.3" class="anchored" data-anchor-id="probability-density-function-pdf-3"><span class="header-section-number">12.4.3</span> Probability density function (PDF)</h3>
+<section id="probability-density-function-pdf-3" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="probability-density-function-pdf-3"><span class="header-section-number">13.4.3</span> Probability density function (PDF)</h3>
 <p>Let’s plot some <span class="math inline">\(F\)</span> distributions using <code>df()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
@@ -791,13 +832,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"df(x, c(2, 5, 8), c(40, 80, 120))"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-simulation-2" class="level3" data-number="12.4.4">
-<h3 data-number="12.4.4" class="anchored" data-anchor-id="data-simulation-2"><span class="header-section-number">12.4.4</span> Data simulation</h3>
+<section id="data-simulation-2" class="level3" data-number="13.4.4">
+<h3 data-number="13.4.4" class="anchored" data-anchor-id="data-simulation-2"><span class="header-section-number">13.4.4</span> Data simulation</h3>
 <p>With <code>rf()</code> we can generate <span class="math inline">\(F\)</span> distributed random numbers. The functionality is the same as for the other distributions.</p>
 </section>
 </section>
-<section id="set-of-distributions" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="set-of-distributions"><span class="header-section-number">12.5</span> Set of Distributions</h2>
+<section id="set-of-distributions" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="set-of-distributions"><span class="header-section-number">13.5</span> Set of Distributions</h2>
 <p>There are many statistical distributions available in R. Each has the same functionality as we have seen above. Here is a table in case you are wondering what some of the distributions are and/or what the associated function names are.</p>
 <table class="table">
 <colgroup>
@@ -960,8 +1001,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="exercises" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">12.6</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">13.6</span> Exercises</h2>
 <ol type="1">
 <li>Compute the probability densities of the following IQ-scores: 70, 80, 90, 100, 110, 120, 130</li>
 <li>Plot the following two normal distributions into a common plot: <span class="math inline">\(N(\mu=0,\sigma^2=1)\)</span> und <span class="math inline">\(N(\mu=3,\sigma^2=0.75)\)</span> Use different colors for the two distributions. Hint: variance is not the same thing as the standard deviation!</li>
@@ -1220,12 +1261,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./hypothesis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sampling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./basicregression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Basic Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
