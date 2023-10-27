@@ -22,7 +22,7 @@ Assume that we have data set and that we have calculated the mean of the data. L
 - Model A (augmented): $Y_i=\bar{Y}+\epsilon_i$
 - $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
 
-When we calculate the sum of square errors (SSE), we will find that the SSE associated with the augmented model is _no smaller than_ the SSE associated with the compact model.  Thus, the real question becomes whether the SSE associated with the augmented model improves on the compact model _enough_ for us to favor the augmented model over the compact model.  This is a statistical question.  Indeed, this is arguably *the* statistical question and is certainly the essence of statistical inference.
+When we calculate the sum of square errors (SSE), we will find that the SSE associated with the augmented model is _no smaller than_ the SSE associated with the compact model.  Thus, the real question becomes whether the SSE associated with the augmented model improves on the compact model _enough_ for us to favor the augmented model over the compact model.  This is a statistical question.  Indeed, this is arguably *the* statistical question and is certainly the essence of statistical testing
 
 To make this exercise concrete, let's generate a sample in which the null hypothesis is true.  That is, $\beta_0=50$.
 
