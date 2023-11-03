@@ -348,6 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#sec-model1table" id="toc-sec-model1table" class="nav-link" data-scroll-target="#sec-model1table"><span class="header-section-number">14.1.1</span> Simple linear regression</a></li>
   <li><a href="#sec-model1points" id="toc-sec-model1points" class="nav-link" data-scroll-target="#sec-model1points"><span class="header-section-number">14.1.2</span> Observed values, fitted values, and residuals</a></li>
+  <li><a href="#side-note-about-regression-diagnostics" id="toc-side-note-about-regression-diagnostics" class="nav-link" data-scroll-target="#side-note-about-regression-diagnostics"><span class="header-section-number">14.1.3</span> Side note about regression diagnostics</a></li>
   </ul></li>
   <li><a href="#sec-model2" id="toc-sec-model2" class="nav-link" data-scroll-target="#sec-model2"><span class="header-section-number">14.2</span> Metric-Predicted Variable with One Dichotomous Predictor</a>
   <ul class="collapse">
@@ -468,7 +469,7 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 &amp;= 4.17998 + 2.20111 \cdot ast
     \end{aligned}
 \]</span></p>
-<p>The estiamted value of the intercept, <span class="math inline">\(b_0 = 4.17998\)</span>, is the value of <code>pts</code> expected when <span class="math inline">\(ast=0\)</span>. Or in graphical terms, <span class="math inline">\(b_0 = 4.17998\)</span> indicates where the regression line intersects the <span class="math inline">\(y\)</span> axis when <span class="math inline">\(x=0\)</span>. Note, that the intercept always has a natural a mathematical interpretation, it may well not have a <em>practical</em> interpretation. For example, if <code>x</code> were ratings from a scale that ran 1-7, observing <span class="math inline">\(x=0\)</span> would be impossible.</p>
+<p>The estimated value of the intercept, <span class="math inline">\(b_0 = 4.17998\)</span>, is the value of <code>pts</code> expected when <span class="math inline">\(ast=0\)</span>. Or in graphical terms, <span class="math inline">\(b_0 = 4.17998\)</span> indicates where the regression line intersects the <span class="math inline">\(y\)</span> axis when <span class="math inline">\(x=0\)</span>. Note, that the intercept always has a natural a mathematical interpretation, it may well not have a <em>practical</em> interpretation. For example, if <code>x</code> were ratings from a scale that ran 1-7, observing <span class="math inline">\(x=0\)</span> would be impossible.</p>
 <p>Typically, the slope <span class="math inline">\(b_1 = b_{ast} = 2.20111\)</span>, is of primary interested, as it summarizes the relationship between <code>ast</code> and <code>pts</code>, the two variables we are investigating. Note that the estimate of <span class="math inline">\(b_1 = b_{ast}\)</span> is positive, suggesting a positive relationship between these two variables, higher <code>ast</code> values seem to imply <code>pts</code>. The other way we might evaluate this relationship would be to calculate a correlation coefficient:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(nba<span class="sc">$</span>pts, nba<span class="sc">$</span>ast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -585,6 +586,11 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Just as we did for Chris Clemons’ single row from <code>nba</code>, one can now repeat the calculations for any particular data point (row) in the <code>nba</code> data set or, if you so wish, do so for <em>all</em> rows.</p>
 <p>In a bit, we’ll talk about how conventional (“ordinary least squares”) regression takes each of these residuals, squares them (so they are all positive), and finds the model parameters (e.g., <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>) that minimize their sum.</p>
 </section>
+<section id="side-note-about-regression-diagnostics" class="level3" data-number="14.1.3">
+<h3 data-number="14.1.3" class="anchored" data-anchor-id="side-note-about-regression-diagnostics"><span class="header-section-number">14.1.3</span> Side note about regression diagnostics</h3>
+<p>The following functions allow you to investigate the results of a regression conducted with <code>lm()</code>. Each takes a fitted model as an argument (e.g., <code>model</code>):</p>
+<p><code>coefficients(m)</code> Model coefficients <code>coef(m)</code> Same as coefficients(m) <code>confint(m)</code> Confidence intervals for the regression coefficients <code>deviance(m)</code> Residual sum of squares <code>effects(m)</code> Vector of orthogonal effects <code>fitted(m)</code> Vector of fitted y values <code>r</code>esiduals(m)<code>Model residuals</code>resid(m)<code>Same as residuals(m)</code>summary(m)<code>Key statistics, such as $R^2$, the $F$ statistic, and the residual standard error ($\sigma$)</code>vcov(m)` Variance–covariance matrix of the main parameters</p>
+</section>
 </section>
 <section id="sec-model2" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="sec-model2"><span class="header-section-number">14.2</span> Metric-Predicted Variable with One Dichotomous Predictor</h2>
@@ -623,16 +629,16 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 2
    player_name     pts
    &lt;chr&gt;         &lt;dbl&gt;
- 1 LeBron James   25.3
- 2 LeBron James   26.8
- 3 LeBron James   27.3
- 4 LeBron James   26.4
+ 1 Stephen Curry  25.3
+ 2 LeBron James   27.3
+ 3 LeBron James   31.4
+ 4 LeBron James   30.3
  5 LeBron James   25.3
- 6 LeBron James   26.7
- 7 LeBron James   27.4
- 8 Stephen Curry  18.6
- 9 LeBron James   30.3
-10 Stephen Curry  24  </code></pre>
+ 6 Stephen Curry  25.5
+ 7 Stephen Curry  32  
+ 8 LeBron James   27.1
+ 9 LeBron James   30  
+10 LeBron James   27.1</code></pre>
 </div>
 </div>
 <p>Another way to get a sense of this data is by generating a variety of descriptive statistics.</p>
