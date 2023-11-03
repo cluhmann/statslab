@@ -281,67 +281,52 @@ nba %>%
 
 This visualization reiterates that LeBron James' median (the solid line in the middle of the left box) are greater than Stephen Curry's, but we can also more easily see that Stephen Curry's values are more spread out; there is greater variability in Curry's `pts` values across seasons.
 
-All of these explorations seem to suggest that LeBron James is a better scorer than Stephen Curry. But we really need some inferential statistics to determine whether the difference between the two players' means is large enough to convince us to treat LeBron James' mean as larger than Stephen Curry's mean.
+All of these explorations seem to suggest that LeBron James is a better scorer than Stephen Curry. But we really need some inferential statistics to determine whether the difference between the two players' means is large enough to convince us to reject the null hypothesis that the two players' means are equal (and treat LeBron James' mean as larger than Stephen Curry's mean).
 
 
 ### Linear regression {#sec-model2table}
 
-In Subsection @sec-model1table, we introduced simple linear regression, which involves modeling the relationship between a numerical outcome variable $y$ and a numerical explanatory variable $x$. In the current situation, we instead have a categorical explanatory variable `player_name`. Furthermore, this categorical variable takes on exactly two values (i.e., "LeBron James" and "Stephen Curry"), which means that our explanatory variable is _dichotomous_. Our regression model will not yield a "best-fitting" regression line like in Figure \@ref(fig:numxplot3), but rather *offsets* relative to a baseline for comparison.\index{offset}
+In @sec-model1table, we introduced simple linear regression, which involves modeling the relationship between a numerical outcome variable $y$ and a numerical explanatory variable $x$. In the current situation, we instead have a categorical explanatory variable `player_name`. Furthermore, this categorical variable takes on exactly two values (i.e., "LeBron James" and "Stephen Curry"), which means that our explanatory variable is _dichotomous_.
 
-As we did in Subsection \@ref(model1table) when studying the relationship between teaching scores and "beauty" scores, let's output the regression table for this model. Recall that this is done in two steps:
+Before we begin putting our regression model together, let's grab the relevant data and save into a variable for less verbose code:
 
-1. We first "fit" the linear regression model using the `lm(y ~ x, data)` function and save it in `lifeExp_model`.
-1. We get the regression table by applying the `get_regression_table()` function from the `moderndive` package to `lifeExp_model`.
-
-```{r, eval=FALSE}
-lifeExp_model <- lm(lifeExp ~ continent, data = gapminder2007)
-get_regression_table(lifeExp_model)
-```
-```{r, echo=FALSE, purl=FALSE}
-lifeExp_model <- lm(lifeExp ~ continent, data = gapminder2007)
-```
-```{r catxplot4b, echo=FALSE, purl=FALSE}
-get_regression_table(lifeExp_model) %>%
-  kable(
-    digits = 3,
-    caption = "Linear regression table",
-    booktabs = TRUE,
-    linesep = ""
-  ) %>%
-  kable_styling(
-    font_size = ifelse(is_latex_output(), 10, 16),
-    latex_options = c("hold_position")
-  )
+```{r}
+curryjames <- nba %>%
+    filter(player_name %in% c("Stephen Curry", "LeBron James")) %>%
+    select(c(pts, player_name))
 ```
 
-Let's once again focus on the values in the `term` and `estimate` columns of Table \@ref(tab:catxplot4b). Why are there now 5 rows? Let's break them down one-by-one:
+Now we can construct the model, fit it to the data, and summarize our results as we did before.
 
-1. `intercept` corresponds to the mean life expectancy of countries in Africa of `r intercept` years.
-1. `continent: Americas` corresponds to countries in the Americas and the value +`r offset_americas` is the same difference in mean life expectancy relative to Africa we displayed in Table \@ref(tab:continent-mean-life-expectancies). In other words, the mean life expectancy of countries in the Americas is $`r intercept` + `r offset_americas` = `r mean_americas`$.
-1. `continent: Asia` corresponds to countries in Asia and the value +`r offset_asia` is the same difference in mean life expectancy relative to Africa we displayed in Table \@ref(tab:continent-mean-life-expectancies). In other words, the mean life expectancy of countries in Asia is $`r intercept` + `r offset_asia` = `r mean_asia`$.
-1. `continent: Europe` corresponds to countries in Europe and the value +`r offset_europe` is the same difference in mean life expectancy relative to Africa we displayed in Table \@ref(tab:continent-mean-life-expectancies). In other words, the mean life expectancy of countries in Europe is $`r intercept` + `r offset_europe` = `r mean_europe`$.
-1. `continent: Oceania` corresponds to countries in Oceania and the value +`r offset_oceania` is the same difference in mean life expectancy relative to Africa we displayed in Table \@ref(tab:continent-mean-life-expectancies). In other words, the mean life expectancy of countries in Oceania is $`r intercept` + `r offset_oceania` = `r mean_oceania`$.
+```{r}
+curryjames_model <- lm(pts ~ player_name, data = curryjames)
+summary(curryjames_model)
+```
 
-To summarize, the 5 values in the `estimate` column in Table \@ref(tab:catxplot4b) correspond to the "baseline for comparison" continent Africa (the intercept) as well as four "offsets" from this baseline for the remaining 4 continents: the Americas, Asia, Europe, and Oceania.
+We have two rows in our regression table: `(Intercept)` and `player_nameStephen Curry`.  We specified our model as `pts ~ player_name`. But what exactly is happening behind the scenes?  One way to investigate is to look at the design matrix that `lm()` has constructed on our behalf:
 
-You might be asking at this point why was Africa chosen as the "baseline for comparison" group. This is the case for no other reason than it comes first alphabetically of the five continents; by default R arranges factors/categorical variables in alphanumeric order. You can change this baseline group to be another continent if you manipulate the variable `continent`'s factor "levels" using the `forcats` package. See [Chapter 15](https://r4ds.had.co.nz/factors.html) of *R for Data Science* [@rds2016] for examples. 
+```{r}
+model.matrix(curryjames_model)
+```
 
-Let's now write the equation for our fitted values $\widehat{y} = \widehat{\text{life exp}}$.
+To better understand how this design matrix encodes our raw data, we can squash to two together for easy comparison:
 
-<!--
-Note: Even though markdown preview of the following LaTeX looks garbled, it
-comes out correct in the HTML output.
--->
+```{r}
+bind_cols(curryjames, model.matrix(curryjames_model))
+```
+
+Now we can see that `lm()` has constructed a design matrix with two columns (one named `(Intercept)` and one named `player_nameStephen Curry`). Every value in the intercept column is 1. The values in the `player_nameStephen Curry` column are 1 where `player_name == Stephen Curry` and 0 where `player_name == LeBron James`.
+
+Let's now write the equation for our fitted values $\widehat{y} = \widehat{\text{pts}}$:
+
 $$
 \begin{aligned}
-\widehat{y} = \widehat{\text{life exp}} &= b_0 + b_{\text{Amer}}\cdot\mathbb{1}_{\text{Amer}}(x) + b_{\text{Asia}}\cdot\mathbb{1}_{\text{Asia}}(x) + \\
-& \qquad b_{\text{Euro}}\cdot\mathbb{1}_{\text{Euro}}(x) + b_{\text{Ocean}}\cdot\mathbb{1}_{\text{Ocean}}(x)\\
-&= `r intercept` + `r offset_americas`\cdot\mathbb{1}_{\text{Amer}}(x) + `r offset_asia`\cdot\mathbb{1}_{\text{Asia}}(x) + \\
-& \qquad `r offset_europe`\cdot\mathbb{1}_{\text{Euro}}(x) + `r offset_oceania`\cdot\mathbb{1}_{\text{Ocean}}(x)
+\widehat{y} = \widehat{pts} &= b_0 + b_1\cdot\mathbb{1}_{\text{Curry}}(x)
 \end{aligned}
 $$
 
-Whoa! That looks daunting! Don't fret, however, as once you understand what all the elements mean, things simplify greatly. First, $\mathbb{1}_{A}(x)$ is what's known in mathematics as an "indicator function." It returns only one of two possible values, 0 and 1, where
+
+What is happening here? First, $\mathbb{1}_{A}(x)$ is what's known in mathematics as an "indicator function". It returns only one of two possible values, 0 and 1, where
 
 $$
 \mathbb{1}_{A}(x) = \left\{
@@ -351,121 +336,85 @@ $$
 \right.
 $$
 
-In a statistical modeling context, this is also known as a *dummy variable*. \index{dummy variable} In our case, let's consider the first such indicator variable $\mathbb{1}_{\text{Amer}}(x)$. This indicator function returns 1 if a country is in the Americas, 0 otherwise:
+In a statistical modeling context, this is also known as a *dummy variable*. In our case, the indicator variable $\mathbb{1}_{\text{Curry}}(x)$ returns 1 if a row of data corresponds to an observation associated with Stephan Curry and 0 otherwise (which is exactly what is in the `curry` column of our design matrix above):
 
 $$
-\mathbb{1}_{\text{Amer}}(x) = \left\{
+\mathbb{1}_{\text{Curry}}(x) = \left\{
 \begin{array}{ll}
-1 & \text{if } \text{country } x \text{ is in the Americas} \\
+1 & \text{if } \text{player } x \text{ is Stephen Curry} \\
 0 & \text{otherwise}\end{array}
 \right.
 $$
 
-Second, $b_0$ corresponds to the intercept as before; in this case, it's the mean life expectancy of all countries in Africa. Third, the $b_{\text{Amer}}$, $b_{\text{Asia}}$, $b_{\text{Euro}}$, and $b_{\text{Ocean}}$ represent the 4 "offsets relative to the baseline for comparison" in the regression table output in Table \@ref(tab:catxplot4b): `continent: Americas`, `continent: Asia`, `continent: Europe`, and `continent: Oceania`.
-
-Let's put this all together and compute the fitted value $\widehat{y} = \widehat{\text{life exp}}$ for a country in Africa. Since the country is in Africa, all four indicator functions $\mathbb{1}_{\text{Amer}}(x)$, $\mathbb{1}_{\text{Asia}}(x)$, $\mathbb{1}_{\text{Euro}}(x)$, and $\mathbb{1}_{\text{Ocean}}(x)$ will equal 0, and thus:
+Thus, we can consider two different scenarios.  The first, is what the model looks like when we are considering observations from LeBron James.  At that point, $\mathbb{1}_{\text{Curry}}(x)=0$, so the model reduces to:
 
 $$
 \begin{aligned}
-\widehat{\text{life exp}} &= b_0 + b_{\text{Amer}}\cdot\mathbb{1}_{\text{Amer}}(x) + b_{\text{Asia}}\cdot\mathbb{1}_{\text{Asia}}(x)
-+ \\
-& \qquad b_{\text{Euro}}\cdot\mathbb{1}_{\text{Euro}}(x) + b_{\text{Ocean}}\cdot\mathbb{1}_{\text{Ocean}}(x)\\
-&= `r intercept` + `r offset_americas`\cdot\mathbb{1}_{\text{Amer}}(x) + `r offset_asia`\cdot\mathbb{1}_{\text{Asia}}(x)
-+ \\
-& \qquad `r offset_europe`\cdot\mathbb{1}_{\text{Euro}}(x) + `r offset_oceania`\cdot\mathbb{1}_{\text{Ocean}}(x)\\
-&= `r intercept` + `r offset_americas`\cdot 0 + `r offset_asia`\cdot 0 + `r offset_europe`\cdot 0 + `r offset_oceania`\cdot 0\\
-&= `r intercept`
+\widehat{pts} &= b_0 + b_1\cdot\mathbb{1}_{\text{Curry}}(x) \\
+\widehat{pts} &= b_0 + b_1\cdot 0 \\
+\widehat{pts} &= b_0
 \end{aligned}
 $$
 
-In other words, all that's left is the intercept $b_0$, corresponding to the average life expectancy of African countries of `r intercept` years. Next, say we are considering a country in the Americas. In this case, only the indicator function $\mathbb{1}_{\text{Amer}}(x)$ for the Americas will equal 1, while all the others will equal 0, and thus:
+This suggests that $b_0$ represents our expectation about the value of `pts` associated with LeBron James.  Now let's consider what the model looks like when we are considering observations from Stephen Curry.  At that point, $\mathbb{1}_{\text{Curry}}(x)=1$, so the model is:
 
 $$
 \begin{aligned}
-\widehat{\text{life exp}} &= `r intercept` + `r offset_americas`\cdot\mathbb{1}_{\text{Amer}}(x) + `r offset_asia`\cdot\mathbb{1}_{\text{Asia}}(x)
-+ `r offset_europe`\cdot\mathbb{1}_{\text{Euro}}(x) + \\
-& \qquad `r offset_oceania`\cdot\mathbb{1}_{\text{Ocean}}(x)\\
-&= `r intercept` + `r offset_americas`\cdot 1 + `r offset_asia`\cdot 0 + `r offset_europe`\cdot 0 + `r offset_oceania`\cdot 0\\
-&= `r intercept` + `r offset_americas` \\
-& = `r mean_americas`
+\widehat{pts} &= b_0 + b_1\cdot\mathbb{1}_{\text{Curry}}(x) \\
+\widehat{pts} &= b_0 + b_1\cdot 1 \\
+\widehat{pts} &= b_0 + b_1
 \end{aligned}
 $$
 
-which is the mean life expectancy for countries in the Americas of `r mean_americas` years in Table \@ref(tab:continent-mean-life-expectancies). Note the "offset from the baseline for comparison" is +`r offset_americas` years. 
+So what does this suggest about the interpretation of $b_1$? Well we already said that $b_0$ is our expectation about LeBron James' value of `pts`.  And our expectation about Stephen Curry's value of `pts` is $b+0 + b_1$.  This implies that $b_1$ represents the **difference** between those two expectations: we expect Stephen Curry's `pts` to be $b_1$ points greater than LeBron James' `pts`.  You may also think of $b_1$ as an **offset**.
 
-Let's do one more. Say we are considering a country in Asia. In this case, only the indicator function $\mathbb{1}_{\text{Asia}}(x)$ for Asia will equal 1, while all the others will equal 0, and thus:
+So returning to our regression table, we can see that the table indicates that $b_0=27.1105$ and $b_1=-3.3490$.  So we should expect that LeBron James' `pts` values are 27.11 on average.  Furthermore, we should expect that Stephen Curry' `pts` values should be 3.35 points **less** than LeBron James' (less because the coefficient is negative).  Let's compare that to the means of the actual data:
 
-$$
-\begin{aligned}
-\widehat{\text{life exp}} &= `r intercept` + `r offset_americas`\cdot\mathbb{1}_{\text{Amer}}(x) + `r offset_asia`\cdot\mathbb{1}_{\text{Asia}}(x)
-+ `r offset_europe`\cdot\mathbb{1}_{\text{Euro}}(x) + \\
-& \qquad `r offset_oceania`\cdot\mathbb{1}_{\text{Ocean}}(x)\\
-&= `r intercept` + `r offset_americas`\cdot 0 + `r offset_asia`\cdot 1 + `r offset_europe`\cdot 0 + `r offset_oceania`\cdot 0\\
-&= `r intercept` + `r offset_asia` \\
-& = `r mean_asia`
-\end{aligned}
-$$
-
-which is the mean life expectancy for Asian countries of `r mean_asia` years in Table \@ref(tab:continent-mean-life-expectancies). The "offset from the baseline for comparison" here is +`r offset_asia` years.
-
-Let's generalize this idea a bit. If we fit a linear regression model using a categorical explanatory variable $x$ that has $k$ possible categories, the regression table will return an intercept and $k - 1$ "offsets." In our case, since there are $k = 5$ continents, the regression model returns an intercept corresponding to the baseline for comparison group of Africa and $k - 1 = 4$ offsets corresponding to the Americas, Asia, Europe, and Oceania.
-
-Understanding a regression table output when you're using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you'll be able to incorporate many new variables into your models, given the large amount of the world's data that is categorical. If you feel like you're still struggling at this point, however, we suggest you closely compare Tables \@ref(tab:continent-mean-life-expectancies) and \@ref(tab:catxplot4b) and note how you can compute all the values from one table using the values in the other.
-
-
-```{block, type="learncheck", purl=FALSE}
-\vspace{-0.15in}
-**_Learning check_**
-\vspace{-0.1in}
+```{r}
+curryjames %>%
+    group_by(player_name) %>%
+    summarize(mean = mean(pts))
 ```
 
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Fit a new linear regression using `lm(gdpPercap ~ continent, data = gapminder2007)` where `gdpPercap` is the new outcome variable $y$. Get information about the "best-fitting" line from the regression table by applying the `get_regression_table()` function. How do the regression results match up with the results from your previous exploratory data analysis?
+So our coefficient values and the interpretation we described above seem to match.
 
-```{block, type="learncheck", purl=FALSE}
-\vspace{-0.25in}
-\vspace{-0.25in}
+You might be asking at this point why was LeBron James chosen as the "baseline" and Stephen Curry appears in the model as an offset. This is the case for no other reason than LeBron James appears first in our `curryjames` data frame.  Good question.
+
+It turns out that we have allows the `lm()` function to do some "bookkeeping" work on our behalf.  When we look at our data, we see that the `player_name` column is `<chr>`, or a character vector (aka, a string).  But we can't really do math on strings.  So what we really need to do is convert these strings into a **categorical variable**.  To do this, we can use R's **factors**.
+
+### Brief detour about factors
+
+When you have a column that is a character vector (or other data type) and you wish to treat it as a categorical variable, you can use the tidyverse package `forcats`. One of the core functions in the `forcats` package is `fct()`. This function does exactly what we need: converts a vector as a factor or categorical variable.  Let's see what `fct()` does for our `player_name` column:
+
+```{r}
+fct(curryjames$player_name)
+```
+
+It doesn't really look like `fct()` has done too much to our column. The only real addition is the "Levels: LeBron James Stephen Curry" at the bottom.  Note that "LeBron James" comes before "Stephen Curry" here. That's an indication of the order in which the 2 levels exist in the factor.  To gain direct control over how `player_name` is used as a predictor in our regression model, we can create a new column that is a factor version of the `player_name` column:
+
+```{r}
+curryjames$player_name.f <- fct(curryjames$player_name)
+```
+
+Now let's use this new variable as our predictor and see what happens:
+
+```{r}
+summary(lm(pts ~ curryjames$player_name.f, data=curryjames))
+```
+
+Other than the slightly more verbose name of our predictor (`curryjames$player_name.fStephen Curry`), the results are the same.  Using another `forcats`, we can instead construct our `player_name` factor so that Stephen Curry is used as the baseline:
+
+```{r}
+curryjames$player_name.f <- fct_rev(curryjames$player_name)
+```
+
+The `fct_rev()` function is just like `fct()`, but it reverses the order of the levels on the factor.
+
+```{r}
+summary(lm(pts ~ curryjames$player_name.f, data=curryjames))
 ```
 
 
-### Observed/fitted values and residuals {#model2points}
+Let's generalize this idea a bit. If we fit a linear regression model using a categorical explanatory variable $x$ that has $k$ possible categories, the regression table will return an intercept and $k - 1$ "offsets". In our case, since there are $k = 2$ players in our reduced `curryjames` data set, the regression model returns an intercept corresponding to the baseline for one player and $k - 1 = 1$ offsets corresponding to the other.
 
-Recall in Subsection \@ref(model1points), we defined the following three concepts:
-
-1. Observed values $y$, or the observed value of the outcome variable \index{regression!observed values}
-1. Fitted values $\widehat{y}$, or the value on the regression line for a given $x$ value
-1. Residuals $y - \widehat{y}$, or the error between the observed value and the fitted value
-
-We obtained these values and other values using the `get_regression_points()` function from the `moderndive` package. This time, however, let's add an argument setting `ID = "country"`: this is telling the function to use the variable `country` in `gapminder2007` as an *identification variable* in the output. This will help contextualize our analysis by matching values to countries.
-
-```{r, eval=FALSE}
-regression_points <- get_regression_points(lifeExp_model, ID = "country")
-regression_points
-```
-```{r model2-residuals, echo=FALSE, purl=FALSE}
-regression_points <- get_regression_points(lifeExp_model, ID = "country")
-regression_points %>%
-  slice(1:10) %>%
-  kable(
-    digits = 3,
-    caption = "Regression points (First 10 out of 142 countries)",
-    booktabs = TRUE,
-    linesep = ""
-  ) %>%
-  kable_styling(
-    font_size = ifelse(is_latex_output(), 10, 16),
-    latex_options = c("hold_position")
-  )
-```
-
-```{r echo=FALSE, purl=FALSE}
-# This code is for inline dynamic coding
-afghanistan_life_exp <- regression_points %>%
-  filter(country == "Afghanistan") %>%
-  pull(lifeExp) %>%
-  round(1)
-afghanistan_offset <- (afghanistan_life_exp - mean_asia) %>% round(1)
-```
-
-Observe in Table \@ref(tab:model2-residuals) that `lifeExp_hat` contains the fitted values $\widehat{y}$ = $\widehat{\text{lifeExp}}$. If you look closely, there are only 5 possible values for `lifeExp_hat`. These correspond to the five mean life expectancies for the 5 continents that we displayed in Table \@ref(tab:continent-mean-life-expectancies) and computed using the values in the `estimate` column of the regression table in Table \@ref(tab:catxplot4b).
-
-The `residual` column is simply $y - \widehat{y}$ = `lifeExp - lifeExp_hat`. These values can be interpreted as the deviation of a country's life expectancy from its continent's average life expectancy. For example, look at the first row of Table \@ref(tab:model2-residuals) corresponding to Afghanistan. The residual of $y - \widehat{y} = `r afghanistan_life_exp` - `r mean_asia` = `r afghanistan_offset`$ is telling us that Afghanistan's life expectancy is a whopping `r -1 * afghanistan_offset` years lower than the mean life expectancy of all Asian countries. This can in part be explained by the many years of war that country has suffered.
+Understanding a regression table output when you're using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you'll be able to incorporate many new variables into your models, given the large amount of the world's data that is categorical.
