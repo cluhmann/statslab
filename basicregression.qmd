@@ -79,7 +79,7 @@ $$
     \end{aligned}
 $$
 
-The estiamted value of the intercept, $b_0 = 4.17998$, is the value of `pts` expected when $ast=0$. Or in graphical terms, $b_0 = 4.17998$ indicates where the regression line intersects the $y$ axis when $x=0$. Note, that the intercept always has a natural a mathematical interpretation, it may well not have a *practical* interpretation.  For example, if `x` were ratings from a scale that ran 1-7, observing $x=0$ would be impossible.
+The estimated value of the intercept, $b_0 = 4.17998$, is the value of `pts` expected when $ast=0$. Or in graphical terms, $b_0 = 4.17998$ indicates where the regression line intersects the $y$ axis when $x=0$. Note, that the intercept always has a natural a mathematical interpretation, it may well not have a *practical* interpretation.  For example, if `x` were ratings from a scale that ran 1-7, observing $x=0$ would be impossible.
 
 Typically, the slope $b_1 = b_{ast} = 2.20111$, is of primary interested, as it summarizes the relationship between `ast` and `pts`, the two variables we are investigating. Note that the estimate of $b_1 = b_{ast}$ is positive, suggesting a positive relationship between these two variables, higher `ast` values seem to imply `pts`. The other way we might evaluate this relationship would be to calculate a correlation coefficient:
 
@@ -213,6 +213,32 @@ Let's inspect the individual columns and match them with the elements of @fig-nu
 Just as we did for Chris Clemons' single row from `nba`, one can now repeat the calculations for any particular data point (row) in the `nba` data set or, if you so wish, do so for _all_ rows.
 
 In a bit, we'll talk about how conventional ("ordinary least squares") regression takes each of these residuals, squares them (so they are all positive), and finds the model parameters (e.g., $b_0$ and $b_1$) that minimize their sum.
+
+### Side note about regression diagnostics
+
+The following functions allow you to investigate the results of a regression conducted with `lm()`.  Each takes a fitted model as an argument (e.g., `model`):
+
+`coefficients(m)`
+    Model coefficients
+`coef(m)`
+    Same as coefficients(m)
+`confint(m)`
+    Confidence intervals for the regression coefficients
+`deviance(m)`
+    Residual sum of squares
+`effects(m)`
+    Vector of orthogonal effects
+`fitted(m)`
+    Vector of fitted y values
+`r`esiduals(m)`
+    Model residuals
+`resid(m)`
+    Same as residuals(m)
+`summary(m)`
+    Key statistics, such as $R^2$, the $F$ statistic, and the residual standard error ($\sigma$)
+`vcov(m)`
+    Variance–covariance matrix of the main parameters
+
 
 
 
