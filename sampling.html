@@ -560,7 +560,7 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
   replicate fruit       
       &lt;int&gt; &lt;chr&gt;       
-1         1 Mango       
+1         1 Tangerine   
 2         1 Apricot     
 3         1 Pamplemousse</code></pre>
 </div>
@@ -573,18 +573,18 @@ dbl (1): ball_ID
 # Groups:   replicate [4]
    replicate fruit       
        &lt;int&gt; &lt;chr&gt;       
- 1         1 Apricot     
- 2         1 Mango       
+ 1         1 Lime        
+ 2         1 Apricot     
  3         1 Tangerine   
- 4         2 Tangerine   
- 5         2 Apricot     
- 6         2 Pamplemousse
+ 4         2 Lime        
+ 5         2 Tangerine   
+ 6         2 Apricot     
  7         3 Tangerine   
  8         3 Pamplemousse
  9         3 Lime        
-10         4 Mango       
-11         4 Pamplemousse
-12         4 Apricot     </code></pre>
+10         4 Apricot     
+11         4 Mango       
+12         4 Pamplemousse</code></pre>
 </div>
 </div>
 <p>Note that the <code>replicate</code> variable indicates which “use” of our virtual shovel that row corresponds to. So rows where <code>replicate=1</code> correspond to our first “scoop” of fruit, rows where <code>replicate=12</code> correspond to our second “scoop” of fruit, and so on.</p>
@@ -598,16 +598,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1     507 white
- 2         1     537 red  
- 3         1      61 white
- 4         1    1029 white
- 5         1    1758 white
- 6         1    2380 red  
- 7         1    1484 white
- 8         1    1733 white
- 9         1     864 red  
-10         1    1459 white
+ 1         1    1926 red  
+ 2         1    1000 red  
+ 3         1    2062 white
+ 4         1    1574 white
+ 5         1     334 white
+ 6         1    2344 red  
+ 7         1     722 red  
+ 8         1    1707 white
+ 9         1    1175 red  
+10         1    1496 white
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -621,16 +621,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color is_red
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;lgl&gt; 
- 1         1     507 white FALSE 
- 2         1     537 red   TRUE  
- 3         1      61 white FALSE 
- 4         1    1029 white FALSE 
- 5         1    1758 white FALSE 
- 6         1    2380 red   TRUE  
- 7         1    1484 white FALSE 
- 8         1    1733 white FALSE 
- 9         1     864 red   TRUE  
-10         1    1459 white FALSE 
+ 1         1    1926 red   TRUE  
+ 2         1    1000 red   TRUE  
+ 3         1    2062 white FALSE 
+ 4         1    1574 white FALSE 
+ 5         1     334 white FALSE 
+ 6         1    2344 red   TRUE  
+ 7         1     722 red   TRUE  
+ 8         1    1707 white FALSE 
+ 9         1    1175 red   TRUE  
+10         1    1496 white FALSE 
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -688,16 +688,16 @@ dbl (1): ball_ID
 # Groups:   replicate [33]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1     299 red  
- 2         1    1674 white
- 3         1    2143 white
- 4         1     886 red  
- 5         1    1663 white
- 6         1    1769 white
- 7         1      93 white
- 8         1    1199 white
- 9         1     220 red  
-10         1     685 white
+ 1         1     101 red  
+ 2         1     621 white
+ 3         1    1745 red  
+ 4         1     639 red  
+ 5         1     770 white
+ 6         1     764 white
+ 7         1    1497 white
+ 8         1     336 white
+ 9         1     564 white
+10         1    2265 red  
 # ℹ 1,640 more rows</code></pre>
 </div>
 </div>
@@ -713,16 +713,16 @@ dbl (1): ball_ID
 <pre><code># A tibble: 33 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    21     0.42
- 2         2    18     0.36
- 3         3    24     0.48
- 4         4    28     0.56
- 5         5    19     0.38
- 6         6    16     0.32
- 7         7    22     0.44
- 8         8    17     0.34
- 9         9    17     0.34
-10        10    15     0.3 
+ 1         1    20     0.4 
+ 2         2    14     0.28
+ 3         3    17     0.34
+ 4         4    15     0.3 
+ 5         5    22     0.44
+ 6         6    23     0.46
+ 7         7    25     0.5 
+ 8         8    25     0.5 
+ 9         9    18     0.36
+10        10    16     0.32
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -777,16 +777,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1,000]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1     154 white
- 2         1     807 red  
- 3         1    2375 red  
- 4         1     410 red  
- 5         1     530 red  
- 6         1    1903 white
- 7         1     891 red  
- 8         1    1358 white
- 9         1     995 white
-10         1    1587 white
+ 1         1     541 white
+ 2         1    1822 red  
+ 3         1    2392 red  
+ 4         1     616 white
+ 5         1     146 red  
+ 6         1     498 white
+ 7         1     599 white
+ 8         1     865 white
+ 9         1    2157 red  
+10         1    1316 red  
 # ℹ 49,990 more rows</code></pre>
 </div>
 </div>
@@ -801,15 +801,15 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1,000 × 3
    replicate   red prop_red
        &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;
- 1         1    17     0.34
+ 1         1    14     0.28
  2         2    17     0.34
- 3         3    18     0.36
- 4         4    21     0.42
- 5         5    19     0.38
- 6         6    24     0.48
- 7         7    14     0.28
- 8         8    16     0.32
- 9         9    21     0.42
+ 3         3    25     0.5 
+ 4         4    17     0.34
+ 5         5    17     0.34
+ 6         6    19     0.38
+ 7         7    25     0.5 
+ 8         8    21     0.42
+ 9         9    19     0.38
 10        10    24     0.48
 # ℹ 990 more rows</code></pre>
 </div>
@@ -940,7 +940,7 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">0.098</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
@@ -948,7 +948,7 @@ dbl (1): ball_ID
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.048</td>
+<td style="text-align: right;">0.049</td>
 </tr>
 </tbody>
 </table>
@@ -1029,16 +1029,16 @@ dbl (1): ball_ID
 # Groups:   replicate [1]
    replicate ball_ID color
        &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;
- 1         1     248 white
- 2         1     766 white
- 3         1    2019 red  
- 4         1    1193 white
- 5         1     163 red  
- 6         1    1589 red  
- 7         1    1776 red  
- 8         1    1100 white
- 9         1    1622 red  
-10         1    2126 white
+ 1         1    1912 white
+ 2         1     978 white
+ 3         1     667 white
+ 4         1    1152 white
+ 5         1    2283 red  
+ 6         1     135 red  
+ 7         1     616 white
+ 8         1     946 white
+ 9         1    1392 white
+10         1     967 white
 # ℹ 40 more rows</code></pre>
 </div>
 </div>
@@ -1051,7 +1051,7 @@ dbl (1): ball_ID
 <pre><code># A tibble: 1 × 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-1         1      15      0.3</code></pre>
+1         1      18     0.36</code></pre>
 </div>
 </div>
 <p>So in our case, the value of <code>prop_red</code> is the <strong>point estimate</strong> of the population proportion <span class="math inline">\(p\)</span> since it estimates the latter’s value. Furthermore, this point estimate has a specific name when considering proportions: the <em>sample proportion</em>. It is denoted using <span class="math inline">\(\widehat{p}\)</span> because it is a common convention in statistics to use a “hat” symbol to denote point estimates.</p>
@@ -1114,7 +1114,7 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">25</td>
-<td style="text-align: right;">0.098</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">50</td>
@@ -1122,7 +1122,7 @@ dbl (1): ball_ID
 </tr>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.048</td>
+<td style="text-align: right;">0.049</td>
 </tr>
 </tbody>
 </table>
@@ -1159,7 +1159,7 @@ dbl (1): ball_ID
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">n = 25</td>
-<td style="text-align: right;">0.098</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">n = 50</td>
@@ -1167,7 +1167,7 @@ dbl (1): ball_ID
 </tr>
 <tr class="odd">
 <td style="text-align: left;">n = 100</td>
-<td style="text-align: right;">0.048</td>
+<td style="text-align: right;">0.049</td>
 </tr>
 </tbody>
 </table>
