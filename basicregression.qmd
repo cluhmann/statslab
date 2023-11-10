@@ -218,26 +218,16 @@ In a bit, we'll talk about how conventional ("ordinary least squares") regressio
 
 The following functions allow you to investigate the results of a regression conducted with `lm()`.  Each takes a fitted model as an argument (e.g., `model`):
 
-`coefficients(m)`
-    Model coefficients
-`coef(m)`
-    Same as coefficients(m)
-`confint(m)`
-    Confidence intervals for the regression coefficients
-`deviance(m)`
-    Residual sum of squares
-`effects(m)`
-    Vector of orthogonal effects
-`fitted(m)`
-    Vector of fitted y values
-`r`esiduals(m)`
-    Model residuals
-`resid(m)`
-    Same as residuals(m)
-`summary(m)`
-    Key statistics, such as $R^2$, the $F$ statistic, and the residual standard error ($\sigma$)
-`vcov(m)`
-    Variance–covariance matrix of the main parameters
+- `coefficients(m)`: Model coefficients
+- `coef(m)`:  Same as coefficients(m)
+- `confint(m)`:  Confidence intervals for the regression coefficients
+- `deviance(m)`: Residual sum of squares
+- `effects(m)`: Vector of orthogonal effects
+- `fitted(m)`:  Vector of fitted y values
+- `residuals(m)`:  Model residuals
+- `resid(m)`: Same as residuals(m)
+- `summary(m)`: Key statistics, such as $R^2$, the $F$ statistic, and the residual standard error ($\sigma$)
+- `vcov(m)`:  Variance–covariance matrix of the main parameters
 
 
 
@@ -422,7 +412,21 @@ It doesn't really look like `fct()` has done too much to our column. The only re
 curryjames$player_name.f <- fct(curryjames$player_name)
 ```
 
-Now let's use this new variable as our predictor and see what happens:
+Let's check the levels on this new column:
+
+```{r}
+levels(curryjames$player_name.f)
+```
+
+Note that "LeBron James" comes first here.  What were the levels on the original version of the column (i.e., `player_name`)?
+
+```{r}
+levels(curryjames$player_name)
+```
+
+The original column contains values that are each a character vector (string) and thus there are no "levels".  It was only once we told R that we wanted to treat this column as a factor that `fct` converted each string into a level on that factor.
+
+Now let's use this new factor variable as our predictor and see what happens:
 
 ```{r}
 summary(lm(pts ~ curryjames$player_name.f, data=curryjames))
@@ -434,13 +438,101 @@ Other than the slightly more verbose name of our predictor (`curryjames$player_n
 curryjames$player_name.f <- fct_rev(curryjames$player_name)
 ```
 
-The `fct_rev()` function is just like `fct()`, but it reverses the order of the levels on the factor.
+The `fct_rev()` function is just like `fct()`, but it reverses the order of the levels on the factor.  Let's check:
+
+```{r}
+levels(curryjames$player_name.f)
+```
+
+Now let's use this new factor variable as our predictor and see what happens:
 
 ```{r}
 summary(lm(pts ~ curryjames$player_name.f, data=curryjames))
 ```
 
+Now we can see that our explanatory variable is called `curryjames$player_name.fLeBron James`, indicating that the level "LeBron James" is acting as the reference.
 
 Let's generalize this idea a bit. If we fit a linear regression model using a categorical explanatory variable $x$ that has $k$ possible categories, the regression table will return an intercept and $k - 1$ "offsets". In our case, since there are $k = 2$ players in our reduced `curryjames` data set, the regression model returns an intercept corresponding to the baseline for one player and $k - 1 = 1$ offsets corresponding to the other.
+
+To see this in action (briefly), let's grab all the rows from `nba` that contain data from Stephen Curry, LeBron James, or Michael Jordan.
+
+```{r}
+curryjamesjordan <- nba %>%
+    filter(player_name %in% c("Stephen Curry",
+                              "LeBron James",
+                              "Michael Jordan")) %>%
+    select(c(pts, player_name))
+slice_sample(curryjamesjordan, n=12)
+```
+
+Now our `player_name` column contains 3 values instead of 2.  Let's convert the `player_name` column into a factor as before:
+
+```{r}
+curryjamesjordan$player_name.f <- fct(curryjamesjordan$player_name)
+```
+
+Let's check the levels on this new column:
+
+```{r}
+levels(curryjamesjordan$player_name.f)
+```
+
+If we now run the same model, we get the following output:
+
+```{r}
+curryjamesjordan_model <- lm(pts ~ curryjamesjordan$player_name.f,
+                            data = curryjamesjordan)
+summary(curryjamesjordan_model)
+```
+
+We can see that there are now **2** `player_name`-related explanatory variables listed in our regression table: `player_name.fLeBron James` and `player_name.fStephen Curry`.  What `model.matrix` did `lm()` construct now that we have a categorical variable (`player_name.f`) with **3** levels?  Let's again combine the `model.matrix` with the original data:
+
+```{r}
+print(bind_cols(curryjamesjordan,
+                model.matrix(curryjamesjordan_model)),
+      width = Inf)
+```
+
+Here we can see that there are three columns in our `model.matrix`. The first is the intercept and every value is $1$. The next column is `curryjamesjordan$player_name.fLeBron James` and takes on a value of $1$ when the row corresponds to a row of data associated with LeBron James and $0$ otherwise.  The final column is `curryjamesjordan$player_name.fStephen Curry` and takes on a value of $1$ when the row corresponds to a row of data associated with Stephan Curry and $0$ otherwise.
+
+With a little consideration (and possibly a bit of algebra), you may be able to convince yourself that our two explanatory variables work much as they did when we only had two levels on the `player_name` factor.  Our `Intercept` represents our expectation about the value of `pts` associated with Michael Jordan, `player_name.fLeBron James` represents our expectation about **the difference** between Michael Jordan's value of `pts` and LeBron James' value of `pts`, and `player_name.fStephan Curry` represents our expectation about **the difference** between Michael Jordan's value of `pts` and Stephan Curry's value of `pts`.
+
+
+### An even briefer detour about contrasts
+
+An additional option is to specify **contrasts**.  Contrasts specify how `lm()` uses our factor(s) to construct the `model.matrix` that contains the actual, numeric values as the observed values of our explanatory variables, $X$.  When working with the `curryjame` data set, we saw that `model.matrix` was created such that there was an `Intercept` column and a second column that coded for the identity of the player (either Curry or James). We also saw that we could flexibly control which player was coded as a $0$ and which was coded as a $1$.  The idea that one level of our factor plays the role of reference and is coded as $0$ whereas the other level (or other levels) are each coded as $1$ and the $\beta$ values represents **differences** from the reference level is only one way to construct the `model.matrix`.  This specific approach is sometimes referred to as _treatment_ coding or _dummy_ coding.  But other options exist!
+
+First, let's see how we can inspect (and control) the numeric coding of our factor's levels.  Let's first do this for the simpler case with only two players.
+
+```{r}
+contrasts(curryjames$player_name.f)
+```
+
+Here we can see that the raw materials used to construct the `model.matrix`.  The `Stephen Curry` column here indicates that the `model.matrix` will place a $1$ in every row where `player_name=="Stephen Curry"` and a $0$ otherwise.  This is exactly what we saw when we inspected the `model.matrix` and gives rise to the interpretation of $\beta$ we outlined above.  But what if we want different numeric values?
+
+To quickly construct different contrasts, we can use a family of functions that includes `contr.treatment()`, which generates the treatment/dummy coding seen above.  We have two levels of our `player_name` factor, so the default contrast is:
+
+```{r}
+contr.treatment(2)
+```
+
+Other coding schemes include `contr.sum()` which is sometimes called "sum coding" and sometimes referred to as "effects coding".
+
+```{r}
+contr.sum(2)
+```
+
+If we use sum coding on our `player_name` factor, we should get a column in our `model.matrix` that has a $-1$ in each row of data associated with LeBron James and a $1$ in every row of data associated with Stephen Curry. Let's see how using sum coding changes our regression output:
+
+```{r}
+contrasts(curryjames$player_name.f) <- contr.sum(2)
+tidy(lm(pts ~ curryjames$player_name.f, data = curryjames))
+```
+
+Now we have a row for our intercept (as before) and a row called `curryjames$player_name.f1`.  Given our coding, I assert that the intercept estimate now represents the "grand mean" of the two players' `pts` values (e.g., (James' average + Curry's average) / 2, which may be different than the mean value of `pts` if we have different numbers of observations from James and Curry!) and that `player_name.f1` represents the difference between the LeBron James' `pts` value and this grand mean.  I will leave it as an exercise for the reader to verify this.
+
+Other coding schemes are available, including "difference" or "contrast" coding, Helmert coding, polynomial coding, and those that replicate ANOVA.  As a starting point, I would recommend the help page associate with the `contrasts()` function (i.e., `help contrasts`).
+
+## Conclusion
 
 Understanding a regression table output when you're using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you'll be able to incorporate many new variables into your models, given the large amount of the world's data that is categorical.
