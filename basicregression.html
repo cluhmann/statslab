@@ -355,7 +355,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#model2EDA" id="toc-model2EDA" class="nav-link" data-scroll-target="#model2EDA"><span class="header-section-number">14.2.1</span> Exploratory data analysis</a></li>
   <li><a href="#sec-model2table" id="toc-sec-model2table" class="nav-link" data-scroll-target="#sec-model2table"><span class="header-section-number">14.2.2</span> Linear regression</a></li>
   <li><a href="#brief-detour-about-factors" id="toc-brief-detour-about-factors" class="nav-link" data-scroll-target="#brief-detour-about-factors"><span class="header-section-number">14.2.3</span> Brief detour about factors</a></li>
+  <li><a href="#an-even-briefer-detour-about-contrasts" id="toc-an-even-briefer-detour-about-contrasts" class="nav-link" data-scroll-target="#an-even-briefer-detour-about-contrasts"><span class="header-section-number">14.2.4</span> An even briefer detour about contrasts</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.3</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -589,7 +591,18 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="side-note-about-regression-diagnostics" class="level3" data-number="14.1.3">
 <h3 data-number="14.1.3" class="anchored" data-anchor-id="side-note-about-regression-diagnostics"><span class="header-section-number">14.1.3</span> Side note about regression diagnostics</h3>
 <p>The following functions allow you to investigate the results of a regression conducted with <code>lm()</code>. Each takes a fitted model as an argument (e.g., <code>model</code>):</p>
-<p><code>coefficients(m)</code> Model coefficients <code>coef(m)</code> Same as coefficients(m) <code>confint(m)</code> Confidence intervals for the regression coefficients <code>deviance(m)</code> Residual sum of squares <code>effects(m)</code> Vector of orthogonal effects <code>fitted(m)</code> Vector of fitted y values <code>r</code>esiduals(m)<code>Model residuals</code>resid(m)<code>Same as residuals(m)</code>summary(m)<code>Key statistics, such as $R^2$, the $F$ statistic, and the residual standard error ($\sigma$)</code>vcov(m)` Variance–covariance matrix of the main parameters</p>
+<ul>
+<li><code>coefficients(m)</code>: Model coefficients</li>
+<li><code>coef(m)</code>: Same as coefficients(m)</li>
+<li><code>confint(m)</code>: Confidence intervals for the regression coefficients</li>
+<li><code>deviance(m)</code>: Residual sum of squares</li>
+<li><code>effects(m)</code>: Vector of orthogonal effects</li>
+<li><code>fitted(m)</code>: Vector of fitted y values</li>
+<li><code>residuals(m)</code>: Model residuals</li>
+<li><code>resid(m)</code>: Same as residuals(m)</li>
+<li><code>summary(m)</code>: Key statistics, such as <span class="math inline">\(R^2\)</span>, the <span class="math inline">\(F\)</span> statistic, and the residual standard error (<span class="math inline">\(\sigma\)</span>)</li>
+<li><code>vcov(m)</code>: Variance–covariance matrix of the main parameters</li>
+</ul>
 </section>
 </section>
 <section id="sec-model2" class="level2" data-number="14.2">
@@ -629,16 +642,16 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 2
    player_name     pts
    &lt;chr&gt;         &lt;dbl&gt;
- 1 Stephen Curry  25.3
- 2 LeBron James   27.3
- 3 LeBron James   31.4
- 4 LeBron James   30.3
- 5 LeBron James   25.3
- 6 Stephen Curry  25.5
- 7 Stephen Curry  32  
- 8 LeBron James   27.1
- 9 LeBron James   30  
-10 LeBron James   27.1</code></pre>
+ 1 Stephen Curry  26.4
+ 2 LeBron James   25.3
+ 3 LeBron James   27.2
+ 4 Stephen Curry  17.5
+ 5 Stephen Curry  18.6
+ 6 LeBron James   26.8
+ 7 Stephen Curry  23.8
+ 8 LeBron James   20.9
+ 9 Stephen Curry  27.3
+10 Stephen Curry  25.3</code></pre>
 </div>
 </div>
 <p>Another way to get a sense of this data is by generating a variety of descriptive statistics.</p>
@@ -863,9 +876,24 @@ Levels: LeBron James Stephen Curry</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>curryjames<span class="sc">$</span>player_name.f <span class="ot">&lt;-</span> <span class="fu">fct</span>(curryjames<span class="sc">$</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now let’s use this new variable as our predictor and see what happens:</p>
+<p>Let’s check the levels on this new column:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pts <span class="sc">~</span> curryjames<span class="sc">$</span>player_name.f, <span class="at">data=</span>curryjames))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(curryjames<span class="sc">$</span>player_name.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "LeBron James"  "Stephen Curry"</code></pre>
+</div>
+</div>
+<p>Note that “LeBron James” comes first here. What were the levels on the original version of the column (i.e., <code>player_name</code>)?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(curryjames<span class="sc">$</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p>The original column contains values that are each a character vector (string) and thus there are no “levels”. It was only once we told R that we wanted to treat this column as a factor that <code>fct</code> converted each string into a level on that factor.</p>
+<p>Now let’s use this new factor variable as our predictor and see what happens:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pts <span class="sc">~</span> curryjames<span class="sc">$</span>player_name.f, <span class="at">data=</span>curryjames))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -889,11 +917,18 @@ F-statistic: 6.665 on 1 and 30 DF,  p-value: 0.01496</code></pre>
 </div>
 <p>Other than the slightly more verbose name of our predictor (<code>curryjames$player_name.fStephen Curry</code>), the results are the same. Using another <code>forcats</code>, we can instead construct our <code>player_name</code> factor so that Stephen Curry is used as the baseline:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>curryjames<span class="sc">$</span>player_name.f <span class="ot">&lt;-</span> <span class="fu">fct_rev</span>(curryjames<span class="sc">$</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>curryjames<span class="sc">$</span>player_name.f <span class="ot">&lt;-</span> <span class="fu">fct_rev</span>(curryjames<span class="sc">$</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>fct_rev()</code> function is just like <code>fct()</code>, but it reverses the order of the levels on the factor.</p>
+<p>The <code>fct_rev()</code> function is just like <code>fct()</code>, but it reverses the order of the levels on the factor. Let’s check:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pts <span class="sc">~</span> curryjames<span class="sc">$</span>player_name.f, <span class="at">data=</span>curryjames))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(curryjames<span class="sc">$</span>player_name.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Stephen Curry" "LeBron James" </code></pre>
+</div>
+</div>
+<p>Now let’s use this new factor variable as our predictor and see what happens:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(pts <span class="sc">~</span> curryjames<span class="sc">$</span>player_name.f, <span class="at">data=</span>curryjames))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -915,11 +950,177 @@ Multiple R-squared:  0.1818,    Adjusted R-squared:  0.1545
 F-statistic: 6.665 on 1 and 30 DF,  p-value: 0.01496</code></pre>
 </div>
 </div>
+<p>Now we can see that our explanatory variable is called <code>curryjames$player_name.fLeBron James</code>, indicating that the level “LeBron James” is acting as the reference.</p>
 <p>Let’s generalize this idea a bit. If we fit a linear regression model using a categorical explanatory variable <span class="math inline">\(x\)</span> that has <span class="math inline">\(k\)</span> possible categories, the regression table will return an intercept and <span class="math inline">\(k - 1\)</span> “offsets”. In our case, since there are <span class="math inline">\(k = 2\)</span> players in our reduced <code>curryjames</code> data set, the regression model returns an intercept corresponding to the baseline for one player and <span class="math inline">\(k - 1 = 1\)</span> offsets corresponding to the other.</p>
+<p>To see this in action (briefly), let’s grab all the rows from <code>nba</code> that contain data from Stephen Curry, LeBron James, or Michael Jordan.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>curryjamesjordan <span class="ot">&lt;-</span> nba <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(player_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Stephen Curry"</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"LeBron James"</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Michael Jordan"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(pts, player_name))</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(curryjamesjordan, <span class="at">n=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 2
+     pts player_name   
+   &lt;dbl&gt; &lt;chr&gt;         
+ 1  22.9 Stephen Curry 
+ 2  25.3 LeBron James  
+ 3  32   Stephen Curry 
+ 4  29.6 Michael Jordan
+ 5  25.3 Stephen Curry 
+ 6  29.7 LeBron James  
+ 7  28.4 LeBron James  
+ 8  30   LeBron James  
+ 9  30.1 Stephen Curry 
+10  17.5 Stephen Curry 
+11  26.8 LeBron James  
+12  28.7 Michael Jordan</code></pre>
+</div>
+</div>
+<p>Now our <code>player_name</code> column contains 3 values instead of 2. Let’s convert the <code>player_name</code> column into a factor as before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>curryjamesjordan<span class="sc">$</span>player_name.f <span class="ot">&lt;-</span> <span class="fu">fct</span>(curryjamesjordan<span class="sc">$</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s check the levels on this new column:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(curryjamesjordan<span class="sc">$</span>player_name.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Michael Jordan" "LeBron James"   "Stephen Curry" </code></pre>
+</div>
+</div>
+<p>If we now run the same model, we get the following output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>curryjamesjordan_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(pts <span class="sc">~</span> curryjamesjordan<span class="sc">$</span>player_name.f,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> curryjamesjordan)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(curryjamesjordan_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pts ~ curryjamesjordan$player_name.f, data = curryjamesjordan)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-9.062 -1.810  0.064  2.602  8.239 
+
+Coefficients:
+                                            Estimate Std. Error t value
+(Intercept)                                   25.300      1.854  13.649
+curryjamesjordan$player_name.fLeBron James     1.811      2.039   0.888
+curryjamesjordan$player_name.fStephen Curry   -1.538      2.120  -0.726
+                                            Pr(&gt;|t|)    
+(Intercept)                                 3.99e-15 ***
+curryjamesjordan$player_name.fLeBron James     0.381    
+curryjamesjordan$player_name.fStephen Curry    0.473    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.707 on 33 degrees of freedom
+Multiple R-squared:  0.1614,    Adjusted R-squared:  0.1106 
+F-statistic: 3.176 on 2 and 33 DF,  p-value: 0.05478</code></pre>
+</div>
+</div>
+<p>We can see that there are now <strong>2</strong> <code>player_name</code>-related explanatory variables listed in our regression table: <code>player_name.fLeBron James</code> and <code>player_name.fStephen Curry</code>. What <code>model.matrix</code> did <code>lm()</code> construct now that we have a categorical variable (<code>player_name.f</code>) with <strong>3</strong> levels? Let’s again combine the <code>model.matrix</code> with the original data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">bind_cols</span>(curryjamesjordan,</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">model.matrix</span>(curryjamesjordan_model)),</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 6
+     pts player_name    player_name.f  `(Intercept)`
+   &lt;dbl&gt; &lt;chr&gt;          &lt;fct&gt;                  &lt;dbl&gt;
+ 1  29.6 Michael Jordan Michael Jordan             1
+ 2  28.7 Michael Jordan Michael Jordan             1
+ 3  22.9 Michael Jordan Michael Jordan             1
+ 4  20   Michael Jordan Michael Jordan             1
+ 5  20.9 LeBron James   LeBron James               1
+ 6  27.2 LeBron James   LeBron James               1
+ 7  31.4 LeBron James   LeBron James               1
+ 8  27.3 LeBron James   LeBron James               1
+ 9  30   LeBron James   LeBron James               1
+10  28.4 LeBron James   LeBron James               1
+   `curryjamesjordan$player_name.fLeBron James`
+                                          &lt;dbl&gt;
+ 1                                            0
+ 2                                            0
+ 3                                            0
+ 4                                            0
+ 5                                            1
+ 6                                            1
+ 7                                            1
+ 8                                            1
+ 9                                            1
+10                                            1
+   `curryjamesjordan$player_name.fStephen Curry`
+                                           &lt;dbl&gt;
+ 1                                             0
+ 2                                             0
+ 3                                             0
+ 4                                             0
+ 5                                             0
+ 6                                             0
+ 7                                             0
+ 8                                             0
+ 9                                             0
+10                                             0
+# ℹ 26 more rows</code></pre>
+</div>
+</div>
+<p>Here we can see that there are three columns in our <code>model.matrix</code>. The first is the intercept and every value is <span class="math inline">\(1\)</span>. The next column is <code>curryjamesjordan$player_name.fLeBron James</code> and takes on a value of <span class="math inline">\(1\)</span> when the row corresponds to a row of data associated with LeBron James and <span class="math inline">\(0\)</span> otherwise. The final column is <code>curryjamesjordan$player_name.fStephen Curry</code> and takes on a value of <span class="math inline">\(1\)</span> when the row corresponds to a row of data associated with Stephan Curry and <span class="math inline">\(0\)</span> otherwise.</p>
+<p>With a little consideration (and possibly a bit of algebra), you may be able to convince yourself that our two explanatory variables work much as they did when we only had two levels on the <code>player_name</code> factor. Our <code>Intercept</code> represents our expectation about the value of <code>pts</code> associated with Michael Jordan, <code>player_name.fLeBron James</code> represents our expectation about <strong>the difference</strong> between Michael Jordan’s value of <code>pts</code> and LeBron James’ value of <code>pts</code>, and <code>player_name.fStephan Curry</code> represents our expectation about <strong>the difference</strong> between Michael Jordan’s value of <code>pts</code> and Stephan Curry’s value of <code>pts</code>.</p>
+</section>
+<section id="an-even-briefer-detour-about-contrasts" class="level3" data-number="14.2.4">
+<h3 data-number="14.2.4" class="anchored" data-anchor-id="an-even-briefer-detour-about-contrasts"><span class="header-section-number">14.2.4</span> An even briefer detour about contrasts</h3>
+<p>An additional option is to specify <strong>contrasts</strong>. Contrasts specify how <code>lm()</code> uses our factor(s) to construct the <code>model.matrix</code> that contains the actual, numeric values as the observed values of our explanatory variables, <span class="math inline">\(X\)</span>. When working with the <code>curryjame</code> data set, we saw that <code>model.matrix</code> was created such that there was an <code>Intercept</code> column and a second column that coded for the identity of the player (either Curry or James). We also saw that we could flexibly control which player was coded as a <span class="math inline">\(0\)</span> and which was coded as a <span class="math inline">\(1\)</span>. The idea that one level of our factor plays the role of reference and is coded as <span class="math inline">\(0\)</span> whereas the other level (or other levels) are each coded as <span class="math inline">\(1\)</span> and the <span class="math inline">\(\beta\)</span> values represents <strong>differences</strong> from the reference level is only one way to construct the <code>model.matrix</code>. This specific approach is sometimes referred to as <em>treatment</em> coding or <em>dummy</em> coding. But other options exist!</p>
+<p>First, let’s see how we can inspect (and control) the numeric coding of our factor’s levels. Let’s first do this for the simpler case with only two players.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(curryjames<span class="sc">$</span>player_name.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              LeBron James
+Stephen Curry            0
+LeBron James             1</code></pre>
+</div>
+</div>
+<p>Here we can see that the raw materials used to construct the <code>model.matrix</code>. The <code>Stephen Curry</code> column here indicates that the <code>model.matrix</code> will place a <span class="math inline">\(1\)</span> in every row where <code>player_name=="Stephen Curry"</code> and a <span class="math inline">\(0\)</span> otherwise. This is exactly what we saw when we inspected the <code>model.matrix</code> and gives rise to the interpretation of <span class="math inline">\(\beta\)</span> we outlined above. But what if we want different numeric values?</p>
+<p>To quickly construct different contrasts, we can use a family of functions that includes <code>contr.treatment()</code>, which generates the treatment/dummy coding seen above. We have two levels of our <code>player_name</code> factor, so the default contrast is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contr.treatment</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  2
+1 0
+2 1</code></pre>
+</div>
+</div>
+<p>Other coding schemes include <code>contr.sum()</code> which is sometimes called “sum coding” and sometimes referred to as “effects coding”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contr.sum</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [,1]
+1    1
+2   -1</code></pre>
+</div>
+</div>
+<p>If we use sum coding on our <code>player_name</code> factor, we should get a column in our <code>model.matrix</code> that has a <span class="math inline">\(-1\)</span> in each row of data associated with LeBron James and a <span class="math inline">\(1\)</span> in every row of data associated with Stephen Curry. Let’s see how using sum coding changes our regression output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(curryjames<span class="sc">$</span>player_name.f) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(<span class="fu">lm</span>(pts <span class="sc">~</span> curryjames<span class="sc">$</span>player_name.f, <span class="at">data =</span> curryjames))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term                      estimate std.error statistic  p.value
+  &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)                  25.4      0.649     39.2  2.46e-27
+2 curryjames$player_name.f1    -1.67     0.649     -2.58 1.50e- 2</code></pre>
+</div>
+</div>
+<p>Now we have a row for our intercept (as before) and a row called <code>curryjames$player_name.f1</code>. Given our coding, I assert that the intercept estimate now represents the “grand mean” of the two players’ <code>pts</code> values (e.g., (James’ average + Curry’s average) / 2, which may be different than the mean value of <code>pts</code> if we have different numbers of observations from James and Curry!) and that <code>player_name.f1</code> represents the difference between the LeBron James’ <code>pts</code> value and this grand mean. I will leave it as an exercise for the reader to verify this.</p>
+<p>Other coding schemes are available, including “difference” or “contrast” coding, Helmert coding, polynomial coding, and those that replicate ANOVA. As a starting point, I would recommend the help page associate with the <code>contrasts()</code> function (i.e., <code>help contrasts</code>).</p>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">14.3</span> Conclusion</h2>
 <p>Understanding a regression table output when you’re using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you’ll be able to incorporate many new variables into your models, given the large amount of the world’s data that is categorical.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
