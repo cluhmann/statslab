@@ -277,7 +277,7 @@ p + stat_function(
 ) +
     stat_function(fun = dnorm,
                   color = "grey70",
-                  size = 1.5) +
+                  linewidth = 1.5) +
     ggtitle("Central t-Distribution (df = 6) compared to z-Distribution") +
     xlab("x") +
     ylab("dt(x, 6) / dnorm(x)")

@@ -536,3 +536,18 @@ Other coding schemes are available, including "difference" or "contrast" coding,
 ## Conclusion
 
 Understanding a regression table output when you're using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you'll be able to incorporate many new variables into your models, given the large amount of the world's data that is categorical.
+
+
+## Activities
+
+1. Generate 200 random values drawn from a normal distribution with a mean of $2.0$ and a standard deviation of $8.0$. Save these values to a variable named `x`.
+1. Generate 200 random values drawn from a normal distribution with a mean of $50.0$ and a standard deviation of $12.0$. Save these values to a variable named `y1`.
+1. Create a data frame (a tibble) with two columns, one with all the values from `y1` and one with all the values from `x`.
+1. Conduct a regression, using the `x` column as the explanatory variable and the `y1` column as the outcome variable.
+1. Inspect the estimated model parameters.  What do they suggest about the relationship between `x` and `y1`?
+1. Add a new column to your data frame and name it `y2`. The values of `y2` should be equal to $14 + 4.3x$.
+1. Conduct a second regression, again using the `x` column as the explanatory variable, but now using the `y2` column as the outcome variable.
+1. Inspect the estimated model parameters.  What do they suggest about the relationship between `x` and `y2`?
+1. Add a new column to your data frame and name it `y3`. The values of `y3` should be equal to the values in the `y2`, but each of the 200 values in `y2` should have a random value added to it.  This random value should be drawn from a normal distribution with a mean of $0.0$ and a standard deviation of $5.0$.
+1. Conduct a third regression, again using the `x` column as the explanatory variable, but now using the `y3` column as the outcome variable.
+1. Inspect the estimated model parameters.  What do they suggest about the relationship between `x` and `y3`?
