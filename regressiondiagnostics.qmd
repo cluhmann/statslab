@@ -8,6 +8,10 @@ nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
 ```
 
 
+::: {.callout-important}
+This chapter is intended to illustrate the concepts behind various regression diagnostics.  For quantitative "tests" of various model assumptions, you should check out packages such as `car`, `broom`, `lmtest`, `lindia`, etc.  However, much of the functionality found in these packages directly corresponds to the explorations described below.
+:::
+
 ## Basics
 
 When we used our basic regression model in @sec-basicregression, we did so without describing any of the assumptions that underlie the whole endeavor.  As we saw, we modeled some outcome variable, $y$, as a linear function of a second, explanatory variable, $x$.
