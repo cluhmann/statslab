@@ -271,6 +271,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Basic Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regressiondiagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Basic Regression</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -285,19 +291,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -695,14 +701,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm,</span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">"grey70"</span>,</span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
 <span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Central t-Distribution (df = 6) compared to z-Distribution"</span>) <span class="sc">+</span></span>
 <span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"x"</span>) <span class="sc">+</span></span>
 <span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"dt(x, 6) / dnorm(x)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="distributions_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -717,7 +719,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When calculating <span class="math inline">\(p\)</span>-values for the <span class="math inline">\(\chi^2\)</span> distribution, in most cases only the upper (right) end of the distribution is needed. This is because most statistical tests are designed in such a way that all deviations from <span class="math inline">\(H_0\)</span> (no matter in which direction) lead to a larger <span class="math inline">\(\chi^2\)</span> value (that’s why these tests always test a non-directional hypothesis, and the <span class="math inline">\(p\)</span>-value therefore corresponds to a two-tailed test). Thus, we always use the argument <code>lower.tail = FALSE</code> to calculate <span class="math inline">\(p\)</span>-values for <span class="math inline">\(\chi^2\)</span> distributions.</p>
 <p>Example for a p-value for <span class="math inline">\(\chi^2(2)=4.56\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="at">q =</span> <span class="fl">4.86</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="at">q =</span> <span class="fl">4.86</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.08803683</code></pre>
 </div>
@@ -727,8 +729,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="13.3.2" class="anchored" data-anchor-id="quantile-function-2"><span class="header-section-number">13.3.2</span> Quantile function</h3>
 <p>With <code>qchisq()</code> we obtain the quantiles of the <span class="math inline">\(\chi^2\)</span> distribution, e.g.&nbsp;the critical values for <span class="math inline">\(\alpha=0.05\)</span>. Some statisticians are very proud to know the critical values for the 1, 2, 3, 4, and 5 degrees of freedom of the chi-square distributions by heart, because these are often needed for model comparisons via likelihood ratio tests.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>my_dfs <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> my_dfs), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>my_dfs <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> my_dfs), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  3.84  5.99  7.81  9.49 11.07</code></pre>
 </div>
@@ -738,38 +740,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="13.3.3" class="anchored" data-anchor-id="probability-density-function-pdf-2"><span class="header-section-number">13.3.3</span> Probability density function (PDF)</h3>
 <p>Again, we can use the probability density function <code>dchisq()</code> to plot one or more <span class="math inline">\(\chi^2\)</span> distributions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x))</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_function</span>(</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> dchisq,</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">2</span>),</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#84CA72"</span>,</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.5</span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">4</span>),</span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"grey70"</span>,</span>
-<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span></span>
-<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
-<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
-<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">8</span>),</span>
-<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"blue"</span>,</span>
-<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span>,</span>
-<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
-<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
-<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">14</span>),</span>
-<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span>,</span>
-<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.7</span></span>
-<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Chi-Square Distributions with dfs = 2, 4, 8, and 14"</span>) <span class="sc">+</span></span>
-<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"x"</span>) <span class="sc">+</span></span>
-<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"dchisq(x, c(2, 4, 8, 14))"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x))</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_function</span>(</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> dchisq,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">2</span>),</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#84CA72"</span>,</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.5</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">4</span>),</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"grey70"</span>,</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">8</span>),</span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"blue"</span>,</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(</span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun =</span> dchisq,</span>
+<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">14</span>),</span>
+<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Chi-Square Distributions with dfs = 2, 4, 8, and 14"</span>) <span class="sc">+</span></span>
+<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"x"</span>) <span class="sc">+</span></span>
+<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"dchisq(x, c(2, 4, 8, 14))"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="distributions_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sampling.html" rel="next">
+<link href="./regressiondiagnostics.html" rel="next">
 <link href="./distributions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -274,6 +274,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Basic Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regressiondiagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Basic Regression</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -288,19 +294,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -358,6 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#an-even-briefer-detour-about-contrasts" id="toc-an-even-briefer-detour-about-contrasts" class="nav-link" data-scroll-target="#an-even-briefer-detour-about-contrasts"><span class="header-section-number">14.2.4</span> An even briefer detour about contrasts</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.3</span> Conclusion</a></li>
+  <li><a href="#activities" id="toc-activities" class="nav-link" data-scroll-target="#activities"><span class="header-section-number">14.4</span> Activities</a></li>
   </ul>
 </nav>
     </div>
@@ -430,7 +437,7 @@ Important
 <h3 data-number="14.1.1" class="anchored" data-anchor-id="sec-model1table"><span class="header-section-number">14.1.1</span> Simple linear regression</h3>
 <p>You may recall that the equation of a line is <span class="math inline">\(y = a + bx\)</span>. It is defined by two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. The intercept, <span class="math inline">\(a\)</span>, is the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x = 0\)</span>. The slope, <span class="math inline">\(b\)</span>, is the increase in <span class="math inline">\(y\)</span> for every increase of one in units of <span class="math inline">\(x\)</span>.</p>
 <p>When discussing regression, we will often use different notation in which a line is described as <span class="math inline">\(\widehat{y} = b_0 + b_1 \cdot x\)</span>. The intercept is <span class="math inline">\(b_0\)</span>, so <span class="math inline">\(b_0\)</span> is the value of <span class="math inline">\(\widehat{y}\)</span> when <span class="math inline">\(x = 0\)</span>. The slope is <span class="math inline">\(b_1\)</span>, i.e., the increase in <span class="math inline">\(\widehat{y}\)</span> for every increase in one one in <span class="math inline">\(x\)</span>. Why do we put a “hat” on top of the <span class="math inline">\(y\)</span>? It’s a form of notation commonly used in statistics to indicate that we have an estimate of <span class="math inline">\(y\)</span> rather than <span class="math inline">\(y\)</span> itself.</p>
-<p>From inspecting the regression line in <a href="#fig-scatter-line">Figure&nbsp;<span>14.1</span></a>, we know that <span class="math inline">\(b_1\)</span> is positive. Why? Because players who have higher <code>ast</code> values also tend to have higher <code>pts</code> values. However, what is the numerical value of the slope <span class="math inline">\(b_1\)</span>? What about the intercept <span class="math inline">\(b_0\)</span>?</p>
+<p>From inspecting the regression line in <a href="regressiondiagnostics.html#fig-scatter-line">Figure&nbsp;<span>15.1</span></a>, we know that <span class="math inline">\(b_1\)</span> is positive. Why? Because players who have higher <code>ast</code> values also tend to have higher <code>pts</code> values. However, what is the numerical value of the slope <span class="math inline">\(b_1\)</span>? What about the intercept <span class="math inline">\(b_0\)</span>?</p>
 <p>We can obtain values of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> by using <em>linear regression</em>. This is done in two steps:</p>
 <ol type="1">
 <li>We first fit the linear regression model using the <code>lm()</code> function and save it in <code>result</code>.</li>
@@ -463,7 +470,7 @@ Multiple R-squared:  0.4369,    Adjusted R-squared:  0.4368
 F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Let’s first focus on interpreting the output, and then we’ll later revisit the code that produced it. In the <code>Estimate</code> column are the estimated values of both the intercept, <span class="math inline">\(b_0\)</span>, and slope, <span class="math inline">\(b_1\)</span>. Thus, the equation of the regression line in Figure <a href="#fig-scatter-line">Figure&nbsp;<span>14.1</span></a> is:</p>
+<p>Let’s first focus on interpreting the output, and then we’ll later revisit the code that produced it. In the <code>Estimate</code> column are the estimated values of both the intercept, <span class="math inline">\(b_0\)</span>, and slope, <span class="math inline">\(b_1\)</span>. Thus, the equation of the regression line in Figure <a href="regressiondiagnostics.html#fig-scatter-line">Figure&nbsp;<span>15.1</span></a> is:</p>
 <p><span class="math display">\[
 \begin{aligned}
     \widehat{y} &amp;= b_0 + b_1 \cdot x\\
@@ -642,16 +649,16 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 2
    player_name     pts
    &lt;chr&gt;         &lt;dbl&gt;
- 1 Stephen Curry  26.4
- 2 LeBron James   25.3
- 3 LeBron James   27.2
- 4 Stephen Curry  17.5
- 5 Stephen Curry  18.6
- 6 LeBron James   26.8
- 7 Stephen Curry  23.8
- 8 LeBron James   20.9
- 9 Stephen Curry  27.3
-10 Stephen Curry  25.3</code></pre>
+ 1 LeBron James   26.8
+ 2 LeBron James   26.4
+ 3 LeBron James   28.4
+ 4 Stephen Curry  32  
+ 5 Stephen Curry  20.8
+ 6 LeBron James   30.3
+ 7 Stephen Curry  30.1
+ 8 LeBron James   31.4
+ 9 Stephen Curry  24  
+10 LeBron James   27.2</code></pre>
 </div>
 </div>
 <p>Another way to get a sense of this data is by generating a variety of descriptive statistics.</p>
@@ -964,18 +971,18 @@ F-statistic: 6.665 on 1 and 30 DF,  p-value: 0.01496</code></pre>
 <pre><code># A tibble: 12 × 2
      pts player_name   
    &lt;dbl&gt; &lt;chr&gt;         
- 1  22.9 Stephen Curry 
- 2  25.3 LeBron James  
- 3  32   Stephen Curry 
- 4  29.6 Michael Jordan
- 5  25.3 Stephen Curry 
- 6  29.7 LeBron James  
- 7  28.4 LeBron James  
- 8  30   LeBron James  
- 9  30.1 Stephen Curry 
-10  17.5 Stephen Curry 
-11  26.8 LeBron James  
-12  28.7 Michael Jordan</code></pre>
+ 1  26.4 LeBron James  
+ 2  22.9 Michael Jordan
+ 3  27.1 LeBron James  
+ 4  29.7 LeBron James  
+ 5  32   Stephen Curry 
+ 6  30   LeBron James  
+ 7  27.3 Stephen Curry 
+ 8  28.4 LeBron James  
+ 9  28.7 Michael Jordan
+10  14.7 Stephen Curry 
+11  25.5 Stephen Curry 
+12  31.4 LeBron James  </code></pre>
 </div>
 </div>
 <p>Now our <code>player_name</code> column contains 3 values instead of 2. Let’s convert the <code>player_name</code> column into a factor as before:</p>
@@ -1119,6 +1126,22 @@ LeBron James             1</code></pre>
 <section id="conclusion" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">14.3</span> Conclusion</h2>
 <p>Understanding a regression table output when you’re using a categorical explanatory variable is a topic those new to regression often struggle with. The only real remedy for these struggles is practice, practice, practice. However, once you equip yourselves with an understanding of how to create regression models using categorical explanatory variables, you’ll be able to incorporate many new variables into your models, given the large amount of the world’s data that is categorical.</p>
+</section>
+<section id="activities" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="activities"><span class="header-section-number">14.4</span> Activities</h2>
+<ol type="1">
+<li>Generate 200 random values drawn from a normal distribution with a mean of <span class="math inline">\(2.0\)</span> and a standard deviation of <span class="math inline">\(8.0\)</span>. Save these values to a variable named <code>x</code>.</li>
+<li>Generate 200 random values drawn from a normal distribution with a mean of <span class="math inline">\(50.0\)</span> and a standard deviation of <span class="math inline">\(12.0\)</span>. Save these values to a variable named <code>y1</code>.</li>
+<li>Create a data frame (a tibble) with two columns, one with all the values from <code>y1</code> and one with all the values from <code>x</code>.</li>
+<li>Conduct a regression, using the <code>x</code> column as the explanatory variable and the <code>y1</code> column as the outcome variable.</li>
+<li>Inspect the estimated model parameters. What do they suggest about the relationship between <code>x</code> and <code>y1</code>?</li>
+<li>Add a new column to your data frame and name it <code>y2</code>. The values of <code>y2</code> should be equal to <span class="math inline">\(14 + 4.3x\)</span>.</li>
+<li>Conduct a second regression, again using the <code>x</code> column as the explanatory variable, but now using the <code>y2</code> column as the outcome variable.</li>
+<li>Inspect the estimated model parameters. What do they suggest about the relationship between <code>x</code> and <code>y2</code>?</li>
+<li>Add a new column to your data frame and name it <code>y3</code>. The values of <code>y3</code> should be equal to the values in the <code>y2</code>, but each of the 200 values in <code>y2</code> should have a random value added to it. This random value should be drawn from a normal distribution with a mean of <span class="math inline">\(0.0\)</span> and a standard deviation of <span class="math inline">\(5.0\)</span>.</li>
+<li>Conduct a third regression, again using the <code>x</code> column as the explanatory variable, but now using the <code>y3</code> column as the outcome variable.</li>
+<li>Inspect the estimated model parameters. What do they suggest about the relationship between <code>x</code> and <code>y3</code>?</li>
+</ol>
 
 
 </section>
@@ -1364,8 +1387,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sampling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./regressiondiagnostics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Basic Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
