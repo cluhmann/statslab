@@ -42,6 +42,7 @@ book:
         - hypothesis.qmd
         - distributions.qmd
         - basicregression.qmd
+        - regressiondiagnostics.qmd
 #        - multiple.qmd
 #        - correlation.qmd
 #        - interactions.qmd

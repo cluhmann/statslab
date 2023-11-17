@@ -27,9 +27,9 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 7 | 10-13 | Plotting with ggplot2 |  |
 | 8 | 10-20 |  | `rep_sample_n()` from scratch |
 | 9 | 10-27 |  | Simulating the PRE sampling distribution |
-| 10 | 11-03 | Regression 1/n |  |
-| 11 | 11-10 | Regression Diagnostics |  |
-| 12 | 11-17 | TBD |  |
+| 10 | 11-03 | Basic Regression 1/2 | |
+| 11 | 11-10 | Basic Regression 2/2 | Generate random data & regress!  |
+| 12 | 11-17 | Regression Diagnostics | Tests of normality |
 | 13 | 11-24 | **No Class – Thanksgiving Break** | |
 | 14 | 12-01 | TBD |  |
 | 15 | 12-08 | Sampling: p-values ala Lakens |  |
