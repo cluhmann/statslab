@@ -649,16 +649,16 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 2
    player_name     pts
    &lt;chr&gt;         &lt;dbl&gt;
- 1 LeBron James   29.7
- 2 LeBron James   25.3
- 3 Stephen Curry  17.5
- 4 LeBron James   27.3
- 5 LeBron James   28.4
- 6 LeBron James   31.4
- 7 LeBron James   27.4
- 8 LeBron James   27.1
- 9 Stephen Curry  14.7
-10 LeBron James   27.2</code></pre>
+ 1 Stephen Curry  14.7
+ 2 LeBron James   28.4
+ 3 LeBron James   25.3
+ 4 Stephen Curry  23.8
+ 5 Stephen Curry  24  
+ 6 LeBron James   27.1
+ 7 Stephen Curry  25.3
+ 8 Stephen Curry  27.3
+ 9 Stephen Curry  17.5
+10 Stephen Curry  25.5</code></pre>
 </div>
 </div>
 <p>Another way to get a sense of this data is by generating a variety of descriptive statistics.</p>
@@ -969,20 +969,20 @@ F-statistic: 6.665 on 1 and 30 DF,  p-value: 0.01496</code></pre>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(curryjamesjordan, <span class="at">n=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 2
-     pts player_name  
-   &lt;dbl&gt; &lt;chr&gt;        
- 1  25.3 LeBron James 
- 2  28.4 LeBron James 
- 3  20.9 LeBron James 
- 4  26.8 LeBron James 
- 5  31.4 LeBron James 
- 6  26.4 LeBron James 
- 7  25.3 Stephen Curry
- 8  18.6 Stephen Curry
- 9  29.7 LeBron James 
-10  24   Stephen Curry
-11  27.1 LeBron James 
-12  30.1 Stephen Curry</code></pre>
+     pts player_name   
+   &lt;dbl&gt; &lt;chr&gt;         
+ 1  26.7 LeBron James  
+ 2  25   LeBron James  
+ 3  26.4 Stephen Curry 
+ 4  20   Michael Jordan
+ 5  25.3 LeBron James  
+ 6  25.3 Stephen Curry 
+ 7  20.9 LeBron James  
+ 8  27.3 Stephen Curry 
+ 9  27.2 LeBron James  
+10  23.8 Stephen Curry 
+11  27.1 LeBron James  
+12  26.4 LeBron James  </code></pre>
 </div>
 </div>
 <p>Now our <code>player_name</code> column contains 3 values instead of 2. Let’s convert the <code>player_name</code> column into a factor as before:</p>
