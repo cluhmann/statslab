@@ -138,3 +138,13 @@ pts_model %>%
     rename_at(vars(c(".fitted", ".resid")), ~c("pts_hat", "residual"))
 ```
 
+
+
+## Activities
+
+1. Generate $N=200$ random values drawn from a normal distribution with a mean of $50$ and a standard deviation of $5$. Save these values to a variable named `x1`.
+1. Generate $N$ new values such that each value is one of the values in `x1` and a new draw from a normal distribution with a mean of $0.0$ and a standard deviation of $0.1$. Save these values to a variable named `x1`.
+1. Generate $N$ new values such that each value is one of the values in `x1` and a new draw from a normal distribution with a mean of $0.0$ and a standard deviation of $1.0$. Save these values to a variable named `y`.
+1. Construct a multiple regression model with an intercept and 2 explanatory variables: `x1` and `x2`.
+1. What has happened here?  Can you perform some explanatory data analysis to help figure this out?
+1. Now increase $N$ to $N=10,000$ and perform all the steps above again.  What has happened now?
