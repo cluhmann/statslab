@@ -5,8 +5,14 @@
 #| output: false
 library(tidyverse)
 library(patchwork)
+library(broom)
 library(kableExtra)
 ```
+
+
+::: {.callout-important}
+This chapter makes use of the `broom` package, part of the tidyverse-adjacent family of packages, `tidymodels`.  It can be installed and loaded in the same way that we have installed/loaded other packages (see @sec-packages for a refresher).
+:::
 
 In @sec-basicregression, we introduced ideas related to modeling, relating outcome variable, $y$, and some explanatory variable, $x$. Though there are many approaches to modeling, we focused on one particular technique: linear regression, one of the most commonly used and easy-to-understand approaches to statistical modeling. Furthermore to keep things simple, we only considered models with one explanatory variable, $x$, that was either metric (@sec-model1) or (@sec-model2).
 
@@ -81,7 +87,7 @@ Observe there is a positive relationship between `pts` and `ast`: as the average
 However, the two plots in @fig-2numxplot1 only focus on the relationship of the outcome variable with each of the two explanatory variables *separately* (the bivariate relationships). To visualize the relationship among all three variables simultaneously, we need a three-dimensional (3D) scatterplot of the sort presented in in @fig-3D-scatterplot.
 
 
-![3D scatterplot and regression plane](images/credit_card_balance_regression_plane.png)
+![3D scatterplot and regression plane](images/credit_card_balance_regression_plane.png){#fig-3D-scatterplot}
 
 Furthermore, we also include the *regression plane*. Recall that regression lines are "best-fitting" in that, of all possible lines we can draw through a cloud of points, the regression line minimizes the *sum of squared residuals*. This concept also extends to models with more than one metric explanatory variable. The difference is instead of a "best-fitting" line, we now have a "best-fitting" plane that similarly minimizes the sum of squared residuals.
 
