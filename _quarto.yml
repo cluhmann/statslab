@@ -43,12 +43,11 @@ book:
         - distributions.qmd
         - basicregression.qmd
         - regressiondiagnostics.qmd
-#        - multiple.qmd
-#        - correlation.qmd
+        - multipleregression.qmd
+#        - anova.qmd
 #        - interactions.qmd
 #        - polynomial.qmd
 #        - glm.qmd
-#        - anova.qmd
     - part: "Activities"
       chapters:
         - sampling.qmd

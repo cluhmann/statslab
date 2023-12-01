@@ -1,0 +1,140 @@
+# Multiple Regression {#sec-multipleregression}
+
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+library(patchwork)
+library(kableExtra)
+```
+
+In @sec-basicregression, we introduced ideas related to modeling, relating outcome variable, $y$, and some explanatory variable, $x$. Though there are many approaches to modeling, we focused on one particular technique: linear regression, one of the most commonly used and easy-to-understand approaches to statistical modeling. Furthermore to keep things simple, we only considered models with one explanatory variable, $x$, that was either metric (@sec-model1) or (@sec-model2).
+
+In this chapter on multiple regression, we’ll start considering models that include more than one explanatory variable. You can imagine when trying to model a particular outcome variable, like points per game, that it would be useful to include more than just one explanatory variable’s-worth of information.
+
+Since our regression models will now consider more than one explanatory variable, the interpretation of the associated effect of any one explanatory variable must be made in conjunction with the other explanatory variables included in your model. Let’s begin!
+
+
+## Two metric explanatory variables
+
+Let's consider multiple regression models where we have two metric explanatory variables. As usual, we'll use the $nba$ data set.  As before, we'll use the average assists per game (`ast`) as one explanatory variable.  As a second explanatory variable, we will use each player's average number of rebounds per game (`reb``).
+
+In this section, we'll fit a regression model where we have 
+
+1. A metric outcome variable $y$, the player's average points per game
+1. Two explanatory variables:
+    1. One metric explanatory variable $x_1$, the player's average assists per game
+    1. Another numerical explanatory variable $x_2$, the player's average rebounds per game
+
+
+### Exploratory data analysis
+
+Let's load our data as usual.
+
+```{r}
+nba <- read_csv("./data/nba_all_seasons.csv", na = c("Undrafted"))
+```
+
+Furthermore, let's look at a random sample of 10 rows of our data, inspecting the relevant columns.
+
+```{r}
+nba %>%
+    sample_n(size = 10) %>%
+    select(c(pts, ast, reb))
+```
+
+As always, we should begin by conducting an exploratory data analysis. Review @sec-eda if you need to do so.
+
+Because our outcome variable `pts` and the explanatory variables `ast` and `reb` are numerical, we can compute the correlation coefficients between the different possible pairs of these variables.  Let's do so.
+
+```{r, eval=FALSE}
+cor(nba$pts, nba$ast)
+cor(nba$pts, nba$reb)
+cor(nba$ast, nba$reb)
+```
+
+Or we can simultaneously compute them by returning a *correlation matrix*. We can then see the correlation coefficient for any pair of variables by looking them up in the appropriate row/column combination.
+
+```{r}
+nba %>%
+    select(pts, ast, reb) %>%
+    cor()
+```
+
+Let's visualize the relationship of the outcome variable with each of the two explanatory variables in two separate plots in @fig-2numxplot1.
+
+```{r}
+#| label: fig-2numxplot1
+plt1 <- ggplot(nba, aes(x = ast, y = pts)) +
+  geom_point(alpha=.2) +
+  geom_smooth(method = "lm", se = FALSE)
+
+plt2 <- ggplot(nba, aes(x = ast, y = reb)) +
+  geom_point(alpha=.2) +
+  geom_smooth(method = "lm", se = FALSE)
+plt1 + plt2
+```
+
+
+Observe there is a positive relationship between `pts` and `ast`: as the average number of assists per game increases, so also does the average number of points scored per game.  This is consistent with the strongly positive correlation coefficient we calculated earlier. Similarly, there is a positive relationship between `pts` and `reb`: as the average number of rebounds per game increases, so also does the average number of points scored per game.
+
+However, the two plots in @fig-2numxplot1 only focus on the relationship of the outcome variable with each of the two explanatory variables *separately* (the bivariate relationships). To visualize the relationship among all three variables simultaneously, we need a three-dimensional (3D) scatterplot of the sort presented in in @fig-3D-scatterplot.
+
+
+![3D scatterplot and regression plane](images/credit_card_balance_regression_plane.png)
+
+Furthermore, we also include the *regression plane*. Recall that regression lines are "best-fitting" in that, of all possible lines we can draw through a cloud of points, the regression line minimizes the *sum of squared residuals*. This concept also extends to models with more than one metric explanatory variable. The difference is instead of a "best-fitting" line, we now have a "best-fitting" plane that similarly minimizes the sum of squared residuals.
+
+::: {.callout-important}
+The three-dimensional plot here is for illustration purposes only. It is intended to provide an accessible way to understand how regression generalizes from a single explanatory variable to two explanatory variables.  But once you add a third explanatory variable into the mix, you can no longer plot things like we have here (you would need a fourth spatial dimension).  Furthermore, three-dimensional plots are never appropriate (I promise).  So hopefully this will be the last time we look at something like this!
+:::
+
+
+
+### Regression plane {#sec-model3table}
+
+Let's now fit a regression model and get the regression table. Just as we did in @sec-basicregression, the regression table for this model can be generated using `summary()`.
+
+```{r}
+# Fit regression model:
+pts_model <- lm(pts ~ ast + reb, data = nba)
+# Get regression table:
+summary(pts_model)
+```
+
+
+1. We first "fit" the linear regression model using the `lm(y ~ x1 + x2, data)` function and save it in `pts_model`.
+1. We get the regression table by applying the `summary()` function to `pts_model`.
+
+Let's interpret the three values in the `Estimate` column. First, the estimate in the `(Intercept)` row is 0.66714. This intercept represents the value of `pts` expected for a player with `ast=0` and `reb=0`.  Second, the estimate in the `ast` row is 1.80437. Taking into account all the other explanatory variables in our model, for every additional assist per game, we expect an additional 1.8 points per game.
+
+Note that we preface our interpretation with the statement, "taking into account all the other explanatory variables in our model".  Here, by all other explanatory variables we mean the intercept and `reb`. We do this to emphasize that we are now jointly interpreting the associated effect of multiple explanatory variables in the same model at the same time and we cannot forget about the other explanatory variables as we interpret one particular parameter.
+
+Third, the estimate in the `reb` row is 1.18920. Taking into account all other explanatory variables in our model, for every additional rebound per game, we expect an additional 1.19 points per game.
+
+Putting these results together, the equation of the regression plane that gives us fitted values $\widehat{y}$ = $\widehat{pts}$ is:
+
+$$
+\begin{aligned}
+\widehat{y} &= b_0 + b_1 \cdot x_1 +  b_2 \cdot x_2\\
+\widehat{pts} &= b_0 + b_{ast} \cdot ast + b_{reb} \cdot reb\\
+&= 0.66714 + (1.80437 \cdot ast) + (1.18920 \cdot reb)
+\end{aligned}
+$$
+
+
+### Observed/fitted values and residuals {#sec-model3points}
+
+Let's also compute all fitted values and residuals for our regression model and present the first 10 rows of output. Thinking about the 3D scatterplot in @fig-3D-scatterplot, the coordinates of each point in the scatterplot is a triplet of `pts`, `ast`, and `reb` from our data.  The fitted values that lie on the regression plan can be found using the equation above.
+
+
+```{r}
+pts_model %>%
+    # expand model result
+    augment() %>%
+    # select relevant columns
+    select(c("pts", "ast", "reb", ".fitted", ".resid")) %>%
+    # rename columns
+    rename_at(vars(c(".fitted", ".resid")), ~c("pts_hat", "residual"))
+```
+
