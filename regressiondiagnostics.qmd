@@ -209,9 +209,9 @@ Multicollinearity (or just collinearity) refers to dependence among explanatory 
 
 ## Activities
 
-1. Generate 10,000 random values drawn from a Student $t$ distribution with a `df` value (degrees of freedom) of $5$.  Multiply all 200 values by 10.  Now add 11 to all 200 values.
-1. Calculate the mean and standard deviation of these 200 values.
-1. Generate 200 random values drawn from a normal distribution with a mean and a standard deviation that are equal to the mean/standard deviation you just calculated.
+1. Generate $N=10,000$ random values drawn from a Student $t$ distribution with a `df` value (degrees of freedom) of $5$.  Multiply all $N$ values by 10.  Now add 11 to all $N$ values.
+1. Calculate the mean and standard deviation of these $N$ values.
+1. Generate $N$ random values drawn from a normal distribution with a mean and a standard deviation that are equal to the mean/standard deviation you just calculated.
 1. Use ggplot to plot a histogram of these two sets of values.  You should ultimately have 1 plot with 2 histograms. Make sure that both histograms are clearly visible.
 1. Set the x-axis so that it only cover the interval $[-10,10]$.  How would you describe the difference between the two distributions?
 1. Now sort the values in each of the two columns.
