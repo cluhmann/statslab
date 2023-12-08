@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sampling.html" rel="next">
+<link href="./multipleregression.html" rel="next">
 <link href="./basicregression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -277,6 +277,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regression Diganostics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -291,19 +297,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
       </ul>
@@ -604,9 +610,9 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="activities" class="level2" data-number="15.6">
 <h2 data-number="15.6" class="anchored" data-anchor-id="activities"><span class="header-section-number">15.6</span> Activities</h2>
 <ol type="1">
-<li>Generate 10,000 random values drawn from a Student <span class="math inline">\(t\)</span> distribution with a <code>df</code> value (degrees of freedom) of <span class="math inline">\(5\)</span>. Multiply all 200 values by 10. Now add 11 to all 200 values.</li>
-<li>Calculate the mean and standard deviation of these 200 values.</li>
-<li>Generate 200 random values drawn from a normal distribution with a mean and a standard deviation that are equal to the mean/standard deviation you just calculated.</li>
+<li>Generate <span class="math inline">\(N=10,000\)</span> random values drawn from a Student <span class="math inline">\(t\)</span> distribution with a <code>df</code> value (degrees of freedom) of <span class="math inline">\(5\)</span>. Multiply all <span class="math inline">\(N\)</span> values by 10. Now add 11 to all <span class="math inline">\(N\)</span> values.</li>
+<li>Calculate the mean and standard deviation of these <span class="math inline">\(N\)</span> values.</li>
+<li>Generate <span class="math inline">\(N\)</span> random values drawn from a normal distribution with a mean and a standard deviation that are equal to the mean/standard deviation you just calculated.</li>
 <li>Use ggplot to plot a histogram of these two sets of values. You should ultimately have 1 plot with 2 histograms. Make sure that both histograms are clearly visible.</li>
 <li>Set the x-axis so that it only cover the interval <span class="math inline">\([-10,10]\)</span>. How would you describe the difference between the two distributions?</li>
 <li>Now sort the values in each of the two columns.</li>
@@ -860,8 +866,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sampling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./multipleregression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

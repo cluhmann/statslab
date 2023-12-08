@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 9&nbsp; Exploratory Data Analysis</title>
+<title>statslab - 16&nbsp; Multiple Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./factors.html" rel="next">
-<link href="./ggplot2.html" rel="prev">
+<link href="./sampling.html" rel="next">
+<link href="./regressiondiagnostics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidyverse.html">Exploring</a></li><li class="breadcrumb-item"><a href="./eda.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptives.html">Statistics</a></li><li class="breadcrumb-item"><a href="./multipleregression.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eda.html" class="sidebar-item-text sidebar-link active">
+  <a href="./eda.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link">
+  <a href="./multipleregression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
   </div>
 </li>
@@ -353,7 +353,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link active" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">9.1</span> Exploratory data analysis</a></li>
+  <li><a href="#two-metric-explanatory-variables" id="toc-two-metric-explanatory-variables" class="nav-link active" data-scroll-target="#two-metric-explanatory-variables"><span class="header-section-number">16.1</span> Two metric explanatory variables</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">16.1.1</span> Exploratory data analysis</a></li>
+  <li><a href="#sec-model3table" id="toc-sec-model3table" class="nav-link" data-scroll-target="#sec-model3table"><span class="header-section-number">16.1.2</span> Regression plane</a></li>
+  <li><a href="#sec-model3points" id="toc-sec-model3points" class="nav-link" data-scroll-target="#sec-model3points"><span class="header-section-number">16.1.3</span> Observed/fitted values and residuals</a></li>
+  </ul></li>
+  <li><a href="#activities" id="toc-activities" class="nav-link" data-scroll-target="#activities"><span class="header-section-number">16.2</span> Activities</a></li>
   </ul>
 </nav>
     </div>
@@ -362,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-eda" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></h1>
+<h1 class="title"><span id="sec-multipleregression" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></h1>
 </div>
 
 
@@ -377,16 +383,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="exploratory-data-analysis" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">9.1</span> Exploratory data analysis</h2>
-<p>A crucial step before doing any kind of analysis or modeling is performing an <em>exploratory data analysis</em> (EDA). EDA gives you a sense of the distributions of the individual variables in your data, whether any potential relationships exist between variables, whether there are outliers/missing/erroneous values, and (most importantly) how you might begin to build a model of your data. Here are three common steps in an EDA:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter makes use of the <code>broom</code> package, part of the tidyverse-adjacent family of packages, <code>tidymodels</code>. It can be installed and loaded in the same way that we have installed/loaded other packages (see <a href="rlang.html#sec-packages"><span>Section&nbsp;1.5</span></a> for a refresher).</p>
+</div>
+</div>
+<p>In <a href="basicregression.html"><span>Chapter&nbsp;14</span></a>, we introduced ideas related to modeling, relating outcome variable, <span class="math inline">\(y\)</span>, and some explanatory variable, <span class="math inline">\(x\)</span>. Though there are many approaches to modeling, we focused on one particular technique: linear regression, one of the most commonly used and easy-to-understand approaches to statistical modeling. Furthermore to keep things simple, we only considered models with one explanatory variable, <span class="math inline">\(x\)</span>, that was either metric (<a href="basicregression.html#sec-model1"><span>Section&nbsp;14.1</span></a>) or (<a href="basicregression.html#sec-model2"><span>Section&nbsp;14.2</span></a>).</p>
+<p>In this chapter on multiple regression, we’ll start considering models that include more than one explanatory variable. You can imagine when trying to model a particular outcome variable, like points per game, that it would be useful to include more than just one explanatory variable’s-worth of information.</p>
+<p>Since our regression models will now consider more than one explanatory variable, the interpretation of the associated effect of any one explanatory variable must be made in conjunction with the other explanatory variables included in your model. Let’s begin!</p>
+<section id="two-metric-explanatory-variables" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="two-metric-explanatory-variables"><span class="header-section-number">16.1</span> Two metric explanatory variables</h2>
+<p>Let’s consider multiple regression models where we have two metric explanatory variables. As usual, we’ll use the <span class="math inline">\(nba\)</span> data set. As before, we’ll use the average assists per game (<code>ast</code>) as one explanatory variable. As a second explanatory variable, we will use each player’s average number of rebounds per game (`reb``).</p>
+<p>In this section, we’ll fit a regression model where we have</p>
 <ol type="1">
-<li>Most crucially, looking at the raw data values.</li>
-<li>Computing summary statistics, such as means, medians, and interquartile ranges.</li>
-<li>Creating data visualizations.</li>
+<li>A metric outcome variable <span class="math inline">\(y\)</span>, the player’s average points per game</li>
+<li>Two explanatory variables:
+<ol type="1">
+<li>One metric explanatory variable <span class="math inline">\(x_1\)</span>, the player’s average assists per game</li>
+<li>Another numerical explanatory variable <span class="math inline">\(x_2\)</span>, the player’s average rebounds per game</li>
+</ol></li>
 </ol>
-<p>Let’s perform the first common step in an exploratory data analysis: looking at the raw data values. Because this step seems so trivial, unfortunately many data analysts ignore it. However, getting an early sense of what your raw data looks like can often prevent many larger issues down the road.</p>
-<p>Let’s load in our <code>nba</code> data:</p>
+<section id="exploratory-data-analysis" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">16.1.1</span> Exploratory data analysis</h3>
+<p>Let’s load our data as usual.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nba <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/nba_all_seasons.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"Undrafted"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -400,197 +427,179 @@ age, player_height, player_weight, draft_year, draft_round, ...
 Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...1`</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nba</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12,305 × 22
-    ...1 player_name team_abbreviation   age player_height player_weight college
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;  
- 1     0 Dennis Rod… CHI                  36          198.          99.8 Southe…
- 2     1 Dwayne Sch… LAC                  28          216.         118.  Florida
- 3     2 Earl Curet… TOR                  39          206.          95.3 Detroi…
- 4     3 Ed O'Bannon DAL                  24          203.         101.  UCLA   
- 5     4 Ed Pinckney MIA                  34          206.         109.  Villan…
- 6     5 Eddie John… HOU                  38          201.          97.5 Illino…
- 7     6 Eddie Jones LAL                  25          198.          86.2 Temple 
- 8     7 Elden Camp… LAL                  28          213.         113.  Clemson
- 9     8 Eldridge R… ATL                  29          193.          86.2 Washin…
-10     9 Elliot Per… MIL                  28          183.          72.6 Memphis
-# ℹ 12,295 more rows
-# ℹ 15 more variables: country &lt;chr&gt;, draft_year &lt;dbl&gt;, draft_round &lt;dbl&gt;,
-#   draft_number &lt;dbl&gt;, gp &lt;dbl&gt;, pts &lt;dbl&gt;, reb &lt;dbl&gt;, ast &lt;dbl&gt;,
-#   net_rating &lt;dbl&gt;, oreb_pct &lt;dbl&gt;, dreb_pct &lt;dbl&gt;, usg_pct &lt;dbl&gt;,
-#   ts_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;, season &lt;chr&gt;</code></pre>
 </div>
-</div>
-<p>You can also take a more detailed look by using RStudio’s spreadsheet viewer (i.e., <code>View(nba)</code>).</p>
-<p>Observe that there are 12305 rows in <code>nba</code>, where each row corresponds to a particular player in a particular NBA season. We won’t get into the the details of all 22 columns in <code>nba</code>, but let’s fully describe a few of them:</p>
-<ol type="1">
-<li><code>player_name</code>: The player’s name.</li>
-<li><code>player_height</code>: The player’s height in centimeters.</li>
-<li><code>player_weight</code>: The player’s weight in kilograms.</li>
-<li><code>pts</code>: The average points the player scored per game in the corresponding season.</li>
-<li><code>ast</code>: The average number of assist the player had per game in the corresponding season.</li>
-</ol>
-<p>Sometimes, the data you have loaded comes in a specific order. For example, the comma-delimited file containing our NBA data is ordered by season (early seasons as the top, recent seasons near the bottom). For this reason, inspecting the first few (e.g., via <code>head()</code> or <code>slice_head()</code>) or the last few (e.g., via <code>tail()</code> or <code>slice_tail()</code>) may not give you a good sense of what the data really looks like. An alternative way to look at the raw data values is by choosing a random sample of the rows in <code>nba</code> by piping it into the <code>sample_n()</code> function from the <code>dplyr</code> package. Here we set the <code>size</code> argument to be <code>5</code>, indicating that we want a random sample of 5 rows. We display the results in Table @ref(tab:five-random-courses). Note that due to the random nature of the sampling, you will likely end up with a different subset of 5 rows.</p>
+<p>Furthermore, let’s look at a random sample of 10 rows of our data, inspecting the relevant columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you wish, you can request more rows.</p>
-<p>Now that we’ve looked at some of the raw values in our <code>nba</code> data frame and got a preliminary sense of the data, let’s move on to the next common step in an exploratory data analysis: computing summary statistics. Let’s start by computing the mean and median of <code>pts</code> and <code>ast</code>. We’ll do this by using the <code>summarize()</code> function from <code>dplyr</code> along with the <code>mean()</code> and <code>median()</code> summary functions we saw in <a href="dplyr.html#sec-summarize"><span>Section&nbsp;7.4</span></a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_pts =</span> <span class="fu">mean</span>(pts),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_ast =</span> <span class="fu">mean</span>(ast),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">median_pts =</span> <span class="fu">median</span>(pts),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">median_ast =</span> <span class="fu">median</span>(ast)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  mean_pts mean_ast median_pts median_ast
-     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-1     8.17     1.81        6.7        1.2</code></pre>
-</div>
-</div>
-<p>However, what if we want other summary statistics as well, such as the standard deviation, the minimum and maximum values, and various percentiles?</p>
-<p>Typing out all these summary statistic functions in <code>summarize()</code> would be long and tedious, particularly if you have many columns in your data frame. You can use a package like <code>skimr</code> (which allows you to “skims” a data frame via commonly used summary statistics(). But let’s instead use a little trick to make the use of <code>summarize()</code> a bit more manageable. Let’s take our <code>nba</code> data frame, <code>select()</code> only the two columns we are interested in (<code>pts</code> and <code>ast</code>) and generate some summary statistics:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span> <span class="fu">select</span>(pts, ast) <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">c</span>(pts, ast)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">n_complete =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(value)),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">m =</span> <span class="fu">mean</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">IQR =</span> <span class="fu">IQR</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">min =</span> <span class="fu">min</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%25 Q"</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, .<span class="dv">25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%50 Q"</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, .<span class="dv">5</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"%75 Q"</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, .<span class="dv">75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">max =</span> <span class="fu">max</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># transpose the data frame for readability purposes</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">variable=</span>name) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols=</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"variable"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(pts, ast, reb))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 3
-   name            ast      pts
-   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
- 1 n_complete 12305    12305   
- 2 n_missing      0        0   
- 3 m              1.81     8.17
- 4 sd             1.79     5.97
- 5 IQR            1.8      7.9 
- 6 min            0        0   
- 7 %25 Q          0.6      3.6 
- 8 %50 Q          1.2      6.7 
- 9 %75 Q          2.4     11.5 
-10 max           11.7     36.1 </code></pre>
+     pts   ast   reb
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  18.5   6.1  10.7
+ 2   1     0.3   0.5
+ 3   4.8   0.9   5.7
+ 4   5.9   1.2   2.3
+ 5   3     0.7   2.4
+ 6  10.8   5.8   3.5
+ 7  20.8   2.1  12.1
+ 8  13.2   1.6   4.3
+ 9   1     0     1.2
+10  20.1   3.5   4.6</code></pre>
 </div>
 </div>
-<p>What have we done here? We have pivoted our data frame so that it has two columns, one named <code>name</code> and one named <code>value</code>. The <code>name</code> column contains the name of the original column the value was originally taken from (i.e., either “pts” or “ast”). The <code>value</code> column contains the value itself. So now we have a transformed data frame that looks like this:</p>
+<p>As always, we should begin by conducting an exploratory data analysis. Review <a href="eda.html"><span>Chapter&nbsp;9</span></a> if you need to do so.</p>
+<p>Because our outcome variable <code>pts</code> and the explanatory variables <code>ast</code> and <code>reb</code> are numerical, we can compute the correlation coefficients between the different possible pairs of these variables. Let’s do so.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span> <span class="fu">select</span>(pts, ast) <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">c</span>(pts, ast)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(nba<span class="sc">$</span>pts, nba<span class="sc">$</span>ast)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(nba<span class="sc">$</span>pts, nba<span class="sc">$</span>reb)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(nba<span class="sc">$</span>ast, nba<span class="sc">$</span>reb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or we can simultaneously compute them by returning a <em>correlation matrix</em>. We can then see the correlation coefficient for any pair of variables by looking them up in the appropriate row/column combination.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(pts, ast, reb) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 2
-  name  value
-  &lt;chr&gt; &lt;dbl&gt;
-1 pts     5.7
-2 ast     3.1
-3 pts     2.3
-4 ast     0.3
-5 pts     0.8
-6 ast     0.4</code></pre>
+<pre><code>          pts       ast       reb
+pts 1.0000000 0.6609489 0.6248885
+ast 0.6609489 1.0000000 0.2410177
+reb 0.6248885 0.2410177 1.0000000</code></pre>
 </div>
 </div>
-<p>We then group by the values in the <code>name</code> column which allows us to specify a summary to be applied to each group (i.e., each column in our original <code>nba</code> data frame) and vastly reduce the amount of duplicate code we need to write. At the end of the code block, we transpose the data frame using <code>pivot()</code> so that we can see all the descriptive statistics.</p>
-<p>Here, we have requested the following descriptive statistics:</p>
-<ul>
-<li><code>n_complete</code>: the number of non-missing or complete values</li>
-<li><code>n_missing</code>: the number of missing values</li>
-<li><code>n</code>: the total number of values</li>
-<li><code>mean</code>: the average</li>
-<li><code>sd</code>: the standard deviation</li>
-<li><code>IQR</code>: the interquartile range, the size of the interval that includes values between the 25th percentile and the 75th percentile</li>
-<li><code>min</code>: the <em>minimum</em> value (also the the 0th percentile: the value at which 0% of observations are smaller than it)</li>
-<li><code>p25</code>: the 25th percentile: the value at which 25% of observations are smaller than it (the <em>1st quartile</em>)</li>
-<li><code>p50</code>: the 50th percentile: the value at which 50% of observations are smaller than it (the <em>2nd</em> quartile and more commonly called the <em>median</em>)</li>
-<li><code>p75</code>: the 75th percentile: the value at which 75% of observations are smaller than it (the <em>3rd quartile</em>)</li>
-<li><code>p100</code>: the <em>maximum</em> value (also the the 100th percentile: the value at which 100% of observations are smaller than it)</li>
-</ul>
-<p>Looking at this output, we can see how the values of both variables distribute. For example, the mean value of <code>pts</code> is 8.17, whereas the mean value of <code>ast</code> is 1.81. Furthermore, the middle 50% of <code>pts</code> values is between 3.6 and 11.5 (the first and third quartiles), whereas the middle 50% of <code>ast</code> values fall within 0.6 to 2.4.</p>
-<p>These statistics provide what are known as <em>univariate</em> summary statistics: functions that take a single variable (i.e., column in our data frame) and return some numerical summary of that variable. However, there also exist <em>bivariate</em> summary statistics: functions that take in two variables and return some summary of those two variables. In particular, when the two variables are numerical, we can compute the <em>correlation coefficient</em>. Generally speaking, <em>coefficients</em> are quantitative expressions of a specific phenomenon. A <em>correlation coefficient</em> is a quantitative expression of the <em>strength of the linear relationship between two numerical variables</em>. Its value ranges between -1 and 1 where:</p>
-<ul>
-<li>-1 indicates a perfect <em>negative relationship</em>: As one variable increases, the value of the other variable tends to go down, following a straight line.</li>
-<li>0 indicates no relationship: The values of both variables go up/down independently of each other.</li>
-<li>+1 indicates a perfect <em>positive relationship</em>: As the value of one variable goes up, the value of the other variable tends to go up as well in a linear fashion.</li>
-</ul>
-<p>The correlation coefficient can be computed using the <code>cor()</code> summary function within a <code>summarize()</code>:</p>
+<p>Let’s visualize the relationship of the outcome variable with each of the two explanatory variables in two separate plots in <a href="#fig-2numxplot1">Figure&nbsp;<span>16.1</span></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(pts, ast, player_height, player_weight)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">pts_ast_corr =</span> <span class="fu">cor</span>(pts, ast))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  pts_ast_corr
-         &lt;dbl&gt;
-1        0.661</code></pre>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(nba, <span class="fu">aes</span>(<span class="at">x =</span> ast, <span class="at">y =</span> pts)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(nba, <span class="fu">aes</span>(<span class="at">x =</span> ast, <span class="at">y =</span> reb)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt1 <span class="sc">+</span> plt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
-</div>
-<p>In our case, the correlation coefficient of 0.661 indicates that the relationship between <code>pts</code> and <code>ast</code> is positive and relatively strong. There is a certain amount of subjectivity in interpreting correlation coefficients, especially those that aren’t close to the extreme values of -1, 0, and 1. Visualizing the scatterplots above can help as can various effect sizes (e.g., <span class="math inline">\(r^2\)</span> in the case of Pearson correlation coefficients, which indicate the proportion of variance in one variable explained by the variance in the other variable).</p>
-<p>Let’s now perform another critical step in any exploratory data analysis: visualizing your data. Because both the <code>pts</code> and <code>ast</code> are (at least) ordinal scales measurements, a scatterplot is an appropriate means of visualizing this data. Let’s do this using <code>geom_point()</code>. Indeed, we have many quantitative variables in the <code>nba</code> data set and we might wish quickly evaluate the bivariate relationships among several variables. <a href="#fig-correlation1">Figure&nbsp;<span>9.1</span></a> illustrates one way that you can construct what is sometimes referred to as a <strong>pairplot</strong> (packages such as <code>Gally</code> can ease the creation of such plots).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(pts, ast, player_height, player_weight)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowid_to_column</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>rowid) <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(., ., <span class="at">by =</span> <span class="st">"rowid"</span>, <span class="at">relationship =</span> <span class="st">"many-to-many"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value.x, <span class="at">y =</span> value.y)) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">01</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(name.y <span class="sc">~</span> name.x, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-correlation1" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-2numxplot1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="eda_files/figure-html/fig-correlation1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;9.1: Scatterplots illustrating bivariate relationships among several different variables.</figcaption>
+<p><img src="multipleregression_files/figure-html/fig-2numxplot1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;16.1: <strong>?(caption)</strong></figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Let’s focus on the two variables of interest: <code>pts</code> and <code>ast</code>.</p>
+<p>Observe there is a positive relationship between <code>pts</code> and <code>ast</code>: as the average number of assists per game increases, so also does the average number of points scored per game. This is consistent with the strongly positive correlation coefficient we calculated earlier. Similarly, there is a positive relationship between <code>pts</code> and <code>reb</code>: as the average number of rebounds per game increases, so also does the average number of points scored per game.</p>
+<p>However, the two plots in <a href="#fig-2numxplot1">Figure&nbsp;<span>16.1</span></a> only focus on the relationship of the outcome variable with each of the two explanatory variables <em>separately</em> (the bivariate relationships). To visualize the relationship among all three variables simultaneously, we need a three-dimensional (3D) scatterplot of the sort presented in in <a href="#fig-3D-scatterplot">Figure&nbsp;<span>16.2</span></a>.</p>
+<div id="fig-3D-scatterplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/credit_card_balance_regression_plane.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;16.2: 3D scatterplot and regression plane</figcaption>
+</figure>
+</div>
+<p>Furthermore, we also include the <em>regression plane</em>. Recall that regression lines are “best-fitting” in that, of all possible lines we can draw through a cloud of points, the regression line minimizes the <em>sum of squared residuals</em>. This concept also extends to models with more than one metric explanatory variable. The difference is instead of a “best-fitting” line, we now have a “best-fitting” plane that similarly minimizes the sum of squared residuals.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The three-dimensional plot here is for illustration purposes only. It is intended to provide an accessible way to understand how regression generalizes from a single explanatory variable to two explanatory variables. But once you add a third explanatory variable into the mix, you can no longer plot things like we have here (you would need a fourth spatial dimension). Furthermore, three-dimensional plots are never appropriate (I promise). So hopefully this will be the last time we look at something like this!</p>
+</div>
+</div>
+</section>
+<section id="sec-model3table" class="level3" data-number="16.1.2">
+<h3 data-number="16.1.2" class="anchored" data-anchor-id="sec-model3table"><span class="header-section-number">16.1.2</span> Regression plane</h3>
+<p>Let’s now fit a regression model and get the regression table. Just as we did in <a href="basicregression.html"><span>Chapter&nbsp;14</span></a>, the regression table for this model can be generated using <code>summary()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ast, <span class="at">y =</span> pts)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Avg. Assists per Game"</span>, </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg. Points per Game"</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Scatterplot of relationship of assists and points"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="eda_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit regression model:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pts_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(pts <span class="sc">~</span> ast <span class="sc">+</span> reb, <span class="at">data =</span> nba)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get regression table:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pts_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pts ~ ast + reb, data = nba)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19.7068  -1.8344  -0.4613   1.4975  20.3105 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.66714    0.05836   11.43   &lt;2e-16 ***
+ast          1.80437    0.01785  101.07   &lt;2e-16 ***
+reb          1.18920    0.01290   92.21   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.448 on 12302 degrees of freedom
+Multiple R-squared:  0.667, Adjusted R-squared:  0.6669 
+F-statistic: 1.232e+04 on 2 and 12302 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Let’s build on this scatterplot by adding a trend line. We do this by adding a new <code>geom_smooth(method = "lm", se = FALSE)</code> layer to the <code>ggplot()</code> code from above. The <code>method = "lm"</code> argument sets the line to be a “<code>l</code>inear <code>m</code>odel.” The <code>se = FALSE</code> argument suppresses <em>standard error</em> uncertainty bars.</p>
+<ol type="1">
+<li>We first “fit” the linear regression model using the <code>lm(y ~ x1 + x2, data)</code> function and save it in <code>pts_model</code>.</li>
+<li>We get the regression table by applying the <code>summary()</code> function to <code>pts_model</code>.</li>
+</ol>
+<p>Let’s interpret the three values in the <code>Estimate</code> column. First, the estimate in the <code>(Intercept)</code> row is 0.66714. This intercept represents the value of <code>pts</code> expected for a player with <code>ast=0</code> and <code>reb=0</code>. Second, the estimate in the <code>ast</code> row is 1.80437. Taking into account all the other explanatory variables in our model, for every additional assist per game, we expect an additional 1.8 points per game.</p>
+<p>Note that we preface our interpretation with the statement, “taking into account all the other explanatory variables in our model”. Here, by all other explanatory variables we mean the intercept and <code>reb</code>. We do this to emphasize that we are now jointly interpreting the associated effect of multiple explanatory variables in the same model at the same time and we cannot forget about the other explanatory variables as we interpret one particular parameter.</p>
+<p>Third, the estimate in the <code>reb</code> row is 1.18920. Taking into account all other explanatory variables in our model, for every additional rebound per game, we expect an additional 1.19 points per game.</p>
+<p>Putting these results together, the equation of the regression plane that gives us fitted values <span class="math inline">\(\widehat{y}\)</span> = <span class="math inline">\(\widehat{pts}\)</span> is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{y} &amp;= b_0 + b_1 \cdot x_1 +  b_2 \cdot x_2\\
+\widehat{pts} &amp;= b_0 + b_{ast} \cdot ast + b_{reb} \cdot reb\\
+&amp;= 0.66714 + (1.80437 \cdot ast) + (1.18920 \cdot reb)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="sec-model3points" class="level3" data-number="16.1.3">
+<h3 data-number="16.1.3" class="anchored" data-anchor-id="sec-model3points"><span class="header-section-number">16.1.3</span> Observed/fitted values and residuals</h3>
+<p>Let’s also compute all fitted values and residuals for our regression model and present the first 10 rows of output. Thinking about the 3D scatterplot in <a href="#fig-3D-scatterplot">Figure&nbsp;<span>16.2</span></a>, the coordinates of each point in the scatterplot is a triplet of <code>pts</code>, <code>ast</code>, and <code>reb</code> from our data. The fitted values that lie on the regression plan can be found using the equation above.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>nba <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ast, <span class="at">y =</span> pts)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Avg. Assists per Game"</span>, </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Avg. Points per Game"</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Scatterplot of relationship of assists and points"</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pts_model <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># expand model result</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">augment</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># select relevant columns</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"pts"</span>, <span class="st">"ast"</span>, <span class="st">"reb"</span>, <span class="st">".fitted"</span>, <span class="st">".resid"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename columns</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename_at</span>(<span class="fu">vars</span>(<span class="fu">c</span>(<span class="st">".fitted"</span>, <span class="st">".resid"</span>)), <span class="sc">~</span><span class="fu">c</span>(<span class="st">"pts_hat"</span>, <span class="st">"residual"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12,305 × 5
+     pts   ast   reb pts_hat residual
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+ 1   5.7   3.1  16.1   25.4   -19.7  
+ 2   2.3   0.3   1.5    2.99   -0.692
+ 3   0.8   0.4   1      2.58   -1.78 
+ 4   3.7   0.6   2.3    4.48   -0.785
+ 5   2.4   0.2   2.4    3.88   -1.48 
+ 6   8.2   1     2.7    5.68    2.52 
+ 7  17.2   3.4   4.1   11.7     5.52 
+ 8  14.9   1.6   8     13.1     1.83 
+ 9   5.7   1.3   1.6    4.92    0.784
+10   6.9   3     1.5    7.86   -0.964
+# ℹ 12,295 more rows</code></pre>
 </div>
-<div class="cell-output-display">
-<p><img src="eda_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<p>The trend line we have added is called a “regression line.” The regression line is a visual summary of the relationship between two numerical variables, in our case <code>pts</code> and <code>ast</code>. The positive slope of the blue line is consistent with our earlier observed correlation coefficient, suggesting that there is a positive relationship between these two variables: a player with a relatively larger number of average assists per game will also tend to have a relatively larger number of average points per game. More information regarding regression can be found in <a href="basicregression.html"><span>Chapter&nbsp;14</span></a>.</p>
+</section>
+</section>
+<section id="activities" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="activities"><span class="header-section-number">16.2</span> Activities</h2>
+<ol type="1">
+<li>Generate <span class="math inline">\(N=200\)</span> random values drawn from a normal distribution with a mean of <span class="math inline">\(50\)</span> and a standard deviation of <span class="math inline">\(5\)</span>. Save these values to a variable named <code>x1</code>.</li>
+<li>Generate <span class="math inline">\(N\)</span> new values such that each value is one of the values in <code>x1</code> and a new draw from a normal distribution with a mean of <span class="math inline">\(0.0\)</span> and a standard deviation of <span class="math inline">\(0.1\)</span>. Save these values to a variable named <code>x1</code>.</li>
+<li>Generate <span class="math inline">\(N\)</span> new values such that each value is one of the values in <code>x1</code> and a new draw from a normal distribution with a mean of <span class="math inline">\(0.0\)</span> and a standard deviation of <span class="math inline">\(1.0\)</span>. Save these values to a variable named <code>y</code>.</li>
+<li>Construct a multiple regression model with an intercept and 2 explanatory variables: <code>x1</code> and <code>x2</code>.</li>
+<li>What has happened here? Can you perform some explanatory data analysis to help figure this out?</li>
+<li>Now increase <span class="math inline">\(N\)</span> to <span class="math inline">\(N=10,000\)</span> and perform all the steps above again. What has happened now?</li>
+</ol>
 
 
 </section>
@@ -831,13 +840,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ggplot2.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualizing Data</span></span>
+      <a href="./regressiondiagnostics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Regression Diganostics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./factors.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sampling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
