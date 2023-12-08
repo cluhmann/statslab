@@ -31,5 +31,7 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 11 | 11-10 | Basic Regression 2/2 | Generate random data & regress!  |
 | 12 | 11-17 | Regression Diagnostics | Tests of normality |
 | 13 | 11-24 | **No Class – Thanksgiving Break** | |
-| 14 | 12-01 | Multiple Regression 1/N |  |
+| 14 | 12-01 | Class aborted |  |
+| 15 | 12-08 | Multiple Regression 1/N |  |
+|  | | Break |  |
 | 15 | 12-08 | Sampling: p-values ala Lakens |  |
