@@ -1,0 +1,43 @@
+# End-to-End Regression {#sec-e2eregression}
+
+```{r}
+#| echo: false
+#| warning: false
+library(kableExtra)
+library(tidyverse)
+```
+
+
+## Rationale
+
+This activity is intended to present a relatively accessible, but realistic series of analytic steps.  We will be using our standard `nba` data set, but will ask you to put these steps together into one coherent whole.  Hopefully the sequence will be useful, not only because 
+
+
+## Research question
+
+The goal of this analysis is to determine what factors explain players' `net_rating` value.  This variable is described as follows:
+
+> Net rating is the offensive rating minus the defensive rating, but simply put it can be defined as how much better or worse the team is when a specific player is on the court. These ratings are usually on a per X possessions basis. Using possessions rather than minutes eliminates the effects of a team that plays very fast or very slow.
+
+Let's try to figure out how `net_rating` is related to information about when players were drafted (e.g., the year they were drafted, the round they were drafted in, and their draft number).  For now, let's confine ourselves to the 2021-22 NBA season (the most recent season we have data for).
+
+## Outline
+To ensure that you are engaging in all the steps of a thorough analysis, we have provided some guidance about the expected steps/outputs that you you conduct/generate.  As you go through the steps, you should be building up an R script step by step.  Once you are done, you should be able to run the entire script and have the various steps executed and the various outputs generated.  It may be helpful to occasionally try running the entire script to see if it still works.  Doing so is particularly diagnostic if you first clear any intermediate variables you have created along the way (e.g., `rm(list = ls())`).
+
+1. Load the `nba` data set.
+1. Conduct an exploratory data analysis (EDA) of the relevant variables. This may include many potential steps, but the following would be some of the bare minimum:
+    1. Descriptive statistics
+    1. Examination of bivariate relationships
+1. Conduct a regression analysis
+1. Perform diagnostics on your regression analysis.  Here again, there are many checks that one could conduct. A few are listed here:
+    1. Checks for linearity
+    1. Checks for normality
+    1. Checks for homoscedasticity
+1. Write up your results
+1. Plot(s) (publication quality)
+
+**Bonus**
+
+1. Redo this analysis but now use all seasons
+1. Average each players' `net_rating` over all seasons to arrive at a single `net_rating` value for each player.
+1. Conduct an EDA and continue from above.

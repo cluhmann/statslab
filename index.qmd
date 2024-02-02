@@ -9,7 +9,7 @@ Christian Luhmann
 
 **Teaching Assistant**
 
-Emily Bibby
+Tracy Radsvick
 
 
 ## Schedule
@@ -33,5 +33,19 @@ _Subject to change_, particularly topics scheduled for later in the semester.
 | 13 | 11-24 | **No Class – Thanksgiving Break** | |
 | 14 | 12-01 | Class aborted |  |
 | 15 | 12-08 | Multiple Regression 1/N |  |
-|  | | Break |  |
-| 15 | 12-08 | Sampling: p-values ala Lakens |  |
+|  | | **Winter Break** |  |
+| 16 | 1-26 | Refresh | |
+| 17 | 2-2 |  | End-to-end Analysis |
+| 18 | 2-9 | Sampling: p-values ala Lakens | |
+| 19 | 2-16 | Interactions | |
+| 20 | 2-23 | Linear Mixed Models  | |
+| 21 | 3-1 | Categorical Variables  | |
+| 22 | 3-8 | Missingness  | |
+| 23 | 3-15 | Model comparison | |
+| 24 | 3-22 | GLM  | |
+| 25 | 3-29 | Machine Learning | |
+| 26 | 4-5 | Machine Learning | |
+| 27 | 4-12 | Bayesian Stuff | |
+| 28 | 4-19 | Bayesian Stuff | |
+| 29 | 4-26 | Python  | |
+| 30 | 5-3 | Julia  | |

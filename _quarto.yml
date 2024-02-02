@@ -53,7 +53,7 @@ book:
         - sampling.qmd
         - simulatingpre.qmd
         - samplepvalues.qmd
-#        - residuals.qmd
+        - endtoend-multiplereg.qmd
 #        - missingness.qmd
     appendices:
         - data-files.qmd
