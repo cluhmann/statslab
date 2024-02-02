@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data-files.html" rel="next">
+<link href="./endtoend-multiplereg.html" rel="next">
 <link href="./simulatingpre.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -332,6 +332,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./endtoend-multiplereg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -656,7 +662,7 @@ mean in group Daniel Friends   mean in group Kyra Friends
 </div>
 </div>
 </div>
-<p>On the x-axis we see <em>p</em>-values from 0 to 1 and on the y-axis we see how frequently these <em>p</em>-values were observed. There is a horizontal red line that indicates an alpha of <span class="math inline">\(5%\)</span> (located at a frequency of <span class="math inline">\(100000*0.05 = 5000\)</span>) – but you can ignore this line for now. The statistical power that is achieved in these simulated studies is 49.791%.</p>
+<p>On the x-axis we see <em>p</em>-values from 0 to 1 and on the y-axis we see how frequently these <em>p</em>-values were observed. There is a horizontal red line that indicates an alpha of <span class="math inline">\(5%\)</span> (located at a frequency of <span class="math inline">\(100000*0.05 = 5000\)</span>) – but you can ignore this line for now. The statistical power that is achieved in these simulated studies is 50.584%.</p>
 <p>The simulation result illustrates the <strong>probability density function</strong> of <em>p</em>-values for a <em>t</em>-test. A probability density function provides the probability that a random variable has a specific value. Because the <em>p</em>-value is a random variable, we can use its probability density function to plot the <em>p</em>-value distribution <span class="citation" data-cites="hung1997behavior ulrich2018some">(<a href="references.html#ref-hung1997behavior" role="doc-biblioref">Hung et al. 1997</a>; <a href="references.html#ref-ulrich2018some" role="doc-biblioref">Ulrich and Miller 2018</a>)</span>. In <a href="http://shiny.ieis.tue.nl/d_p_power/">this online Shiny app</a> you can vary the sample size, effect size, and alpha level to examine the effect on the <em>p</em>-value distribution. Increasing the sample size or the effect size will increase the steepness of the <em>p</em>-value distribution, which means that the probability to observe small <em>p</em>-values increases. The <em>p</em>-value distribution is a function of the statistical power of the test.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -809,15 +815,15 @@ mean in group Daniel Friends   mean in group Kyra Friends
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.73385384 -0.20344897 -0.18258249 -0.56114030  0.32821723 -1.10500091
- [7]  0.11804587  1.53495952  0.81622319 -0.39066360  1.78892434 -0.30883923
-[13] -0.04872880  0.87601497 -1.45331043  1.01832305 -0.05512362  0.14990620
-[19]  0.81584128 -1.47231149  1.37572938 -0.80753828  0.34928925  0.27337516
-[25] -0.89428458 -1.29617926  0.37233392 -0.04118283 -0.47567429  1.90698666
-[31] -1.13497043 -0.57957020  1.10291594 -0.72676117  0.87853727 -0.09058497
-[37] -0.63509080 -0.57829142 -1.62423699  0.39716986 -0.44219132  1.13071274
-[43]  0.44754859 -0.94158066  0.26750106  0.18993232 -0.86124640  0.72274178
-[49]  0.29196651 -2.42813521</code></pre>
+<pre><code> [1]  0.43559805  0.91637034 -0.34696571  0.60358026 -0.09240940  0.20028282
+ [7]  1.09098582 -0.77687522 -1.26792362 -0.23021575  0.99985472 -1.24548162
+[13]  0.87322608 -0.69620523 -0.09022357 -1.77941704 -0.74012847  1.11359805
+[19]  0.52262634 -1.06394855  0.51641052  0.37572010 -0.09169497  0.89555171
+[25] -0.29420920 -0.62206358  0.22493433  1.06462158  1.55168403  0.28261568
+[31]  0.08452561 -1.40268698  1.67585060 -1.52031291 -2.04714228  0.44422782
+[37]  0.03376063  1.89743652 -1.52538653  0.01177425 -0.27681616  1.85002336
+[43] -0.87937069 -0.16281254  0.78772400 -0.31678745 -0.44270811 -0.11553278
+[49] -0.03861569  0.42638747</code></pre>
 </div>
 </div>
 <p>This command generates 50 random observations from a distribution with a mean of 0 and a standard deviation of 1 (in the long run – the mean and standard deviation will vary in each sample that is generated). Imagine we run this command once, and we observe a mean of 0.5. The figure below visualizes this scenario. We can perform a one-sample <em>t</em>-test against 0, and this test tells us, with a <em>p</em> &lt; .05, that the data we have observed is surprisingly different from 0, assuming the random number generator in R functions as it should and generates data with a true mean of 0.</p>
@@ -1202,8 +1208,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-files.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Data Files</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./endtoend-multiplereg.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
