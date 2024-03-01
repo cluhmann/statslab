@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 10&nbsp; Working with Categorical Data</title>
+<title>statslab - 17&nbsp; Generalized Linear Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./descriptives.html" rel="next">
-<link href="./eda.html" rel="prev">
+<link href="./sampling.html" rel="next">
+<link href="./multipleregression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -94,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tidyverse.html">Exploring</a></li><li class="breadcrumb-item"><a href="./factors.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./descriptives.html">Statistics</a></li><li class="breadcrumb-item"><a href="./glm.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -196,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./factors.html" class="sidebar-item-text sidebar-link active">
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></span></a>
   </div>
 </li>
@@ -249,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+  <a href="./glm.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span></a>
   </div>
 </li>
@@ -325,14 +327,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link active" data-scroll-target="#logistic-regression"><span class="header-section-number">17.1</span> Logistic regression</a>
+  <ul class="collapse">
+  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology"><span class="header-section-number">17.1.1</span> Terminology</a></li>
+  <li><a href="#properties-of-log-odds" id="toc-properties-of-log-odds" class="nav-link" data-scroll-target="#properties-of-log-odds"><span class="header-section-number">17.1.2</span> Properties of log odds</a></li>
+  <li><a href="#link-and-variance-functions" id="toc-link-and-variance-functions" class="nav-link" data-scroll-target="#link-and-variance-functions"><span class="header-section-number">17.1.3</span> Link and variance functions</a></li>
+  <li><a href="#estimating-logistic-regression-models-in-r" id="toc-estimating-logistic-regression-models-in-r" class="nav-link" data-scroll-target="#estimating-logistic-regression-models-in-r"><span class="header-section-number">17.1.4</span> Estimating logistic regression models in R</a></li>
+  </ul></li>
+  <li><a href="#activities" id="toc-activities" class="nav-link" data-scroll-target="#activities"><span class="header-section-number">17.2</span> Activities</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-factors" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Working with Categorical Data</span></span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></h1>
 </div>
 
 
@@ -347,9 +362,104 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Coming soon…</p>
+<p>The basic idea behind Generalized Linear Models (not to be confused with General Linear Models) is to specify a <strong>link function</strong> that transforms the response space into a modeling space where we can perform our usual linear regression, and to capture the dependence of the variance on the mean through a <strong>variance function</strong>. The parameters of the model will be expressed on the scale of the modeling space, but we can always transform it back into our original response space using the <strong>inverse link function</strong> or <strong>mean function</strong>.</p>
+<p>Let’s see what this looks like. A GLM specifies three ingredients. A linear combination of coefficients and predictors (just like we have been using throughout our exploration of regression so far):</p>
+<p><span class="math display">\[
+\eta = b_0 + b_1x_1 + b_2x_2 + ...
+\]</span></p>
+<p>We then have link function:</p>
+<p><span class="math display">\[
+g(\mu = E(y|x_i)) = \eta
+\]</span></p>
+<p>Note that the link function is applied to the <strong>left-hand side</strong> of this expression, or the portion pertaining to our <strong>outcome variable</strong> (e.g., <span class="math inline">\(y\)</span>). Often, people prefer to think about their outcome variable in its natural scale. Thus, we can rearrange so that the left-hand side is left untransformed:</p>
+<p><span class="math display">\[
+\mu = E(y|x_i) = g^{-1}(\eta)
+\]</span></p>
+<p>So, to summarize, <span class="math inline">\(g()\)</span> is the <strong>link function</strong> and is applied to the outcome variable, <span class="math inline">\(y\)</span>, whereas <span class="math inline">\(g^{-1}\)</span> is the <strong>inverse link function</strong> or <strong>mean function</strong> and is applied to the linear combination of coefficients and predictors (e.g., <span class="math inline">\(\eta\)</span>).</p>
+<p>The last ingredient is the distribution for modeling the variance, <span class="math inline">\(Var(y|x)\)</span>. There are many choices here. The ones most commonly used in psychology are <strong>logistic regression</strong> and <strong>Poisson regression</strong>, the former being used for binary data (Bernoulli trials) and the latter being used for count data, where the number of trials is not well-defined.</p>
+<section id="logistic-regression" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">17.1</span> Logistic regression</h2>
+<section id="terminology" class="level3" data-number="17.1.1">
+<h3 data-number="17.1.1" class="anchored" data-anchor-id="terminology"><span class="header-section-number">17.1.1</span> Terminology</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: left;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bernoulli trial</strong></td>
+<td style="text-align: left;">An event with a binary outcome, with one outcome considered ‘success’</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>proportion</strong></td>
+<td style="text-align: left;">The ratio of successes to the total number of Bernoulli trials</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>odds</strong></td>
+<td style="text-align: left;">The ratio of p(success) and p(failure)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>log odds</strong></td>
+<td style="text-align: left;">The (natural) log of the odds</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>In logistic regression, we are modeling the relationship between the response and a set of predictors in log odds space.</p>
+<p>Logistic regression is used when the individual outcomes are Bernoulli trials, or events with binary outcomes. Typically one of the two outcomes is referred to as ‘success’ and is coded as a 1; the other is referred to as ‘failure’ and is coded as 0. Note that the terms ‘success’ and ‘failure’ are completely arbitrary, and should not be taken to imply that the more desirable category should always be coded as 1. For instance, when flipping a coin we could equivalently choose ‘heads’ as success and ‘tails’ as failure or vice versa.</p>
+<p>Often the outcome of a sequence of Bernoulli trials is communicated as a <strong>proportion</strong>: the ratio of successes to the total number of trials. For instance, if we flip a coin 100 times and get 47 heads, we would have a proportion of 47/100 or .47, which would also be our estimate of the probability of the event. For events coded as 1s and 0s, a shortcut way of getting the proportion is to use the <code>mean()</code> function.</p>
+<p>We can also talk about the odds of success, i.e., that the odds of heads versus tails are one to one, or 1:1. The odds of it raining on a given day in Glasgow would be 170:195; the denominator is the number of days it did not rain (365 - 170 = 195). Expressed as a decimal number, the ratio 170/195 is about 0.87, and is known as the <strong>natural odds</strong>. Natural odds ranges from 0 to <span class="math inline">\(+\inf\)</span>. Given <span class="math inline">\(k\)</span> successes on <span class="math inline">\(n\)</span> trials, we can represent the natural odds as <span class="math inline">\(\frac{k}{n - k}\)</span>. Or, given a probability <span class="math inline">\(p\)</span>, we can represent the odds as <span class="math inline">\(\frac{p}{1-p}\)</span>.</p>
+<p>The natural log of the odds, or <strong>logit</strong> is the scale on which logistic regression is performed. Recall that the logarithm of some value <span class="math inline">\(k\)</span> gives the exponent that would yield <span class="math inline">\(k\)</span> for a given base. For instance, the <span class="math inline">\(log_2\)</span> (log to the base 2) of 16 is 4, because <span class="math inline">\(2^4 = 16\)</span>. In logistic regression, the base that is typically used is <span class="math inline">\(e\)</span> (also known as Euler’s number). To get the log odds from odds of, say, Glasgow rainfall, we would use <code>log(170/195)</code>, which yields -0.1372011; to get natural odds back from log odds, we would use the inverse, <code>exp(-.137)</code>, which returns about 0.872.</p>
+</section>
+<section id="properties-of-log-odds" class="level3" data-number="17.1.2">
+<h3 data-number="17.1.2" class="anchored" data-anchor-id="properties-of-log-odds"><span class="header-section-number">17.1.2</span> Properties of log odds</h3>
+<p>log odds = <span class="math inline">\(\log \left(\frac{p}{1-p}\right)\)</span></p>
+<p>Log odds has some nice properties for linear modeling.</p>
+<p>First, it is symmetric around zero, and zero log odds corresponds to maximum uncertainty, i.e., a probability of .5. Positive log odds means that success is more likely than failure (Pr(success) &gt; .5), and negative log odds means that failure is more likely than success (Pr(success) &lt; .5). A log odds of 2 means that success is more likely than failure by the same amount that -2 means that failure is more likely than success. The scale is unbounded; it goes from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span>.</p>
+</section>
+<section id="link-and-variance-functions" class="level3" data-number="17.1.3">
+<h3 data-number="17.1.3" class="anchored" data-anchor-id="link-and-variance-functions"><span class="header-section-number">17.1.3</span> Link and variance functions</h3>
+<p>The link function for logistic regression is:</p>
+<p><span class="math display">\[\eta = \log \left(\frac{p}{1-p}\right)\]</span></p>
+<p>while the inverse link function is:</p>
+<p><span class="math display">\[p = \frac{1}{1 + e^{-\eta}}\]</span></p>
+<p>where <span class="math inline">\(e\)</span> is Euler’s number. In R, you could type this latter function as <code>1/(1 + exp(-eta))</code>.</p>
+<p>The variance function is the variance for the binomial distribution, namely:</p>
+<p><span class="math display">\[np(1 - p).\]</span></p>
+<p>The app below allows you to manipulate the intercept and slope of a line in log odds space and to see the projection of the line back into response space. Note the S-shaped (“sigmoidal”) shape of the function in the response shape.</p>
+<div class="cell">
+<iframe src="https://rstudio-connect.psy.gla.ac.uk/logit?showcase=0" width="672" height="800px" data-external="1">
+</iframe>
+</div>
+</section>
+<section id="estimating-logistic-regression-models-in-r" class="level3" data-number="17.1.4">
+<h3 data-number="17.1.4" class="anchored" data-anchor-id="estimating-logistic-regression-models-in-r"><span class="header-section-number">17.1.4</span> Estimating logistic regression models in R</h3>
+<p>For single-level data, you use the <code>glm()</code> function. Note that it is much like the <code>lm()</code> function you are already familiar with. The main difference is that you specify a <code>family</code> argument for the link/variance functions. For logistic regression, you use <code>family = binomial(link = "logit")</code>. The logit link is default for the binomial family with a logit link, so typing <code>family = binomial</code> is sufficient.</p>
+<p><code>glm(DV ~ IV1 + IV2 + ..., data, family = binomial)</code></p>
+</section>
+</section>
+<section id="activities" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="activities"><span class="header-section-number">17.2</span> Activities</h2>
+<ul>
+<li>If you haven’t already, load the <code>nba</code> data set we downloaded back in <a href="data.html#sec-dataactivities"><span>Section&nbsp;4.2</span></a>. And let’s pass <code>c("Undrafted")</code> as the <code>na</code> argument:</li>
+<li>Determine the mean height of players in the data set.</li>
+<li>Create a new column called <code>player_tall</code> which has ones in rows where the corresponding player is taller than the mean height and zeros in rows where the corresponding player is shorter than (or exactly as tall as) the mean height.</li>
+<li>Conduct a logistic regression with <code>pts</code> as a predictor and <code>player_tall</code> as the outcome/target variable.</li>
+<li>Plot the model’s predictions (e.g., <code>p(player_tall==True)</code>) for a range of values of <code>pts</code> (e.g., from 0 to 50).</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -587,13 +697,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./eda.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
+      <a href="./multipleregression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./descriptives.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sampling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

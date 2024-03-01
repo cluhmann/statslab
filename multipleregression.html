@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sampling.html" rel="next">
+<link href="./glm.html" rel="next">
 <link href="./regressiondiagnostics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -283,6 +283,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -297,25 +303,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./endtoend-multiplereg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -443,16 +449,16 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <pre><code># A tibble: 10 × 3
      pts   ast   reb
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  10.1   0.4   9.4
- 2   1.7   0     0.7
- 3  18.6   9     3.7
- 4   2.5   0.8   0  
- 5   9.2   1.4   4.6
- 6   3.7   0.2   5  
- 7   4.5   0.9   1.2
- 8   0.1   0     0.1
- 9  11.7   2.3   3.4
-10  10     0.9   2.7</code></pre>
+ 1   6.5   1     6.5
+ 2   3.2   0.4   2  
+ 3   3.8   0.6   1.6
+ 4  10.4   3.1   5.8
+ 5   3.7   0.5   2.1
+ 6  14.4   7.4   3  
+ 7   3     0.3   2.6
+ 8   3.9   0.3   2  
+ 9   3.1   0.4   3.1
+10   7.9   3.5   4.7</code></pre>
 </div>
 </div>
 <p>As always, we should begin by conducting an exploratory data analysis. Review <a href="eda.html"><span>Chapter&nbsp;9</span></a> if you need to do so.</p>
@@ -851,8 +857,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sampling.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./glm.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

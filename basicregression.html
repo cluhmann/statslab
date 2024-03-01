@@ -286,6 +286,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -300,25 +306,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./endtoend-multiplereg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -661,16 +667,16 @@ F-statistic:  9544 on 1 and 12303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code># A tibble: 10 × 2
    player_name     pts
    &lt;chr&gt;         &lt;dbl&gt;
- 1 LeBron James   30  
- 2 LeBron James   27.4
- 3 Stephen Curry  18.6
- 4 Stephen Curry  14.7
- 5 LeBron James   27.2
- 6 Stephen Curry  27.3
- 7 LeBron James   25.3
- 8 Stephen Curry  23.8
- 9 LeBron James   25  
-10 Stephen Curry  26.4</code></pre>
+ 1 Stephen Curry  17.5
+ 2 LeBron James   25.3
+ 3 LeBron James   25.3
+ 4 LeBron James   27.5
+ 5 LeBron James   25.3
+ 6 LeBron James   27.2
+ 7 LeBron James   28.4
+ 8 Stephen Curry  18.6
+ 9 LeBron James   26.7
+10 LeBron James   20.9</code></pre>
 </div>
 </div>
 <p>Another way to get a sense of this data is by generating a variety of descriptive statistics.</p>
@@ -981,20 +987,20 @@ F-statistic: 6.665 on 1 and 30 DF,  p-value: 0.01496</code></pre>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(curryjamesjordan, <span class="at">n=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 2
-     pts player_name   
-   &lt;dbl&gt; &lt;chr&gt;         
- 1  23.8 Stephen Curry 
- 2  26.7 LeBron James  
- 3  28.4 LeBron James  
- 4  24   Stephen Curry 
- 5  27.1 LeBron James  
- 6  25.3 LeBron James  
- 7  27.3 Stephen Curry 
- 8  22.9 Stephen Curry 
- 9  27.5 LeBron James  
-10  32   Stephen Curry 
-11  20   Michael Jordan
-12  30.1 Stephen Curry </code></pre>
+     pts player_name  
+   &lt;dbl&gt; &lt;chr&gt;        
+ 1  25.5 Stephen Curry
+ 2  27.3 Stephen Curry
+ 3  25.3 LeBron James 
+ 4  14.7 Stephen Curry
+ 5  26.7 LeBron James 
+ 6  31.4 LeBron James 
+ 7  25.3 Stephen Curry
+ 8  26.4 Stephen Curry
+ 9  22.9 Stephen Curry
+10  30.1 Stephen Curry
+11  30   LeBron James 
+12  27.2 LeBron James </code></pre>
 </div>
 </div>
 <p>Now our <code>player_name</code> column contains 3 values instead of 2. Let’s convert the <code>player_name</code> column into a factor as before:</p>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>statslab - 20&nbsp; End-to-End Regression</title>
+<title>statslab - 21&nbsp; End-to-End Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sampling.html">Activities</a></li><li class="breadcrumb-item"><a href="./endtoend-multiplereg.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sampling.html">Activities</a></li><li class="breadcrumb-item"><a href="./endtoend-multiplereg.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -247,6 +247,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Multiple Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -261,25 +267,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./simulatingpre.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Sampling Distribution of PRE</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./samplepvalues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./endtoend-multiplereg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -323,9 +329,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link active" data-scroll-target="#rationale"><span class="header-section-number">20.1</span> Rationale</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question"><span class="header-section-number">20.2</span> Research question</a></li>
-  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline"><span class="header-section-number">20.3</span> Outline</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link active" data-scroll-target="#rationale"><span class="header-section-number">21.1</span> Rationale</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question"><span class="header-section-number">21.2</span> Research question</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline"><span class="header-section-number">21.3</span> Outline</a></li>
   </ul>
 </nav>
     </div>
@@ -334,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-e2eregression" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></h1>
+<h1 class="title"><span id="sec-e2eregression" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Regression</span></span></h1>
 </div>
 
 
@@ -349,20 +355,20 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="rationale" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="rationale"><span class="header-section-number">20.1</span> Rationale</h2>
+<section id="rationale" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="rationale"><span class="header-section-number">21.1</span> Rationale</h2>
 <p>This activity is intended to present a relatively accessible, but realistic series of analytic steps. We will be using our standard <code>nba</code> data set, but will ask you to put these steps together into one coherent whole. Hopefully the sequence will be useful, not only because</p>
 </section>
-<section id="research-question" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="research-question"><span class="header-section-number">20.2</span> Research question</h2>
+<section id="research-question" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="research-question"><span class="header-section-number">21.2</span> Research question</h2>
 <p>The goal of this analysis is to determine what factors explain players’ <code>net_rating</code> value. This variable is described as follows:</p>
 <blockquote class="blockquote">
 <p>Net rating is the offensive rating minus the defensive rating, but simply put it can be defined as how much better or worse the team is when a specific player is on the court. These ratings are usually on a per X possessions basis. Using possessions rather than minutes eliminates the effects of a team that plays very fast or very slow.</p>
 </blockquote>
 <p>Let’s try to figure out how <code>net_rating</code> is related to information about when players were drafted (e.g., the year they were drafted, the round they were drafted in, and their draft number). For now, let’s confine ourselves to the 2021-22 NBA season (the most recent season we have data for).</p>
 </section>
-<section id="outline" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="outline"><span class="header-section-number">20.3</span> Outline</h2>
+<section id="outline" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="outline"><span class="header-section-number">21.3</span> Outline</h2>
 <p>To ensure that you are engaging in all the steps of a thorough analysis, we have provided some guidance about the expected steps/outputs that you you conduct/generate. As you go through the steps, you should be building up an R script step by step. Once you are done, you should be able to run the entire script and have the various steps executed and the various outputs generated. It may be helpful to occasionally try running the entire script to see if it still works. Doing so is particularly diagnostic if you first clear any intermediate variables you have created along the way (e.g., <code>rm(list = ls())</code>).</p>
 <ol type="1">
 <li>Load the <code>nba</code> data set.</li>
@@ -628,7 +634,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./samplepvalues.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Using <em>p</em>-values to test a hypothesis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
