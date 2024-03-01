@@ -22,7 +22,7 @@ Licensed under creative commons Attribution-ShareAlike 4.0 International license
 
 _Improving Your Statistical Inferences_ by Daniel Lakens
 
-https://lakens.github.io/statistical_inference
+https://lakens.github.io/statistical_inferences/
 
 Licensed under a creative commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0).
 

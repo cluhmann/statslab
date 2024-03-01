@@ -44,10 +44,10 @@ book:
         - basicregression.qmd
         - regressiondiagnostics.qmd
         - multipleregression.qmd
+        - glm.qmd
 #        - anova.qmd
 #        - interactions.qmd
 #        - polynomial.qmd
-#        - glm.qmd
     - part: "Activities"
       chapters:
         - sampling.qmd
