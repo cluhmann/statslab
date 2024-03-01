@@ -128,7 +128,7 @@ The null hypothesis assumes that if we would ask an infinite number of my friend
 
 It is practical to create a null model in terms of a **standardized** distribution, as this makes it easier to calculate the probability that specific values will occur, regardless of the scale that is used to collect the measurements. One version of a null model for differences is the _t_-distribution, which can be used to describe which differences should be expected when drawing samples from a population. Such a null model is built on **assumptions**. In the case of the _t_-distribution, the assumption is that scores are normally distributed. In reality, the assumptions upon which statistical methods are built are never met perfectly, which is why statisticians examine the impact of violations of assumptions on methodological procedures. Statistical tests are still useful in practice when the impact of violations on statistical inferences is small enough.
 
-We can use a _*_probability density function_ to quantify the distribution of _t_-values that is expected when there is no difference in the population. @fig-tdist illustrates the probability density function for a _t_-distribution with 18 **degrees of freedom**, df, which corresponds to our example where we collect data from 20 friends ($df = N - 2$ for two independent groups). For a continuous distribution, where probabilities are defined for an infinite number of points, the probability of observing any single point (e.g., $t = 2.5$) is always zero. Probabilities are measured over intervals. For this reason, when a _p_-value is computed, it is not defined as 'the probability of observing the data', but as "the probability of observing the data, _or more extreme data_". This creates an interval (a tail of a distribution) for which a probability can be calculated.
+We can use a _probability density function_ to quantify the distribution of _t_-values that is expected when there is no difference in the population. @fig-tdist illustrates the probability density function for a _t_-distribution with 18 **degrees of freedom**, df, which corresponds to our example where we collect data from 20 friends ($df = N - 2$ for two independent groups). For a continuous distribution, where probabilities are defined for an infinite number of points, the probability of observing any single point (e.g., $t = 2.5$) is always zero. Probabilities are measured over intervals. For this reason, when a _p_-value is computed, it is not defined as 'the probability of observing the data', but as "the probability of observing the data, _or more extreme data_". This creates an interval (a tail of a distribution) for which a probability can be calculated.
 
 ## Calculating a _p_-value
 
@@ -186,7 +186,7 @@ for (i in 1:100000) {
 }
 
 # compute power
-mean(p < 0.05)
+print(mean(p < 0.05))
 
 # plot the histogram
 ggplot(tibble(p), mapping = aes(x = p)) +
